@@ -27,15 +27,15 @@
         SELECT * FROM product_info
     </select>
     
-    <select id="getDetail" parameterType="String" resultType="ProductInfo" resultMap="BaseResultMap">
+    <select id="getDetail" parameterType="String" resultMap="BaseResultMap">
     	SELECT * FROM product_info where product_id = #{id}
     </select>
     
-    <select id="ifProExist" parameterType="String" resultType="ProductInfo" resultMap="BaseResultMap">
+    <select id="ifProExist" parameterType="String" resultMap="BaseResultMap">
     	SELECT * FROM product_info where product_code = #{id}
     </select>
     
-     <select id="add" parameterType="ProductInfo"  resultMap="BaseResultMap">
+     <select id="add" parameterType="ProductComment">
     	INSERT INTO `product_info`
     	(product_code,product_name,brand_name,one_category_id,two_category_id,
     	three_category_id,publish_status,audit_status,price,discount_rate,average_cost,
@@ -47,7 +47,7 @@
     	now())
     </select>
     
-    <select id="search" parameterType="String" resultType="ProductInfo" resultMap="BaseResultMap">
+    <select id="search" parameterType="String" resultMap="BaseResultMap">
     	SELECT * FROM product_info where product_name LIKE '%${name}%'
     </select>
     
