@@ -71,4 +71,10 @@
     	publish_status = #{publishStatus}, modified_time = now()
         WHERE product_id = #{productId}
     </select>
+    
+    <select id="getListByCategory" parameterType="String" resultType="ProductInfo" resultMap="BaseResultMap">
+    	SELECT * FROM product_info where one_category_id = #{category_id}
+    	or two_category_id = #{category_id}
+    	or three_category_id = #{category_id}
+    </select>
 </mapper>

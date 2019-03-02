@@ -24,4 +24,11 @@ public interface ProInfoService {
 
 	ProductInfo ifProExist(String id);
 
+	public List<ProductInfo> getListByCategory(String id);
+
+	
+	
+
+	
+
 }
