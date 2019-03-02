@@ -7,7 +7,7 @@ import whut.utils.ResponseData;
 
 public interface MemberInfoService {
 
-	public ResponseData getList(int status);
+	public ResponseData getList();
 
 	public ResponseData add(UserInfo user);
 

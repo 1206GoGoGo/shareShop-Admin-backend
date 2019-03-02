@@ -17,8 +17,8 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 
 
 	@Override
-	public ResponseData getList(int status) {
-		List<UserInfo> list = dao.getList(status);
+	public ResponseData getList() {
+		List<UserInfo> list = dao.getList();
 		if(list != null) {
 			return new ResponseData(200,"success",list);
 		}else {

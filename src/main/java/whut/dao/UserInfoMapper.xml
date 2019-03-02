@@ -19,7 +19,7 @@
     <result column="user_money" jdbcType="DECIMAL" property="userMoney" />
   </resultMap>
   
-    <select id="getList" parameterType="String" resultMap="BaseResultMap">
+    <select id="getList" resultMap="BaseResultMap">
         SELECT * FROM user_info
    </select>
 
@@ -43,7 +43,7 @@
         WHERE user_id = #{userId}
     </select>
     
-    <select id="getList" parameterType="String" resultMap="BaseResultMap">
+    <select id="getDetail" parameterType="String" resultMap="BaseResultMap">
         SELECT * FROM user_info  WHERE user_id = #{id}
    </select>
 
