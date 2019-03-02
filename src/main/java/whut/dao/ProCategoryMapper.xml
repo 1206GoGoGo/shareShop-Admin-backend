@@ -12,7 +12,7 @@
     <result column="category_status" jdbcType="TINYINT" property="categoryStatus" />
   </resultMap>
   
-  <select id="getList" resultMap="BaseResultMap">
+  <select id="getList" resultType="ProductCategory" resultMap="BaseResultMap">
         SELECT * FROM product_category where category_level = 1 and category_status = 1
    </select>
    
@@ -36,12 +36,12 @@
         WHERE category_id = #{id}
     </select>
     
-   <select id="ifCategoryExist" parameterType="String" resultMap="BaseResultMap">
+    <select id="ifCategoryExist" parameterType="String" resultType="ProductCategory" resultMap="BaseResultMap">
         SELECT * FROM product_category where category_code = #{categoryCode}
    </select>
-   
-    <select id="ifHaveChild" parameterType="String" resultMap="BaseResultMap">
+
+	<select id="ifHaveChild" parameterType="String" resultType="ProductCategory" resultMap="BaseResultMap">
         SELECT * FROM product_category where parent_id = #{id}
-   </select>
+	</select>
 
 </mapper>

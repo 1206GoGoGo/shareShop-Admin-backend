@@ -3,6 +3,7 @@ package whut.pojo;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  *   订单主表
@@ -51,8 +52,18 @@ public class OrderMaster implements Serializable{
     private Date receiveTime;  //收货时间
 
     private Byte orderStatus; //订单状态
+    
+    private List<OrderDetail> orderDetails; //订单中的商品
 
-    public Integer getOrderId() {
+    public List<OrderDetail> getOrderDetails() {
+		return orderDetails;
+	}
+
+	public void setOrderDetails(List<OrderDetail> orderDetails) {
+		this.orderDetails = orderDetails;
+	}
+
+	public Integer getOrderId() {
         return orderId;
     }
 

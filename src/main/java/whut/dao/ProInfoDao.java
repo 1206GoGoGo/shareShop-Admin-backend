@@ -24,6 +24,9 @@ public interface ProInfoDao {
 
 	ProductInfo ifProExist(String id);
 
+	List<ProductInfo> getListByCategory(String id);
+
+	
 	
 
 }

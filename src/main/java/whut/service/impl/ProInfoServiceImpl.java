@@ -75,6 +75,13 @@ public class ProInfoServiceImpl implements ProInfoService{
 		proInfoDao.modifyShelfStatus(map);
 	}
 
+	@Override
+	public List<ProductInfo> getListByCategory(String id) {
+		// TODO Auto-generated method stub
+		return proInfoDao.getListByCategory(id);
+	}
+
+	
 	
 	
 }

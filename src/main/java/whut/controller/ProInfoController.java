@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DuplicateKeyException;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -93,6 +93,17 @@ public class ProInfoController {
 		proInfoService.modifyShelfStatus(id, status);
 		return new ResponseData(200,"modifyShelfStatus success",null);
 	}
+	
+	//根据分类获取商品列表
+	@RequestMapping(value = "/getListByCategory", method = RequestMethod.GET)
+	public @ResponseBody Object getListByCategory(String id){
+		List<ProductInfo> list = new ArrayList<>();
+		list = proInfoService.getListByCategory(id);
+		if(list.isEmpty())
+			return new ResponseData(400,"No data",null);
+		return new ResponseData(200,"success",list);
+	}
+	
 }
 	
 
