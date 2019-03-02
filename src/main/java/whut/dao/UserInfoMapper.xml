@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="whut.dao.UserInfoDao">
+
+<resultMap id="BaseResultMap" type="whut.pojo.UserInfo">
+    <id column="user_info_id" jdbcType="INTEGER" property="userInfoId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="identity_card_type" jdbcType="TINYINT" property="identityCardType" />
+    <result column="identity_card_no" jdbcType="VARCHAR" property="identityCardNo" />
+    <result column="phone_number" jdbcType="INTEGER" property="phoneNumber" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="gender" jdbcType="VARCHAR" property="gender" />
+    <result column="birthday" jdbcType="TIMESTAMP" property="birthday" />
+    <result column="register_time" jdbcType="TIMESTAMP" property="registerTime" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="superior_id" jdbcType="INTEGER" property="superiorId" />
+    <result column="is_seller" jdbcType="TINYINT" property="isSeller" />
+    <result column="user_money" jdbcType="DECIMAL" property="userMoney" />
+  </resultMap>
+  
+    <select id="getList" parameterType="String" resultMap="BaseResultMap">
+        SELECT * FROM user_info
+   </select>
+
+   <select id="add" parameterType="UserInfo">
+    	INSERT INTO user_info
+    	(name,identity_card_type,identity_card_no,phone_number,email,gender,birthday,
+    	register_time,user_id,superior_id,is_seller)      
+        VALUES
+    	(#{name},#{identityCardType},#{identityCardNo},#{phoneNumber},#{email},#{gender},#{birthday},
+    	now(),#{userId},#{superiorId},#{isSeller})
+    </select>
+    
+    <select id="delete" parameterType="String">
+        DELETE FROM user_info where user_id = #{id}
+   </select>
+   
+   <select id="modify" parameterType="UserInfo">
+    	UPDATE user_info SET 
+    	name = #{name},identity_card_type = #{identityCardType},identity_card_no = #{identityCardNo},phone_number = #{phoneNumber},
+    	email = #{email},gender = #{gender},birthday = #{birthday},superior_id = #{superiorId},is_seller = #{isSeller}
+        WHERE user_id = #{userId}
+    </select>
+    
+    <select id="getList" parameterType="String" resultMap="BaseResultMap">
+        SELECT * FROM user_info  WHERE user_id = #{id}
+   </select>
+
+</mapper>
