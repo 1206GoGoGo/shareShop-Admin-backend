@@ -126,7 +126,7 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 	 * 判断条件？
 	 */
 	@Override
-	public ResponseData modifyProStatus(int orderDetailId, Byte status) {
+	public ResponseData modifyProStatus(int orderId, Byte status) {
 		boolean result = dao.modifyProStatus(orderId, status);
 		if(result) {
 			return new ResponseData(200,"success",null);
