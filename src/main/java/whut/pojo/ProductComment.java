@@ -21,6 +21,8 @@ public class ProductComment implements Serializable{
     private String title;  //评论标题
 
     private String content;  //评论内容
+    
+    private String secondContent; //第二次评论内容
 
     private Date commentTime;  //评论时间
 
@@ -74,6 +76,14 @@ public class ProductComment implements Serializable{
         this.content = content == null ? null : content.trim();
     }
 
+    public String getSecondContent() {
+        return secondContent;
+    }
+
+    public void setSecondContent(String secondContent) {
+        this.secondContent = secondContent == null ? null : secondContent.trim();
+    }
+    
     public Date getCommentTime() {
         return commentTime;
     }
