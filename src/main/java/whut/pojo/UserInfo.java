@@ -18,7 +18,7 @@ public class UserInfo implements Serializable{
 
     private String identityCardNo;  //证件号码
 
-    private Integer phoneNumber;  //手机号
+    private String phoneNumber;  //手机号
 
     private String email;  //邮箱
 
@@ -68,12 +68,12 @@ public class UserInfo implements Serializable{
         this.identityCardNo = identityCardNo == null ? null : identityCardNo.trim();
     }
 
-    public Integer getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(Integer phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber == null ? null : phoneNumber.trim();
     }
 
     public String getEmail() {
