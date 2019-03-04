@@ -7,6 +7,8 @@ import whut.pojo.UserInfo;
 public interface UserInfoDao {
 
 	List<UserInfo> getList();
+	
+	List<UserInfo> getSellerList();
 
 	boolean add(UserInfo user);
 

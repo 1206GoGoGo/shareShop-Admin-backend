@@ -22,6 +22,10 @@
     <select id="getList" resultMap="BaseResultMap">
         SELECT * FROM user_info
    </select>
+   
+    <select id="getSellerList" resultMap="BaseResultMap">
+        SELECT * FROM user_info where is_seller = 1
+   </select>
 
    <select id="add" parameterType="UserInfo">
     	INSERT INTO user_info
