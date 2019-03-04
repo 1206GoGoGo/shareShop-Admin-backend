@@ -20,7 +20,7 @@ public class MemberInfoController {
 	
 	@RequestMapping(value = "/getList", method = RequestMethod.GET)
 	public @ResponseBody ResponseData getList(int status) {
-		return  memberInfoService.getList();
+		return  memberInfoService.getList(status);
 	}
 	
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
