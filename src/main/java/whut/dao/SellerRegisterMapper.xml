@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="whut.dao.SellerRegisterDao">
+ <resultMap id="BaseResultMap" type="whut.pojo.SellerRegister" >
+    <id column="register_id" property="registerId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="submit_time" property="submitTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+ </resultMap>
+ 
+  <select id="getSellerList" resultMap="BaseResultMap">
+        SELECT * FROM seller_register where status = 0
+   </select>
+   
+    <select id="add" parameterType="SellerRegister">
+    	INSERT INTO seller_register
+    	(user_id,remark,submit_time,status)      
+        VALUES
+    	(#{userId},#{remark},now(),0)
+    </select>
+    
+   <select id="delete" parameterType="String">
+        UPDATE seller_register SET status = 2 where register_id = #{id} 
+   </select>
+   
+</mapper>

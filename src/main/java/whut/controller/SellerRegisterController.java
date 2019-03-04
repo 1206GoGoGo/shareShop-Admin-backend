@@ -21,7 +21,7 @@ public class SellerRegisterController {
 	@Autowired
 	public SellerRegisterService sellerInfoService;
 	
-	//获取所有seller的信息列表
+	//获取所有seller的登记信息列表
 	@RequestMapping(value = "/getSellerList", method = RequestMethod.GET)
 	public @ResponseBody Object getSellerList() {
 		List<SellerRegister> list = new ArrayList<>();
