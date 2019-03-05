@@ -7,13 +7,13 @@ import whut.utils.ResponseData;
 
 public interface MemberInfoService {
 
-	public ResponseData getList();
+	public ResponseData getList(int status);
 
 	public ResponseData add(UserInfo user);
 
 	public ResponseData delete(int id);
 
-	public ResponseData search(String info);
+	public ResponseData search(String username, String phoneNumber,String name,String identityCardNo);
 
 	public ResponseData modify(UserInfo user);
 

@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import whut.dao.OrderDao;
 import whut.pojo.OrderDetail;
 import whut.pojo.OrderMaster;
 import whut.pojo.UserAddr;
 import whut.service.MemberOrderService;
+import whut.utils.JsonUtils;
 import whut.utils.ResponseData;
 
 @Service
@@ -112,7 +114,11 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 	 * 待处理、发货、确认收货
 	 */
 	@Override
-	public ResponseData modifyOrderStatus(int orderId, Byte status) {
+	public ResponseData modifyOrderStatus(String jsonString) {
+		JsonUtils jsonUtils = new JsonUtils(jsonString);
+		int orderId = jsonUtils.getIntValue("orderId");
+		Byte status = (byte) jsonUtils.getIntValue("status");
+		
 		boolean result = dao.modifyOrderStatus(orderId, status);
 		//修改全部子账单状态
 		if(result) {
@@ -126,7 +132,11 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 	 * 判断条件？
 	 */
 	@Override
-	public ResponseData modifyProStatus(int orderId, Byte status) {
+	public ResponseData modifyProStatus(String jsonString) {
+		JsonUtils jsonUtils = new JsonUtils(jsonString);
+		int orderId = jsonUtils.getIntValue("orderId");
+		Byte status = (byte) jsonUtils.getIntValue("status");
+		
 		boolean result = dao.modifyProStatus(orderId, status);
 		if(result) {
 			return new ResponseData(200,"success",null);

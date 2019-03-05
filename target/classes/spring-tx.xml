@@ -31,6 +31,7 @@
             <tx:method name="add*" propagation="REQUIRED" isolation="DEFAULT" read-only="false" rollback-for="Exception" />
             <tx:method name="delete*" propagation="REQUIRED" isolation="DEFAULT" read-only="false" rollback-for="Exception" />
             <tx:method name="update*" propagation="REQUIRED" isolation="DEFAULT" read-only="false" rollback-for="Exception" />
+            <tx:method name="modify*" propagation="REQUIRED" isolation="DEFAULT" read-only="false" rollback-for="Exception" />
         </tx:attributes>
     </tx:advice>
     

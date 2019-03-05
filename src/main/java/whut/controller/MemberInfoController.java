@@ -1,5 +1,7 @@
 package whut.controller;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import whut.pojo.UserInfo;
 import whut.service.MemberInfoService;
+import whut.utils.JsonUtils;
 import whut.utils.ResponseData;
 
 @Controller
@@ -18,9 +21,14 @@ public class MemberInfoController {
 	@Autowired
 	private MemberInfoService memberInfoService;
 	
+	/**
+	 * 通过用户状态获取会员信息列表
+	 * @param status
+	 * @return
+	 */
 	@RequestMapping(value = "/getList", method = RequestMethod.GET)
 	public @ResponseBody ResponseData getList(int status) {
-		return  memberInfoService.getList();
+		return  memberInfoService.getList(status);
 	}
 	
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
@@ -46,12 +54,12 @@ public class MemberInfoController {
 	
 	/**
 	 * 根据某些字段去查找
-	 * @param info
+	 * @param jsonString查询条件用Post组成json字符串传入
 	 * @return
 	 */
-	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public @ResponseBody ResponseData search(String info) {
-		return  memberInfoService.search(info);
+	@RequestMapping(value = "/search", method = RequestMethod.POST)
+	public @ResponseBody ResponseData search(String username, String phoneNumber,String name,String identityCardNo) {
+		return  memberInfoService.search(username, phoneNumber, name, identityCardNo);
 	}
 	
 	@RequestMapping(value = "/getDetail", method = RequestMethod.GET)
