@@ -1,0 +1,25 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="whut.dao.SellerBillDao">
+
+	<select id="getList" parameterType="String" resultType="SellerBill">
+    	SELECT withdraw_money as money, create_time as createTime, 'withdraw_money' as remark FROM withdraw_record where user_id = #{id}
+		union
+		SELECT yield_money as money , create_time as createTime ,'yield_money' as remark FROM yield_detail where user_id = #{id}
+		ORDER BY createTime;
+    </select>
+    <select id="addWithdraw" parameterType="WithdrawRecord">
+    	INSERT INTO withdraw_record
+    	(user_id,withdraw_money,create_time,phone_number,status)      
+        VALUES
+    	(#{userId},#{withdrawMoney},now(),1)
+    </select>
+    
+    <select id="addYield" parameterType="YieldDetail">
+    	INSERT INTO yield_detail
+    	(user_id,order_id,yield_money,purchaser_id,create_time)      
+        VALUES
+    	(#{userId},#{orderId},#{yieldMoney},#{purchaserId},now())
+    </select>
+
+</mapper>

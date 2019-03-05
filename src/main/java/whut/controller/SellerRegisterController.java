@@ -40,7 +40,7 @@ public class SellerRegisterController {
 	}
 	
 	
-	//删除seller，修改SellerRegister表和UserInfo表状态
+	//删除seller注册信息
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public @ResponseBody Object delete(String id) {
 		sellerInfoService.delete(id);

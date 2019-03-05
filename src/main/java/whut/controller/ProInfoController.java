@@ -73,7 +73,7 @@ public class ProInfoController {
 		return new ResponseData(200,"success",list);
 	}
 	
-	//根据id修改某商品属性
+	//修改某商品属性
 	@RequestMapping(value = "/modify", method = RequestMethod.POST, consumes= "application/json")
 	public @ResponseBody Object modify(@RequestBody ProductInfo productInfo){
 		proInfoService.modify(productInfo);
