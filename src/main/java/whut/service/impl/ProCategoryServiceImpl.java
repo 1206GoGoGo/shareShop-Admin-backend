@@ -57,6 +57,7 @@ public class ProCategoryServiceImpl implements ProCategoryService{
 	@Override
 	public void deleteConfirm(String id) {
 		// TODO Auto-generated method stub
+		proCategoryDao.delete(id);
 		List<ProductCategory> list = new ArrayList<>();
 		list = proCategoryDao.ifHaveChild(id);
 		for(int i = 0; i < list.size(); i++) {

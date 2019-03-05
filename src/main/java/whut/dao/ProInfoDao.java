@@ -22,9 +22,9 @@ public interface ProInfoDao {
 
 	void modifyShelfStatus(Map<String, String> map);
 
-	ProductInfo ifProExist(String id);
-
 	List<ProductInfo> getListByCategory(String id);
+
+	ProductInfo getDetailByCode(String id);
 
 	
 	

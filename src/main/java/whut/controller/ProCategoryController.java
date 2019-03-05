@@ -64,7 +64,6 @@ public class ProCategoryController {
 	//删除分类,其下有子分类也删，修改其下子分类状态都为0
 	@RequestMapping(value = "/deleteConfirm", method = RequestMethod.GET)
 	public @ResponseBody Object deleteConfirm(String id){
-		proCategoryService.delete(id);
 		proCategoryService.deleteConfirm(id);
 		return new ResponseData(200,"delete success",null);
 	}
