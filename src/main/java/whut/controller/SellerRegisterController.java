@@ -17,7 +17,10 @@ import whut.utils.ResponseData;
 @Controller
 @RequestMapping(value = "/seller/register")
 public class SellerRegisterController {
-	
+	/*
+	 * 注册成Seller不需要管理员审核，前台判断支付成功即修改用户状态成为店主
+	 * 该Controller层无作用
+	 */
 	@Autowired
 	public SellerRegisterService sellerInfoService;
 	
