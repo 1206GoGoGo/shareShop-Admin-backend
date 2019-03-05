@@ -32,11 +32,6 @@ public class ProInfoServiceImpl implements ProInfoService{
 		return proInfoDao.getDetail(id);
 	}
 
-	@Override
-	public ProductInfo ifProExist(String id) {
-		// TODO Auto-generated method stub
-		return proInfoDao.ifProExist(id);
-	}
 	
 	@Override
 	public void add(ProductInfo productInfo) {
@@ -79,6 +74,12 @@ public class ProInfoServiceImpl implements ProInfoService{
 	public List<ProductInfo> getListByCategory(String id) {
 		// TODO Auto-generated method stub
 		return proInfoDao.getListByCategory(id);
+	}
+
+	@Override
+	public ProductInfo getDetailByCode(String id) {
+		// TODO Auto-generated method stub
+		return proInfoDao.getDetailByCode(id);
 	}
 
 	

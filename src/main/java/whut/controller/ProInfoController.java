@@ -44,10 +44,10 @@ public class ProInfoController {
 	}
 	
 	//根据商品码id获取某商品详情
-	@RequestMapping(value = "/ifProExist", method = RequestMethod.GET)
-	public @ResponseBody Object ifProExist(String id){
+	@RequestMapping(value = "/getDetailByCode", method = RequestMethod.GET)
+	public @ResponseBody Object getDetailByCode(String id){
 		ProductInfo productInfo = new ProductInfo();
-		productInfo = proInfoService.ifProExist(id);
+		productInfo = proInfoService.getDetailByCode(id);
 		if(productInfo == null)
 			return new ResponseData(400,"not find",null);
 		return new ResponseData(200,"success",productInfo);
@@ -56,7 +56,7 @@ public class ProInfoController {
 	//添加新商品信息
 	@RequestMapping(value = "/add", method = RequestMethod.POST, consumes= "application/json")
 	public @ResponseBody Object add(@RequestBody ProductInfo productInfo){		
-		if(proInfoService.ifProExist(productInfo.getProductCode()) == null) {
+		if(proInfoService.getDetailByCode(productInfo.getProductCode()) == null) {
 			proInfoService.add(productInfo);
 			return new ResponseData(200,"Successfully added",null);
 		}

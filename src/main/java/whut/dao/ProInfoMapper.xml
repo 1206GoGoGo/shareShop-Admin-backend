@@ -31,7 +31,7 @@
     	SELECT * FROM product_info where product_id = #{id}
     </select>
     
-    <select id="ifProExist" parameterType="String" resultMap="BaseResultMap">
+    <select id="getDetailByCode" parameterType="String" resultMap="BaseResultMap">
     	SELECT * FROM product_info where product_code = #{id}
     </select>
     

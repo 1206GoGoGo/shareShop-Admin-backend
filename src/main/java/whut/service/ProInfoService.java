@@ -22,9 +22,9 @@ public interface ProInfoService {
 
 	public void modifyShelfStatus(String id, String status);
 
-	ProductInfo ifProExist(String id);
-
 	public List<ProductInfo> getListByCategory(String id);
+
+	public ProductInfo getDetailByCode(String id);
 
 	
 	
