@@ -111,9 +111,9 @@ public class MemberOrderController {
 	 * @param orderId
 	 * @return
 	 */
-	@RequestMapping(value = "/modifyOrderStatus", method = RequestMethod.GET)
-	public @ResponseBody ResponseData modifyOrderStatus(int orderId, Byte status) {
-		return memberOrderService.modifyOrderStatus(orderId,status);
+	@RequestMapping(value = "/modifyOrderStatus", method = RequestMethod.POST)
+	public @ResponseBody ResponseData modifyOrderStatus(@RequestBody String jsonString) {
+		return memberOrderService.modifyOrderStatus(jsonString);
 	}
 	
 	/**
@@ -123,7 +123,7 @@ public class MemberOrderController {
 	 * @return
 	 */
 	@RequestMapping(value = "/modifyProStatus", method = RequestMethod.GET)
-	public @ResponseBody ResponseData modifyProStatus(int orderDetailId, Byte status) {
-		return memberOrderService.modifyProStatus(orderDetailId,status);
+	public @ResponseBody ResponseData modifyProStatus(@RequestBody String jsonString) {
+		return memberOrderService.modifyProStatus(jsonString);
 	}
 }

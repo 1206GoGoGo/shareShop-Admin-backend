@@ -2,6 +2,8 @@ package whut.service;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.RequestBody;
+
 import whut.pojo.OrderDetail;
 import whut.pojo.OrderMaster;
 import whut.utils.ResponseData;
@@ -24,7 +26,7 @@ public interface MemberOrderService {
 
 	public ResponseData modifyPro(OrderDetail orderDetail);
 
-	public ResponseData modifyOrderStatus(int orderId, Byte status);
+	public ResponseData modifyOrderStatus(@RequestBody String jsonString);
 
-	public ResponseData modifyProStatus(int orderDetailId, Byte status);
+	public ResponseData modifyProStatus(@RequestBody String jsonString);
 }
