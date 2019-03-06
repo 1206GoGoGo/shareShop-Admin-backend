@@ -14,7 +14,7 @@ import whut.utils.ResponseData;
 @Aspect
 public class ExceptionHandle {
 	
-    @Pointcut("execution(* whut.controller.*(..))")
+    @Pointcut("execution(* whut.controller.MemberInfoController.*(..))")
     public void declearJoinPointExpression(){}
     /**
      * 环绕通知(需要携带类型为ProceedingJoinPoint类型的参数)

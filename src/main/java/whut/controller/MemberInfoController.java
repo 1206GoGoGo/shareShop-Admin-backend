@@ -32,7 +32,9 @@ public class MemberInfoController {
 	}
 	
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public @ResponseBody ResponseData add(@RequestBody UserInfo user) {
+	public @ResponseBody ResponseData add(@RequestBody UserInfo user){
+		
+		
 		return  memberInfoService.add(user);
 	}
 	

@@ -6,15 +6,11 @@ import whut.pojo.UserInfo;
 
 public interface UserInfoDao {
 
-<<<<<<< HEAD
 	List<UserInfo> getList(int status);
-=======
-	List<UserInfo> getList();
 	
 	List<UserInfo> getSellerList();
->>>>>>> d1a6e89de2a9810eda0f8bcec98669866dff2eea
 
-	boolean add(UserInfo user);
+	void add(UserInfo user) throws Exception;
 
 	//修改用户状态
 	boolean delete(int id);
