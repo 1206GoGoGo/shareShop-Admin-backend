@@ -28,22 +28,13 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 		}else {
 			return new ResponseData(400,"no data",null);
 		}
+
 	}
 
 	@Override
 	public ResponseData add(UserInfo user){
-		//boolean result = dao.add(user);
-		try {
-
-			System.out.println("in");
-			dao.add(user);
-		}catch(Exception e) {
-			System.out.println("catch");
-			return new ResponseData(200,"success",null);
-		}
-		System.out.println("out");
-		return new ResponseData(500,"error",null);
-	
+		dao.add(user);
+		return new ResponseData(200,"success",null);
 	}
 
 	@Override

@@ -10,7 +10,7 @@ public interface UserInfoDao {
 	
 	List<UserInfo> getSellerList();
 
-	void add(UserInfo user) throws Exception;
+	void add(UserInfo user);
 
 	//修改用户状态
 	boolean delete(int id);

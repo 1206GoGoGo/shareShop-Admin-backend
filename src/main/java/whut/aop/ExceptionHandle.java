@@ -14,7 +14,12 @@ import whut.utils.ResponseData;
 @Aspect
 public class ExceptionHandle {
 	
-    @Pointcut("execution(* whut.controller.MemberInfoController.*(..))")
+	public ExceptionHandle() {}
+	
+    //@Pointcut("execution(* whut.controller.*(..))")
+	//完成dao后再开启全部controller的异常捕获，并加入日志
+	
+    @Pointcut("execution(* whut.service.MemberInfoService.*(..))")
     public void declearJoinPointExpression(){}
     /**
      * 环绕通知(需要携带类型为ProceedingJoinPoint类型的参数)
@@ -30,11 +35,11 @@ public class ExceptionHandle {
         String methodName = point.getSignature().getName();
         try {
             //前置通知
-            System.out.println("The method "+ methodName+" start. param<"+ Arrays.asList(point.getArgs())+">");
+            System.out.println("----------------------The method "+ methodName+" start. param<"+ Arrays.asList(point.getArgs())+">");
             //执行目标方法
             responseData = (ResponseData) point.proceed();
             //返回通知
-            //System.out.println("The method "+ methodName+" end. result<"+ result+">");
+            System.out.println("-----------------------The method "+ methodName+" end. result<"+ responseData+">");
         } catch (Throwable e) {
         	
         	responseData = new ResponseData(500,"请求异常",null);
