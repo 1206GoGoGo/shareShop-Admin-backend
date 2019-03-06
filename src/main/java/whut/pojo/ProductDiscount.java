@@ -13,6 +13,8 @@ public class ProductDiscount implements Serializable{
     private Integer categoryId;  //商品分类id
 
     private Byte discountRate;  //折扣率
+    
+    private Byte sellerDiscountRate; //seller折扣率
 
     private Byte yieldRate;  //收益率
 
@@ -38,6 +40,14 @@ public class ProductDiscount implements Serializable{
 
     public void setDiscountRate(Byte discountRate) {
         this.discountRate = discountRate;
+    }
+    
+    public Byte getSellerDiscountRate() {
+        return sellerDiscountRate;
+    }
+
+    public void setSellerDiscountRate(Byte sellerDiscountRate) {
+        this.sellerDiscountRate = sellerDiscountRate;
     }
 
     public Byte getYieldRate() {
