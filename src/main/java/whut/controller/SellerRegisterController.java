@@ -26,7 +26,7 @@ public class SellerRegisterController {
 	
 	//获取所有seller的登记信息列表
 	@RequestMapping(value = "/getSellerList", method = RequestMethod.GET)
-	public @ResponseBody Object getSellerList() {
+	public @ResponseBody ResponseData getSellerList() {
 		List<SellerRegister> list = new ArrayList<>();
 		list = sellerInfoService.getSellerList();
 		if(list.isEmpty())
@@ -37,7 +37,7 @@ public class SellerRegisterController {
 	
 	//添加seller注册信息
 	@RequestMapping(value = "/add", method = RequestMethod.POST, consumes = "application/json")
-	public @ResponseBody Object add(@RequestBody SellerRegister sellerRegister) {
+	public @ResponseBody ResponseData add(@RequestBody SellerRegister sellerRegister) {
 		sellerInfoService.add(sellerRegister);
 		return new ResponseData(200,"add success",null);
 	}
@@ -45,7 +45,7 @@ public class SellerRegisterController {
 	
 	//删除seller注册信息
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-	public @ResponseBody Object delete(String id) {
+	public @ResponseBody ResponseData delete(String id) {
 		sellerInfoService.delete(id);
 		return new ResponseData(200,"delete success",null);
 	}

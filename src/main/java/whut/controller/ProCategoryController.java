@@ -24,7 +24,7 @@ public class ProCategoryController {
 	
 	//获取第一层级分类列表
 	@RequestMapping(value = "/getList", method = RequestMethod.GET)
-	public @ResponseBody Object getList() {
+	public @ResponseBody ResponseData getList() {
 		List<ProductCategory> list = new ArrayList<>();
 		list = proCategoryService.getList();
 		if(list.isEmpty())
@@ -34,7 +34,7 @@ public class ProCategoryController {
 	
 	//新增分类
 	@RequestMapping(value = "/add", method = RequestMethod.POST, consumes = "application/json")
-	public @ResponseBody Object add(@RequestBody ProductCategory productCategory) {		
+	public @ResponseBody ResponseData add(@RequestBody ProductCategory productCategory) {		
 		if(proCategoryService.ifCategoryExist(productCategory.getCategoryCode()) == null) {
 			proCategoryService.add(productCategory);
 			return new ResponseData(200,"add success",null);
@@ -44,14 +44,14 @@ public class ProCategoryController {
 	
 	//修改分类
 	@RequestMapping(value = "/modify", method = RequestMethod.POST, consumes= "application/json")
-	public @ResponseBody Object modify(@RequestBody ProductCategory productCategory){
+	public @ResponseBody ResponseData modify(@RequestBody ProductCategory productCategory){
 		proCategoryService.modify(productCategory);
 		return new ResponseData(200,"modify success",null);
 	}
 	
 	//删除分类,其下有子分类时判断
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-	public @ResponseBody Object delete(String id){
+	public @ResponseBody ResponseData delete(String id){
 		List<ProductCategory> list = new ArrayList<>();
 		list = proCategoryService.ifHaveChild(id);
 		if(list.size() == 0) {
@@ -63,7 +63,7 @@ public class ProCategoryController {
 	
 	//删除分类,其下有子分类也删，修改其下子分类状态都为0
 	@RequestMapping(value = "/deleteConfirm", method = RequestMethod.GET)
-	public @ResponseBody Object deleteConfirm(String id){
+	public @ResponseBody ResponseData deleteConfirm(String id){
 		proCategoryService.deleteConfirm(id);
 		return new ResponseData(200,"delete success",null);
 	}

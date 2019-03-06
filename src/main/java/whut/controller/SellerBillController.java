@@ -25,7 +25,7 @@ public class SellerBillController {
 	
 	//获取某一seller的账户余额变动信息
 	@RequestMapping(value = "/getList", method = RequestMethod.GET)
-	public @ResponseBody Object getList(String id) {
+	public @ResponseBody ResponseData getList(String id) {
 		List<SellerBill> list = new ArrayList<>();
 		list = sellerBillService.getList(id);
 		if(list.isEmpty())
@@ -35,7 +35,7 @@ public class SellerBillController {
 	
 	//获取某一seller所有的提现记录
 	@RequestMapping(value = "/getWithdrawList", method = RequestMethod.GET)
-	public @ResponseBody Object getWithdrawList(String id) {
+	public @ResponseBody ResponseData getWithdrawList(String id) {
 		List<WithdrawRecord> list = new ArrayList<>();
 		list = sellerBillService.getWithdrawList(id);
 		if(list.isEmpty())
@@ -45,7 +45,7 @@ public class SellerBillController {
 	
 	//获取某一seller所有的收益记录
 	@RequestMapping(value = "/getYieldList", method = RequestMethod.GET)
-	public @ResponseBody Object getYieldList(String id) {
+	public @ResponseBody ResponseData getYieldList(String id) {
 		List<YieldDetail> list = new ArrayList<>();
 		list = sellerBillService.getYieldList(id);
 		if(list.isEmpty())
@@ -55,14 +55,14 @@ public class SellerBillController {
 	
 	//添加提现记录
 	@RequestMapping(value = "/addWithdraw", method = RequestMethod.POST, consumes = "application/json")
-	public @ResponseBody Object addWithdraw(@RequestBody WithdrawRecord withdrawRecord) {
+	public @ResponseBody ResponseData addWithdraw(@RequestBody WithdrawRecord withdrawRecord) {
 		sellerBillService.addWithdraw(withdrawRecord);
 		return new ResponseData(200,"add success",null);
 	}
 	
 	//添加收益记录
 	@RequestMapping(value = "/addYield", method = RequestMethod.POST, consumes = "application/json")
-	public @ResponseBody Object addYield(@RequestBody YieldDetail yieldDetail) {
+	public @ResponseBody ResponseData addYield(@RequestBody YieldDetail yieldDetail) {
 		sellerBillService.addYield(yieldDetail);
 		return new ResponseData(200,"add success",null);
 	}

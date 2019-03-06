@@ -22,7 +22,7 @@ public class SellerOrderController {
 	
 	//通过该seller购买的订单信息
 	@RequestMapping(value = "/getList", method = RequestMethod.GET)
-	public @ResponseBody Object getList(String id) {
+	public @ResponseBody ResponseData getList(String id) {
 		List<YieldDetail> list = new ArrayList<>();
 		list = sellerOrderService.getList(id);
 		if(list.isEmpty())

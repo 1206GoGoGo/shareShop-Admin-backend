@@ -25,7 +25,7 @@ public class ProInfoController {
 	
 	//获取所有商品列表
 	@RequestMapping(value = "/getList", method = RequestMethod.GET)
-	public @ResponseBody Object getList() {
+	public @ResponseBody ResponseData getList() {
 		List<ProductInfo> list = new ArrayList<>();
 		list = proInfoService.getList();
 		if(list.isEmpty())
@@ -35,7 +35,7 @@ public class ProInfoController {
 	
 	//根据商品id获取某商品详情
 	@RequestMapping(value = "/getDetail", method = RequestMethod.GET)
-	public @ResponseBody Object getDetail(String id){
+	public @ResponseBody ResponseData getDetail(String id){
 		ProductInfo productInfo = new ProductInfo();
 		productInfo = proInfoService.getDetail(id);
 		if(productInfo == null)
@@ -45,7 +45,7 @@ public class ProInfoController {
 	
 	//根据商品码id获取某商品详情
 	@RequestMapping(value = "/getDetailByCode", method = RequestMethod.GET)
-	public @ResponseBody Object getDetailByCode(String id){
+	public @ResponseBody ResponseData getDetailByCode(String id){
 		ProductInfo productInfo = new ProductInfo();
 		productInfo = proInfoService.getDetailByCode(id);
 		if(productInfo == null)
@@ -55,7 +55,7 @@ public class ProInfoController {
 	
 	//添加新商品信息
 	@RequestMapping(value = "/add", method = RequestMethod.POST, consumes= "application/json")
-	public @ResponseBody Object add(@RequestBody ProductInfo productInfo){		
+	public @ResponseBody ResponseData add(@RequestBody ProductInfo productInfo){		
 		if(proInfoService.getDetailByCode(productInfo.getProductCode()) == null) {
 			proInfoService.add(productInfo);
 			return new ResponseData(200,"Successfully added",null);
@@ -65,7 +65,7 @@ public class ProInfoController {
 	
 	//根据商品名称查找商品
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public @ResponseBody Object search(String name){
+	public @ResponseBody ResponseData search(String name){
 		List<ProductInfo> list = new ArrayList<>();
 		list = proInfoService.search(name);
 		if(list.isEmpty())
@@ -75,28 +75,28 @@ public class ProInfoController {
 	
 	//修改某商品属性
 	@RequestMapping(value = "/modify", method = RequestMethod.POST, consumes= "application/json")
-	public @ResponseBody Object modify(@RequestBody ProductInfo productInfo){
+	public @ResponseBody ResponseData modify(@RequestBody ProductInfo productInfo){
 		proInfoService.modify(productInfo);
 		return new ResponseData(200,"modify success",null);
 	}
 	
 	//根据商品id修改某商品审核状态
 	@RequestMapping(value = "/modifyAuditStatus", method = RequestMethod.GET)
-	public @ResponseBody Object modifyAuditStatus(String id, String status){
+	public @ResponseBody ResponseData modifyAuditStatus(String id, String status){
 		proInfoService.modifyAuditStatus(id, status);
 		return new ResponseData(200,"modifyAuditStatus success",null);
 	}
 	
 	//根据商品id修改某商品上下架状态
 	@RequestMapping(value = "/modifyShelfStatus", method = RequestMethod.GET)
-	public @ResponseBody Object modifyShelfStatus(String id, String status){
+	public @ResponseBody ResponseData modifyShelfStatus(String id, String status){
 		proInfoService.modifyShelfStatus(id, status);
 		return new ResponseData(200,"modifyShelfStatus success",null);
 	}
 	
 	//根据分类获取商品列表
 	@RequestMapping(value = "/getListByCategory", method = RequestMethod.GET)
-	public @ResponseBody Object getListByCategory(String id){
+	public @ResponseBody ResponseData getListByCategory(String id){
 		List<ProductInfo> list = new ArrayList<>();
 		list = proInfoService.getListByCategory(id);
 		if(list.isEmpty())
