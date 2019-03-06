@@ -23,7 +23,7 @@ public class ProDiscountController {
 	
 	//获取商品折扣列表
 	@RequestMapping(value = "/getList", method = RequestMethod.GET)
-	public @ResponseBody Object getList() {
+	public @ResponseBody ResponseData getList() {
 		List<ProductDiscount> list = new ArrayList<>();
 		list = proDiscountService.getList();
 		if(list.isEmpty())
@@ -33,7 +33,7 @@ public class ProDiscountController {
 	
 	//根据商品分类id查询折扣
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public @ResponseBody Object search(String id){
+	public @ResponseBody ResponseData search(String id){
 		ProductDiscount productDiscount = new ProductDiscount();
 		productDiscount = proDiscountService.search(id);
 		if(productDiscount == null)
@@ -43,7 +43,7 @@ public class ProDiscountController {
 	
 	//添加新的折扣信息
 	@RequestMapping(value = "/add", method = RequestMethod.POST, consumes= "application/json")
-	public @ResponseBody Object add(@RequestBody ProductDiscount productDiscount){		
+	public @ResponseBody ResponseData add(@RequestBody ProductDiscount productDiscount){		
 		if(proDiscountService.search(productDiscount.getCategoryId().toString()) == null) {
 			proDiscountService.add(productDiscount);
 			return new ResponseData(200,"Successfully added",null);
@@ -53,7 +53,7 @@ public class ProDiscountController {
 	
 	//修改折扣信息
 	@RequestMapping(value = "/modify", method = RequestMethod.POST, consumes= "application/json")
-	public @ResponseBody Object modify(@RequestBody ProductDiscount productDiscount){
+	public @ResponseBody ResponseData modify(@RequestBody ProductDiscount productDiscount){
 		proDiscountService.modify(productDiscount);
 		return new ResponseData(200,"modify success",null);
 	}
