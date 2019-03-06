@@ -22,7 +22,7 @@ public class ManagerClassController {
 	 * 获取列表
 	 * @return
 	 */
-	@RequestMapping(value = "/getList", method = RequestMethod.POST)
+	@RequestMapping(value = "/getList", method = RequestMethod.GET)
 	public @ResponseBody ResponseData getList() {
 		return managerClassService.getList();
 	}
