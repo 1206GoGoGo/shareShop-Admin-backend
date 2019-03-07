@@ -26,4 +26,8 @@ public interface ProInfoService {
 
 	public ResponseData getDetailByCode(String id);
 
+	public ResponseData getUncheckedList();
+
+	public ResponseData getOffShelfCategory();
+
 }

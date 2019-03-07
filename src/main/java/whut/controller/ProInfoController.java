@@ -78,8 +78,19 @@ public class ProInfoController {
 	//根据分类获取商品列表
 	@RequestMapping(value = "/getListByCategory", method = RequestMethod.GET)
 	public @ResponseBody ResponseData getListByCategory(String id){
-		return proInfoService.getListByCategory(id);
-		
+		return proInfoService.getListByCategory(id);	
+	}
+	
+	//获取所有未审核的商品列表
+	@RequestMapping(value = "/getUncheckedList", method = RequestMethod.GET)
+	public @ResponseBody ResponseData getUncheckedList(){
+		return proInfoService.getUncheckedList();	
+	}
+	
+	//获取所有的下架商品列表
+	@RequestMapping(value = "/getOffShelfCategory", method = RequestMethod.GET)
+	public @ResponseBody ResponseData getOffShelfCategory(){
+		return proInfoService.getOffShelfCategory();	
 	}
 	
 }

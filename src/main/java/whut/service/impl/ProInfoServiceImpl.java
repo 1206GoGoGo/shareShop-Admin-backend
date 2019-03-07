@@ -113,6 +113,28 @@ public class ProInfoServiceImpl implements ProInfoService{
 		}else {
 			return new ResponseData(400,"no data",null);
 		}
+	}
+
+	@Override
+	public ResponseData getUncheckedList() {
+		// TODO Auto-generated method stub
+		List<ProductInfo> list = proInfoDao.getUncheckedList();
+		if(list != null) {
+			return new ResponseData(200,"success",list);
+		}else {
+			return new ResponseData(400,"no data",null);
+		}
+	}
+
+	@Override
+	public ResponseData getOffShelfCategory() {
+		// TODO Auto-generated method stub
+		List<ProductInfo> list = proInfoDao.getOffShelfCategory();
+		if(list != null) {
+			return new ResponseData(200,"success",list);
+		}else {
+			return new ResponseData(400,"no data",null);
+		}
 	}	
 	
 }
