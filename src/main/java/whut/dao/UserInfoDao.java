@@ -6,6 +6,7 @@ import whut.pojo.UserInfo;
 
 public interface UserInfoDao {
 
+	//获取完整用户信息
 	List<UserInfo> getList(int status);
 	
 	List<UserInfo> getSellerList();
@@ -15,8 +16,10 @@ public interface UserInfoDao {
 	//修改用户状态
 	boolean delete(int id);
 
+	//修改用户信息表
 	boolean modify(UserInfo user);
 
+	//通过登录表id获取全部信息
 	UserInfo getDetail(int id);
 
 	//通过用户id获取用户全部信息（两个表的信息）

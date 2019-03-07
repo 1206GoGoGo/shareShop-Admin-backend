@@ -59,7 +59,7 @@ public class MemberInfoController {
 	 * @param jsonString查询条件用Post组成json字符串传入
 	 * @return
 	 */
-	@RequestMapping(value = "/search", method = RequestMethod.POST)
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public @ResponseBody ResponseData search(String username, String phoneNumber,String name,String identityCardNo) {
 		return  memberInfoService.search(username, phoneNumber, name, identityCardNo);
 	}
