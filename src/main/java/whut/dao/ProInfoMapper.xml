@@ -24,7 +24,7 @@
     <result column="modified_time" jdbcType="TIMESTAMP" property="modifiedTime" />
   </resultMap>
     <select id="getList" resultType="ProductInfo" resultMap="BaseResultMap">
-        SELECT * FROM product_info
+        SELECT * FROM product_info where publish_status = 1 and audit_status = 1
     </select>
     
     <select id="getDetail" parameterType="String" resultMap="BaseResultMap">
@@ -72,9 +72,18 @@
         WHERE product_id = #{productId}
     </select>
     
-    <select id="getListByCategory" parameterType="String" resultType="ProductInfo" resultMap="BaseResultMap">
-    	SELECT * FROM product_info where one_category_id = #{category_id}
+    <select id="getListByCategory" parameterType="String"  resultMap="BaseResultMap">
+    	SELECT * FROM product_info where (one_category_id = #{category_id}
     	or two_category_id = #{category_id}
-    	or three_category_id = #{category_id}
+    	or three_category_id = #{category_id})
+    	and publish_status = 1 and audit_status = 1
+    </select>
+    
+    <select id="getUncheckedList"  resultMap="BaseResultMap">
+    	SELECT * FROM product_info where  audit_status = 0
+    </select>
+    
+   <select id="getOffShelfCategory"  resultMap="BaseResultMap">
+    	SELECT * FROM product_info where  publish_status = 0
     </select>
 </mapper>

@@ -16,7 +16,7 @@
   </resultMap>
   
   <select id="getListByProduct" parameterType="String" resultMap="BaseResultMap">
-        SELECT * FROM product_comment where product_id = #{id}
+        SELECT * FROM product_comment where product_id = #{id} and audit_status = 1
    </select>
    
     <select id="getListByUser" parameterType="String" resultMap="BaseResultMap">
