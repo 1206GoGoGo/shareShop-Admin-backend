@@ -1,11 +1,10 @@
 package whut.service;
 
-import java.util.List;
 
-import whut.pojo.YieldDetail;
+import whut.utils.ResponseData;
 
 public interface SellerOrderService {
 
-	public List<YieldDetail> getList(String id);
+	public ResponseData getList(String id);
 
 }

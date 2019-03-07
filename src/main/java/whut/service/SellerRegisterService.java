@@ -1,19 +1,20 @@
 package whut.service;
 
-import java.util.List;
+
 
 import whut.pojo.SellerRegister;
+import whut.utils.ResponseData;
 
 
 
 public interface SellerRegisterService {
 
 	
-	public List<SellerRegister> getSellerList();
+	public ResponseData getSellerList();
 
-	public void add(SellerRegister sellerRegister);
+	public ResponseData add(SellerRegister sellerRegister);
 
-	public void delete(String id);
+	public ResponseData delete(String id);
 
 	
 

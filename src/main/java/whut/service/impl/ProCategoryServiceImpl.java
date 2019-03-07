@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import whut.dao.ProCategoryDao;
 import whut.pojo.ProductCategory;
 import whut.service.ProCategoryService;
+import whut.utils.ResponseData;
 
 
 @Service
@@ -18,28 +19,43 @@ public class ProCategoryServiceImpl implements ProCategoryService{
 	public ProCategoryDao proCategoryDao;
 	
 	@Override
-	public List<ProductCategory> getList() {
+	public ResponseData getList() {
 		// TODO Auto-generated method stub
-		return proCategoryDao.getList();
+		List<ProductCategory> list = proCategoryDao.getList();
+		if(list != null) {
+			return new ResponseData(200,"success",list);
+		}else {
+			return new ResponseData(400,"no data",null);
+		}
 	}
 
 	@Override
-	public void add(ProductCategory productCategory) {
+	public ResponseData add(ProductCategory productCategory) {
 		// TODO Auto-generated method stub
-		proCategoryDao.add(productCategory);
+		if(proCategoryDao.ifCategoryExist(productCategory.getCategoryCode()) == null) {
+			proCategoryDao.add(productCategory);
+			return new ResponseData(200,"add success",null);
+		}
+		return new ResponseData(500,"Fail to add",null);
 	}
 
 	@Override
-	public void modify(ProductCategory productCategory) {
+	public ResponseData modify(ProductCategory productCategory) {
 		// TODO Auto-generated method stub
 		proCategoryDao.modify(productCategory);
+		return new ResponseData(200,"modify success",null);
 	}
 
 	@Override
-	public void delete(String id) {
+	public ResponseData delete(String id) {
 		// TODO Auto-generated method stub
-		//如果该类别下有产品则无法删除，设置修改状态即可
-		proCategoryDao.delete(id);
+		List<ProductCategory> list = new ArrayList<>();
+		list = proCategoryDao.ifHaveChild(id);
+		if(list.size() == 0) {
+			proCategoryDao.delete(id);
+			return new ResponseData(200,"delete success",null);
+		}
+		return new ResponseData(500,"There are subcategories under this category",null);
 	}
 
 	@Override
@@ -55,7 +71,7 @@ public class ProCategoryServiceImpl implements ProCategoryService{
 	}
 
 	@Override
-	public void deleteConfirm(String id) {
+	public ResponseData deleteConfirm(String id) {
 		// TODO Auto-generated method stub
 		proCategoryDao.delete(id);
 		List<ProductCategory> list = new ArrayList<>();
@@ -70,6 +86,7 @@ public class ProCategoryServiceImpl implements ProCategoryService{
 				}
 			}
 		}
+		return new ResponseData(200,"delete success",null);
 	}
 
 }

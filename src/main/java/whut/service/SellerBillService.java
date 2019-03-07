@@ -1,25 +1,20 @@
 package whut.service;
 
-import java.util.List;
 
-import whut.pojo.SellerBill;
 import whut.pojo.WithdrawRecord;
 import whut.pojo.YieldDetail;
+import whut.utils.ResponseData;
 
 public interface SellerBillService {
 
-	public List<SellerBill> getList(String id);
+	public ResponseData getList(String id);
 
-	public void addWithdraw(WithdrawRecord withdrawRecord);
+	public ResponseData addWithdraw(WithdrawRecord withdrawRecord);
 
-	public void addYield(YieldDetail yieldDetail);
+	public ResponseData addYield(YieldDetail yieldDetail);
 
-	public List<WithdrawRecord> getWithdrawList(String id);
+	public ResponseData getWithdrawList(String id);
 
-	public List<YieldDetail> getYieldList(String id);
-
-	
-
-	
+	public ResponseData getYieldList(String id);
 
 }

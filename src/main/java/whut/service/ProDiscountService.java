@@ -1,19 +1,20 @@
 package whut.service;
 
-import java.util.List;
+
 
 import whut.pojo.ProductDiscount;
+import whut.utils.ResponseData;
 
 
 
 public interface ProDiscountService {
 
-	public List<ProductDiscount> getList();
+	public ResponseData getList();
 
-	public ProductDiscount search(String id);
+	public ResponseData search(String id);
 
-	public void add(ProductDiscount productDiscount);
+	public ResponseData add(ProductDiscount productDiscount);
 
-	public void modify(ProductDiscount productDiscount);
+	public ResponseData modify(ProductDiscount productDiscount);
 
 }

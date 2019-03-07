@@ -1,34 +1,29 @@
 package whut.service;
 
-import java.util.List;
 
 
 import whut.pojo.ProductInfo;
+import whut.utils.ResponseData;
 
 
 public interface ProInfoService {
 
-	public List<ProductInfo> getList();
+	public ResponseData getList();
 
-	public ProductInfo getDetail(String id);
+	public ResponseData getDetail(String id);
 
-	public void add(ProductInfo productInfo);
+	public ResponseData add(ProductInfo productInfo);
 
-	public List<ProductInfo> search(String name);
+	public ResponseData search(String name);
 
-	public void modify(ProductInfo productInfo);
+	public ResponseData modify(ProductInfo productInfo);
 
-	public void modifyAuditStatus(String id, String status);
+	public ResponseData modifyAuditStatus(String id, String status);
 
-	public void modifyShelfStatus(String id, String status);
+	public ResponseData modifyShelfStatus(String id, String status);
 
-	public List<ProductInfo> getListByCategory(String id);
+	public ResponseData getListByCategory(String id);
 
-	public ProductInfo getDetailByCode(String id);
-
-	
-	
-
-	
+	public ResponseData getDetailByCode(String id);
 
 }

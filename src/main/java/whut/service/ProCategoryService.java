@@ -1,25 +1,27 @@
 package whut.service;
 
+
 import java.util.List;
 
 import whut.pojo.ProductCategory;
+import whut.utils.ResponseData;
 
 
 public interface ProCategoryService {
 
-	public List<ProductCategory> getList();
+	public ResponseData getList();
 
-	public void add(ProductCategory productCategory);
+	public ResponseData add(ProductCategory productCategory);
 	
-	public void modify(ProductCategory productCategory);
+	public ResponseData modify(ProductCategory productCategory);
 
-	public void delete(String id);
+	public ResponseData delete(String id);
 
 	public ProductCategory ifCategoryExist(String categoryCode);
 
 	public List<ProductCategory> ifHaveChild(String id);
 
-	public void deleteConfirm(String id);
+	public ResponseData deleteConfirm(String id);
 
 	
 

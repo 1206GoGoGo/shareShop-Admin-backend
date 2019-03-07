@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 
 import whut.dao.ProDiscountDao;
 import whut.pojo.ProductDiscount;
+
 import whut.service.ProDiscountService;
+import whut.utils.ResponseData;
 
 
 @Service
@@ -17,27 +19,41 @@ public class ProDiscountServiceImpl implements ProDiscountService{
 	public ProDiscountDao proDiscountDao;
 	
 	@Override
-	public List<ProductDiscount> getList() {
+	public ResponseData getList() {
 		// TODO Auto-generated method stub
-		return proDiscountDao.getList();
+		List<ProductDiscount> list = proDiscountDao.getList();
+		if(list != null) {
+			return new ResponseData(200,"success",list);
+		}else {
+			return new ResponseData(400,"no data",null);
+		}
 	}
 
 	@Override
-	public ProductDiscount search(String id) {
+	public ResponseData search(String id) {
 		// TODO Auto-generated method stub
-		return proDiscountDao.search(id);
+		ProductDiscount productDiscount = new ProductDiscount();
+		productDiscount = proDiscountDao.search(id);
+		if(productDiscount == null)
+			return new ResponseData(400,"not find",null);
+		return new ResponseData(200,"success",productDiscount);
 	}
 
 	@Override
-	public void add(ProductDiscount productDiscount) {
+	public ResponseData add(ProductDiscount productDiscount) {
 		// TODO Auto-generated method stub
-		proDiscountDao.add(productDiscount);
+		if(proDiscountDao.search(productDiscount.getCategoryId().toString()) == null) {
+			proDiscountDao.add(productDiscount);
+			return new ResponseData(200,"Successfully added",null);
+		}
+		return new ResponseData(500,"Add failed",null);
 	}
 
 	@Override
-	public void modify(ProductDiscount productDiscount) {
+	public ResponseData modify(ProductDiscount productDiscount) {
 		// TODO Auto-generated method stub
 		proDiscountDao.modify(productDiscount);
+		return new ResponseData(200,"modify success",null);
 	}
 
 }

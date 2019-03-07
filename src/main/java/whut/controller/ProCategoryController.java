@@ -1,7 +1,5 @@
 package whut.controller;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -25,47 +23,34 @@ public class ProCategoryController {
 	//获取第一层级分类列表
 	@RequestMapping(value = "/getList", method = RequestMethod.GET)
 	public @ResponseBody ResponseData getList() {
-		List<ProductCategory> list = new ArrayList<>();
-		list = proCategoryService.getList();
-		if(list.isEmpty())
-			return new ResponseData(400,"No data",null);
-		return new ResponseData(200,"success",list);
+		return proCategoryService.getList();
 	}
 	
 	//新增分类
 	@RequestMapping(value = "/add", method = RequestMethod.POST, consumes = "application/json")
 	public @ResponseBody ResponseData add(@RequestBody ProductCategory productCategory) {		
-		if(proCategoryService.ifCategoryExist(productCategory.getCategoryCode()) == null) {
-			proCategoryService.add(productCategory);
-			return new ResponseData(200,"add success",null);
-		}
-		return new ResponseData(500,"Fail to add",null);
+		return proCategoryService.add(productCategory);
+			
 	}
 	
 	//修改分类
 	@RequestMapping(value = "/modify", method = RequestMethod.POST, consumes= "application/json")
 	public @ResponseBody ResponseData modify(@RequestBody ProductCategory productCategory){
-		proCategoryService.modify(productCategory);
-		return new ResponseData(200,"modify success",null);
+		return proCategoryService.modify(productCategory);
+		
 	}
 	
 	//删除分类,其下有子分类时判断
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public @ResponseBody ResponseData delete(String id){
-		List<ProductCategory> list = new ArrayList<>();
-		list = proCategoryService.ifHaveChild(id);
-		if(list.size() == 0) {
-			proCategoryService.delete(id);
-			return new ResponseData(200,"delete success",null);
-		}
-		return new ResponseData(500,"There are subcategories under this category",null);
+		return proCategoryService.delete(id);
 	}
 	
 	//删除分类,其下有子分类也删，修改其下子分类状态都为0
 	@RequestMapping(value = "/deleteConfirm", method = RequestMethod.GET)
 	public @ResponseBody ResponseData deleteConfirm(String id){
-		proCategoryService.deleteConfirm(id);
-		return new ResponseData(200,"delete success",null);
+		return proCategoryService.deleteConfirm(id);
+		
 	}
 	
 }

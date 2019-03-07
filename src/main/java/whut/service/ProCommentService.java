@@ -1,22 +1,23 @@
 package whut.service;
 
-import java.util.List;
+
 
 import whut.pojo.ProductComment;
+import whut.utils.ResponseData;
 
 
 
 public interface ProCommentService {
 
-	public List<ProductComment> getListByProduct(String id);
+	public ResponseData getListByProduct(String id);
 
-	public List<ProductComment> getListByUser(String id);
+	public ResponseData getListByUser(String id);
 	
-	public void add(ProductComment productComment);
+	public ResponseData add(ProductComment productComment);
 
-	public void delete(String id);
+	public ResponseData delete(String id);
 
-	public void addAgain(String id, String content);
+	public ResponseData addAgain(String id, String content);
 
 	public ProductComment getCommentById(String id);
 

@@ -1,5 +1,6 @@
 package whut.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import whut.pojo.SellerBill;
 import whut.pojo.WithdrawRecord;
 import whut.pojo.YieldDetail;
 import whut.service.SellerBillService;
+import whut.utils.ResponseData;
 
 @Service
 public class SellerBillServiceImpl implements SellerBillService{
@@ -18,33 +20,48 @@ public class SellerBillServiceImpl implements SellerBillService{
 	public SellerBillDao sellerBillDao;
 
 	@Override
-	public List<SellerBill> getList(String id) {
+	public ResponseData getList(String id) {
 		// TODO Auto-generated method stub
-		return sellerBillDao.getList(id);
+		List<SellerBill> list = sellerBillDao.getList(id);
+		if(list != null) {
+			return new ResponseData(200,"success",list);
+		}else {
+			return new ResponseData(400,"no data",null);
+		}
 	}
 
 	@Override
-	public void addWithdraw(WithdrawRecord withdrawRecord) {
+	public ResponseData addWithdraw(WithdrawRecord withdrawRecord) {
 		// TODO Auto-generated method stub
 		sellerBillDao.addWithdraw(withdrawRecord);
+		return new ResponseData(200,"add success",null);
 	}
 
 	@Override
-	public void addYield(YieldDetail yieldDetail) {
+	public ResponseData addYield(YieldDetail yieldDetail) {
 		// TODO Auto-generated method stub
 		sellerBillDao.addYield(yieldDetail);
+		return new ResponseData(200,"add success",null);
 	}
 
 	@Override
-	public List<WithdrawRecord> getWithdrawList(String id) {
+	public ResponseData getWithdrawList(String id) {
 		// TODO Auto-generated method stub
-		return sellerBillDao.getWithdrawList(id);
+		List<WithdrawRecord> list = new ArrayList<>();
+		list = sellerBillDao.getWithdrawList(id);
+		if(list.isEmpty())
+			return new ResponseData(400,"No data",null);
+		return new ResponseData(200,"success",list);
 	}
 
 	@Override
-	public List<YieldDetail> getYieldList(String id) {
+	public ResponseData getYieldList(String id) {
 		// TODO Auto-generated method stub
-		return sellerBillDao.getYieldList(id);
+		List<YieldDetail> list = new ArrayList<>();
+		list = sellerBillDao.getYieldList(id);
+		if(list.isEmpty())
+			return new ResponseData(400,"No data",null);
+		return new ResponseData(200,"success",list);
 	}
 	
 	
