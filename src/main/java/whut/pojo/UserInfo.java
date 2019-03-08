@@ -35,8 +35,18 @@ public class UserInfo implements Serializable{
     private Byte isSeller;  //是否是店主
 
     private BigDecimal userMoney;  //账户余额
+    
+    private UserLogin userLogin; //用户登录对象
 
-    public Integer getUserInfoId() {
+    public UserLogin getUserLogin() {
+		return userLogin;
+	}
+
+	public void setUserLogin(UserLogin userLogin) {
+		this.userLogin = userLogin;
+	}
+
+	public Integer getUserInfoId() {
         return userInfoId;
     }
 

@@ -11,7 +11,7 @@ import whut.utils.ResponseData;
 
 
 @Component
-@Aspect
+//@Aspect
 public class ExceptionHandle {
 	
 	public ExceptionHandle() {}

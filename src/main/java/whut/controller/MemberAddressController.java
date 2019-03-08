@@ -22,20 +22,5 @@ public class MemberAddressController {
 	public @ResponseBody ResponseData getListByUserId(int id) {
 		return  memberAddressService.getListByUserId(id);
 	}
-
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public @ResponseBody ResponseData add(@RequestBody UserAddr userAddr) {
-		return  memberAddressService.add(userAddr);
-	}
-	
-	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-	public @ResponseBody ResponseData delete(int id) {
-		return  memberAddressService.delete(id);
-	}
-	
-	@RequestMapping(value = "/modify", method = RequestMethod.GET)
-	public @ResponseBody ResponseData modify(@RequestBody UserAddr userAddr) {
-		return  memberAddressService.modify(userAddr);
-	}
 	
 }

@@ -24,36 +24,4 @@ public class MemberAddressServiceImpl implements MemberAddressService {
 		}
 	}
 
-	@Override
-	public ResponseData add(UserAddr userAddr) {
-		boolean result = dao.add(userAddr);
-		if(result) {
-			return new ResponseData(200,"success",null);
-		}else {
-			return new ResponseData(500,"error",null);
-		}
-	}
-
-	@Override
-	public ResponseData delete(int id) {
-		boolean result = dao.delete(id);
-		if(result) {
-			return new ResponseData(200,"success",null);
-		}else {
-			return new ResponseData(500,"error",null);
-		}
-
-	}
-
-	@Override
-	public ResponseData modify(UserAddr userAddr) {
-		boolean result = dao.modify(userAddr);
-		if(result) {
-			return new ResponseData(200,"success",null);
-		}else {
-			return new ResponseData(500,"error",null);
-		}
-	}
-	
-
 }
