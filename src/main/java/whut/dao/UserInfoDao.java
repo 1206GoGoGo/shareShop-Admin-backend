@@ -32,4 +32,10 @@ public interface UserInfoDao {
 
 	List<UserInfo> getMemberBySellerId(int sellerid);
 
+	UserInfo getUserInfo(String id);
+
+	void addSeller(String id);
+
+	void deleteSeller(String id);
+
 }
