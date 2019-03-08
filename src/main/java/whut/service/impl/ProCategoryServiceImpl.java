@@ -36,7 +36,7 @@ public class ProCategoryServiceImpl implements ProCategoryService{
 			proCategoryDao.add(productCategory);
 			return new ResponseData(200,"add success",null);
 		}
-		return new ResponseData(500,"Fail to add",null);
+		return new ResponseData(406,"Fail to add",null);
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class ProCategoryServiceImpl implements ProCategoryService{
 			proCategoryDao.delete(id);
 			return new ResponseData(200,"delete success",null);
 		}
-		return new ResponseData(500,"There are subcategories under this category",null);
+		return new ResponseData(406,"There are subcategories under this category",null);
 	}
 
 	@Override

@@ -50,9 +50,9 @@ public class ProInfoServiceImpl implements ProInfoService{
 		// TODO Auto-generated method stub
 		if(proInfoDao.getDetailByCode(productInfo.getProductCode()) == null) {
 			proInfoDao.add(productInfo);
-			return new ResponseData(200,"Successfully added",null);
+			return new ResponseData(200,"success",null);
 		}else {
-			return new ResponseData(500,"Add failed",null);
+			return new ResponseData(406,"parameters incorrect",null);
 		}
 	}
 

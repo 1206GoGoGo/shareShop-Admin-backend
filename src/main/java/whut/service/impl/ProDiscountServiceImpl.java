@@ -46,7 +46,7 @@ public class ProDiscountServiceImpl implements ProDiscountService{
 			proDiscountDao.add(productDiscount);
 			return new ResponseData(200,"Successfully added",null);
 		}
-		return new ResponseData(500,"Add failed",null);
+		return new ResponseData(406,"Add failed",null);
 	}
 
 	@Override

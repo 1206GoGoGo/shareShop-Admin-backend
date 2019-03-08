@@ -19,9 +19,9 @@
   </resultMap>
 
 	<select id="getList" parameterType="String" resultType="SellerBill">
-    	SELECT withdraw_money as money, create_time as createTime, 'withdraw_money' as remark FROM withdraw_record where user_id = #{id}
+    	SELECT withdraw_money as money, create_time as createTime, 'withdraw_money' as type FROM withdraw_record where user_id = #{id}
 		union
-		SELECT yield_money as money , create_time as createTime ,'yield_money' as remark FROM yield_detail where user_id = #{id}
+		SELECT yield_money as money , create_time as createTime ,'yield_money' as type FROM yield_detail where user_id = #{id}
 		ORDER BY createTime;
     </select>
     
