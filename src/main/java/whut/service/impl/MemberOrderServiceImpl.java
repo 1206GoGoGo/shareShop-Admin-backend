@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import whut.dao.OrderDao;
+import whut.dao.UserLoginDao;
 import whut.pojo.OrderDetail;
 import whut.pojo.OrderMaster;
 import whut.pojo.UserAddr;
@@ -19,6 +20,9 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 
 	@Autowired
 	private OrderDao dao;
+	
+	@Autowired
+	private UserLoginDao loginDao;
 
 	@Override
 	public ResponseData getListByUser(int id) {
@@ -142,6 +146,22 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 			return new ResponseData(200,"success",null);
 		}else {
 			return new ResponseData(500,"error",null);
+		}
+	}
+
+	@Override
+	public ResponseData getListByUserName(String username) {
+		int id = loginDao.searchByUsername(username);
+		if(id == 0) {
+			return new ResponseData(4001,"不存在该用户",null);
+		}
+		
+		
+		List<OrderMaster> list = dao.getListByUser(id);
+		if(list != null) {
+			return new ResponseData(200,"success",list);
+		}else {
+			return new ResponseData(4002,"no data",null);
 		}
 	}
 

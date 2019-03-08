@@ -29,6 +29,16 @@ public class MemberOrderController {
 	}
 	
 	/**
+	 * 根据用户名获取订单列表
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "/getListByUserName", method = RequestMethod.GET)
+	public @ResponseBody ResponseData getListByUserName(String username) {
+		return memberOrderService.getListByUserName(username);
+	}
+	
+	/**
 	 * 获取某商品的购买记录
 	 * @param id
 	 * @return

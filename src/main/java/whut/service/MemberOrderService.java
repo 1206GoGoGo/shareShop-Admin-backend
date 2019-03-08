@@ -29,4 +29,6 @@ public interface MemberOrderService {
 	public ResponseData modifyOrderStatus(@RequestBody String jsonString);
 
 	public ResponseData modifyProStatus(@RequestBody String jsonString);
+
+	public ResponseData getListByUserName(String username);
 }
