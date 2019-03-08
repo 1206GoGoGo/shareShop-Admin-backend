@@ -88,9 +88,9 @@ public class ProInfoController {
 	}
 	
 	//获取所有的下架商品列表
-	@RequestMapping(value = "/getOffShelfCategory", method = RequestMethod.GET)
-	public @ResponseBody ResponseData getOffShelfCategory(){
-		return proInfoService.getOffShelfCategory();	
+	@RequestMapping(value = "/getOffShelfList", method = RequestMethod.GET)
+	public @ResponseBody ResponseData getOffShelfList(){
+		return proInfoService.getOffShelfList();	
 	}
 	
 }

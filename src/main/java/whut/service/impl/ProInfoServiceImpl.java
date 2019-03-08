@@ -127,9 +127,9 @@ public class ProInfoServiceImpl implements ProInfoService{
 	}
 
 	@Override
-	public ResponseData getOffShelfCategory() {
+	public ResponseData getOffShelfList() {
 		// TODO Auto-generated method stub
-		List<ProductInfo> list = proInfoDao.getOffShelfCategory();
+		List<ProductInfo> list = proInfoDao.getOffShelfList();
 		if(list != null) {
 			return new ResponseData(200,"success",list);
 		}else {
