@@ -9,7 +9,7 @@ public interface SellerInfoService {
 
 	public ResponseData addSeller(String id);
 
-	UserInfo getUserInfo(String id);
+	UserInfo getDetail(String id);
 
 	public ResponseData deleteSeller(String id);
 

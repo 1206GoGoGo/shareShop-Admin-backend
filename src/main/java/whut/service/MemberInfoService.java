@@ -17,5 +17,5 @@ public interface MemberInfoService {
 
 	public ResponseData modify(UserInfo user);
 
-	public ResponseData getDetail(int id);
+	public ResponseData getDetail(String id);
 }

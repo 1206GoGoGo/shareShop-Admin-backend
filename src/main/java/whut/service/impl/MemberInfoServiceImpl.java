@@ -84,7 +84,7 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 	}
 
 	@Override
-	public ResponseData getDetail(int id) {
+	public ResponseData getDetail(String id) {
 		UserInfo info = dao.getDetail(id);
 		if(info != null) {
 			return new ResponseData(200,"success",info);

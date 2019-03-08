@@ -28,7 +28,7 @@ public class SellerInfoController {
 		return sellerInfoService.addSeller(id);	
 	}
 	
-	//注册seller，修改UserInfo表用户是否是店主
+	//注销seller，修改UserInfo表用户是否是店主
 	@RequestMapping(value = "/deleteSeller", method = RequestMethod.GET)
 	public @ResponseBody ResponseData deleteSeller(String id){
 		return sellerInfoService.deleteSeller(id);	

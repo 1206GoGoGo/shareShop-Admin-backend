@@ -65,7 +65,7 @@ public class MemberInfoController {
 	}
 	
 	@RequestMapping(value = "/getDetail", method = RequestMethod.GET)
-	public @ResponseBody ResponseData getDetail(int id) {
+	public @ResponseBody ResponseData getDetail(String id) {
 		return  memberInfoService.getDetail(id);
 	}
 

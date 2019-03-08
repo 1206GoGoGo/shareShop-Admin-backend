@@ -20,7 +20,7 @@ public interface UserInfoDao {
 	boolean modify(UserInfo user);
 
 	//通过登录表id获取全部信息
-	UserInfo getDetail(int id);
+	UserInfo getDetail(String id);
 
 	//通过用户id获取用户全部信息（两个表的信息）
 	List<UserInfo> getAllInfoByUserId(int userId);
@@ -28,5 +28,9 @@ public interface UserInfoDao {
 	//通过用户对象获取用户全部信息（两个表的信息）
 	//无数据返回null
 	List<UserInfo> searchAllInfoByUserInfo(UserInfo userInfo);
+
+	void addSeller(String id);
+
+	void deleteSeller(String id);
 
 }

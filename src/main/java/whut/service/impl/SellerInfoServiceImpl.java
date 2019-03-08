@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import whut.dao.SellerInfoDao;
+import whut.dao.UserInfoDao;
 import whut.pojo.UserInfo;
 import whut.service.SellerInfoService;
 import whut.utils.ResponseData;
@@ -14,7 +14,7 @@ import whut.utils.ResponseData;
 public class SellerInfoServiceImpl implements SellerInfoService{
 
 	@Autowired
-	private SellerInfoDao sellerInfoDao;
+	private UserInfoDao sellerInfoDao;
 	
 	@Override
 	public ResponseData getSellerList() {
@@ -28,16 +28,16 @@ public class SellerInfoServiceImpl implements SellerInfoService{
 	}
 	
 	@Override
-	public UserInfo getUserInfo(String id) {
+	public UserInfo getDetail(String id) {
 		// TODO Auto-generated method stub
-		return sellerInfoDao.getUserInfo(id);
+		return sellerInfoDao.getDetail(id);
 	}
 	
 	@Override
 	public ResponseData addSeller(String id) {
 		// TODO Auto-generated method stub
 		//判断是否是店主
-		if(sellerInfoDao.getUserInfo(id).getIsSeller().equals(0)) {
+		if(sellerInfoDao.getDetail(id).getIsSeller().equals(0)) {
 			sellerInfoDao.addSeller(id);
 			return new ResponseData(200,"success",null);
 		}
@@ -47,7 +47,7 @@ public class SellerInfoServiceImpl implements SellerInfoService{
 	@Override
 	public ResponseData deleteSeller(String id) {
 		// TODO Auto-generated method stub
-		if(sellerInfoDao.getUserInfo(id).getIsSeller().equals(1)) {
+		if(sellerInfoDao.getDetail(id).getIsSeller().equals(1)) {
 			sellerInfoDao.deleteSeller(id);
 			return new ResponseData(200,"success",null);
 		}
