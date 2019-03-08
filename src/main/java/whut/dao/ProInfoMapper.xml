@@ -83,7 +83,7 @@
     	SELECT * FROM product_info where  audit_status = 0
     </select>
     
-   <select id="getOffShelfList"  resultMap="BaseResultMap">
+   <select id="getOffShelfCategory"  resultMap="BaseResultMap">
     	SELECT * FROM product_info where  publish_status = 0
     </select>
 </mapper>

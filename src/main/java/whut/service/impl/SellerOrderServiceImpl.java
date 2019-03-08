@@ -20,7 +20,6 @@ public class SellerOrderServiceImpl implements SellerOrderService{
 	@Override
 	public ResponseData getList(String id) {
 		// TODO Auto-generated method stub
-		//通过店主ID查到下线，把下线的订单ID和金额，计算预计收益金额和是否到账（余额）
 		List<YieldDetail> list = new ArrayList<>();
 		list = sellerOrderDao.getList(id);
 		if(list.isEmpty())

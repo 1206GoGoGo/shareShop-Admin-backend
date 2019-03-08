@@ -9,7 +9,7 @@ public interface OrderDao {
 
 	List<OrderMaster> getListByUser(int id);
 
-	List<OrderMaster> getListByPro(int id);
+	List<OrderDetail> getListByPro(int id);
 
 	List<OrderMaster> getListByStatus(Byte status);
 
@@ -17,7 +17,7 @@ public interface OrderDao {
 
 	List<OrderDetail> getListByStatus(int orderId);
 
-	List<OrderDetail> getListByOrderId(int orderId);
+	List<OrderMaster> getListByOrderId(int orderId);
 
 	boolean modifyOrder(OrderMaster orderMaster);
 
@@ -25,6 +25,6 @@ public interface OrderDao {
 
 	boolean modifyOrderStatus(int orderId, Byte status);
 
-	boolean modifyProStatus(int orderId, Byte status);
+	boolean modifyProStatus(int orderDetailId, Byte status);
 
 }

@@ -31,6 +31,16 @@ public class MemberInfoController {
 		return  memberInfoService.getList(status);
 	}
 	
+	/**
+	 * 通过seller获取用户信息列表
+	 * @param username
+	 * @return
+	 */
+	@RequestMapping(value = "/getListBySeller", method = RequestMethod.GET)
+	public @ResponseBody ResponseData getListBySeller(String username) {
+		return  memberInfoService.getMemberListBySeller(username);
+	}
+	
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public @ResponseBody ResponseData add(@RequestBody UserInfo user){
 		
@@ -60,12 +70,13 @@ public class MemberInfoController {
 	 * @return
 	 */
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public @ResponseBody ResponseData search(String username, String phoneNumber,String name,String identityCardNo) {
-		return  memberInfoService.search(username, phoneNumber, name, identityCardNo);
+	public @ResponseBody ResponseData search(int pagesize,int pageindex,String username,
+			String phoneNumber,String name,String identityCardNo,int level) {
+		return  memberInfoService.search(pagesize,pageindex,username, phoneNumber, name, identityCardNo,level);
 	}
 	
 	@RequestMapping(value = "/getDetail", method = RequestMethod.GET)
-	public @ResponseBody ResponseData getDetail(String id) {
+	public @ResponseBody ResponseData getDetail(int id) {
 		return  memberInfoService.getDetail(id);
 	}
 

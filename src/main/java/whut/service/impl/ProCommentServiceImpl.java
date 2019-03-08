@@ -67,7 +67,7 @@ public class ProCommentServiceImpl implements ProCommentService{
 			proCommentDao.addAgain(map);
 			return new ResponseData(200,"add success",null);
 		}
-		return new ResponseData(406,"Sorry,you can't evaluate again",null);
+		return new ResponseData(500,"Sorry,you can't evaluate again",null);
 		
 	}
 

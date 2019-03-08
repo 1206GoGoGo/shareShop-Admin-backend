@@ -6,7 +6,7 @@ import whut.pojo.UserInfo;
 
 public interface UserInfoDao {
 
-	//获取完整用户信息
+	//获取完整用户信息--不包括seller
 	List<UserInfo> getList(int status);
 	
 	List<UserInfo> getSellerList();
@@ -20,17 +20,16 @@ public interface UserInfoDao {
 	boolean modify(UserInfo user);
 
 	//通过登录表id获取全部信息
-	UserInfo getDetail(String id);
+	UserInfo getDetail(int id);
 
 	//通过用户id获取用户全部信息（两个表的信息）
 	List<UserInfo> getAllInfoByUserId(int userId);
 
 	//通过用户对象获取用户全部信息（两个表的信息）
 	//无数据返回null
-	List<UserInfo> searchAllInfoByUserInfo(UserInfo userInfo);
+	//String username, String phoneNumber,String name,String identityCardNo,int  level
+	List<UserInfo> searchAllInfoByUserInfo(int pageindex, int pagesize, UserInfo userInfo);
 
-	void addSeller(String id);
-
-	void deleteSeller(String id);
+	List<UserInfo> getMemberBySellerId(int sellerid);
 
 }

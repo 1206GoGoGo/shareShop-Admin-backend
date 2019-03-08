@@ -13,9 +13,11 @@ public interface MemberInfoService {
 
 	public ResponseData delete(int id);
 
-	public ResponseData search(String username, String phoneNumber,String name,String identityCardNo);
+	public ResponseData search(int pagesize, int pageindex, String username, String phoneNumber,String name,String identityCardNo, int level);
 
 	public ResponseData modify(UserInfo user);
 
-	public ResponseData getDetail(String id);
+	public ResponseData getDetail(int id);
+
+	public ResponseData getMemberListBySeller(String username);
 }

@@ -28,6 +28,6 @@ public interface ProInfoService {
 
 	public ResponseData getUncheckedList();
 
-	public ResponseData getOffShelfList();
+	public ResponseData getOffShelfCategory();
 
 }

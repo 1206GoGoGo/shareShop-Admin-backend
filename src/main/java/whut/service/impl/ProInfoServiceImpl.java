@@ -50,9 +50,9 @@ public class ProInfoServiceImpl implements ProInfoService{
 		// TODO Auto-generated method stub
 		if(proInfoDao.getDetailByCode(productInfo.getProductCode()) == null) {
 			proInfoDao.add(productInfo);
-			return new ResponseData(200,"success",null);
+			return new ResponseData(200,"Successfully added",null);
 		}else {
-			return new ResponseData(406,"parameters incorrect",null);
+			return new ResponseData(500,"Add failed",null);
 		}
 	}
 
@@ -127,9 +127,9 @@ public class ProInfoServiceImpl implements ProInfoService{
 	}
 
 	@Override
-	public ResponseData getOffShelfList() {
+	public ResponseData getOffShelfCategory() {
 		// TODO Auto-generated method stub
-		List<ProductInfo> list = proInfoDao.getOffShelfList();
+		List<ProductInfo> list = proInfoDao.getOffShelfCategory();
 		if(list != null) {
 			return new ResponseData(200,"success",list);
 		}else {

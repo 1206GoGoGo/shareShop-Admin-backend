@@ -32,7 +32,7 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 
 	@Override
 	public ResponseData getListByPro(int id) {
-		List<OrderMaster> list = dao.getListByPro(id);
+		List<OrderDetail> list = dao.getListByPro(id);
 		if(list != null) {
 			return new ResponseData(200,"success",list);
 		}else {
@@ -72,7 +72,7 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 
 	@Override
 	public ResponseData getDetail(int orderId) {
-		List<OrderDetail> list = dao.getListByOrderId(orderId);
+		List<OrderMaster> list = dao.getListByOrderId(orderId);
 		if(list != null) {
 			return new ResponseData(200,"success",list);
 		}else {
@@ -134,10 +134,10 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 	@Override
 	public ResponseData modifyProStatus(String jsonString) {
 		JsonUtils jsonUtils = new JsonUtils(jsonString);
-		int orderId = jsonUtils.getIntValue("orderId");
+		int orderDetailId = jsonUtils.getIntValue("orderId");
 		Byte status = (byte) jsonUtils.getIntValue("status");
 		
-		boolean result = dao.modifyProStatus(orderId, status);
+		boolean result = dao.modifyProStatus(orderDetailId, status);
 		if(result) {
 			return new ResponseData(200,"success",null);
 		}else {

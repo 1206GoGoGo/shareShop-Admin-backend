@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import whut.dao.UserInfoDao;
 import whut.dao.UserLoginDao;
 import whut.pojo.UserInfo;
+import whut.pojo.UserLogin;
 import whut.service.MemberInfoService;
 import whut.utils.JsonUtils;
 import whut.utils.ResponseData;
@@ -48,7 +49,7 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 	}
 
 	@Override
-	public ResponseData search(String username, String phoneNumber,String name,String identityCardNo) {
+	public ResponseData search(int pagesize, int pageindex, String username, String phoneNumber,String name,String identityCardNo, int level) {
 		
 		int userId = 0;
 		List<UserInfo> list = null;
@@ -65,7 +66,13 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 		userInfo.setPhoneNumber(phoneNumber);
 		userInfo.setName(name);
 		userInfo.setIdentityCardNo(identityCardNo);
-		list = dao.searchAllInfoByUserInfo(userInfo);
+		
+		UserLogin userLogin = new UserLogin();
+		userLogin.setLevel(level);
+		userInfo.setUserLogin(userLogin);
+		
+		
+		list = dao.searchAllInfoByUserInfo(pageindex,pagesize,userInfo);
 		if(list!=null) {
 			return new ResponseData(200,"success",list);
 		}
@@ -84,13 +91,29 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 	}
 
 	@Override
-	public ResponseData getDetail(String id) {
+	public ResponseData getDetail(int id) {
 		UserInfo info = dao.getDetail(id);
 		if(info != null) {
 			return new ResponseData(200,"success",info);
 		}else {
 			return new ResponseData(400,"no data",null);
 		}
+	}
+
+	@Override
+	public ResponseData getMemberListBySeller(String username) {
+		int sellerid = loginDao.searchByUsername(username);
+		if(sellerid == 0) {
+			return new ResponseData(4061,"no data",null);
+		}
+
+		List<UserInfo> list = null;
+		list = dao.getMemberBySellerId(sellerid);
+		if(list == null) {
+			return new ResponseData(4062,"no data",null);
+		}
+		
+		return new ResponseData(200,"success",list);
 	}
 
 }

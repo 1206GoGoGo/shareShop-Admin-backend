@@ -28,7 +28,7 @@ public interface ProInfoDao {
 
 	List<ProductInfo> getUncheckedList();
 
-	List<ProductInfo> getOffShelfList();
+	List<ProductInfo> getOffShelfCategory();
 
 	
 	
