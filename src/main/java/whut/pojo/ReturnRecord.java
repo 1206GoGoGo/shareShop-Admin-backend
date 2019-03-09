@@ -13,6 +13,8 @@ public class ReturnRecord implements Serializable{
     private Integer returnId; //退货id
 
     private Integer userId; // 用户id
+    
+    private Integer orderId;//订单id
 
     private Integer orderDetailId; // 订单详情id
 
@@ -42,6 +44,14 @@ public class ReturnRecord implements Serializable{
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+    
+    public Integer getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
     }
 
     public Integer getOrderDetailId() {

@@ -19,7 +19,7 @@ public class OrderMaster implements Serializable{
 
     private String consigneeName;  //收货人姓名
 
-    private Integer consigneePhone;  //收货人联系电话
+    private String consigneePhone;  //收货人联系电话
 
     private Integer postalCode;  //收货邮政编码
 
@@ -95,12 +95,12 @@ public class OrderMaster implements Serializable{
         this.consigneeName = consigneeName == null ? null : consigneeName.trim();
     }
 
-    public Integer getConsigneePhone() {
+    public String getConsigneePhone() {
         return consigneePhone;
     }
 
-    public void setConsigneePhone(Integer consigneePhone) {
-        this.consigneePhone = consigneePhone;
+    public void setConsigneePhone(String consigneePhone) {
+        this.consigneePhone = consigneePhone == null ? null : consigneePhone.trim();
     }
 
     public Integer getPostalCode() {
