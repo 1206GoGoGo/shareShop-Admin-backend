@@ -28,6 +28,16 @@ public class ManagerInfo implements Serializable{
     private Date birthday; //管理员生日
 
     private Date registerTime;  //注册时间
+    
+    private UserLogin userLogin; //用户登录对象
+
+    public UserLogin getUserLogin() {
+		return userLogin;
+	}
+
+	public void setUserLogin(UserLogin userLogin) {
+		this.userLogin = userLogin;
+	}
 
     public Integer getManagerInfoId() {
         return managerInfoId;
