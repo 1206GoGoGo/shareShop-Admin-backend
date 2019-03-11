@@ -6,7 +6,7 @@
     <id column="category_id" jdbcType="INTEGER" property="categoryId" />
     <result column="level" jdbcType="INTEGER" property="level" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="describe" jdbcType="VARCHAR" property="describe" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
   </resultMap>
   
   <select id="getList" resultMap="BaseResultMap">
@@ -14,16 +14,16 @@
    </select>
    
     <select id="add" parameterType="ManagerCategory">
-    	INSERT INTO manager_category
-    	(level,name,describe)      
-        VALUES
-    	(#{level},#{name},#{describe})
+    	INSERT INTO manager_category 
+    	(level,name,description)      
+        VALUES 
+    	(#{level},#{name},#{description})
     </select>
    
     
     <select id="modify" parameterType="ManagerCategory">
     	UPDATE manager_category SET 
-    	level = #{level},name = #{name},describe = #{describe}
+    	level = #{level},name = #{name},description = #{description}
         WHERE category_id = #{categoryId}
     </select>
     

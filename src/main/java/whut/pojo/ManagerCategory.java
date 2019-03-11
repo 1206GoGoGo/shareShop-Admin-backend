@@ -14,7 +14,7 @@ public class ManagerCategory implements Serializable {
 
     private String name;  //级别对应的名字
 
-    private String describe;  //职位描述
+    private String description;  //职位描述
 
     public Integer getCategoryId() {
         return categoryId;
@@ -40,11 +40,11 @@ public class ManagerCategory implements Serializable {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getDescribe() {
-        return describe;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescribe(String describe) {
-        this.describe = describe == null ? null : describe.trim();
+    public void setDescription(String description) {
+        this.description = description == null ? null : description.trim();
     }
 }
