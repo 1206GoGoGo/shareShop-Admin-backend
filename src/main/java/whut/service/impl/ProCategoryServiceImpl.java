@@ -36,7 +36,7 @@ public class ProCategoryServiceImpl implements ProCategoryService{
 			proCategoryDao.add(productCategory);
 			return new ResponseData(200,"add success",null);
 		}
-		return new ResponseData(500,"Fail to add",null);
+		return new ResponseData(406,"Fail to add",null);
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class ProCategoryServiceImpl implements ProCategoryService{
 			proCategoryDao.delete(id);
 			return new ResponseData(200,"delete success",null);
 		}
-		return new ResponseData(500,"There are subcategories under this category",null);
+		return new ResponseData(406,"There are subcategories under this category",null);
 	}
 
 	@Override
@@ -87,6 +87,17 @@ public class ProCategoryServiceImpl implements ProCategoryService{
 			}
 		}
 		return new ResponseData(200,"delete success",null);
+	}
+
+	@Override
+	public ResponseData getListByParentId(String id) {
+		// TODO Auto-generated method stub
+		List<ProductCategory> list = new ArrayList<>();
+		list = proCategoryDao.ifHaveChild(id);
+		if(list.size() == 0) {
+			return new ResponseData(406,"There are no subcategories",null);
+		}
+		return new ResponseData(200,"success",list);
 	}
 
 }

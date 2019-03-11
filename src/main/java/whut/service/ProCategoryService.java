@@ -23,6 +23,8 @@ public interface ProCategoryService {
 
 	public ResponseData deleteConfirm(String id);
 
+	public ResponseData getListByParentId(String id);
+
 	
 
 }
