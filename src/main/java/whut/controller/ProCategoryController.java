@@ -26,6 +26,12 @@ public class ProCategoryController {
 		return proCategoryService.getList();
 	}
 	
+	//根据父分类ID获取子分类列表
+	@RequestMapping(value = "/getListByParentId", method = RequestMethod.GET)
+	public @ResponseBody ResponseData getListByParentId(String id) {
+		return proCategoryService.getListByParentId(id);
+	}
+	
 	//新增分类
 	@RequestMapping(value = "/add", method = RequestMethod.POST, consumes = "application/json")
 	public @ResponseBody ResponseData add(@RequestBody ProductCategory productCategory) {		
