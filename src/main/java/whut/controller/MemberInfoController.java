@@ -27,8 +27,8 @@ public class MemberInfoController {
 	 * @return
 	 */
 	@RequestMapping(value = "/getList", method = RequestMethod.GET)
-	public @ResponseBody ResponseData getList(int status) {
-		return  memberInfoService.getList(status);
+	public @ResponseBody ResponseData getList(String status,String pageindex, String pagesize) {
+		return  memberInfoService.getList(status, pagesize, pagesize);
 	}
 	
 	/**
@@ -43,8 +43,6 @@ public class MemberInfoController {
 	
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public @ResponseBody ResponseData add(@RequestBody UserInfo user){
-		
-
 		return  memberInfoService.add(user);
 	}
 	
@@ -70,8 +68,8 @@ public class MemberInfoController {
 	 * @return
 	 */
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public @ResponseBody ResponseData search(int pagesize,int pageindex,String username,
-			String phoneNumber,String name,String identityCardNo,int level) {
+	public @ResponseBody ResponseData search(String pagesize,String pageindex,String username,
+			String phoneNumber,String name,String identityCardNo,String level) {
 		return  memberInfoService.search(pagesize,pageindex,username, phoneNumber, name, identityCardNo,level);
 	}
 	

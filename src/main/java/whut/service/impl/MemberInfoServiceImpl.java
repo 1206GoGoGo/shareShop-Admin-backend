@@ -1,6 +1,9 @@
 package whut.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,8 +25,13 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 	private UserLoginDao loginDao;
 	
 	@Override
-	public ResponseData getList(int status) {
-		List<UserInfo> list = dao.getList(status);
+	public ResponseData getList(String status,String pageindex, String pagesize) {
+		Map<String,String> map = new HashMap<>();
+		map.put("status", status);
+		map.put("pageindex", pageindex);
+		map.put("pagesize", pagesize);
+		
+		List<UserInfo> list = dao.getList(map);
 		if(list != null) {
 			return new ResponseData(200,"success",list);
 		}else {
@@ -34,45 +42,52 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 
 	@Override
 	public ResponseData add(UserInfo user){
+		//判断信息是否冲突
+		user.getUserLogin().getUsername();
+		user.getPhoneNumber();
+		user.getEmail();
+		user.getIdentityCardNo();
+		//return new ResponseData(4061,"用户信息冲突",null);
+		
+		//判断密码是否符合规则
+		user.getUserLogin().getPassword();
+		//return new ResponseData(4062,"密码定义不合规则",null);
 		dao.add(user);
 		return new ResponseData(200,"success",null);
 	}
 
 	@Override
 	public ResponseData delete(int id) {
-		boolean result = dao.delete(id);
-		if(result) {
-			return new ResponseData(200,"success",null);
-		}else {
-			return new ResponseData(500,"error",null);
-		}
+		dao.delete(id);
+		return new ResponseData(200,"success",null);
 	}
 
 	@Override
-	public ResponseData search(int pagesize, int pageindex, String username, String phoneNumber,String name,String identityCardNo, int level) {
+	public ResponseData search(String pagesize, String pageindex, String username, String phoneNumber,String name,String identityCardNo, String level) {
 		
+		//通过用户名直接查询，不再进行其他条件判断
 		int userId = 0;
-		List<UserInfo> list = null;
+		List<UserInfo> list = new ArrayList<>();
 		if(username!=null || username!="") {
 			userId = loginDao.searchByUsername(username);
 		}
 		if(userId!=0) {
 			//获取列表
-			list = dao.getAllInfoByUserId(userId);
+			list.add( dao.getDetail(userId) );
 			return new ResponseData(200,"success",list);
 		}
+			
+		//查询，处分页都可能为空
+		Map<String,String> map = new HashMap<>();
+		map.put("pageindex", pageindex);
+		map.put("pagesize", pagesize);
+		map.put("username", username);
+		map.put("phoneNumber", phoneNumber);
+		map.put("name", name);
+		map.put("identityCardNo", identityCardNo);
+		map.put("level", level);
 		
-		UserInfo userInfo = new UserInfo();
-		userInfo.setPhoneNumber(phoneNumber);
-		userInfo.setName(name);
-		userInfo.setIdentityCardNo(identityCardNo);
-		
-		UserLogin userLogin = new UserLogin();
-		userLogin.setLevel(level);
-		userInfo.setUserLogin(userLogin);
-		
-		
-		list = dao.searchAllInfoByUserInfo(pageindex,pagesize,userInfo);
+		list = dao.searchAllInfoByUserInfo(map);
 		if(list!=null) {
 			return new ResponseData(200,"success",list);
 		}
@@ -82,12 +97,15 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 
 	@Override
 	public ResponseData modify(UserInfo user) {
-		boolean result = dao.modify(user);
-		if(result) {
-			return new ResponseData(200,"success",null);
-		}else {
-			return new ResponseData(500,"error",null);
-		}
+		UserInfo userOld = dao.getDetail(user.getUserLogin().getUserId());
+		//修改用户信息，密码、登录名、证件号、账户余额禁止修改(编号识别要修改的用户)。需要判断是否满足指定条件，如果用户状态已经是注销状态禁止修改。
+		
+		
+		
+		
+		dao.modify(user);
+		return new ResponseData(200,"success",null);
+
 	}
 
 	@Override
@@ -102,7 +120,7 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 
 	@Override
 	public ResponseData getMemberListBySeller(String username) {
-		int sellerid = loginDao.searchByUsername(username);
+		int sellerid = loginDao.getLoginInfo(username).getUserId();
 		if(sellerid == 0) {
 			return new ResponseData(4061,"no data",null);
 		}
