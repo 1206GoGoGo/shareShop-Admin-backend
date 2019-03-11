@@ -31,8 +31,12 @@ public class ManagerClassServiceImpl implements ManagerClassService {
 	public ResponseData add(ManagerCategory managerCategory) {
 		//判断同名
 		ManagerCategory managerCategoryOld = dao.getIdByName(managerCategory.getName());
-		dao.add(managerCategory);
-		return new ResponseData(200,"success",null);
+		if(managerCategoryOld!=null) {
+			dao.add(managerCategory);
+			return new ResponseData(200,"success",null);
+		}else {
+			return new ResponseData(406,"该分类名已存在",null);
+		}
 
 	}
 
@@ -40,6 +44,11 @@ public class ManagerClassServiceImpl implements ManagerClassService {
 	public ResponseData modify(ManagerCategory managerCategory) {
 		//判断修改的是不是同名
 		ManagerCategory managerCategoryOld = dao.getIdByName(managerCategory.getName());
+		if(managerCategoryOld!=null) {
+			if(managerCategory.getCategoryId() != managerCategoryOld.getCategoryId()) {
+				return new ResponseData(406,"已存在该名字的分类",null);
+			}
+		}
 		dao.modify(managerCategory);
 		return new ResponseData(200,"success",null);
 

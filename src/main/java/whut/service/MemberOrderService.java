@@ -10,11 +10,13 @@ import whut.utils.ResponseData;
 
 public interface MemberOrderService {
 
-	public ResponseData getListByUser(int id);
+	public ResponseData getListByUser(String pageindex, String pagesize, String id);
 
-	public ResponseData getListByPro(int id);
+	public ResponseData getListByUserName(String pageindex, String pagesize, String username);
 
-	public ResponseData getListByStatus(Byte status);
+	public ResponseData getListByPro(String pageindex, String pagesize, int id);
+
+	public ResponseData getListByStatus(String pageindex, String pagesize, String status);
 
 	public ResponseData search(String orderNumber);
 
@@ -29,6 +31,4 @@ public interface MemberOrderService {
 	public ResponseData modifyOrderStatus(@RequestBody String jsonString);
 
 	public ResponseData modifyProStatus(@RequestBody String jsonString);
-
-	public ResponseData getListByUserName(String username);
 }
