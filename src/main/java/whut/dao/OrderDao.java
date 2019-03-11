@@ -23,13 +23,15 @@ public interface OrderDao {
 
 	List<OrderDetail> getDetailListByOrderId(int orderId);
 
-	boolean modifyOrder(OrderMaster orderMaster);
+	void modifyOrder(OrderMaster orderMaster);
 
-	boolean modifyPro(OrderDetail orderDetail);
+	void modifyPro(OrderDetail orderDetail);
 
-	boolean modifyOrderStatus(int orderId, Byte status);
+	//int orderId, Byte status
+	void modifyOrderStatus(Map<String, String> map);
 
-	boolean modifyProStatus(int orderDetailId, Byte status);
+	//int orderDetailId, Byte status
+	void modifyProStatus(Map<String, String> map);
 
 
 }

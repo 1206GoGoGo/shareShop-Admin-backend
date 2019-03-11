@@ -128,12 +128,10 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 	 */
 	@Override
 	public ResponseData modifyOrder(OrderMaster orderMaster) {
-		boolean result = dao.modifyOrder(orderMaster);
-		if(result) {
-			return new ResponseData(200,"success",null);
-		}else {
-			return new ResponseData(500,"error",null);
-		}
+		OrderMaster orderMasterOld = dao.getMasterByOrderId(orderMaster.getOrderId());
+		dao.modifyOrder(orderMasterOld);
+		return new ResponseData(200,"success",null);
+	
 	}
 
 	/**
@@ -141,12 +139,9 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 	 */
 	@Override
 	public ResponseData modifyPro(OrderDetail orderDetail) {
-		boolean result = dao.modifyPro(orderDetail);
-		if(result) {
-			return new ResponseData(200,"success",null);
-		}else {
-			return new ResponseData(500,"error",null);
-		}
+		dao.modifyPro(orderDetail);
+		return new ResponseData(200,"success",null);
+	
 	}
 
 	/**
@@ -156,16 +151,19 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 	@Override
 	public ResponseData modifyOrderStatus(String jsonString) {
 		JsonUtils jsonUtils = new JsonUtils(jsonString);
-		int orderId = jsonUtils.getIntValue("orderId");
-		Byte status = (byte) jsonUtils.getIntValue("status");
+		String orderId = jsonUtils.getStringValue("orderId");
+		String status = jsonUtils.getStringValue("status");
 		
-		boolean result = dao.modifyOrderStatus(orderId, status);
+		
+		Map<String, String> map = new HashMap<>();
+		map.put("orderId", orderId);
+		map.put("status", status);
+		
+		
+		dao.modifyOrderStatus(map);
 		//修改全部子账单状态
-		if(result) {
-			return new ResponseData(200,"success",null);
-		}else {
-			return new ResponseData(500,"error",null);
-		}
+		return new ResponseData(200,"success",null);
+	
 	}
 
 	/**
@@ -174,15 +172,16 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 	@Override
 	public ResponseData modifyProStatus(String jsonString) {
 		JsonUtils jsonUtils = new JsonUtils(jsonString);
-		int orderDetailId = jsonUtils.getIntValue("orderId");
-		Byte status = (byte) jsonUtils.getIntValue("status");
+		String orderDetailId = jsonUtils.getStringValue("orderDetailId");
+		String status = jsonUtils.getStringValue("status");
+
+		Map<String, String> map = new HashMap<>();
+		map.put("orderDetailId", orderDetailId);
+		map.put("status", status);
 		
-		boolean result = dao.modifyProStatus(orderDetailId, status);
-		if(result) {
-			return new ResponseData(200,"success",null);
-		}else {
-			return new ResponseData(500,"error",null);
-		}
+		dao.modifyProStatus(map);
+		return new ResponseData(200,"success",null);
+	
 	}
 
 
