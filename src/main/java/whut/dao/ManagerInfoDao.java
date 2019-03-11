@@ -8,12 +8,12 @@ public interface ManagerInfoDao {
 
 	List<ManagerInfo> getList();
 
-	boolean add(ManagerInfo managerInfo);
+	void add(ManagerInfo managerInfo);
 
 	ManagerInfo getDetail(int id);
 
-	boolean modify(ManagerInfo managerInfo);
+	void modify(ManagerInfo managerInfo);
 
-	boolean delete(int id);
+	void delete(int id);
 
 }

@@ -151,7 +151,7 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 
 	@Override
 	public ResponseData getListByUserName(String username) {
-		int id = loginDao.searchByUsername(username);
+		int id = loginDao.getLoginInfo(username).getUserId();
 		if(id == 0) {
 			return new ResponseData(4001,"不存在该用户",null);
 		}

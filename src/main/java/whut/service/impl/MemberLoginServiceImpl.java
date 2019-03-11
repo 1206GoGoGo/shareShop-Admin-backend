@@ -37,12 +37,12 @@ public class MemberLoginServiceImpl implements MemberLoginService {
 
 	@Override
 	public ResponseData getPhoneCode(String phoneCode) {
-		return new ResponseData(400,"no data",null);
+		return new ResponseData(200,"success","成功发送验证码，请查收");
 	}
 
 	@Override
 	public ResponseData getMailCode(String mailCode) {
-		return new ResponseData(400,"no data",null);
+		return new ResponseData(200,"success","成功发送验证码，请查收");
 	}
 
 }

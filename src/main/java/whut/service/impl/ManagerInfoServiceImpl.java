@@ -27,12 +27,10 @@ public class ManagerInfoServiceImpl implements ManagerInfoService {
 
 	@Override
 	public ResponseData add(ManagerInfo managerInfo) {
-		boolean result = dao.add(managerInfo);
-		if(result) {
-			return new ResponseData(200,"success",null);
-		}else {
-			return new ResponseData(500,"error",null);
-		}
+		//判断用户名是否重复
+		dao.add(managerInfo);
+		return new ResponseData(200,"success",null);
+
 	}
 
 	@Override
@@ -47,22 +45,18 @@ public class ManagerInfoServiceImpl implements ManagerInfoService {
 
 	@Override
 	public ResponseData modify(ManagerInfo managerInfo) {
-		boolean result = dao.modify(managerInfo);
-		if(result) {
-			return new ResponseData(200,"success",null);
-		}else {
-			return new ResponseData(500,"error",null);
-		}
+		//判断参数等问题
+		dao.getDetail(managerInfo.getUserId());
+		//
+		dao.modify(managerInfo);
+		return new ResponseData(200,"success",null);
 	}
 
 	@Override
 	public ResponseData delete(int id) {
-		boolean result = dao.delete(id);
-		if(result) {
-			return new ResponseData(200,"success",null);
-		}else {
-			return new ResponseData(500,"error",null);
-		}
+		dao.delete(id);
+		return new ResponseData(200,"success",null);
+
 	}
 	
 

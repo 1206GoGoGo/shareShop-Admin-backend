@@ -8,10 +8,13 @@ public interface ManagerCategoryDao {
 
 	List<ManagerCategory> getList();
 
-	boolean add(ManagerCategory managerCategory);
+	void add(ManagerCategory managerCategory);
 
-	boolean modify(ManagerCategory managerCategory);
+	void modify(ManagerCategory managerCategory);
 
-	boolean delete(int id);
+	void delete(int id);
+
+	//不存在返回null
+	ManagerCategory getIdByName(String name);
 
 }

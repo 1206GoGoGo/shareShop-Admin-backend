@@ -69,7 +69,7 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 		int userId = 0;
 		List<UserInfo> list = new ArrayList<>();
 		if(username!=null || username!="") {
-			userId = loginDao.searchByUsername(username);
+			userId = loginDao.getLoginInfo(username).getUserId();
 		}
 		if(userId!=0) {
 			//获取列表

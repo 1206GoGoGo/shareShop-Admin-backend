@@ -29,33 +29,27 @@ public class ManagerClassServiceImpl implements ManagerClassService {
 
 	@Override
 	public ResponseData add(ManagerCategory managerCategory) {
-		boolean result = dao.add(managerCategory);
-		if(result) {
-			return new ResponseData(200,"success",null);
-		}else {
-			return new ResponseData(500,"error",null);
-		}
+		//判断同名
+		ManagerCategory managerCategoryOld = dao.getIdByName(managerCategory.getName());
+		dao.add(managerCategory);
+		return new ResponseData(200,"success",null);
+
 	}
 
 	@Override
 	public ResponseData modify(ManagerCategory managerCategory) {
-		boolean result = dao.modify(managerCategory);
-		if(result) {
-			return new ResponseData(200,"success",null);
-		}else {
-			return new ResponseData(500,"error",null);
-		}
+		//判断修改的是不是同名
+		ManagerCategory managerCategoryOld = dao.getIdByName(managerCategory.getName());
+		dao.modify(managerCategory);
+		return new ResponseData(200,"success",null);
+
 	}
 
 	@Override
 	public ResponseData delete(int id) {
-		boolean result = dao.delete(id);
-		if(result) {
-			return new ResponseData(200,"success",null);
-		}else {
-			return new ResponseData(500,"error",null);
-		}
-	}
+		dao.delete(id);
+		return new ResponseData(200,"success",null);
 
+	}
 
 }
