@@ -28,6 +28,10 @@ public class ProductInfo implements Serializable{
     private Byte auditStatus;  //审核状态
 
     private BigDecimal price;  //商品销售价格
+    
+    private BigDecimal originalPrice; //商品原价
+
+    private Byte useCoupon; //是否可以使用优惠券
 
     private Integer discountRate;  //折扣比率
 
@@ -125,6 +129,22 @@ public class ProductInfo implements Serializable{
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+    
+    public BigDecimal getOriginalPrice() {
+        return originalPrice;
+    }
+
+    public void setOriginalPrice(BigDecimal originalPrice) {
+        this.originalPrice = originalPrice;
+    }
+
+    public Byte getUseCoupon() {
+        return useCoupon;
+    }
+
+    public void setUseCoupon(Byte useCoupon) {
+        this.useCoupon = useCoupon;
     }
 
     public Integer getDiscountRate() {
