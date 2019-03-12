@@ -1,6 +1,5 @@
 package whut.service;
 
-import java.util.List;
 
 import whut.pojo.UserInfo;
 import whut.utils.ResponseData;

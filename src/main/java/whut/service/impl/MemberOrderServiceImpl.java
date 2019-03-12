@@ -6,13 +6,11 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import whut.dao.OrderDao;
 import whut.dao.UserLoginDao;
 import whut.pojo.OrderDetail;
 import whut.pojo.OrderMaster;
-import whut.pojo.UserAddr;
 import whut.service.MemberOrderService;
 import whut.utils.JsonUtils;
 import whut.utils.ResponseData;
@@ -129,7 +127,25 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 	@Override
 	public ResponseData modifyOrder(OrderMaster orderMaster) {
 		OrderMaster orderMasterOld = dao.getMasterByOrderId(orderMaster.getOrderId());
-		dao.modifyOrder(orderMasterOld);
+		//判断当前订单状态
+		if( orderMasterOld.getOrderStatus()==1 ||  orderMasterOld.getOrderStatus()==2) {
+			//满足条件可以修改
+		}else {
+			return new ResponseData(4061,"当前状态禁止修改",null);
+		}
+
+		
+		//只修改部分允许修改的数据
+		orderMasterOld.setConsigneeName(orderMaster.getConsigneeName());
+		orderMasterOld.setConsigneePhone(orderMaster.getConsigneePhone());
+		orderMasterOld.setPostalCode(orderMaster.getPostalCode());
+		orderMasterOld.setState(orderMaster.getState());
+		orderMasterOld.setCity(orderMaster.getCity());
+		orderMasterOld.setFirstAddr(orderMaster.getFirstAddr());
+		orderMasterOld.setSecondAddr(orderMaster.getSecondAddr());
+		orderMasterOld.setExpressNumber(orderMaster.getExpressNumber());
+		
+		dao.modifyOrder(orderMaster);
 		return new ResponseData(200,"success",null);
 	
 	}
@@ -139,6 +155,12 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 	 */
 	@Override
 	public ResponseData modifyPro(OrderDetail orderDetail) {
+		OrderDetail orderDetailOld = dao.getOrderDetailByOrderDetailId(orderDetail.getOrderDetailId());
+		//判断当前订单状态
+		
+		//通过修改商品名来修改商品颜色分类，并且是同一个商品，即商品名相同
+		orderDetailOld.setProductId(orderDetail.getProductId());
+		
 		dao.modifyPro(orderDetail);
 		return new ResponseData(200,"success",null);
 	
@@ -152,15 +174,81 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 	public ResponseData modifyOrderStatus(String jsonString) {
 		JsonUtils jsonUtils = new JsonUtils(jsonString);
 		String orderId = jsonUtils.getStringValue("orderId");
-		String status = jsonUtils.getStringValue("status");
+		int status = jsonUtils.getIntValue("status");
 		
+		OrderMaster orderMaster = dao.getMasterByOrderId(Integer.parseInt(orderId));
+		int statusOld = orderMaster.getOrderStatus();
+		
+		//若订单下商品状态不同则禁止修改
+		List<OrderDetail> proList = dao.getDetailListByOrderId(Integer.parseInt(orderId));
+		
+		//int tempStatus = proList.get(0).getstatus();
+		for( int i = 0 ; i < proList.size() ; i++) {
+			//获取详情状态
+			//if(proList.get(i).getstatus() != tempStatus) {
+			//	return new ResponseData(406,"当前订单中子商品状态不一致禁止整单操作",null);
+			//}
+		}
+		
+		
+		int newStatus = 0;
+		
+		//发货2—— 4
+		if(statusOld == 2 && status == 4) {
+			newStatus = 4;
+		}
+		//同意取消订单11——12
+		if(statusOld == 11 && status == 12) {
+			newStatus = 12;
+		}
+		//同意退货申请21——22
+		if(statusOld == 21 && status == 22) {
+			newStatus = 22;
+		}
+		//收到退货商品，符合退货条件，完成退货22——29
+		if(statusOld == 22 && status == 29) {
+			newStatus = 29;
+		}
+		//退货商品不符合条件22——23
+		if(statusOld == 22 && status == 23) {
+			newStatus = 23;
+		}
+		//退货商品重新发货（发还用户）22、23——24
+		if( (statusOld == 22 || statusOld ==23) && status == 24) {
+			newStatus = 24;
+		}
+		//同意用户换货申请31——32
+		if(statusOld == 31 && status == 32) {
+			newStatus = 32;
+		}
+		//商品不符合换货条件，待返回32——33
+		if(statusOld == 32 && status == 33) {
+			newStatus = 33;
+		}
+		//换货失败原商品发回33——34
+		if(statusOld == 33 && status == 34) {
+			newStatus = 34;
+		}
+		//符合换货标准，待发新商品32——36
+		if(statusOld == 32 && status == 36) {
+			newStatus = 36;
+		}
+		//换货商品发出32、36——37
+		if( (statusOld == 32 || statusOld == 36) && status == 37) {
+			newStatus = 37;
+		}
+		
+		if(newStatus==0) {
+			return new ResponseData(406,"当前订单状态禁止修改或无法修改传递的状态",null);
+		}
 		
 		Map<String, String> map = new HashMap<>();
 		map.put("orderId", orderId);
-		map.put("status", status);
+		map.put("status", String.valueOf(status));
 		
-		
+		//修改订单状态和子订单状态
 		dao.modifyOrderStatus(map);
+		dao.modifyProStatusByOrderId(map);
 		//修改全部子账单状态
 		return new ResponseData(200,"success",null);
 	
@@ -174,7 +262,11 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 		JsonUtils jsonUtils = new JsonUtils(jsonString);
 		String orderDetailId = jsonUtils.getStringValue("orderDetailId");
 		String status = jsonUtils.getStringValue("status");
+		
+		OrderDetail orderDetail = dao.getOrderDetailByOrderDetailId(Integer.parseInt(orderDetailId));
 
+		//判断当前状态，修改单个状态及整单状态
+		
 		Map<String, String> map = new HashMap<>();
 		map.put("orderDetailId", orderDetailId);
 		map.put("status", status);

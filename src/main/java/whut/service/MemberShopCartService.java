@@ -1,7 +1,5 @@
 package whut.service;
 
-import java.util.List;
-
 import whut.utils.ResponseData;
 
 public interface MemberShopCartService {

@@ -26,6 +26,8 @@ public class MemberLoginServiceImpl implements MemberLoginService {
 		
 		//同意后在session中保存用户信息
 		
+		
+		
 		return new ResponseData(200,"no data",null);
 	}
 

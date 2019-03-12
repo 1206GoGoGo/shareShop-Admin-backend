@@ -33,5 +33,10 @@ public interface OrderDao {
 	//int orderDetailId, Byte status
 	void modifyProStatus(Map<String, String> map);
 
+	OrderDetail getOrderDetailByOrderDetailId(Integer orderDetailId);
+
+	//通过订单号修改订单下所有商品对应的状态
+	//int orderId, Byte status
+	void modifyProStatusByOrderId(Map<String, String> map);
 
 }

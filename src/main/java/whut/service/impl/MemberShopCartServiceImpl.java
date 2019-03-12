@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import whut.dao.OrderCartDao;
-import whut.pojo.ManagerCategory;
 import whut.pojo.OrderCart;
 import whut.service.MemberShopCartService;
 import whut.utils.ResponseData;
