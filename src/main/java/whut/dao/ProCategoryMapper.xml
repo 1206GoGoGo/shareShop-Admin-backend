@@ -10,6 +10,7 @@
     <result column="parent_id" jdbcType="INTEGER" property="parentId" />
     <result column="category_level" jdbcType="TINYINT" property="categoryLevel" />
     <result column="category_status" jdbcType="TINYINT" property="categoryStatus" />
+    <result column="pic_url" jdbcType="VARCHAR" property="picUrl" />
   </resultMap>
   
   <select id="getList" resultType="ProductCategory" resultMap="BaseResultMap">
@@ -18,15 +19,15 @@
    
    <select id="add" parameterType="ProductCategory">
     	INSERT INTO product_category
-    	(category_name,category_code,parent_id,category_level,category_status)      
+    	(category_name,category_code,parent_id,category_level,category_status,pic_url)      
         VALUES
-    	(#{categoryName},#{categoryCode},#{parentId},#{categoryLevel},#{categoryStatus})
+    	(#{categoryName},#{categoryCode},#{parentId},#{categoryLevel},#{categoryStatus},#{picUrl})
     </select>
     
     <select id="modify" parameterType="ProductCategory">
     	UPDATE product_category SET 
     	category_name = #{categoryName},category_code = #{categoryCode},parent_id = #{parentId},
-    	category_level = #{categoryLevel},category_status = #{categoryStatus}   
+    	category_level = #{categoryLevel},category_status = #{categoryStatus},pic_url = #{picUrl}
         WHERE category_id = #{categoryId}
     </select>
     

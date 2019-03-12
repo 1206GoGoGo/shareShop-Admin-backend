@@ -20,6 +20,8 @@ public class OrderDetail implements Serializable{
     private Integer productQuantity; //商品数量
 
     private BigDecimal productPrice;  //商品价格
+    
+    private Byte status; //订单商品状态
 
     public Integer getOrderDetailId() {
         return orderDetailId;
@@ -67,5 +69,13 @@ public class OrderDetail implements Serializable{
 
     public void setProductPrice(BigDecimal productPrice) {
         this.productPrice = productPrice;
+    }
+    
+    public Byte getStatus() {
+        return status;
+    }
+
+    public void setStatus(Byte status) {
+        this.status = status;
     }
 }

@@ -19,6 +19,8 @@ public class ProductCategory implements Serializable{
     private Byte categoryLevel;  //分类层级
 
     private Byte categoryStatus;  //分类状态
+    
+    private String picUrl; //商品分类图片
 
     public Integer getCategoryId() {
         return categoryId;
@@ -66,5 +68,13 @@ public class ProductCategory implements Serializable{
 
     public void setCategoryStatus(Byte categoryStatus) {
         this.categoryStatus = categoryStatus;
+    }
+    
+    public String getPicUrl() {
+        return picUrl;
+    }
+
+    public void setPicUrl(String picUrl) {
+        this.picUrl = picUrl == null ? null : picUrl.trim();
     }
 }
