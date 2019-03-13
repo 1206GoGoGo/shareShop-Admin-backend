@@ -116,9 +116,9 @@ public class ProInfoServiceImpl implements ProInfoService{
 	}
 
 	@Override
-	public ResponseData getUncheckedList() {
+	public ResponseData getIfcheckedList(String status) {
 		// TODO Auto-generated method stub
-		List<ProductInfo> list = proInfoDao.getUncheckedList();
+		List<ProductInfo> list = proInfoDao.getIfcheckedList(status);
 		if(list != null) {
 			return new ResponseData(200,"success",list);
 		}else {
@@ -127,9 +127,29 @@ public class ProInfoServiceImpl implements ProInfoService{
 	}
 
 	@Override
-	public ResponseData getOffShelfList() {
+	public ResponseData getIfShelfList(String status) {
 		// TODO Auto-generated method stub
-		List<ProductInfo> list = proInfoDao.getOffShelfList();
+		List<ProductInfo> list = proInfoDao.getIfShelfList(status);
+		if(list != null) {
+			return new ResponseData(200,"success",list);
+		}else {
+			return new ResponseData(400,"no data",null);
+		}
+	}
+
+	@Override
+	public ResponseData getListByCondition(String name, String procode, String categoryId, String status1,
+			String status2) {
+		// TODO Auto-generated method stub
+		Map<String, String> map = new HashMap<>();
+		map.put("productName", name);
+		map.put("productCode", procode);
+		map.put("oneCategoryId", categoryId);
+		map.put("twoCategoryId", categoryId);
+		map.put("threeCategoryId", categoryId);
+		map.put("publishStatus", status1);
+		map.put("auditStatus", status2);
+		List<ProductInfo> list = proInfoDao.getListByCondition(map);
 		if(list != null) {
 			return new ResponseData(200,"success",list);
 		}else {

@@ -81,16 +81,22 @@ public class ProInfoController {
 		return proInfoService.getListByCategory(id);	
 	}
 	
-	//获取所有未审核的商品列表
-	@RequestMapping(value = "/getUncheckedList", method = RequestMethod.GET)
-	public @ResponseBody ResponseData getUncheckedList(){
-		return proInfoService.getUncheckedList();	
+	//根据审核状态获取所有的商品列表
+	@RequestMapping(value = "/getIfcheckedList", method = RequestMethod.GET)
+	public @ResponseBody ResponseData getIfcheckedList(String status){
+		return proInfoService.getIfcheckedList(status);	
 	}
 	
-	//获取所有的下架商品列表
-	@RequestMapping(value = "/getOffShelfList", method = RequestMethod.GET)
-	public @ResponseBody ResponseData getOffShelfList(){
-		return proInfoService.getOffShelfList();	
+	//根据上下架状态获取所有的商品列表
+	@RequestMapping(value = "/getIfShelfList", method = RequestMethod.GET)
+	public @ResponseBody ResponseData getIfShelfList(String status){
+		return proInfoService.getIfShelfList(status);	
+	}
+	
+	//管理员联合查询
+	@RequestMapping(value = "/getListByCondition", method = RequestMethod.GET)
+	public @ResponseBody ResponseData getListByCondition(String name, String procode, String categoryId, String status1,String status2){
+		return proInfoService.getListByCondition(name,procode,categoryId,status1,status2);	
 	}
 	
 }

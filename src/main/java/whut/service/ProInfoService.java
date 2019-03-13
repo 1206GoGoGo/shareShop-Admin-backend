@@ -26,8 +26,11 @@ public interface ProInfoService {
 
 	public ResponseData getDetailByCode(String id);
 
-	public ResponseData getUncheckedList();
+	public ResponseData getIfcheckedList(String status);
 
-	public ResponseData getOffShelfList();
+	public ResponseData getIfShelfList(String status);
+
+	public ResponseData getListByCondition(String name, String procode, String categoryId, String status1,
+			String status2);
 
 }

@@ -26,9 +26,11 @@ public interface ProInfoDao {
 
 	ProductInfo getDetailByCode(String id);
 
-	List<ProductInfo> getUncheckedList();
+	List<ProductInfo> getIfcheckedList(String status);
 
-	List<ProductInfo> getOffShelfList();
+	List<ProductInfo> getIfShelfList(String status);
+
+	List<ProductInfo> getListByCondition(Map<String, String> map);
 
 	
 	
