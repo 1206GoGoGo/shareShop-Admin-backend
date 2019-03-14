@@ -18,7 +18,7 @@ public class ReturnRecord implements Serializable{
 
     private Integer orderDetailId; // 订单详情id
 
-    private Integer productId; // 商品id
+    private Integer productSpecsId;  //单品ID
 
     private Byte returnType; // 0:退货   1:退款
 
@@ -62,12 +62,12 @@ public class ReturnRecord implements Serializable{
         this.orderDetailId = orderDetailId;
     }
 
-    public Integer getProductId() {
-        return productId;
+    public Integer getProductSpecsId() {
+        return productSpecsId;
     }
 
-    public void setProductId(Integer productId) {
-        this.productId = productId;
+    public void setProductSpecsId(Integer productSpecsId) {
+        this.productSpecsId = productSpecsId;
     }
 
     public Byte getReturnType() {

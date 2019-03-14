@@ -1,70 +1,64 @@
 package whut.pojo;
+
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * 商品信息
+ * 商品信息表
  * @author wangql
  *
  */
 public class ProductInfo implements Serializable{
-    private Integer productId; //商品ID
+    private Integer productId;//商品ID
 
-    private String productCode; //商品编码
+    private String productName;//商品名称
 
-    private String productName;  //商品名称
+    private String brandName;//品牌
 
-    private String brandName;  //品牌
+    private Integer oneCategoryId;//一级分类ID
 
-    private Integer oneCategoryId;  //一级分类ID
+    private Integer twoCategoryId;//二级分类ID
 
-    private Integer twoCategoryId;   //二级分类ID
+    private Integer threeCategoryId;//三级分类ID
 
-    private Integer threeCategoryId;  //三级分类ID
+    private String mainImage;//主图
 
-    private Byte publishStatus;  //上下架状态
+    private String attributeList;//属性列表
 
-    private Byte auditStatus;  //审核状态
+    private Byte publishStatus;//上下架状态
 
-    private BigDecimal price;  //商品销售价格
+    private Byte auditStatus;//审核状态
+
+    private Byte useCoupon;//是否可以使用优惠券
+
+    private Integer discountRate;//折扣比率
+
+    private Date productionDate;//生产日期
+
+    private String description;//商品描述
+
+    private Integer stock;//商品库存
+
+    private Date inputTime;//商品录入时间
+
+    private Date modifiedTime;//商品修改时间
     
-    private BigDecimal originalPrice; //商品原价
+    private ProductSpecs productSpecs; //商品规格(单品详情)
 
-    private Byte useCoupon; //是否可以使用优惠券
+    public ProductSpecs getProductSpecs() {
+		return productSpecs;
+	}
 
-    private Integer discountRate;  //折扣比率
+	public void setProductSpecs(ProductSpecs productSpecs) {
+		this.productSpecs = productSpecs;
+	}
 
-    private BigDecimal averageCost;  //商品成本
-
-    private Date productionDate;  //生产日期
-
-    private String size;  //商品尺寸
-
-    private String productColor;  //商品颜色
-
-    private Double weight;  //商品重量
-
-    private String description;  //商品描述
-
-    private Date inputTime;  //商品录入时间
-
-    private Date modifiedTime; //商品修改时间
-
-    public Integer getProductId() {
+	public Integer getProductId() {
         return productId;
     }
 
     public void setProductId(Integer productId) {
         this.productId = productId;
-    }
-
-    public String getProductCode() {
-        return productCode;
-    }
-
-    public void setProductCode(String productCode) {
-        this.productCode = productCode == null ? null : productCode.trim();
     }
 
     public String getProductName() {
@@ -107,6 +101,22 @@ public class ProductInfo implements Serializable{
         this.threeCategoryId = threeCategoryId;
     }
 
+    public String getMainImage() {
+        return mainImage;
+    }
+
+    public void setMainImage(String mainImage) {
+        this.mainImage = mainImage == null ? null : mainImage.trim();
+    }
+
+    public String getAttributeList() {
+        return attributeList;
+    }
+
+    public void setAttributeList(String attributeList) {
+        this.attributeList = attributeList == null ? null : attributeList.trim();
+    }
+
     public Byte getPublishStatus() {
         return publishStatus;
     }
@@ -121,22 +131,6 @@ public class ProductInfo implements Serializable{
 
     public void setAuditStatus(Byte auditStatus) {
         this.auditStatus = auditStatus;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-    
-    public BigDecimal getOriginalPrice() {
-        return originalPrice;
-    }
-
-    public void setOriginalPrice(BigDecimal originalPrice) {
-        this.originalPrice = originalPrice;
     }
 
     public Byte getUseCoupon() {
@@ -155,14 +149,6 @@ public class ProductInfo implements Serializable{
         this.discountRate = discountRate;
     }
 
-    public BigDecimal getAverageCost() {
-        return averageCost;
-    }
-
-    public void setAverageCost(BigDecimal averageCost) {
-        this.averageCost = averageCost;
-    }
-
     public Date getProductionDate() {
         return productionDate;
     }
@@ -171,36 +157,20 @@ public class ProductInfo implements Serializable{
         this.productionDate = productionDate;
     }
 
-    public String getSize() {
-        return size;
-    }
-
-    public void setSize(String size) {
-        this.size = size == null ? null : size.trim();
-    }
-
-    public String getProductColor() {
-        return productColor;
-    }
-
-    public void setProductColor(String productColor) {
-        this.productColor = productColor == null ? null : productColor.trim();
-    }
-
-    public Double getWeight() {
-        return weight;
-    }
-
-    public void setWeight(Double weight) {
-        this.weight = weight;
-    }
-
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description == null ? null : description.trim();
+    }
+
+    public Integer getStock() {
+        return stock;
+    }
+
+    public void setStock(Integer stock) {
+        this.stock = stock;
     }
 
     public Date getInputTime() {

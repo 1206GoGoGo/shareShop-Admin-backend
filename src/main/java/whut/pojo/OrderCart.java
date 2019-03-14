@@ -15,7 +15,7 @@ public class OrderCart implements Serializable{
 
     private Integer userId;  //用户ID
 
-    private Integer productId; //商品ID
+    private Integer productSpecsId; //单品ID
 
     private Integer productQuantity; //商品数量
 
@@ -39,13 +39,14 @@ public class OrderCart implements Serializable{
         this.userId = userId;
     }
 
-    public Integer getProductId() {
-        return productId;
+    public Integer getProductSpecsId() {
+        return productSpecsId;
     }
 
-    public void setProductId(Integer productId) {
-        this.productId = productId;
+    public void setProductSpecsId(Integer productSpecsId) {
+        this.productSpecsId = productSpecsId;
     }
+
 
     public Integer getProductQuantity() {
         return productQuantity;

@@ -48,7 +48,7 @@ public class ProInfoServiceImpl implements ProInfoService{
 	@Override
 	public ResponseData add(ProductInfo productInfo) {
 		// TODO Auto-generated method stub
-		if(proInfoDao.getDetailByCode(productInfo.getProductCode()) == null) {
+		if(proInfoDao.getDetailByCode(productInfo.getProductSpecs().getProductCode()) == null) {
 			proInfoDao.add(productInfo);
 			return new ResponseData(200,"Successfully added",null);
 		}else {

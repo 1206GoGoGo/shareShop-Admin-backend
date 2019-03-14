@@ -174,7 +174,7 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 		
 		
 		//通过修改商品名来修改商品颜色分类，并且是同一个商品，即商品名相同
-		orderDetailOld.setProductId(orderDetail.getProductId());
+		orderDetailOld.setProductSpecsId(orderDetail.getProductSpecsId());
 		
 		dao.modifyPro(orderDetailOld);
 		return new ResponseData(200,"success",null);

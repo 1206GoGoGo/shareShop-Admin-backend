@@ -92,6 +92,9 @@
     
     <select id="getListByCondition" parameterType="hashmap" resultMap="BaseResultMap">
     	SELECT * FROM product_info where  1 = 1
+    	<if test="productName != null">
+      		and product_name = #{productName} 
+    	</if>
     	<if test="productCode != null">
       		and product_code = #{productCode} 
     	</if>
