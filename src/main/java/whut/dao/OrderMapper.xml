@@ -104,7 +104,7 @@
         WHERE order_detail_id = #{orderDetailId}
     </select>
     
-    <select id="modifyProStatus" parameterType="hashmap">
+    <select id="modifyProStatusByOrderId" parameterType="hashmap">
     	UPDATE order_detail SET 
     	status = #{status}
         WHERE order_id = #{orderId}
