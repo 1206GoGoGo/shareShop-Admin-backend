@@ -92,7 +92,7 @@
         where ui.user_id = #{sellerid} and ui.is_seller = 1
    </select>
    
-   <select id="modify" parameterType="string">
+   <select id="addSeller" parameterType="string">
     	UPDATE user_info SET is_seller = 1 WHERE user_id = #{id}
     </select>
     
