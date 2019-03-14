@@ -25,8 +25,10 @@
     </association>
   </resultMap>
   
-    <select id="getList" resultMap="BaseResultMap">
+    <select id="getList" parameterType="hashmap" resultMap="BaseResultMap">
         SELECT * FROM user_info ui LEFT JOIN user_login ul on ui.user_id = ul.user_id
+        where ul.status = #{status} 
+        limit #{pageindex}, #{pagesize}
    </select>
    
     <select id="getSellerList" resultMap="BaseResultMap">
@@ -42,7 +44,7 @@
     	now(),#{userId},#{superiorId},#{isSeller})
     </select>
     
-    <select id="delete" parameterType="String">
+    <select id="delete" parameterType="int">
         DELETE FROM user_info where user_id = #{id}
    </select>
    
@@ -53,8 +55,52 @@
         WHERE user_id = #{userId}
     </select>
     
-    <select id="getDetail" parameterType="String" resultMap="BaseResultMap">
+    <select id="getDetail" parameterType="int" resultMap="BaseResultMap">
         SELECT * FROM user_info  WHERE user_id = #{id}
    </select>
+   
+   <select id="getUserInfo" parameterType="string" resultMap="BaseResultMap">
+        SELECT * FROM user_info  WHERE user_id = #{id}
+   </select>
+   
+   <select id="searchAllInfoByUserInfo" parameterType="hashmap" resultMap="BaseResultMap">
+      SELECT * FROM user_info ui LEFT JOIN user_login ul on ui.user_id = ul.user_id 
+      where  1 = 1
+    	<if test="username != null">
+      		and ul.username = #{username} 
+    	</if>
+    	<if test="phoneNumber != null">
+      		and ui.phone_number = #{phoneNumber} 
+    	</if>
+    	<if test="name != null">
+      		and ui.name = #{name} 
+    	</if>
+    	<if test="identityCardNo != null">
+      		and ui.identity_card_no = #{identityCardNo} 
+    	</if>
+    	<if test="level != null">
+      		and ul.level = #{level}  
+    	</if>
+        <if test="email != null">
+      		and ui.email = #{email}  
+    	</if>
+    	limit #{pageindex}, #{pagesize}
+   </select>
+   
+  <select id="getMemberBySellerId" parameterType="int" resultMap="BaseResultMap">
+       SELECT * FROM user_info ui LEFT JOIN user_login ul on ui.user_id = ul.user_id
+        where ui.user_id = #{sellerid} and ui.is_seller = 1
+   </select>
+   
+   <select id="modify" parameterType="string">
+    	UPDATE user_info SET is_seller = 1 WHERE user_id = #{id}
+    </select>
+    
+   <select id="deleteSeller" parameterType="string">
+    	UPDATE user_info SET is_seller = 0 WHERE user_id = #{id}
+    </select>
+   
+   
+   
 
 </mapper>
