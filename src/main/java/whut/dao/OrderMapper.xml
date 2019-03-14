@@ -27,7 +27,7 @@
     
     <collection property="orderDetails" javaType="list" ofType="OrderDetail">
     	<id column="order_detail_id" jdbcType="INTEGER" property="orderDetailId" />
-    	<result column="product_id" jdbcType="INTEGER" property="productId" />
+    	 <result column="product_specs_id" jdbcType="INTEGER" property="productSpecsId" />
     	<result column="poduct_name" jdbcType="VARCHAR" property="poductName" />
     	<result column="product_quantity" jdbcType="INTEGER" property="productQuantity" />
     	<result column="product_price" jdbcType="DECIMAL" property="productPrice" />
@@ -38,7 +38,7 @@
  <resultMap id="OrderDetailResultMap" type="whut.pojo.OrderDetail">
     <id column="order_detail_id" jdbcType="INTEGER" property="orderDetailId" />
     <result column="order_id" jdbcType="INTEGER" property="orderId" />
-    <result column="product_id" jdbcType="INTEGER" property="productId" />
+     <result column="product_specs_id" jdbcType="INTEGER" property="productSpecsId" />
     <result column="poduct_name" jdbcType="VARCHAR" property="poductName" />
     <result column="product_quantity" jdbcType="INTEGER" property="productQuantity" />
     <result column="product_price" jdbcType="DECIMAL" property="productPrice" />

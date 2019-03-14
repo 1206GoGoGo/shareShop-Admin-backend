@@ -5,7 +5,7 @@
   <resultMap id="BaseResultMap" type="whut.pojo.OrderCart">
     <id column="cart_id" jdbcType="INTEGER" property="cartId" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
-    <result column="product_id" jdbcType="INTEGER" property="productId" />
+    <result column="product_specs_id" jdbcType="INTEGER" property="productSpecsId" />
     <result column="product_quantity" jdbcType="INTEGER" property="productQuantity" />
     <result column="product_price" jdbcType="DECIMAL" property="productPrice" />
     <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
@@ -16,6 +16,6 @@
    </select>
    
    <select id="getAmountById" parameterType="int" resultType="java.lang.Integer">
-        SELECT count(*) FROM order_cart where product_id = #{id}
+        SELECT count(*) FROM order_cart where product_specs_id = #{id}
    </select>
 </mapper>
