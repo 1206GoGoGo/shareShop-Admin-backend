@@ -30,7 +30,9 @@ public interface ProInfoService {
 
 	public ResponseData getIfShelfList(String status);
 
-	public ResponseData getListByCondition(String name, String procode, String categoryId, String status1,
-			String status2);
+	public ResponseData getListByCondition(String name, String procode, String categoryId1, String categoryId2,
+			String categoryId3, String status1, String status2);
+
+	
 
 }

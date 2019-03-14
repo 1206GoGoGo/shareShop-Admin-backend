@@ -95,8 +95,8 @@ public class ProInfoController {
 	
 	//管理员联合查询
 	@RequestMapping(value = "/getListByCondition", method = RequestMethod.GET)
-	public @ResponseBody ResponseData getListByCondition(String name, String procode, String categoryId, String status1,String status2){
-		return proInfoService.getListByCondition(name,procode,categoryId,status1,status2);	
+	public @ResponseBody ResponseData getListByCondition(String name, String procode, String categoryId1, String categoryId2,String categoryId3,String status1,String status2){
+		return proInfoService.getListByCondition(name,procode,categoryId1,categoryId2,categoryId3,status1,status2);	
 	}
 	
 }

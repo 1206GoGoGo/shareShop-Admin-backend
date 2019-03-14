@@ -138,15 +138,15 @@ public class ProInfoServiceImpl implements ProInfoService{
 	}
 
 	@Override
-	public ResponseData getListByCondition(String name, String procode, String categoryId, String status1,
-			String status2) {
+	public ResponseData getListByCondition(String name, String procode, String categoryId1, String categoryId2,
+			String categoryId3, String status1, String status2) {
 		// TODO Auto-generated method stub
 		Map<String, String> map = new HashMap<>();
 		map.put("productName", name);
 		map.put("productCode", procode);
-		map.put("oneCategoryId", categoryId);
-		map.put("twoCategoryId", categoryId);
-		map.put("threeCategoryId", categoryId);
+		map.put("oneCategoryId", categoryId1);
+		map.put("twoCategoryId", categoryId2);
+		map.put("threeCategoryId", categoryId3);
 		map.put("publishStatus", status1);
 		map.put("auditStatus", status2);
 		List<ProductInfo> list = proInfoDao.getListByCondition(map);
