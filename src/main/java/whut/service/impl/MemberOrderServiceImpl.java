@@ -145,7 +145,7 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 		orderMasterOld.setSecondAddr(orderMaster.getSecondAddr());
 		orderMasterOld.setExpressNumber(orderMaster.getExpressNumber());
 		
-		dao.modifyOrder(orderMaster);
+		dao.modifyOrder(orderMasterOld);
 		return new ResponseData(200,"success",null);
 	
 	}
@@ -156,12 +156,27 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 	@Override
 	public ResponseData modifyPro(OrderDetail orderDetail) {
 		OrderDetail orderDetailOld = dao.getOrderDetailByOrderDetailId(orderDetail.getOrderDetailId());
+		
 		//判断当前订单状态
+		if( orderDetailOld.getStatus()==1 ||  orderDetailOld.getStatus()==2) {
+			//满足条件可以修改
+		}else {
+			return new ResponseData(4061,"当前状态禁止修改",null);
+		}
+		
+		if( orderDetailOld.getPoductName() != orderDetail.getPoductName()) {
+			return new ResponseData(4062,"不能更改已下单商品",null);
+		}
+		
+		if( orderDetailOld.getProductPrice() != orderDetail.getProductPrice()) {
+			return new ResponseData(4063,"更换商品价格不同",null);
+		}
+		
 		
 		//通过修改商品名来修改商品颜色分类，并且是同一个商品，即商品名相同
 		orderDetailOld.setProductId(orderDetail.getProductId());
 		
-		dao.modifyPro(orderDetail);
+		dao.modifyPro(orderDetailOld);
 		return new ResponseData(200,"success",null);
 	
 	}
@@ -182,12 +197,16 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 		//若订单下商品状态不同则禁止修改
 		List<OrderDetail> proList = dao.getDetailListByOrderId(Integer.parseInt(orderId));
 		
-		//int tempStatus = proList.get(0).getstatus();
-		for( int i = 0 ; i < proList.size() ; i++) {
+		int tempStatus = proList.get(0).getStatus();
+		for( int i = 1 ; i < proList.size() ; i++) {
 			//获取详情状态
-			//if(proList.get(i).getstatus() != tempStatus) {
-			//	return new ResponseData(406,"当前订单中子商品状态不一致禁止整单操作",null);
-			//}
+			if(proList.get(i).getStatus() != tempStatus) {
+				return new ResponseData(4061,"当前订单中子商品状态不一致禁止整单操作",null);
+			}
+		}
+		
+		if(tempStatus != statusOld) {
+			return new ResponseData(4062,"订单状态和订单下商品状态不一致禁止整单修改",null);	
 		}
 		
 		
@@ -239,14 +258,13 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 		}
 		
 		if(newStatus==0) {
-			return new ResponseData(406,"当前订单状态禁止修改或无法修改传递的状态",null);
+			return new ResponseData(4063,"当前订单状态禁止修改或无法从原有状态修改到指定状态",null);
 		}
 		
+		//修改订单状态和子订单状态
 		Map<String, String> map = new HashMap<>();
 		map.put("orderId", orderId);
 		map.put("status", String.valueOf(status));
-		
-		//修改订单状态和子订单状态
 		dao.modifyOrderStatus(map);
 		dao.modifyProStatusByOrderId(map);
 		//修改全部子账单状态
@@ -255,7 +273,7 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 	}
 
 	/**
-	 * 判断条件？
+	 * 判断条件
 	 */
 	@Override
 	public ResponseData modifyProStatus(String jsonString) {
@@ -263,15 +281,65 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 		String orderDetailId = jsonUtils.getStringValue("orderDetailId");
 		String status = jsonUtils.getStringValue("status");
 		
-		OrderDetail orderDetail = dao.getOrderDetailByOrderDetailId(Integer.parseInt(orderDetailId));
+		OrderDetail orderDetailOld = dao.getOrderDetailByOrderDetailId(Integer.parseInt(orderDetailId));
 
+		int getStatus = Integer.parseInt(status);	//	传入的新status
+		int statusOld = orderDetailOld.getStatus();
+		int newStatus = 0;
 		//判断当前状态，修改单个状态及整单状态
+		//同意退货申请21——22
+		if(statusOld == 21 && getStatus == 22) {
+			newStatus = 22;
+		}
+		//收到退货商品，符合退货条件，完成退货22——29
+		if(statusOld == 22 && getStatus == 29) {
+			newStatus = 29;
+		}
+		//退货商品不符合条件22——23
+		if(statusOld == 22 && getStatus == 23) {
+			newStatus = 23;
+		}
+		//退货商品重新发货（发还用户）22、23——24
+		if( (statusOld == 22 || statusOld ==23) && getStatus == 24) {
+			newStatus = 24;
+		}
+		//同意用户换货申请31——32
+		if(statusOld == 31 && getStatus == 32) {
+			newStatus = 32;
+		}
+		//商品不符合换货条件，待返回32——33
+		if(statusOld == 32 && getStatus == 33) {
+			newStatus = 33;
+		}
+		//换货失败原商品发回33——34
+		if(statusOld == 33 && getStatus == 34) {
+			newStatus = 34;
+		}
+		//符合换货标准，待发新商品32——36
+		if(statusOld == 32 && getStatus == 36) {
+			newStatus = 36;
+		}
+		//换货商品发出32、36——37
+		if( (statusOld == 32 || statusOld == 36) && getStatus == 37) {
+			newStatus = 37;
+		}
 		
+		if(newStatus==0) {
+			return new ResponseData(406,"当前订单状态禁止修改或无法从原有状态修改到指定状态",null);
+		}
+		
+		//修改单个商品状态
 		Map<String, String> map = new HashMap<>();
 		map.put("orderDetailId", orderDetailId);
 		map.put("status", status);
-		
 		dao.modifyProStatus(map);
+		
+		//修改整个订单状态
+		Map<String, String> mapOrder = new HashMap<>();
+		mapOrder.put("orderId", String.valueOf(orderDetailOld.getOrderId()) );
+		mapOrder.put("status", status);
+		dao.modifyOrderStatus(mapOrder);
+		
 		return new ResponseData(200,"success",null);
 	
 	}
