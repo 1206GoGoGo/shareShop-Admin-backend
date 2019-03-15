@@ -36,12 +36,4 @@ public interface UserInfoDao {
 	void addSeller(String id);
 
 	void deleteSeller(String id);
-
-	//以下无数据返回null
-
-	List<UserInfo> searchInfoByPhoneNumber(String phoneNumber);
-
-	List<UserInfo> searchInfoByEmail(String email);
-
-	List<UserInfo> searchInfoByIdentityCardNo(String identityCardNo);
 }

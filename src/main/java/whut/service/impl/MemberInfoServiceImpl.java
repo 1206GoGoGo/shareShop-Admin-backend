@@ -56,6 +56,16 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 			return new ResponseData(4062,"unqualified password",null);
 		}
 		
+		//查询，处分页都可能为空
+		Map<String,String> map = new HashMap<>();
+		map.put("pageindex", "1");
+		map.put("pagesize", "1");
+		map.put("username", null);
+		map.put("phoneNumber", null);
+		map.put("name", null);
+		map.put("identityCardNo", null);
+		map.put("level", null);
+		map.put("email", null);
 		
 		//判断信息是否冲突
 		List<UserInfo> list = new ArrayList<>();
@@ -65,22 +75,25 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 		}
 		
 		String phoneNumber = user.getPhoneNumber();
-		list = dao.searchInfoByPhoneNumber(phoneNumber);
-		if(list!=null) {
+		map.put("phoneNumber", phoneNumber);
+		if(dao.searchAllInfoByUserInfo(map)!=null) {
 			return new ResponseData(4061,"phoneNumber is occupied",null);
 		}
+		map.put("phoneNumber", null);
 		
 		String email = user.getEmail();
-		list = dao.searchInfoByEmail(email);
-		if(list!=null) {
+		map.put("email", email);
+		if(dao.searchAllInfoByUserInfo(map)!=null) {
 			return new ResponseData(4061,"email is occupied",null);
 		}
+		map.put("email", null);
 		
 		String identityCardNo = user.getIdentityCardNo();
-		list = dao.searchInfoByIdentityCardNo(identityCardNo);
-		if(list!=null) {
+		map.put("identityCardNo", identityCardNo);
+		if(dao.searchAllInfoByUserInfo(map)!=null) {
 			return new ResponseData(4061,"identityCardNo is occupied",null);
 		}
+		map.put("identityCardNo", null);
 		
 		//添加用户登录表数据
 		UserLogin userLogin = new UserLogin();
@@ -156,6 +169,7 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 		map.put("name", name);
 		map.put("identityCardNo", identityCardNo);
 		map.put("level", level);
+		map.put("email", null);
 		
 		list = dao.searchAllInfoByUserInfo(map);
 		if(list!=null) {
