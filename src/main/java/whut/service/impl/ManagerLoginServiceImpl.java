@@ -33,7 +33,7 @@ public class ManagerLoginServiceImpl implements ManagerLoginService {
 		String password = jsonUtils.getStringValue("password");
 
 		UserLogin userLogin = loginDao.getLoginInfo(username);
-		if( EncryptUtil.MD5(password) != userLogin.getPassword()) {
+		if( !EncryptUtil.MD5(password).equals(userLogin.getPassword())) {
 			return new ResponseData(4061,"password error",null);
 		}
 		if( userLogin.getLevel()!=20 ) {
@@ -51,8 +51,13 @@ public class ManagerLoginServiceImpl implements ManagerLoginService {
 		//用户等级。数字
 		Cookie dot = new Cookie("_dotcom_user", userLogin.getLevel().toString());
 		dot.setPath("/");
-		dot.setMaxAge(60*60*24);
+		dot.setMaxAge(60*60*24*30);
 		response.addCookie(dot);
+		//用户名（每次请求前端带到后台）
+		Cookie userna = new Cookie("_octouser", username);
+		userna.setPath("/");
+		userna.setMaxAge(60*60*24*30);
+		response.addCookie(userna);
 		//最近活跃0/1（8个小时内，活跃1，否则不存在）
 		Cookie activity = new Cookie("has_recent_activity", "1");
 		activity.setPath("/");
@@ -61,18 +66,13 @@ public class ManagerLoginServiceImpl implements ManagerLoginService {
 		//登录状态0/1（24小时为1，否则不存在）
 		Cookie logged = new Cookie("logged_in", "1");
 		logged.setPath("/");
-		logged.setMaxAge(60*60*24);
+		logged.setMaxAge(60*60*24*365);
 		response.addCookie(logged);
 		//用户登录信息，安全验证（每次请求前端带到后台）
 		Cookie logininfo = new Cookie("_tzBDSFRCVID", sercity);
 		logininfo.setPath("/");
 		logininfo.setMaxAge(60*60*24);
 		response.addCookie(logininfo);
-		//用户名（每次请求前端带到后台）
-		Cookie userna = new Cookie("_octouser", username);
-		userna.setPath("/");
-		userna.setMaxAge(60*60*24);
-		response.addCookie(userna);
 		
 		//设置session
 		//用户登录信息
