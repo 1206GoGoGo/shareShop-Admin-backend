@@ -68,7 +68,7 @@
    
    <select id="getMasterByOrderId" parameterType="int" resultMap="orderResultMap">
        SELECT * FROM order_master om LEFT JOIN order_detail od on om.order_id = od.order_id
-       where order_id = #{orderId} 
+       where om.order_id = #{orderId} 
    </select>
    
    
