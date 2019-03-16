@@ -21,16 +21,14 @@ public interface UserInfoDao {
 	//修改用户信息表
 	void modify(UserInfo user);
 
-	//通过登录表id获取用户信息
-	UserInfo getDetail(int id);
-
 	//通过用户对象获取用户全部信息（两个表的信息）
 	//无数据返回list为空
 	//String pagesize, String pageindex, String username, String phoneNumber,String name,String identityCardNo, String level
 	List<UserInfo> searchAllInfoByUserInfo(Map<String, Object> map);
 
 	List<UserInfo> getMemberBySellerId(int sellerid);
-
+	
+	//通过登录表id获取用户信息
 	UserInfo getUserInfo(String id);
 
 	void addSeller(String id);

@@ -163,7 +163,7 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 
 		if(userId!=0) {
 			//获取列表
-			list.add( dao.getDetail(userId) );
+			list.add( dao.getUserInfo(String.valueOf(userId)) );
 			return new ResponseData(200,"success",list);
 		}
 			
@@ -188,7 +188,7 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 
 	@Override
 	public ResponseData modify(UserInfo user) {
-		UserInfo userOld = dao.getDetail(user.getUserId());
+		UserInfo userOld = dao.getUserInfo(String.valueOf(user.getUserId()));
 		//修改用户信息，密码、登录名、证件号、账户余额禁止修改(编号识别要修改的用户)。需要判断是否满足指定条件，如果用户状态已经是注销状态禁止修改。
 		
 		//判断当前用户状态
@@ -212,7 +212,7 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 
 	@Override
 	public ResponseData getDetail(int id) {
-		UserInfo info = dao.getDetail(id);
+		UserInfo info = dao.getUserInfo(String.valueOf(id));
 		if(info != null) {
 			return new ResponseData(200,"success",info);
 		}else {
