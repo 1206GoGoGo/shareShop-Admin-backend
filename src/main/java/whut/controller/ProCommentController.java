@@ -51,4 +51,11 @@ public class ProCommentController {
 		return proCommentService.delete(id);
 		
 	}
+	
+	//管理员根据商品名称、商品编码、用户名称联合查询
+	@RequestMapping(value = "/getListByCondition", method = RequestMethod.GET)
+	public @ResponseBody ResponseData getListByCondition(String proName,String proCode, String userName){
+		return proCommentService.getListByCondition(proName,proCode,userName);
+		
+	}
 }

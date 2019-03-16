@@ -1,7 +1,9 @@
 package whut.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -86,6 +88,60 @@ public class ProCouponServiceImpl implements ProCouponService{
 		}else {
 			return new ResponseData(400,"no data",null);
 		}
+	}
+
+	@Override
+	public ResponseData addCouponLogs(CouponLogs couponLogs) {
+		// TODO Auto-generated method stub
+		proCouponDao.addCouponLogs(couponLogs);
+		return new ResponseData(200,"success",null);
+	}
+
+	@Override
+	public ResponseData getCouponLogsDetail(String id, String orderNumber) {
+		// TODO Auto-generated method stub
+		Map<String, String> map = new HashMap<>();
+		map.put("couponId", id);
+		map.put("orderNumber", orderNumber);
+		CouponLogs couponLogs = proCouponDao.getCouponLogsDetail(map);
+		if(couponLogs != null) {
+			return new ResponseData(200,"success",couponLogs);
+		}else {
+			return new ResponseData(400,"No data",null);
+		}
+	}
+
+	@Override
+	public ResponseData getCouponLogsListByStatus(String status) {
+		// TODO Auto-generated method stub
+		List<CouponLogs> list =	new ArrayList<>();
+		list = proCouponDao.getCouponLogsListByStatus(status);
+		if(list != null) {
+			return new ResponseData(200,"success",list);
+		}else {
+			return new ResponseData(400,"no data",null);
+		}
+	}
+
+	@Override
+	public ResponseData modifyCouponLogsStatus(String id) {
+		// TODO Auto-generated method stub
+		proCouponDao.modifyCouponLogsStatus(id);
+		return new ResponseData(200,"success",null);
+	}
+
+	@Override
+	public ResponseData addCouponReceive(CouponReceive couponReceive) {
+		// TODO Auto-generated method stub
+		proCouponDao.addCouponReceive(couponReceive);
+		return new ResponseData(200,"success",null);
+	}
+
+	@Override
+	public ResponseData modifyCouponReceiveStatus(String id) {
+		// TODO Auto-generated method stub
+		proCouponDao.modifyCouponReceiveStatus(id);
+		return new ResponseData(200,"success",null);
 	}
 	
 	

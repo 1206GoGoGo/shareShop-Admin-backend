@@ -76,5 +76,12 @@ public class ProCommentServiceImpl implements ProCommentService{
 		// TODO Auto-generated method stub
 		return proCommentDao.getCommentById(id);
 	}
+
+	@Override
+	public ResponseData getListByCondition(String proName, String proCode, String userName) {
+		// TODO Auto-generated method stub
+		//商品评论：管理员要显示商品编码、商品名称、评价的用户名。（新建一个POJO类）
+		return null;
+	}
 	
 }
