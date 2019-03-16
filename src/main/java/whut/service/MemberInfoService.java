@@ -12,7 +12,7 @@ public interface MemberInfoService {
 
 	public ResponseData delete(int id);
 
-	public ResponseData search(String pagesize, String pageindex, String username, String phoneNumber,String name,String identityCardNo, String level);
+	public ResponseData search(int pagesize, int pageindex, String username, String phoneNumber,String name,String identityCardNo, String level);
 
 	public ResponseData modify(UserInfo user);
 

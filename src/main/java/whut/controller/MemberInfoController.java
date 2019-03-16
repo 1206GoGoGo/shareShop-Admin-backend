@@ -66,7 +66,7 @@ public class MemberInfoController {
 	 * @return
 	 */
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public @ResponseBody ResponseData search(String pagesize,String pageindex,String username,
+	public @ResponseBody ResponseData search(int pagesize,int pageindex,String username,
 			String phoneNumber,String name,String identityCardNo,String level) {
 		return  memberInfoService.search(pagesize,pageindex,username, phoneNumber, name, identityCardNo,level);
 	}

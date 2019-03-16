@@ -60,9 +60,9 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 		}
 		
 		//查询，处分页都可能为空
-		Map<String,String> map = new HashMap<>();
-		map.put("pageindex", "1");
-		map.put("pagesize", "1");
+		Map<String,Object> map = new HashMap<>();
+		map.put("pageindex", 1);
+		map.put("pagesize", 1);
 		map.put("username", null);
 		map.put("phoneNumber", null);
 		map.put("name", null);
@@ -148,7 +148,7 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 	}
 
 	@Override
-	public ResponseData search(String pagesize, String pageindex, String username, String phoneNumber,String name,String identityCardNo, String level) {
+	public ResponseData search(int pagesize, int pageindex, String username, String phoneNumber,String name,String identityCardNo, String level) {
 		
 		//通过用户名直接查询，不再进行其他条件判断
 		int userId = 0;
@@ -168,7 +168,7 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 		}
 			
 		//查询，处分页都可能为空
-		Map<String,String> map = new HashMap<>();
+		Map<String,Object> map = new HashMap<>();
 		map.put("pageindex", pageindex);
 		map.put("pagesize", pagesize);
 		map.put("username", username);
