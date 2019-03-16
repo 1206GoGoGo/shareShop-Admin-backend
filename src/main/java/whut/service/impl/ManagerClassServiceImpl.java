@@ -30,27 +30,36 @@ public class ManagerClassServiceImpl implements ManagerClassService {
 	@Override
 	public ResponseData add(ManagerCategory managerCategory) {
 		//判断同名
-		ManagerCategory managerCategoryOld = dao.getIdByName(managerCategory.getName());
-		if(managerCategoryOld!=null) {
+		ManagerCategory managerCategoryOld = null;
+		try {
+			managerCategoryOld = dao.getIdByName(managerCategory.getName());
+		}catch(Exception e) {
+			//不存在该分类名
 			dao.add(managerCategory);
 			return new ResponseData(200,"success",null);
-		}else {
-			return new ResponseData(406,"该分类名已存在",null);
 		}
+		//已存在该分类名
+		return new ResponseData(406,"该分类名已存在",null);
 
 	}
 
 	@Override
 	public ResponseData modify(ManagerCategory managerCategory) {
 		//判断修改的是不是同名
-		ManagerCategory managerCategoryOld = dao.getIdByName(managerCategory.getName());
-		if(managerCategoryOld!=null) {
+		ManagerCategory managerCategoryOld = null;
+		try {
+			managerCategoryOld = dao.getIdByName(managerCategory.getName());
 			if(managerCategory.getCategoryId() != managerCategoryOld.getCategoryId()) {
 				return new ResponseData(406,"已存在该名字的分类",null);
+			}else {
+				dao.modify(managerCategory);
+				return new ResponseData(200,"success",null);		
 			}
+		}catch(Exception e) {
+			//不存在同名分类
+			dao.modify(managerCategory);
+			return new ResponseData(200,"success",null);
 		}
-		dao.modify(managerCategory);
-		return new ResponseData(200,"success",null);
 
 	}
 

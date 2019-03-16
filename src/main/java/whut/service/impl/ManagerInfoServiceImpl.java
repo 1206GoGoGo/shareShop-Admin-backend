@@ -1,6 +1,5 @@
 package whut.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Service;
 import whut.dao.ManagerInfoDao;
 import whut.dao.UserLoginDao;
 import whut.pojo.ManagerInfo;
-import whut.pojo.UserInfo;
 import whut.pojo.UserLogin;
 import whut.service.ManagerInfoService;
 import whut.utils.ResponseData;
@@ -55,6 +53,7 @@ public class ManagerInfoServiceImpl implements ManagerInfoService {
 		userLogin.setLevel( managerInfo.getUserLogin().getLevel() );	//设置用户等级、管理员类型需要传入
 		userLogin.setStatus((byte)1);	//设置用户状态
 		loginDao.addUser(userLogin);
+		
 		userLogin = loginDao.getLoginInfo(username);
 		
 		//给user对象赋值id

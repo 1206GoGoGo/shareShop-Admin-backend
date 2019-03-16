@@ -25,8 +25,8 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 	private UserLoginDao loginDao;
 
 	@Override
-	public ResponseData getListByUser(String pageindex, String pagesize, String id) {
-		Map<String, String> map = new HashMap<>();
+	public ResponseData getListByUser(int pageindex, int pagesize, int id) {
+		Map<String, Integer> map = new HashMap<>();
 		map.put("pageindex", pageindex);
 		map.put("pagesize", pagesize);
 		map.put("id", id);
@@ -39,16 +39,16 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 	}
 	
 	@Override
-	public ResponseData getListByUserName(String pageindex, String pagesize, String username) {
+	public ResponseData getListByUserName(int pageindex, int pagesize, String username) {
 		int id = loginDao.getLoginInfo(username).getUserId();
 		if(id == 0) {
 			return new ResponseData(4001,"不存在该用户",null);
 		}
 		
-		Map<String, String> map = new HashMap<>();
+		Map<String, Integer> map = new HashMap<>();
 		map.put("pageindex", pageindex);
 		map.put("pagesize", pagesize);
-		map.put("id", String.valueOf(id));
+		map.put("id", id);
 		
 		List<OrderMaster> list = dao.getListByUser(map);
 		if(list != null) {
@@ -59,11 +59,11 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 	}
 
 	@Override
-	public ResponseData getListByPro(String pageindex, String pagesize, int id) {
-		Map<String, String> map = new HashMap<>();
+	public ResponseData getListByPro(int pageindex, int pagesize, int id) {
+		Map<String, Integer> map = new HashMap<>();
 		map.put("pageindex", pageindex);
 		map.put("pagesize", pagesize);
-		map.put("id", String.valueOf(id));
+		map.put("id", id);
 		
 		List<OrderDetail> list = dao.getListByPro(map);
 		if(list != null) {
@@ -74,14 +74,14 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 	}
 
 	@Override
-	public ResponseData getListByStatus(String pageindex, String pagesize, String status) {
-		Map<String, String> map = new HashMap<>();
+	public ResponseData getListByStatus(int pageindex, int pagesize, int status) {
+		Map<String, Integer> map = new HashMap<>();
 		map.put("pageindex", pageindex);
 		map.put("pagesize", pagesize);
 		map.put("status", status);
 		
 		List<OrderMaster> list = dao.getListByStatus(map);
-		if(list != null) {
+		if(!list.isEmpty()) {
 			return new ResponseData(200,"success",list);
 		}else {
 			return new ResponseData(400,"no data",null);

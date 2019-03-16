@@ -1,7 +1,6 @@
 package whut.service.impl;
 
 import java.util.Date;
-import java.util.Enumeration;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -87,7 +86,7 @@ public class ManagerLoginServiceImpl implements ManagerLoginService {
             System.out.println(cookie.getName()+":"+cookie.getValue());
         }
 		
-		return new ResponseData(200,"no data",null);
+		return new ResponseData(200,"login success",null);
 	}
 
 	@Override

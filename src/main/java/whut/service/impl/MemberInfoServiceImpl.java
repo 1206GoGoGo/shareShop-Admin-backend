@@ -135,10 +135,10 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 		}
 		
 		//判断该用户是否产生过订单
-		Map<String, String> map = new HashMap<>();
-		map.put("pageindex", "1");
-		map.put("pagesize", "1");
-		map.put("id", String.valueOf(id));
+		Map<String, Integer> map = new HashMap<>();
+		map.put("pageindex", 1);
+		map.put("pagesize", 1);
+		map.put("id", id);
 		if(orderDao.getListByUser(map)!=null) {
 			return new ResponseData(4063,"该用户存在订单信息",null);
 		}

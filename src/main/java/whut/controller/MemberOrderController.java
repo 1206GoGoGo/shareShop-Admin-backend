@@ -24,7 +24,7 @@ public class MemberOrderController {
 	 * @return
 	 */
 	@RequestMapping(value = "/getListByUser", method = RequestMethod.GET)
-	public @ResponseBody ResponseData getListByUser(String pageindex, String pagesize, String id) {
+	public @ResponseBody ResponseData getListByUser(int pageindex, int pagesize, int id) {
 		return memberOrderService.getListByUser(pageindex, pagesize, id);
 	}
 	
@@ -34,7 +34,7 @@ public class MemberOrderController {
 	 * @return
 	 */
 	@RequestMapping(value = "/getListByUserName", method = RequestMethod.GET)
-	public @ResponseBody ResponseData getListByUserName(String pageindex, String pagesize, String username) {
+	public @ResponseBody ResponseData getListByUserName(int pageindex, int pagesize, String username) {
 		return memberOrderService.getListByUserName(pageindex, pagesize, username);
 	}
 	
@@ -44,7 +44,7 @@ public class MemberOrderController {
 	 * @return
 	 */
 	@RequestMapping(value = "/getListByPro", method = RequestMethod.GET)
-	public @ResponseBody ResponseData getListByPro(String pageindex, String pagesize, int id) {
+	public @ResponseBody ResponseData getListByPro(int pageindex, int pagesize, int id) {
 		return memberOrderService.getListByPro(pageindex, pagesize, id);
 	}
 	
@@ -54,7 +54,7 @@ public class MemberOrderController {
 	 * @return
 	 */
 	@RequestMapping(value = "/getListByStatus", method = RequestMethod.GET)
-	public @ResponseBody ResponseData getListByStatus(String pageindex, String pagesize, String status) {
+	public @ResponseBody ResponseData getListByStatus(int pageindex, int pagesize, int status) {
 		return memberOrderService.getListByStatus(pageindex, pagesize, status);
 	}
 	

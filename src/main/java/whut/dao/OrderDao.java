@@ -9,13 +9,13 @@ import whut.pojo.OrderMaster;
 public interface OrderDao {
 
 	//String pageindex, String pagesize, String id
-	List<OrderMaster> getListByUser(Map<String, String> map);
+	List<OrderMaster> getListByUser(Map<String, Integer> map);
 
 	//String pageindex, String pagesize, int id
-	List<OrderDetail> getListByPro(Map<String, String> map);
+	List<OrderDetail> getListByPro(Map<String, Integer> map);
 
 	//String pageindex, String pagesize, String status
-	List<OrderMaster> getListByStatus(Map<String, String> map);
+	List<OrderMaster> getListByStatus(Map<String, Integer> map);
 
 	OrderMaster searchByOrderNumber(String orderNumber);
 	
