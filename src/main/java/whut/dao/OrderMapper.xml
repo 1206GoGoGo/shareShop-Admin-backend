@@ -52,12 +52,13 @@
    </select>
    
    <select id="getListByPro" parameterType="hashmap" resultMap="OrderDetailResultMap">
-       SELECT * FROM order_detail where product_id = #{id}  limit #{pageindex},#{pagesize}
+       SELECT * FROM order_detail where product_specs_id = #{id}  limit #{pageindex},#{pagesize}
    </select>
    
    <select id="getListByStatus" parameterType="hashmap" resultMap="orderResultMap">
        SELECT * FROM order_master om LEFT JOIN order_detail od on om.order_id = od.order_id
        where order_number = #{orderNumber} 
+       limit #{pageindex},#{pagesize}
    </select>
    
     <select id="searchByOrderNumber" parameterType="string" resultMap="orderResultMap">
