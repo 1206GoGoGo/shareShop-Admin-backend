@@ -1,7 +1,6 @@
 package whut.service.impl;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,14 +28,18 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 	private OrderDao orderDao;
 	
 	@Override
-	public ResponseData getList(String status,String pageindex, String pagesize) {
-		Map<String,String> map = new HashMap<>();
+	public ResponseData getList(int status,int pageindex, int pagesize) {
+		Map<String,Integer> map = new HashMap<>();
 		map.put("status", status);
 		map.put("pageindex", pageindex);
 		map.put("pagesize", pagesize);
 		
+		System.out.println(status);
+		System.out.println(pageindex);
+		System.out.println(pagesize);
+		
 		List<UserInfo> list = dao.getList(map);
-		if(list != null) {
+		if(list != null && !list.isEmpty()) {
 			return new ResponseData(200,"success",list);
 		}else {
 			return new ResponseData(400,"no data",null);
@@ -68,7 +71,6 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 		map.put("email", null);
 		
 		//判断信息是否冲突
-		List<UserInfo> list = new ArrayList<>();
 		
 		if(loginDao.getLoginInfo(username)!=null) {
 			return new ResponseData(4061,"username is occupied",null);
@@ -76,21 +78,21 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 		
 		String phoneNumber = user.getPhoneNumber();
 		map.put("phoneNumber", phoneNumber);
-		if(dao.searchAllInfoByUserInfo(map)!=null) {
+		if(!dao.searchAllInfoByUserInfo(map).isEmpty()) {
 			return new ResponseData(4061,"phoneNumber is occupied",null);
 		}
 		map.put("phoneNumber", null);
 		
 		String email = user.getEmail();
 		map.put("email", email);
-		if(dao.searchAllInfoByUserInfo(map)!=null) {
+		if(!dao.searchAllInfoByUserInfo(map).isEmpty()) {
 			return new ResponseData(4061,"email is occupied",null);
 		}
 		map.put("email", null);
 		
 		String identityCardNo = user.getIdentityCardNo();
 		map.put("identityCardNo", identityCardNo);
-		if(dao.searchAllInfoByUserInfo(map)!=null) {
+		if(!dao.searchAllInfoByUserInfo(map).isEmpty()) {
 			return new ResponseData(4061,"identityCardNo is occupied",null);
 		}
 		map.put("identityCardNo", null);
@@ -151,9 +153,14 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 		//通过用户名直接查询，不再进行其他条件判断
 		int userId = 0;
 		List<UserInfo> list = new ArrayList<>();
-		if(username!=null || username!="") {
-			userId = loginDao.getLoginInfo(username).getUserId();
+		try {
+			if(username!=null && !username.equals("")) {
+				userId = loginDao.getLoginInfo(username).getUserId();
+			}
+		}catch(Exception e) {
+			return new ResponseData(4001,"没有指定用户",list);
 		}
+
 		if(userId!=0) {
 			//获取列表
 			list.add( dao.getDetail(userId) );
@@ -215,15 +222,17 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 
 	@Override
 	public ResponseData getMemberListBySeller(String username) {
-		int sellerid = loginDao.getLoginInfo(username).getUserId();
-		if(sellerid == 0) {
-			return new ResponseData(4061,"no data",null);
+		int sellerid;
+		try {
+			sellerid = loginDao.getLoginInfo(username).getUserId();
+		}catch(Exception e) {
+			return new ResponseData(4061,"该用户不存在",null);
 		}
 
 		List<UserInfo> list = null;
 		list = dao.getMemberBySellerId(sellerid);
-		if(list == null) {
-			return new ResponseData(4062,"no data",null);
+		if(list==null || list.isEmpty() ) {
+			return new ResponseData(4062,"该推广者无下线",null);
 		}
 		
 		return new ResponseData(200,"success",list);

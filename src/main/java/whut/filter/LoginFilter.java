@@ -58,14 +58,14 @@ public class LoginFilter implements Filter{
 	        sercityOldSession = session.getAttribute("_tzBDSFRCVID").toString();
 		}catch(Exception e) {
 			response.setContentType("application/json;charset=UTF-8");
-        	response.getWriter().print( "{'code':403,'msg':'用户未登录','data': null}");
+        	response.getWriter().print( "{\"code\":403,\"msg\":\"用户未登录\",\"data\": null}");
         	return;
 		}
 		
 		//判断客户端发送的安全验证是否符合条件
         if(!sercityOldCookie.equals(sercityOldSession)) {
 			response.setContentType("application/json;charset=UTF-8");
-        	response.getWriter().print( "{'code':403,'msg':'用户未登录','data': null}");
+        	response.getWriter().print( "{\"code\":403,\"msg\":\"用户未登录\",\"data\": null}");
         	return;
         }
         

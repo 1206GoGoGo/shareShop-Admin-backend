@@ -25,8 +25,8 @@ public class MemberInfoController {
 	 * @return
 	 */
 	@RequestMapping(value = "/getList", method = RequestMethod.GET)
-	public @ResponseBody ResponseData getList(String status,String pageindex, String pagesize) {
-		return  memberInfoService.getList(status, pagesize, pagesize);
+	public @ResponseBody ResponseData getList(int status,int pageindex, int pagesize) {
+		return  memberInfoService.getList(status, pageindex, pagesize);
 	}
 	
 	/**

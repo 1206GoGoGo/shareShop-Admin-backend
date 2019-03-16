@@ -1,8 +1,5 @@
 package whut.dao;
 
-import java.util.List;
-
-import whut.pojo.UserInfo;
 import whut.pojo.UserLogin;
 
 public interface UserLoginDao {
