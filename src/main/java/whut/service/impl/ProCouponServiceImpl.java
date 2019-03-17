@@ -44,7 +44,11 @@ public class ProCouponServiceImpl implements ProCouponService{
 	public ResponseData getCouponDetailById(String id) {
 		// TODO Auto-generated method stub
 		CouponInfo couponInfo = proCouponDao.getCouponDetailById(id);
-		return new ResponseData(200,"success",couponInfo);
+		if(couponInfo != null) {
+			return new ResponseData(200,"success",couponInfo);
+		}else {
+			return new ResponseData(400,"No data",null);
+		}
 	}
 
 	@Override

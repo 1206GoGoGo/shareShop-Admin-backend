@@ -99,7 +99,7 @@
     </select>
     
     <select id="modifyCouponLogsStatus" parameterType="string">
-    	UPDATE coupon_logs SET status = #{status}
+    	UPDATE coupon_logs SET status = 0 where coupon_id = #{id}
     </select>
     
    <select id="addCouponReceive" parameterType="couponReceive">
@@ -110,7 +110,7 @@
     </select>
     
     <select id="modifyCouponReceiveStatus" parameterType="string">
-    	UPDATE coupon_receive SET status = #{status}
+    	UPDATE coupon_receive SET status = 0 where coupon_id = #{id}
     </select>
     
   </mapper>
