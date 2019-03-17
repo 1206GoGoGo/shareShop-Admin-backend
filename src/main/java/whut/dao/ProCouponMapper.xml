@@ -109,7 +109,7 @@
     	(#{userId},#{couponId},#{couponMoney},#{fullMoney},#{receiveTime},#{status})
     </select>
     
-    <select id="modifyCouponLogsStatus" parameterType="string">
+    <select id="modifyCouponReceiveStatus" parameterType="string">
     	UPDATE coupon_receive SET status = #{status}
     </select>
     
