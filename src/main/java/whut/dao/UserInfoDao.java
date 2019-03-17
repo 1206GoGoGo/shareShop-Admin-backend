@@ -11,7 +11,7 @@ public interface UserInfoDao {
 	//获取完整用户信息--不包括seller
 	List<UserInfo> getList(Map<String, Integer> map);
 	
-	List<UserInfo> getSellerList();
+	List<UserInfo> getSellerList(Map<String, Object> map);
 
 	void add(UserInfo user);
 

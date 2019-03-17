@@ -22,8 +22,8 @@ public class ProCategoryController {
 	
 	//获取第一层级分类列表
 	@RequestMapping(value = "/getList", method = RequestMethod.GET)
-	public @ResponseBody ResponseData getList() {
-		return proCategoryService.getList();
+	public @ResponseBody ResponseData getList(int pageindex, int pagesize) {
+		return proCategoryService.getList(pageindex, pagesize);
 	}
 	
 	//根据父分类ID获取子分类列表

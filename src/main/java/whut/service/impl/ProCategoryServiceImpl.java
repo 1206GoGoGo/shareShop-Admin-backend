@@ -1,7 +1,9 @@
 package whut.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,9 +21,12 @@ public class ProCategoryServiceImpl implements ProCategoryService{
 	public ProCategoryDao proCategoryDao;
 	
 	@Override
-	public ResponseData getList() {
+	public ResponseData getList(int pageindex, int pagesize) {
 		// TODO Auto-generated method stub
-		List<ProductCategory> list = proCategoryDao.getList();
+		Map<String,Object> map = new HashMap<>();
+		map.put("pageindex", pageindex);
+		map.put("pagesize", pagesize);
+		List<ProductCategory> list = proCategoryDao.getList(map);
 		if(list != null) {
 			return new ResponseData(200,"success",list);
 		}else {

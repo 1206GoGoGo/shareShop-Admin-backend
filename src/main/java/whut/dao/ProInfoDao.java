@@ -8,13 +8,14 @@ import whut.pojo.ProductInfo;
 
 public interface ProInfoDao {
 
-	List<ProductInfo> getList();
+	List<ProductInfo> getList(Map<String, Object> map);
 
 	ProductInfo getDetail(String id);
 
 	void add(ProductInfo productInfo);
 
-	List<ProductInfo> search(@Param(value = "name") String name);
+	//List<ProductInfo> search(@Param(value = "name") String name);
+	List<ProductInfo> search(Map<String, Object> map);
 
 	void modify(ProductInfo productInfo);
 
@@ -22,15 +23,15 @@ public interface ProInfoDao {
 
 	void modifyShelfStatus(Map<String, String> map);
 
-	List<ProductInfo> getListByCategory(String id);
+	List<ProductInfo> getListByCategory(Map<String, Object> map);
 
 	ProductInfo getDetailByCode(String id);
 
-	List<ProductInfo> getIfcheckedList(String status);
+	List<ProductInfo> getIfcheckedList(Map<String, Object> map);
 
-	List<ProductInfo> getIfShelfList(String status);
+	List<ProductInfo> getIfShelfList(Map<String, Object> map);
 
-	List<ProductInfo> getListByCondition(Map<String, String> map);
+	List<ProductInfo> getListByCondition(Map<String, Object> map);
 
 	
 	

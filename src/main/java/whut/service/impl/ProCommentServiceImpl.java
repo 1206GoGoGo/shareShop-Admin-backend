@@ -22,9 +22,13 @@ public class ProCommentServiceImpl implements ProCommentService{
 	public ProCommentDao proCommentDao;
 
 	@Override
-	public ResponseData getListByProduct(String id) {
+	public ResponseData getListByProduct(String id,int pageindex, int pagesize) {
 		// TODO Auto-generated method stub
-		List<ProductComment> list = proCommentDao.getListByProduct(id);
+		Map<String,Object> map = new HashMap<>();
+		map.put("productId", id);
+		map.put("pageindex", pageindex);
+		map.put("pagesize", pagesize);
+		List<ProductComment> list = proCommentDao.getListByProduct(map);
 		if(list != null) {
 			return new ResponseData(200,"success",list);
 		}else {
@@ -33,10 +37,14 @@ public class ProCommentServiceImpl implements ProCommentService{
 	}
 
 	@Override
-	public ResponseData getListByUser(String id) {
+	public ResponseData getListByUser(String id,int pageindex, int pagesize) {
 		// TODO Auto-generated method stub
+		Map<String,Object> map = new HashMap<>();
+		map.put("userId", id);
+		map.put("pageindex", pageindex);
+		map.put("pagesize", pagesize);
 		List<ProductComment> list = new ArrayList<>();
-		list = proCommentDao.getListByUser(id);
+		list = proCommentDao.getListByUser(map);
 		if(list.isEmpty())
 			return new ResponseData(400,"No Comments",null);
 		return new ResponseData(200,"success",list);
@@ -78,7 +86,7 @@ public class ProCommentServiceImpl implements ProCommentService{
 	}
 
 	@Override
-	public ResponseData getListByCondition(String proName, String proCode, String userName) {
+	public ResponseData getListByCondition(String proName, String proCode, String userName,int pageindex, int pagesize) {
 		// TODO Auto-generated method stub
 		//商品评论：管理员要显示商品编码、商品名称、评价的用户名。（新建一个POJO类）
 		return null;

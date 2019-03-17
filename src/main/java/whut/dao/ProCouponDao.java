@@ -9,7 +9,7 @@ import whut.pojo.CouponReceive;
 
 public interface ProCouponDao {
 
-	List<CouponInfo> getList();
+	List<CouponInfo> getList(Map<String, Object> map);
 
 	void addCoupon(CouponInfo couponInfo);
 
@@ -17,17 +17,17 @@ public interface ProCouponDao {
 
 	void deleteCoupon(String id);
 
-	List<CouponReceive> getCouponByUId(String id);
+	List<CouponReceive> getCouponByUId(Map<String, Object> map);
 
-	List<CouponLogs> getCouponLogsList();
+	List<CouponLogs> getCouponLogsList(Map<String, Object> map);
 
-	List<CouponReceive> getCouponReceiveList();
+	List<CouponReceive> getCouponReceiveList(Map<String, Object> map);
 
 	void addCouponLogs(CouponLogs couponLogs);
 
 	CouponLogs getCouponLogsDetail(Map<String, String> map);
 
-	List<CouponLogs> getCouponLogsListByStatus(String status);
+	List<CouponLogs> getCouponLogsListByStatus(Map<String, Object> map);
 
 	void modifyCouponLogsStatus(String id);
 

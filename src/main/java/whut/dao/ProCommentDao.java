@@ -9,9 +9,9 @@ import whut.pojo.ProductComment;
 
 public interface ProCommentDao {
 
-	public List<ProductComment> getListByProduct(String id);
+	public List<ProductComment> getListByProduct(Map<String, Object> map);
 
-	public List<ProductComment> getListByUser(String id);
+	public List<ProductComment> getListByUser(Map<String, Object> map);
 
 	public void add(ProductComment productComment);
 

@@ -1,6 +1,8 @@
 package whut.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,9 +21,12 @@ public class ProDiscountServiceImpl implements ProDiscountService{
 	public ProDiscountDao proDiscountDao;
 	
 	@Override
-	public ResponseData getList() {
+	public ResponseData getList(int pageindex, int pagesize) {
 		// TODO Auto-generated method stub
-		List<ProductDiscount> list = proDiscountDao.getList();
+		Map<String,Object> map = new HashMap<>();
+		map.put("pageindex", pageindex);
+		map.put("pagesize", pagesize);
+		List<ProductDiscount> list = proDiscountDao.getList(map);
 		if(list != null) {
 			return new ResponseData(200,"success",list);
 		}else {

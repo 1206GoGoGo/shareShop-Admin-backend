@@ -7,7 +7,7 @@ import whut.utils.ResponseData;
 
 public interface ProCouponService {
 
-	ResponseData getList();
+	ResponseData getList(int pageindex, int pagesize);
 
 	ResponseData addCoupon(CouponInfo couponInfo);
 
@@ -15,17 +15,17 @@ public interface ProCouponService {
 
 	ResponseData deleteCoupon(String id);
 
-	ResponseData getCouponByUId(String id);
+	ResponseData getCouponByUId(String id,int pageindex, int pagesize);
 
-	ResponseData getCouponLogsList();
+	ResponseData getCouponLogsList(int pageindex, int pagesize);
 
-	ResponseData getCouponReceiveList();
+	ResponseData getCouponReceiveList(int pageindex, int pagesize);
 
 	ResponseData addCouponLogs(CouponLogs couponLogs);
 
 	ResponseData getCouponLogsDetail(String id, String orderNumber);
 
-	ResponseData getCouponLogsListByStatus(String status);
+	ResponseData getCouponLogsListByStatus(String status,int pageindex, int pagesize);
 
 	ResponseData modifyCouponLogsStatus(String id);
 

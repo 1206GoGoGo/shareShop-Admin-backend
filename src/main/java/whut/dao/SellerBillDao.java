@@ -1,6 +1,7 @@
 package whut.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import whut.pojo.SellerBill;
 import whut.pojo.WithdrawRecord;
@@ -10,12 +11,12 @@ public interface SellerBillDao {
 
 	public void addWithdraw(WithdrawRecord withdrawRecord);
 
-	public List<SellerBill> getList(String id);
+	public List<SellerBill> getList(Map<String, Object> map);
 
 	public void addYield(YieldDetail yieldDetail);
 
-	public List<WithdrawRecord> getWithdrawList(String id);
+	public List<WithdrawRecord> getWithdrawList(Map<String, Object> map);
 
-	public List<YieldDetail> getYieldList(String id);
+	public List<YieldDetail> getYieldList(Map<String, Object> map);
 
 }

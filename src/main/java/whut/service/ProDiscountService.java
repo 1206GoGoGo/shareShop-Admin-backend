@@ -9,7 +9,7 @@ import whut.utils.ResponseData;
 
 public interface ProDiscountService {
 
-	public ResponseData getList();
+	public ResponseData getList(int pageindex, int pagesize);
 
 	public ResponseData search(String id);
 

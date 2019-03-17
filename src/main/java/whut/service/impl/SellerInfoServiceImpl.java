@@ -1,6 +1,8 @@
 package whut.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,9 +19,12 @@ public class SellerInfoServiceImpl implements SellerInfoService{
 	private UserInfoDao sellerInfoDao;
 	
 	@Override
-	public ResponseData getSellerList() {
+	public ResponseData getSellerList(int pageindex, int pagesize) {
 		// TODO Auto-generated method stub
-		List<UserInfo> list = sellerInfoDao.getSellerList();	 
+		Map<String,Object> map = new HashMap<>();
+		map.put("pageindex", pageindex);
+		map.put("pagesize", pagesize);
+		List<UserInfo> list = sellerInfoDao.getSellerList(map);	 
 		if(list != null) {
 			return new ResponseData(200,"success",list);
 		}else {

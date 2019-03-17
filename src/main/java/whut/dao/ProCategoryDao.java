@@ -1,12 +1,13 @@
 package whut.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import whut.pojo.ProductCategory;
 
 public interface ProCategoryDao {
 
-	public List<ProductCategory> getList();
+	public List<ProductCategory> getList(Map<String, Object> map);
 
 	public void add(ProductCategory productCategory);
 

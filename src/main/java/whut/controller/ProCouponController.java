@@ -22,8 +22,8 @@ public class ProCouponController {
 	
 	//获取所有优惠券信息
 	@RequestMapping(value = "/getList", method = RequestMethod.GET)
-	public @ResponseBody ResponseData getList() {
-		return proCouponService.getList();
+	public @ResponseBody ResponseData getList(int pageindex, int pagesize) {
+		return proCouponService.getList(pageindex, pagesize);
 	}
 	
 	//管理员添加优惠券
@@ -46,14 +46,14 @@ public class ProCouponController {
 	
 	//根据用户Id查看用户领取的未使用(状态为0)优惠券信息
 	@RequestMapping(value = "/getCouponByUId", method = RequestMethod.GET)
-	public @ResponseBody ResponseData getCouponByUId(String id) {
-		return proCouponService.getCouponByUId(id);
+	public @ResponseBody ResponseData getCouponByUId(String id,int pageindex, int pagesize) {
+		return proCouponService.getCouponByUId(id,pageindex, pagesize);
 	}
 	
 	//查看优惠券消费记录
 	@RequestMapping(value = "/getCouponLogsList", method = RequestMethod.GET)
-	public @ResponseBody ResponseData getCouponLogsList() {
-		return proCouponService.getCouponLogsList();
+	public @ResponseBody ResponseData getCouponLogsList(int pageindex, int pagesize) {
+		return proCouponService.getCouponLogsList(pageindex, pagesize);
 	}
 	
 	//向优惠券消费记录表增加记录
@@ -71,8 +71,8 @@ public class ProCouponController {
 	
 	//根据状态获取优惠券消费记录列表
 	@RequestMapping(value = "/getCouponLogsListByStatus", method = RequestMethod.GET)
-	public @ResponseBody ResponseData getCouponLogsListByStatus(String status) {
-		return proCouponService.getCouponLogsListByStatus(status);
+	public @ResponseBody ResponseData getCouponLogsListByStatus(String status,int pageindex, int pagesize) {
+		return proCouponService.getCouponLogsListByStatus(status,pageindex, pagesize);
 	}
 	
 	//根据优惠券id修改优惠券消费记录状态失效（使用优惠券但退款）
@@ -83,8 +83,8 @@ public class ProCouponController {
 	
 	//查看优惠券领取记录
 	@RequestMapping(value = "/getCouponReceiveList", method = RequestMethod.GET)
-	public @ResponseBody ResponseData getCouponReceiveList() {
-		return proCouponService.getCouponReceiveList();
+	public @ResponseBody ResponseData getCouponReceiveList(int pageindex, int pagesize) {
+		return proCouponService.getCouponReceiveList(pageindex, pagesize);
 	}
 	
 	//向优惠券领取表增加记录

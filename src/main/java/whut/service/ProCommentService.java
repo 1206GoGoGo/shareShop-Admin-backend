@@ -9,9 +9,9 @@ import whut.utils.ResponseData;
 
 public interface ProCommentService {
 
-	public ResponseData getListByProduct(String id);
+	public ResponseData getListByProduct(String id,int pageindex, int pagesize);
 
-	public ResponseData getListByUser(String id);
+	public ResponseData getListByUser(String id,int pageindex, int pagesize);
 	
 	public ResponseData add(ProductComment productComment);
 
@@ -21,6 +21,6 @@ public interface ProCommentService {
 
 	public ProductComment getCommentById(String id);
 
-	public ResponseData getListByCondition(String proName, String proCode, String userName);
+	public ResponseData getListByCondition(String proName, String proCode, String userName,int pageindex, int pagesize);
 
 }

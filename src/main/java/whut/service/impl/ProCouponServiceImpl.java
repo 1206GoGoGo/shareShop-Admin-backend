@@ -22,10 +22,13 @@ public class ProCouponServiceImpl implements ProCouponService{
 	private ProCouponDao proCouponDao;
 
 	@Override
-	public ResponseData getList() {
+	public ResponseData getList(int pageindex, int pagesize) {
 		// TODO Auto-generated method stub
+		Map<String,Object> map = new HashMap<>();
+		map.put("pageindex", pageindex);
+		map.put("pagesize", pagesize);
 		List<CouponInfo> list = new ArrayList<>();
-		list = proCouponDao.getList();
+		list = proCouponDao.getList(map);
 		if(list != null) {
 			return new ResponseData(200,"success",list);
 		}else {
@@ -59,10 +62,14 @@ public class ProCouponServiceImpl implements ProCouponService{
 	}
 
 	@Override
-	public ResponseData getCouponByUId(String id) {
+	public ResponseData getCouponByUId(String id,int pageindex, int pagesize) {
 		// TODO Auto-generated method stub
+		Map<String,Object> map = new HashMap<>();
+		map.put("userId", id);
+		map.put("pageindex", pageindex);
+		map.put("pagesize", pagesize);
 		List<CouponReceive> list = new ArrayList<>();
-		list = proCouponDao.getCouponByUId(id);
+		list = proCouponDao.getCouponByUId(map);
 		if(list != null) {
 			return new ResponseData(200,"success",list);
 		}else {
@@ -71,10 +78,13 @@ public class ProCouponServiceImpl implements ProCouponService{
 	}
 
 	@Override
-	public ResponseData getCouponLogsList() {
+	public ResponseData getCouponLogsList(int pageindex, int pagesize) {
 		// TODO Auto-generated method stub
+		Map<String,Object> map = new HashMap<>();
+		map.put("pageindex", pageindex);
+		map.put("pagesize", pagesize);
 		List<CouponLogs> list =	new ArrayList<>();
-		list = proCouponDao.getCouponLogsList();
+		list = proCouponDao.getCouponLogsList(map);
 		if(list != null) {
 			return new ResponseData(200,"success",list);
 		}else {
@@ -83,10 +93,13 @@ public class ProCouponServiceImpl implements ProCouponService{
 	}
 
 	@Override
-	public ResponseData getCouponReceiveList() {
+	public ResponseData getCouponReceiveList(int pageindex, int pagesize) {
 		// TODO Auto-generated method stub
+		Map<String,Object> map = new HashMap<>();
+		map.put("pageindex", pageindex);
+		map.put("pagesize", pagesize);
 		List<CouponReceive> list =	new ArrayList<>();
-		list = proCouponDao.getCouponReceiveList();
+		list = proCouponDao.getCouponReceiveList(map);
 		if(list != null) {
 			return new ResponseData(200,"success",list);
 		}else {
@@ -116,10 +129,14 @@ public class ProCouponServiceImpl implements ProCouponService{
 	}
 
 	@Override
-	public ResponseData getCouponLogsListByStatus(String status) {
+	public ResponseData getCouponLogsListByStatus(String status,int pageindex, int pagesize) {
 		// TODO Auto-generated method stub
+		Map<String,Object> map = new HashMap<>();
+		map.put("status", status);
+		map.put("pageindex", pageindex);
+		map.put("pagesize", pagesize);
 		List<CouponLogs> list =	new ArrayList<>();
-		list = proCouponDao.getCouponLogsListByStatus(status);
+		list = proCouponDao.getCouponLogsListByStatus(map);
 		if(list != null) {
 			return new ResponseData(200,"success",list);
 		}else {
