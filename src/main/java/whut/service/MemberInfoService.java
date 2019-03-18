@@ -10,7 +10,7 @@ public interface MemberInfoService {
 
 	public ResponseData add(UserInfo user);
 
-	public ResponseData delete(int id);
+	public ResponseData delete(String jsonString);
 
 	public ResponseData search(int pagesize, int pageindex, String username, String phoneNumber,String name,String identityCardNo, String level);
 

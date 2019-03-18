@@ -55,9 +55,9 @@ public class MemberInfoController {
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-	public @ResponseBody ResponseData delete(int id) {
-		return  memberInfoService.delete(id);
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	public @ResponseBody ResponseData delete(@RequestBody String jsonString) {
+		return  memberInfoService.delete(jsonString);
 	}
 	
 	/**

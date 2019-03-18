@@ -14,6 +14,7 @@ import whut.dao.UserLoginDao;
 import whut.pojo.UserInfo;
 import whut.pojo.UserLogin;
 import whut.service.MemberInfoService;
+import whut.utils.JsonUtils;
 import whut.utils.ResponseData;
 @Service
 public class MemberInfoServiceImpl implements MemberInfoService {
@@ -35,10 +36,10 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 		map.put("pagesize", pagesize);
 		
 		List<UserInfo> list = dao.getList(map);
-		if(list != null && !list.isEmpty()) {
-			return new ResponseData(200,"success",list);
+		if(list.isEmpty()) {
+			return new ResponseData(400,"no data satify request",null);
 		}else {
-			return new ResponseData(400,"no data",null);
+			return new ResponseData(200,"success",list);
 		}
 
 	}
@@ -50,9 +51,9 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 		String password = user.getUserLogin().getPassword();
 		//判断用户名、密码是否符合规则
 		if(username.length()<5) {
-			return new ResponseData(4062,"unqualified username",null);}
+			return new ResponseData(4065,"unqualified username",null);}
 		if(this.checkPassWordMethod(password)) {
-			return new ResponseData(4062,"unqualified password",null);
+			return new ResponseData(4066,"unqualified password",null);
 		}
 		
 		//查询，处分页都可能为空
@@ -75,21 +76,21 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 		String phoneNumber = user.getPhoneNumber();
 		map.put("phoneNumber", phoneNumber);
 		if(!dao.searchAllInfoByUserInfo(map).isEmpty()) {
-			return new ResponseData(4061,"phoneNumber is occupied",null);
+			return new ResponseData(4062,"phoneNumber is occupied",null);
 		}
 		map.put("phoneNumber", null);
 		
 		String email = user.getEmail();
 		map.put("email", email);
 		if(!dao.searchAllInfoByUserInfo(map).isEmpty()) {
-			return new ResponseData(4061,"email is occupied",null);
+			return new ResponseData(4063,"email is occupied",null);
 		}
 		map.put("email", null);
 		
 		String identityCardNo = user.getIdentityCardNo();
 		map.put("identityCardNo", identityCardNo);
 		if(!dao.searchAllInfoByUserInfo(map).isEmpty()) {
-			return new ResponseData(4061,"identityCardNo is occupied",null);
+			return new ResponseData(4064,"identityCardNo is occupied",null);
 		}
 		map.put("identityCardNo", null);
 		
@@ -114,20 +115,20 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 	}
 
 	@Override
-	public ResponseData delete(int id) {
-		
+	public ResponseData delete( String jsonString) {
+		int id = new JsonUtils(jsonString).getIntValue("id");
 		UserLogin userLogin = loginDao.getLoginInfoById(id);
 		if(userLogin == null) {
-			return new ResponseData(406,"该用户不存在",null);
+			return new ResponseData(406,"user does not exist",null);
 		}
 		
 		//判断用户状态（已是删除状态禁止删除）
 		if(userLogin.getStatus()==0) {
-			return new ResponseData(4061,"用户在该状态下禁止删除",null);
+			return new ResponseData(4061,"user status exception",null);
 		}
 		//店主禁止删除（该操作入口禁止删除）
 		if(userLogin.getLevel()==3) {
-			return new ResponseData(4062,"该用户店主身份禁止删除",null);
+			return new ResponseData(4062,"prevent deletion of Shopkeeper identity",null);
 		}
 		
 		//判断该用户是否产生过订单
@@ -136,7 +137,7 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 		map.put("pagesize", 1);
 		map.put("id", id);
 		if(orderDao.getListByUser(map)!=null) {
-			return new ResponseData(4063,"该用户存在订单信息",null);
+			return new ResponseData(4063,"the user has order information",null);
 		}
 		
 		dao.delete(id);
@@ -148,15 +149,15 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 		
 		//通过用户名直接查询，不再进行其他条件判断
 		int userId = 0;
-		List<UserInfo> list = new ArrayList<>();
 		try {
 			if(username!=null && !username.equals("")) {
 				userId = loginDao.getLoginInfo(username).getUserId();
 			}
 		}catch(Exception e) {
-			return new ResponseData(4001,"没有指定用户",list);
+			return new ResponseData(400,"no specified user",null);
 		}
 
+		List<UserInfo> list = new ArrayList<>();
 		if(userId!=0) {
 			//获取列表
 			list.add( dao.getUserInfo(String.valueOf(userId)) );
@@ -179,7 +180,7 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 			return new ResponseData(200,"success",list);
 		}
 		
-		return  new ResponseData(400,"no data",null);
+		return  new ResponseData(400,"no specified user",null);
 	}
 
 	@Override
@@ -189,7 +190,7 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 		
 		//判断当前用户状态
 		if( userOld.getUserLogin().getStatus() == 0 ) {
-			return new ResponseData(4061,"用户状态异常，禁止修改",null);
+			return new ResponseData(4061,"user status exception",null);
 		}
 		
 		//只处理部分参数的修改
@@ -212,7 +213,7 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 		if(info != null) {
 			return new ResponseData(200,"success",info);
 		}else {
-			return new ResponseData(400,"no data",null);
+			return new ResponseData(400,"no data satify request",null);
 		}
 	}
 
@@ -222,13 +223,13 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 		try {
 			sellerid = loginDao.getLoginInfo(username).getUserId();
 		}catch(Exception e) {
-			return new ResponseData(4061,"该用户不存在",null);
+			return new ResponseData(4061,"user does not exist",null);
 		}
 
 		List<UserInfo> list = null;
 		list = dao.getMemberBySellerId(sellerid);
 		if(list==null || list.isEmpty() ) {
-			return new ResponseData(4062,"该推广者无下线",null);
+			return new ResponseData(4062,"promoter has not downline",null);
 		}
 		
 		return new ResponseData(200,"success",list);

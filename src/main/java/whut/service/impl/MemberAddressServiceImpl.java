@@ -17,10 +17,10 @@ public class MemberAddressServiceImpl implements MemberAddressService {
 	@Override
 	public ResponseData getListByUserId(int id) {
 		List<UserAddr> userAddr = dao.getListByUserId(id);
-		if(userAddr != null) {
-			return new ResponseData(200,"success",userAddr);
+		if(userAddr.isEmpty()) {
+			return new ResponseData(400,"no data satify request",null);
 		}else {
-			return new ResponseData(400,"no data",null);
+			return new ResponseData(200,"success",userAddr);
 		}
 	}
 

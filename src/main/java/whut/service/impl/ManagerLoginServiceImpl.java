@@ -24,7 +24,6 @@ public class ManagerLoginServiceImpl implements ManagerLoginService {
 	
 	@Override
 	public ResponseData loginin(String jsonString, HttpServletRequest request, HttpServletResponse response) {
-        Cookie[] cookies = request.getCookies();
         HttpSession session = request.getSession();
 		
 		JsonUtils jsonUtils = new JsonUtils(jsonString);
@@ -36,10 +35,10 @@ public class ManagerLoginServiceImpl implements ManagerLoginService {
 			return new ResponseData(4061,"password error",null);
 		}
 		if( userLogin.getLevel()!=20 ) {
-			return new ResponseData(4063,"用户权限不足",null);
+			return new ResponseData(4063,"inadequate permissions",null);
 		}
 		if( userLogin.getStatus()!=1 ) {
-			return new ResponseData(4064,"管理员状态异常",null);
+			return new ResponseData(4064,"Administrator status exception",null);
 		}
 		
 		//验证成功创建安全信息sercity及加密
@@ -80,12 +79,7 @@ public class ManagerLoginServiceImpl implements ManagerLoginService {
 		//用户名
 		session.setAttribute("_octouser",username);
 		session.setMaxInactiveInterval(60*60*24);
-		
-        
-        for(Cookie cookie:cookies){
-            System.out.println(cookie.getName()+":"+cookie.getValue());
-        }
-		
+
 		return new ResponseData(200,"login success",null);
 	}
 
@@ -110,12 +104,12 @@ public class ManagerLoginServiceImpl implements ManagerLoginService {
 
 	@Override
 	public ResponseData getPhoneCode(String phoneCode) {
-		return new ResponseData(200,"success","成功发送验证码，请查收");
+		return new ResponseData(200,"success",null);
 	}
 
 	@Override
 	public ResponseData getMailCode(String mailCode) {
-		return new ResponseData(200,"success","成功发送验证码，请查收");
+		return new ResponseData(200,"success",null);
 	}
 
 }
