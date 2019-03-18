@@ -14,6 +14,6 @@ public interface ManagerInfoService {
 
 	public ResponseData modify(ManagerInfo managerInfo);
 
-	public ResponseData delete(int id);
+	public ResponseData delete(String jsonString);
 
 }

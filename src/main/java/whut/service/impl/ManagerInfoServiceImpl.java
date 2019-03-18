@@ -2,6 +2,7 @@ package whut.service.impl;
 
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +11,7 @@ import whut.dao.UserLoginDao;
 import whut.pojo.ManagerInfo;
 import whut.pojo.UserLogin;
 import whut.service.ManagerInfoService;
+import whut.utils.JsonUtils;
 import whut.utils.ResponseData;
 @Service
 public class ManagerInfoServiceImpl implements ManagerInfoService {
@@ -23,10 +25,10 @@ public class ManagerInfoServiceImpl implements ManagerInfoService {
 	@Override
 	public ResponseData getList() {
 		List<ManagerInfo> list = dao.getList();
-		if(list != null) {
-			return new ResponseData(200,"success",list);
-		}else {
+		if(list.isEmpty()) {
 			return new ResponseData(400,"no data",null);
+		}else {
+			return new ResponseData(200,"success",list);
 		}
 	}
 
@@ -54,8 +56,9 @@ public class ManagerInfoServiceImpl implements ManagerInfoService {
 		userLogin.setStatus((byte)1);	//设置用户状态
 		loginDao.addUser(userLogin);
 		
+		//刷新，将执行数据插入操作，之后获取添加数据对象
+
 		userLogin = loginDao.getLoginInfo(username);
-		
 		//给user对象赋值id
 		managerInfo.setUserId(userLogin.getUserId());
 		managerInfo.setUserLogin(userLogin);
@@ -79,11 +82,14 @@ public class ManagerInfoServiceImpl implements ManagerInfoService {
 	@Override
 	public ResponseData modify(ManagerInfo managerInfo) {
 		ManagerInfo managerInfoOld = dao.getDetail(managerInfo.getUserId());
-		
+		if(managerInfoOld == null) {
+			//需要修改的管理员编号不存在
+			return new ResponseData(4061,"Administrator does not exist",null);
+		}
 		
 		//判断当前管理员状态
 		if( managerInfoOld.getUserLogin().getStatus() == 0 ) {
-			return new ResponseData(4061,"管理员状态异常，禁止修改",null);
+			return new ResponseData(4062,"Administrator status exception",null);
 		}
 		
 		//只处理部分参数的修改
@@ -96,12 +102,13 @@ public class ManagerInfoServiceImpl implements ManagerInfoService {
 		managerInfoOld.setBirthday(managerInfo.getBirthday());
 		
 		
-		dao.modify(managerInfo);
+		dao.modify(managerInfoOld);
 		return new ResponseData(200,"success",null);
 	}
 
 	@Override
-	public ResponseData delete(int id) {
+	public ResponseData delete(String jsonString) {
+		int id = new JsonUtils(jsonString).getIntValue("id");
 		dao.delete(id);
 		return new ResponseData(200,"success",null);
 

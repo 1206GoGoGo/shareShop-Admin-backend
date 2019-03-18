@@ -37,8 +37,8 @@ public class ManagerInfoController {
 		return  managerInfoService.modify(managerInfo);
 	}
 	
-	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-	public @ResponseBody ResponseData delete(int id) {
-		return  managerInfoService.delete(id);
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	public @ResponseBody ResponseData delete(@RequestBody String jsonString) {
+		return  managerInfoService.delete(jsonString);
 	}
 }
