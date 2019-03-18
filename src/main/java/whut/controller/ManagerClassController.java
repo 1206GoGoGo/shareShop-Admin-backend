@@ -48,12 +48,13 @@ public class ManagerClassController {
 	
 	/**
 	 * 删除某管理员
+	 * jsonString包含删除分类——id
 	 * 是否通过改状态
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-	public @ResponseBody ResponseData delete(int id) {
-		return managerClassService.delete(id);
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	public @ResponseBody ResponseData delete(@RequestBody String jsonString) {
+		return managerClassService.delete(jsonString);
 	}
 }

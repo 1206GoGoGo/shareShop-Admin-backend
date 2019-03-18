@@ -34,10 +34,6 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 		map.put("pageindex", pageindex);
 		map.put("pagesize", pagesize);
 		
-		System.out.println(status);
-		System.out.println(pageindex);
-		System.out.println(pagesize);
-		
 		List<UserInfo> list = dao.getList(map);
 		if(list != null && !list.isEmpty()) {
 			return new ResponseData(200,"success",list);

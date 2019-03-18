@@ -12,5 +12,8 @@ public interface UserLoginDao {
 	//通过id获取对象
 	UserLogin getLoginInfoById(Integer userId);
 
+	//获取数量。不存在返回0
+	int getLoginInfoAmountByLevel(int level);
+
 
 }

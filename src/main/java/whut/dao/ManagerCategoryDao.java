@@ -17,4 +17,7 @@ public interface ManagerCategoryDao {
 	//不存在返回null
 	ManagerCategory getIdByName(String name);
 
+	//通过分类id获取level号
+	ManagerCategory getByCategoryId(int id);
+
 }

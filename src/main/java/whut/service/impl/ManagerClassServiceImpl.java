@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import whut.dao.ManagerCategoryDao;
+import whut.dao.UserLoginDao;
 import whut.pojo.ManagerCategory;
+import whut.pojo.UserLogin;
 import whut.service.ManagerClassService;
+import whut.utils.JsonUtils;
 import whut.utils.ResponseData;
 
 @Service
@@ -15,14 +18,17 @@ public class ManagerClassServiceImpl implements ManagerClassService {
 	
 	@Autowired
 	private ManagerCategoryDao dao;
-
+	
+	@Autowired
+	private UserLoginDao userLoginDao;
+	
 	@Override
 	public ResponseData getList() {
 		List<ManagerCategory> list = dao.getList();
-		if(list != null) {
-			return new ResponseData(200,"success",list);
-		}else {
+		if(list.isEmpty()) {
 			return new ResponseData(400,"no data",null);
+		}else {
+			return new ResponseData(200,"success",list);
 		}
 		
 	}
@@ -39,7 +45,7 @@ public class ManagerClassServiceImpl implements ManagerClassService {
 			return new ResponseData(200,"success",null);
 		}
 		//已存在该分类名
-		return new ResponseData(406,"该分类名已存在",null);
+		return new ResponseData(406,"class name already exists",null);
 
 	}
 
@@ -50,7 +56,7 @@ public class ManagerClassServiceImpl implements ManagerClassService {
 		try {
 			managerCategoryOld = dao.getIdByName(managerCategory.getName());
 			if(managerCategory.getCategoryId() != managerCategoryOld.getCategoryId()) {
-				return new ResponseData(406,"已存在该名字的分类",null);
+				return new ResponseData(406,"class name already exists",null);
 			}else {
 				dao.modify(managerCategory);
 				return new ResponseData(200,"success",null);		
@@ -64,10 +70,20 @@ public class ManagerClassServiceImpl implements ManagerClassService {
 	}
 
 	@Override
-	public ResponseData delete(int id) {
+	public ResponseData delete(String jsonString) {
+		int id = new JsonUtils(jsonString).getIntValue("id");
+		ManagerCategory managerCategory = dao.getByCategoryId(id);
+		if(managerCategory==null) {
+			//要删除分类不存在
+			return new ResponseData(4061,"classification does not exist",null);
+		}
+		int amount = userLoginDao.getLoginInfoAmountByLevel(managerCategory.getLevel());
+		if(amount!=0) {
+			//该分类下有管理员，无法修改
+			return new ResponseData(4062,"classification binds data",null);
+		}
 		dao.delete(id);
 		return new ResponseData(200,"success",null);
-
 	}
 
 }

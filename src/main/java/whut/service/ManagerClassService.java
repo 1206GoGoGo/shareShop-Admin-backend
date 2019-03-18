@@ -11,5 +11,5 @@ public interface ManagerClassService {
 
 	public ResponseData modify(ManagerCategory managerCategory);
 
-	public ResponseData delete(int id);
+	public ResponseData delete(String jsonString);
 }
