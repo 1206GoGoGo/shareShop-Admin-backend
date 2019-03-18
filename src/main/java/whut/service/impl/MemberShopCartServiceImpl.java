@@ -18,10 +18,10 @@ public class MemberShopCartServiceImpl implements MemberShopCartService {
 	@Override
 	public ResponseData getListByUser(int id) {
 		List<OrderCart> list = dao.getListByUser(id);
-		if(list != null) {
-			return new ResponseData(200,"success",list);
+		if(list.isEmpty()) {
+			return new ResponseData(400,"no data satify request",null);
 		}else {
-			return new ResponseData(400,"no data",null);
+			return new ResponseData(200,"success",list);
 		}
 	}
 

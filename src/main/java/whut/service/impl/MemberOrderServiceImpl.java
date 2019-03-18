@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import whut.dao.OrderDao;
+import whut.dao.ProSpecsDao;
 import whut.dao.UserLoginDao;
 import whut.pojo.OrderDetail;
 import whut.pojo.OrderMaster;
+import whut.pojo.ProductSpecs;
 import whut.service.MemberOrderService;
 import whut.utils.JsonUtils;
 import whut.utils.ResponseData;
@@ -22,6 +24,9 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 	private OrderDao dao;
 	
 	@Autowired
+	private ProSpecsDao proSpecsDao;
+	
+	@Autowired
 	private UserLoginDao loginDao;
 
 	@Override
@@ -31,18 +36,20 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 		map.put("pagesize", pagesize);
 		map.put("id", id);
 		List<OrderMaster> list = dao.getListByUser(map);
-		if(list != null) {
-			return new ResponseData(200,"success",list);
+		if(list.isEmpty()) {
+			return new ResponseData(400,"no data satify request",null);
 		}else {
-			return new ResponseData(400,"no data",null);
+			return new ResponseData(200,"success",list);
 		}
 	}
 	
 	@Override
 	public ResponseData getListByUserName(int pageindex, int pagesize, String username) {
-		int id = loginDao.getLoginInfo(username).getUserId();
-		if(id == 0) {
-			return new ResponseData(4001,"不存在该用户",null);
+		int id = 0;
+		try {
+			id = loginDao.getLoginInfo(username).getUserId();
+		}catch(Exception e) {
+			return new ResponseData(4001,"the user does not exist",null);
 		}
 		
 		Map<String, Integer> map = new HashMap<>();
@@ -51,10 +58,10 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 		map.put("id", id);
 		
 		List<OrderMaster> list = dao.getListByUser(map);
-		if(list != null) {
-			return new ResponseData(200,"success",list);
+		if(list.isEmpty()) {
+			return new ResponseData(4002,"the user has no order record",null);
 		}else {
-			return new ResponseData(4002,"no data",null);
+			return new ResponseData(200,"success",list);
 		}
 	}
 
@@ -66,10 +73,10 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 		map.put("id", id);
 		
 		List<OrderDetail> list = dao.getListByPro(map);
-		if(list != null) {
-			return new ResponseData(200,"success",list);
+		if(list.isEmpty()) {
+			return new ResponseData(400,"no data satify request",null);
 		}else {
-			return new ResponseData(400,"no data",null);
+			return new ResponseData(200,"success",list);
 		}
 	}
 
@@ -81,10 +88,10 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 		map.put("status", status);
 		
 		List<OrderMaster> list = dao.getListByStatus(map);
-		if(!list.isEmpty()) {
-			return new ResponseData(200,"success",list);
+		if(list.isEmpty()) {
+			return new ResponseData(400,"no data satify request",null);
 		}else {
-			return new ResponseData(400,"no data",null);
+			return new ResponseData(200,"success",list);
 		}
 	}
 
@@ -94,17 +101,17 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 		if(orderMaster != null) {
 			return new ResponseData(200,"success",orderMaster);
 		}else {
-			return new ResponseData(400,"no data",null);
+			return new ResponseData(400,"no data satify request",null);
 		}
 	}
 	
 	@Override
 	public ResponseData getDetailListByOrderId(int orderId) {
 		List<OrderDetail> list = dao.getDetailListByOrderId(orderId);
-		if(list != null) {
-			return new ResponseData(200,"success",list);
+		if(list.isEmpty()) {
+			return new ResponseData(400,"no data satify request",null);
 		}else {
-			return new ResponseData(400,"no data",null);
+			return new ResponseData(200,"success",list);
 		}
 	}
 
@@ -114,7 +121,7 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 		if(orderMaster != null) {
 			return new ResponseData(200,"success",orderMaster);
 		}else {
-			return new ResponseData(400,"no data",null);
+			return new ResponseData(400,"no data satify request",null);
 		}
 	}
 
@@ -131,7 +138,7 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 		if( orderMasterOld.getOrderStatus()==1 ||  orderMasterOld.getOrderStatus()==2) {
 			//满足条件可以修改
 		}else {
-			return new ResponseData(4061,"当前状态禁止修改",null);
+			return new ResponseData(4061,"current status prohibits modification",null);
 		}
 
 		
@@ -161,15 +168,16 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 		if( orderDetailOld.getStatus()==1 ||  orderDetailOld.getStatus()==2) {
 			//满足条件可以修改
 		}else {
-			return new ResponseData(4061,"当前状态禁止修改",null);
+			return new ResponseData(4061,"current status prohibits modification",null);
 		}
-		
-		if( orderDetailOld.getPoductName() != orderDetail.getPoductName()) {
-			return new ResponseData(4062,"不能更改已下单商品",null);
+		int productIdOld = proSpecsDao.getProSpecsBySpecsId(orderDetailOld.getProductSpecsId()).getProductId();
+		int productId = proSpecsDao.getProSpecsBySpecsId(orderDetail.getProductSpecsId()).getProductId();
+		if( productIdOld != productId ) {
+			return new ResponseData(4062,"no exchange for commodity except for color ..",null);
 		}
 		
 		if( orderDetailOld.getProductPrice() != orderDetail.getProductPrice()) {
-			return new ResponseData(4063,"更换商品价格不同",null);
+			return new ResponseData(4063,"replacement of goods at different prices",null);
 		}
 		
 		
