@@ -33,6 +33,7 @@
    
     <select id="getSellerList" resultMap="BaseResultMap">
         SELECT * FROM user_info ui LEFT JOIN user_login ul on ui.user_id = ul.user_id where ui.is_seller = 1
+        limit #{pageindex}, #{pagesize}
    </select>
 
    <select id="add" parameterType="UserInfo">

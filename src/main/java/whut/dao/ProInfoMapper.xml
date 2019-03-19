@@ -21,8 +21,9 @@
     <result column="input_time" jdbcType="TIMESTAMP" property="inputTime" />
     <result column="modified_time" jdbcType="TIMESTAMP" property="modifiedTime" />
   </resultMap>
-    <select id="getList" resultType="ProductInfo" resultMap="BaseResultMap">
+    <select id="getList" parameterType="hashmap" resultMap="BaseResultMap">
         SELECT * FROM product_info where publish_status = 1 and audit_status = 1
+        limit #{pageindex},#{pagesize}  
     </select>
     
     <select id="getDetail" parameterType="String" resultMap="BaseResultMap">
@@ -44,8 +45,9 @@
     	#{useCoupon},#{discountRate},#{productionDate},#{description},#{stock},now())
     </select>
     
-    <select id="search" parameterType="String" resultMap="BaseResultMap">
-    	SELECT * FROM product_info where product_name LIKE '%${name}%'
+    <select id="search" parameterType="hashmap" resultMap="BaseResultMap">
+    	SELECT * FROM product_info where product_name LIKE '%${productName}%'
+    	limit #{pageindex},#{pagesize}  
     </select>
     
     <select id="modify" parameterType="ProductInfo">
@@ -69,19 +71,22 @@
         WHERE product_id = #{productId}
     </select>
     
-    <select id="getListByCategory" parameterType="String"  resultMap="BaseResultMap">
-    	SELECT * FROM product_info where (one_category_id = #{category_id}
-    	or two_category_id = #{category_id}
-    	or three_category_id = #{category_id})
+    <select id="getListByCategory" parameterType="hashmap"  resultMap="BaseResultMap">
+    	SELECT * FROM product_info where (one_category_id = #{oneCategoryId}
+    	or two_category_id = #{twoCategoryId}
+    	or three_category_id = #{threeCategoryId})
     	and publish_status = 1 and audit_status = 1
+    	limit #{pageindex},#{pagesize} 
     </select>
     
-    <select id="getIfcheckedList" parameterType="String" resultMap="BaseResultMap">
-    	SELECT * FROM product_info where  audit_status = #{status}
+    <select id="getIfcheckedList" parameterType="hashmap" resultMap="BaseResultMap">
+    	SELECT * FROM product_info where  audit_status = #{auditStatus}
+    	limit #{pageindex},#{pagesize} 
     </select>
     
-   <select id="getIfShelfList" parameterType="String" resultMap="BaseResultMap">
-    	SELECT * FROM product_info where  publish_status = #{status}
+   <select id="getIfShelfList" parameterType="hashmap" resultMap="BaseResultMap">
+    	SELECT * FROM product_info where  publish_status = #{publishStatus}
+    	limit #{pageindex},#{pagesize} 
     </select>
     
     <select id="getListByCondition" parameterType="hashmap" resultMap="BaseResultMap">
@@ -107,6 +112,6 @@
         <if test="auditStatus != null">
       		and audit_status = #{auditStatus}  
     	</if>
-    	   
+    	 limit #{pageindex},#{pagesize} 
     </select>
 </mapper>

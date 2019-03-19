@@ -15,12 +15,14 @@
     <result column="audit_status" jdbcType="TINYINT" property="auditStatus" />
   </resultMap>
   
-  <select id="getListByProduct" parameterType="String" resultMap="BaseResultMap">
+  <select id="getListByProduct" parameterType="hashmap" resultMap="BaseResultMap">
         SELECT * FROM product_comment where product_id = #{id} and audit_status = 1
+        limit #{pageindex},#{pagesize}
    </select>
    
-    <select id="getListByUser" parameterType="String" resultMap="BaseResultMap">
+    <select id="getListByUser" parameterType="hashmap" resultMap="BaseResultMap">
         SELECT * FROM product_comment where user_id = #{id}
+        limit #{pageindex},#{pagesize}
    </select>
    
    <select id="add" parameterType="ProductInfo">

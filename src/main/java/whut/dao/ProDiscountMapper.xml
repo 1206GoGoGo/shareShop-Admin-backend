@@ -11,8 +11,9 @@
     <result column="yield_rate" jdbcType="TINYINT" property="yieldRate" />
 </resultMap>
 
-	<select id="getList"  resultMap="BaseResultMap">
+	<select id="getList"  parameterType="hashmap"  resultMap="BaseResultMap">
         SELECT * FROM product_discount
+        limit #{pageindex},#{pagesize}
     </select>
     
 
