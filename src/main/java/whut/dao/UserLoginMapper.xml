@@ -24,5 +24,10 @@
    <select id="getLoginInfoById" parameterType="int" resultMap="BaseResultMap">
         SELECT * FROM user_login where user_id = #{userId}
    </select>
+   
+      
+   <select id="getLoginInfoAmountByLevel" parameterType="int" resultMap="BaseResultMap">
+        SELECT count(*) FROM user_login where level = #{level}
+   </select>
 
 </mapper>

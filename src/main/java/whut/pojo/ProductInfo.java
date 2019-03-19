@@ -2,6 +2,7 @@ package whut.pojo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 商品信息表
@@ -43,13 +44,14 @@ public class ProductInfo implements Serializable{
 
     private Date modifiedTime;//商品修改时间
     
-    private ProductSpecs productSpecs; //商品规格(单品详情)
+    private List<ProductSpecs> productSpecs; //商品规格(单品详情)
 
-    public ProductSpecs getProductSpecs() {
+
+	public List<ProductSpecs> getProductSpecs() {
 		return productSpecs;
 	}
 
-	public void setProductSpecs(ProductSpecs productSpecs) {
+	public void setProductSpecs(List<ProductSpecs> productSpecs) {
 		this.productSpecs = productSpecs;
 	}
 

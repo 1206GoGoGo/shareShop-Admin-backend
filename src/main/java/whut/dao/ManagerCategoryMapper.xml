@@ -34,5 +34,9 @@
      <select id="getIdByName" resultMap="BaseResultMap">
         SELECT * FROM manager_category where name = #{name}
       </select>
+      
+      <select id="getByCategoryId" parameterType="int">
+        SELECT * FROM manager_category where category_id = #{id}
+      </select>
 
 </mapper>
