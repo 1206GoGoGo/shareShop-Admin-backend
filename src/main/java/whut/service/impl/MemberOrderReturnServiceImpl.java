@@ -5,12 +5,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import whut.dao.OrderReturnDao;
 import whut.pojo.ReturnRecord;
 import whut.service.MemberOrderReturnService;
 import whut.utils.ResponseData;
 
+@Service
 public class MemberOrderReturnServiceImpl implements MemberOrderReturnService {
 
 	@Autowired
