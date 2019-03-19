@@ -41,8 +41,9 @@
     <result column="status" jdbcType="TINYINT" property="status" />
   </resultMap>
   
-  <select id="getList"  resultMap="CouponInfoResultMap">
+  <select id="getList"  parameterType="hashmap" resultMap="CouponInfoResultMap">
         SELECT * FROM coupon_info where status = 1
+        limit #{pageindex},#{pagesize}
    </select>
    
    <select id="addCoupon" parameterType="CouponInfo">
@@ -62,16 +63,19 @@
         UPDATE coupon_info SET status = -1 WHERE coupon_id = #{id}
     </select>
     
-    <select id="getCouponByUId" parameterType="string" resultMap="CouponReceiveResultMap">
-        SELECT * FROM coupon_receive where user_id = #{id}
+    <select id="getCouponByUId" parameterType="hashmap" resultMap="CouponReceiveResultMap">
+        SELECT * FROM coupon_receive where user_id = #{userId}
+        limit #{pageindex},#{pagesize}
     </select>
     
- 	<select id="getCouponReceiveList" resultMap="CouponReceiveResultMap">
+ 	<select id="getCouponReceiveList" parameterType="hashmap" resultMap="CouponReceiveResultMap">
         SELECT * FROM coupon_receive where status != -1
+        limit #{pageindex},#{pagesize}
     </select>
   
-    <select id="getCouponLogsList" resultMap="CouponLogsResultMap">
+    <select id="getCouponLogsList" parameterType="hashmap" resultMap="CouponLogsResultMap">
         SELECT * FROM coupon_logs where status = 1
+        limit #{pageindex},#{pagesize}
     </select>
     
     <select id="addCouponLogs" parameterType="couponLogs">
@@ -92,10 +96,12 @@
     	<if test="orderNumber != null">
       		and order_number = #{orderNumber} 
     	</if>
+    	  limit #{pageindex},#{pagesize}
     </select>
     
    <select id="getCouponLogsListByStatus" parameterType="string" resultMap="CouponLogsResultMap">
         SELECT * FROM coupon_logs where status = #{status}
+        limit #{pageindex},#{pagesize}
     </select>
     
     <select id="modifyCouponLogsStatus" parameterType="string">
