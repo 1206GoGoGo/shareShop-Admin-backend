@@ -45,7 +45,7 @@ public class ProCommentServiceImpl implements ProCommentService{
 		map.put("pagesize", pagesize);
 		List<ProductComment> list = new ArrayList<>();
 		list = proCommentDao.getListByUser(map);
-		if(list.isEmpty())
+		if(list == null)
 			return new ResponseData(400,"No Comments",null);
 		return new ResponseData(200,"success",list);
 	}

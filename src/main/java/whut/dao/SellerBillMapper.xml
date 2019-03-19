@@ -22,7 +22,7 @@
     	SELECT withdraw_money as money, create_time as createTime, 'withdraw_money' as type FROM withdraw_record where user_id = #{userId}
 		union
 		SELECT yield_money as money , create_time as createTime ,'yield_money' as type FROM yield_detail where user_id = #{userId}
-		ORDER BY createTime;
+		ORDER BY createTime
 		limit #{pageindex},#{pagesize}
     </select>
     

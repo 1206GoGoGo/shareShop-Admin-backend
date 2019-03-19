@@ -99,7 +99,7 @@
     	  limit #{pageindex},#{pagesize}
     </select>
     
-   <select id="getCouponLogsListByStatus" parameterType="string" resultMap="CouponLogsResultMap">
+   <select id="getCouponLogsListByStatus" parameterType="hashmap" resultMap="CouponLogsResultMap">
         SELECT * FROM coupon_logs where status = #{status}
         limit #{pageindex},#{pagesize}
     </select>

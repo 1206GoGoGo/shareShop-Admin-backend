@@ -16,12 +16,12 @@
   </resultMap>
   
   <select id="getListByProduct" parameterType="hashmap" resultMap="BaseResultMap">
-        SELECT * FROM product_comment where product_id = #{id} and audit_status = 1
+        SELECT * FROM product_comment where product_id = #{productId} and audit_status = 1
         limit #{pageindex},#{pagesize}
    </select>
    
     <select id="getListByUser" parameterType="hashmap" resultMap="BaseResultMap">
-        SELECT * FROM product_comment where user_id = #{id}
+        SELECT * FROM product_comment where user_id = #{userId}
         limit #{pageindex},#{pagesize}
    </select>
    
