@@ -2,7 +2,6 @@ package whut.service.impl;
 
 import java.util.List;
 
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -101,7 +100,6 @@ public class ManagerInfoServiceImpl implements ManagerInfoService {
 		managerInfoOld.setGender(managerInfo.getGender());
 		managerInfoOld.setBirthday(managerInfo.getBirthday());
 		
-		
 		dao.modify(managerInfoOld);
 		return new ResponseData(200,"success",null);
 	}
@@ -111,7 +109,6 @@ public class ManagerInfoServiceImpl implements ManagerInfoService {
 		int id = new JsonUtils(jsonString).getIntValue("id");
 		dao.delete(id);
 		return new ResponseData(200,"success",null);
-
 	}
 	
 	//密码校验

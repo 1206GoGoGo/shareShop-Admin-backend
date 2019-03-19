@@ -26,7 +26,8 @@ public class ReturnRecord implements Serializable{
 
     private Date createTime;  //申请时间
 
-    private Byte status;  //退货状态
+    private Byte status;  //申请退货21、同意退货22：1.收到商品退货完成（分为整单退货、单个商品退货）29
+    					  //					   2.商品不符合退货失败（待发货）23、已发货24、已收货结束售后25
 
     private String reason;  //退货原因
 

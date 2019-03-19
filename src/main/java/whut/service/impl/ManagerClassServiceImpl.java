@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import whut.dao.ManagerCategoryDao;
 import whut.dao.UserLoginDao;
 import whut.pojo.ManagerCategory;
-import whut.pojo.UserLogin;
 import whut.service.ManagerClassService;
 import whut.utils.JsonUtils;
 import whut.utils.ResponseData;

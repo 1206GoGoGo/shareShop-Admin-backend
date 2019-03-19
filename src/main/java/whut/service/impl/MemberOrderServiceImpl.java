@@ -8,11 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import whut.dao.OrderDao;
+import whut.dao.OrderReturnDao;
 import whut.dao.ProSpecsDao;
 import whut.dao.UserLoginDao;
 import whut.pojo.OrderDetail;
 import whut.pojo.OrderMaster;
-import whut.pojo.ProductSpecs;
 import whut.service.MemberOrderService;
 import whut.utils.JsonUtils;
 import whut.utils.ResponseData;
@@ -28,6 +28,9 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 	
 	@Autowired
 	private UserLoginDao loginDao;
+	
+	@Autowired
+	private OrderReturnDao orderReturnDao;
 
 	@Override
 	public ResponseData getListByUser(int pageindex, int pagesize, int id) {
@@ -219,6 +222,7 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 		
 		
 		int newStatus = 0;
+		int returnStatus = 0;
 		
 		//发货2—— 4
 		if(statusOld == 2 && status == 4) {
@@ -231,18 +235,22 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 		//同意退货申请21——22
 		if(statusOld == 21 && status == 22) {
 			newStatus = 22;
+			returnStatus = 22;
 		}
 		//收到退货商品，符合退货条件，完成退货22——29
 		if(statusOld == 22 && status == 29) {
 			newStatus = 29;
+			returnStatus = 29;
 		}
 		//退货商品不符合条件22——23
 		if(statusOld == 22 && status == 23) {
 			newStatus = 23;
+			returnStatus = 23;
 		}
 		//退货商品重新发货（发还用户）22、23——24
 		if( (statusOld == 22 || statusOld ==23) && status == 24) {
 			newStatus = 24;
+			returnStatus = 24;
 		}
 		//同意用户换货申请31——32
 		if(statusOld == 31 && status == 32) {
@@ -268,6 +276,7 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 		if(newStatus==0) {
 			return new ResponseData(4063,"当前订单状态禁止修改或无法从原有状态修改到指定状态",null);
 		}
+
 		
 		//修改订单状态和子订单状态
 		Map<String, String> map = new HashMap<>();
@@ -275,6 +284,12 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 		map.put("status", String.valueOf(status));
 		dao.modifyOrderStatus(map);
 		dao.modifyProStatusByOrderId(map);
+		
+		//处理退货，同时处理退货表数据
+		if(returnStatus!=0) {
+			orderReturnDao.modifyStatusByOrderId(map);
+		}
+		
 		//修改全部子账单状态
 		return new ResponseData(200,"success",null);
 	
@@ -294,22 +309,27 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 		int getStatus = Integer.parseInt(status);	//	传入的新status
 		int statusOld = orderDetailOld.getStatus();
 		int newStatus = 0;
+		int returnStatus = 0;
 		//判断当前状态，修改单个状态及整单状态
 		//同意退货申请21——22
 		if(statusOld == 21 && getStatus == 22) {
 			newStatus = 22;
+			returnStatus = 22;
 		}
 		//收到退货商品，符合退货条件，完成退货22——29
 		if(statusOld == 22 && getStatus == 29) {
 			newStatus = 29;
+			returnStatus = 29;
 		}
 		//退货商品不符合条件22——23
 		if(statusOld == 22 && getStatus == 23) {
 			newStatus = 23;
+			returnStatus = 23;
 		}
 		//退货商品重新发货（发还用户）22、23——24
 		if( (statusOld == 22 || statusOld ==23) && getStatus == 24) {
 			newStatus = 24;
+			returnStatus = 24;
 		}
 		//同意用户换货申请31——32
 		if(statusOld == 31 && getStatus == 32) {
@@ -341,12 +361,17 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 		map.put("orderDetailId", orderDetailId);
 		map.put("status", status);
 		dao.modifyProStatus(map);
+		//修改退货相关信息
+		if(returnStatus!=0) {
+			orderReturnDao.modifyStatusByOrderDetailId(map);
+		}
 		
 		//修改整个订单状态
 		Map<String, String> mapOrder = new HashMap<>();
 		mapOrder.put("orderId", String.valueOf(orderDetailOld.getOrderId()) );
 		mapOrder.put("status", status);
 		dao.modifyOrderStatus(mapOrder);
+
 		
 		return new ResponseData(200,"success",null);
 	

@@ -132,7 +132,7 @@ public class MemberOrderController {
 	 * @param orderDetailId
 	 * @return
 	 */
-	@RequestMapping(value = "/modifyProStatus", method = RequestMethod.GET)
+	@RequestMapping(value = "/modifyProStatus", method = RequestMethod.POST)
 	public @ResponseBody ResponseData modifyProStatus(@RequestBody String jsonString) {
 		return memberOrderService.modifyProStatus(jsonString);
 	}
