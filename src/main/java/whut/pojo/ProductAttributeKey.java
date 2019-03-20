@@ -20,6 +20,8 @@ public class ProductAttributeKey implements Serializable{
     private Date createTime;//创建时间
 
     private Date updateTime;//修改时间
+    
+    private Byte status;//状态
 
     public Integer getKeyId() {
         return keyId;
@@ -67,5 +69,13 @@ public class ProductAttributeKey implements Serializable{
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+    
+    public Byte getStatus() {
+        return status;
+    }
+
+    public void setStatus(Byte status) {
+        this.status = status;
     }
 }
