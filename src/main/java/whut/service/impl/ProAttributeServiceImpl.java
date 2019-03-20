@@ -79,7 +79,11 @@ public class ProAttributeServiceImpl implements ProAttributeService{
 	@Override
 	public ResponseData modifyProductAttributeKeyByStatus(String id, String status) {
 		// TODO Auto-generated method stub
-		return null;
+		Map<String, String> map = new HashMap<>();
+		map.put("keyId", id);
+		map.put("status", status);
+		proAttributeDao.modifyProductAttributeKeyByStatus(map);
+		return new ResponseData(200,"success",null);
 	}
 
 	@Override
@@ -146,7 +150,11 @@ public class ProAttributeServiceImpl implements ProAttributeService{
 	@Override
 	public ResponseData modifyProductAttributeValueByStatus(String id, String status) {
 		// TODO Auto-generated method stub
-		return null;
+		Map<String, String> map = new HashMap<>();
+		map.put("valueId", id);
+		map.put("status", status);
+		proAttributeDao.modifyProductAttributeValueByStatus(map);
+		return new ResponseData(200,"success",null);
 	}
 	
 }

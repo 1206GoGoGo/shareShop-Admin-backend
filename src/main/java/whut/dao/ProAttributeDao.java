@@ -26,4 +26,8 @@ public interface ProAttributeDao {
 
 	void modifyProductAttributeValue(ProductAttributeValue productAttributeValue1);
 
+	void modifyProductAttributeKeyByStatus(Map<String, String> map);
+
+	void modifyProductAttributeValueByStatus(Map<String, String> map);
+
 }
