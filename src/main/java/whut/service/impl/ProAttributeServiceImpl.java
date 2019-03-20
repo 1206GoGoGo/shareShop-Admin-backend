@@ -100,7 +100,7 @@ public class ProAttributeServiceImpl implements ProAttributeService{
 	@Override
 	public ResponseData getProductAttributeValueByKeyID(String id) {
 		// TODO Auto-generated method stub
-		List<ProductAttributeValue> list = proAttributeDao.getProductAttributeKeyList(id);
+		List<ProductAttributeValue> list = proAttributeDao.getProductAttributeValueByKeyID(id);
 		if(list != null) {
 			return new ResponseData(200,"success",list);
 		}else {

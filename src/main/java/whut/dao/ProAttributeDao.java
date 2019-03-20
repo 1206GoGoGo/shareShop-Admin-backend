@@ -18,7 +18,6 @@ public interface ProAttributeDao {
 
 	List<ProductAttributeKey> getProductAttributeKeyByCategoryID(String id);
 
-	List<ProductAttributeValue> getProductAttributeKeyList(String id);
 
 	ProductAttributeValue getProductAttributeValueByIdAndValue(Map<String, String> map);
 
@@ -29,5 +28,7 @@ public interface ProAttributeDao {
 	void modifyProductAttributeKeyByStatus(Map<String, String> map);
 
 	void modifyProductAttributeValueByStatus(Map<String, String> map);
+
+	List<ProductAttributeValue> getProductAttributeValueByKeyID(String id);
 
 }
