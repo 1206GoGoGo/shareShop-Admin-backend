@@ -50,7 +50,7 @@
         WHERE key_id = #{keyId}
     </select>
     
-    <select id="modifyProductAttributeValueByStatus" parameterType="hashmap">
+    <select id="modifyProductAttributeKeyByStatus" parameterType="hashmap">
     	UPDATE product_attribute_key SET status = #{status}
         WHERE key_id = #{keyId}
     </select>
