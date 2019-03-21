@@ -22,8 +22,8 @@ public class ManagerInfoServiceImpl implements ManagerInfoService {
 	private UserLoginDao loginDao;
 
 	@Override
-	public ResponseData getList() {
-		List<ManagerInfo> list = dao.getList();
+	public ResponseData getList(int status) {
+		List<ManagerInfo> list = dao.getList(status);
 		if(list.isEmpty()) {
 			return new ResponseData(400,"no data",null);
 		}else {

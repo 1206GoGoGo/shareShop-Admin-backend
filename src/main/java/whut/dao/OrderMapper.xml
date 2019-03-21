@@ -77,13 +77,13 @@
    </select>
    
    <select id="getOrderDetailByOrderDetailId" parameterType="int" resultMap="OrderDetailResultMap">
-       SELECT * FROM order_detail where orderDetailId = #{orderDetailId}
+       SELECT * FROM order_detail where order_detail_id = #{orderDetailId}
    </select>
    
       
    <select id="modifyOrder" parameterType="orderMaster">
     	UPDATE order_master SET 
-    	order_status = #{consigneeName},consignee_phone = #{consigneePhone},postal_code = #{postalCode},
+    	consignee_name = #{consigneeName},consignee_phone = #{consigneePhone},postal_code = #{postalCode},
     	state = #{state},city = #{city},first_addr = #{firstAddr},second_addr = #{secondAddr}
         WHERE order_id = #{orderId}
     </select>

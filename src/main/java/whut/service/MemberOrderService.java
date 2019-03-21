@@ -30,4 +30,6 @@ public interface MemberOrderService {
 	public ResponseData modifyOrderStatus(@RequestBody String jsonString);
 
 	public ResponseData modifyProStatus(@RequestBody String jsonString);
+
+	public ResponseData getRecordByUser(int pageindex, int pagesize, String user, String timebe, String timeen);
 }

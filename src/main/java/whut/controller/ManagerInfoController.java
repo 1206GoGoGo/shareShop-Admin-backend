@@ -18,8 +18,8 @@ public class ManagerInfoController {
 	private ManagerInfoService managerInfoService;
 	
 	@RequestMapping(value = "/getList", method = RequestMethod.GET)
-	public @ResponseBody ResponseData getList() {
-		return  managerInfoService.getList();
+	public @ResponseBody ResponseData getList(int status) {
+		return  managerInfoService.getList(status);
 	}
 	
 	@RequestMapping(value = "/add", method = RequestMethod.POST)

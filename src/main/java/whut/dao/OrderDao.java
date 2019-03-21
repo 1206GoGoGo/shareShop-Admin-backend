@@ -5,6 +5,7 @@ import java.util.Map;
 
 import whut.pojo.OrderDetail;
 import whut.pojo.OrderMaster;
+import whut.pojo.SellerBill;
 
 public interface OrderDao {
 
@@ -38,5 +39,8 @@ public interface OrderDao {
 	//通过订单号修改订单下所有商品对应的状态
 	//int orderId, Byte status
 	void modifyProStatusByOrderId(Map<String, String> map);
+
+	//int pageindex, int pagesize, String user, String timebe, String timeen
+	List<SellerBill> getRecordByUser(Map<String, Object> map);
 
 }

@@ -13,6 +13,7 @@ import whut.dao.ProSpecsDao;
 import whut.dao.UserLoginDao;
 import whut.pojo.OrderDetail;
 import whut.pojo.OrderMaster;
+import whut.pojo.SellerBill;
 import whut.service.MemberOrderService;
 import whut.utils.JsonUtils;
 import whut.utils.ResponseData;
@@ -183,7 +184,6 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 			return new ResponseData(4063,"replacement of goods at different prices",null);
 		}
 		
-		
 		//通过修改商品名来修改商品颜色分类，并且是同一个商品，即商品名相同
 		orderDetailOld.setProductSpecsId(orderDetail.getProductSpecsId());
 		
@@ -203,7 +203,13 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 		int status = jsonUtils.getIntValue("status");
 		
 		OrderMaster orderMaster = dao.getMasterByOrderId(Integer.parseInt(orderId));
-		int statusOld = orderMaster.getOrderStatus();
+		
+		int statusOld;
+		try {
+			statusOld = orderMaster.getOrderStatus();
+		}catch(Exception e) {
+			return new ResponseData(406,"order does not exist",null);
+		}
 		
 		//若订单下商品状态不同则禁止修改
 		List<OrderDetail> proList = dao.getDetailListByOrderId(Integer.parseInt(orderId));
@@ -307,7 +313,12 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 		OrderDetail orderDetailOld = dao.getOrderDetailByOrderDetailId(Integer.parseInt(orderDetailId));
 
 		int getStatus = Integer.parseInt(status);	//	传入的新status
-		int statusOld = orderDetailOld.getStatus();
+		int statusOld;
+		try {
+			statusOld = orderDetailOld.getStatus();
+		}catch(Exception e) {
+			return new ResponseData(406,"order does not exist",null);
+		}
 		int newStatus = 0;
 		int returnStatus = 0;
 		//判断当前状态，修改单个状态及整单状态
@@ -353,7 +364,7 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 		}
 		
 		if(newStatus==0) {
-			return new ResponseData(406,"当前订单状态禁止修改或无法从原有状态修改到指定状态",null);
+			return new ResponseData(4061,"当前订单状态禁止修改或无法从原有状态修改到指定状态",null);
 		}
 		
 		//修改单个商品状态
@@ -361,6 +372,7 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 		map.put("orderDetailId", orderDetailId);
 		map.put("status", status);
 		dao.modifyProStatus(map);
+		
 		//修改退货相关信息
 		if(returnStatus!=0) {
 			orderReturnDao.modifyStatusByOrderDetailId(map);
@@ -375,6 +387,30 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 		
 		return new ResponseData(200,"success",null);
 	
+	}
+
+	@Override
+	public ResponseData getRecordByUser(int pageindex, int pagesize, String user, String timebe, String timeen) {
+		int id = 0;
+		try {
+			id = loginDao.getLoginInfo(user).getUserId();
+		}catch(Exception e) {
+			return new ResponseData(4001,"the user does not exist",null);
+		}
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("pageindex", pageindex);
+		map.put("pagesize", pagesize);
+		map.put("id", id);
+		map.put("timebe", timebe);
+		map.put("timeen", timeen);
+		
+		List<SellerBill> list = dao.getRecordByUser(map);
+		if(list.isEmpty()) {
+			return new ResponseData(4002,"the user has no order record",null);
+		}else {
+			return new ResponseData(200,"success",list);
+		}
 	}
 
 

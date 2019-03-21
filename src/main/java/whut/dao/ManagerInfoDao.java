@@ -6,7 +6,7 @@ import whut.pojo.ManagerInfo;
 
 public interface ManagerInfoDao {
 
-	List<ManagerInfo> getList();
+	List<ManagerInfo> getList(int status);
 
 	void add(ManagerInfo managerInfo);
 

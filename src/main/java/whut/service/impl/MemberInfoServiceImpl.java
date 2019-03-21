@@ -202,7 +202,7 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 		userOld.setGender(user.getGender());
 		userOld.setBirthday(user.getBirthday());
 		
-		dao.modify(user);
+		dao.modify(userOld);
 		return new ResponseData(200,"success",null);
 
 	}

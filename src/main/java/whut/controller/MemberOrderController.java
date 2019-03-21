@@ -136,4 +136,16 @@ public class MemberOrderController {
 	public @ResponseBody ResponseData modifyProStatus(@RequestBody String jsonString) {
 		return memberOrderService.modifyProStatus(jsonString);
 	}
+	
+	/**
+	 * 获取某用户的消费记录
+	 * @param pageindex
+	 * @param pagesize
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "/getRecord", method = RequestMethod.GET)
+	public @ResponseBody ResponseData getRecordByUser(int pageindex, int pagesize, String user, String timebe, String timeen) {
+		return memberOrderService.getRecordByUser(pageindex, pagesize, user, timebe, timeen);
+	}
 }
