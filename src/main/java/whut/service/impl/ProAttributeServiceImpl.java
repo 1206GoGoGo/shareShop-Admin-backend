@@ -38,7 +38,8 @@ public class ProAttributeServiceImpl implements ProAttributeService{
 	@Override
 	public ResponseData addProductAttributeKey(ProductAttributeKey productAttributeKey) {
 		// TODO Auto-generated method stub
-		if(getProductAttributeKeyByIdAndName(productAttributeKey.getCategoryId().toString(),productAttributeKey.getAttrName()).getData().equals(null)) {
+		Object productAttributeKey1 = getProductAttributeKeyByIdAndName(productAttributeKey.getCategoryId().toString(),productAttributeKey.getAttrName()).getData();
+		if(productAttributeKey1 == null) {
 			proAttributeDao.addProductAttributeKey(productAttributeKey);
 			return new ResponseData(200,"success",null);
 		}
@@ -62,17 +63,11 @@ public class ProAttributeServiceImpl implements ProAttributeService{
 	@Override
 	public ResponseData modifyProductAttributeKey(ProductAttributeKey productAttributeKey) {
 		// TODO Auto-generated method stub
-		ProductAttributeKey productAttributeKey1 = new ProductAttributeKey();
-		if(getProductAttributeKeyByIdAndName(productAttributeKey.getCategoryId().toString(),productAttributeKey.getAttrName()).getData().equals(null)) {
-			//只能修改部分参数
-			productAttributeKey1.setAttrName(productAttributeKey.getAttrName());
-			productAttributeKey1.setCategoryId(productAttributeKey.getCategoryId());
-			productAttributeKey1.setNameSort(productAttributeKey.getNameSort());
-			proAttributeDao.modifyProductAttributeKey(productAttributeKey1);
-			return new ResponseData(200,"success",null);
-		}
-		else
-			return new ResponseData(400,"This commodity attribute already exists under this category",null);
+		ProductAttributeKey productAttributeKey1 = new ProductAttributeKey();		
+		//只能修改部分参数
+		productAttributeKey1.setNameSort(productAttributeKey.getNameSort());
+		proAttributeDao.modifyProductAttributeKey(productAttributeKey1);
+		return new ResponseData(200,"success",null);
 	}
 
 
@@ -111,7 +106,8 @@ public class ProAttributeServiceImpl implements ProAttributeService{
 	@Override
 	public ResponseData addProductAttributeValue(ProductAttributeValue productAttributeValue) {
 		// TODO Auto-generated method stub
-		if(getProductAttributeValueByIdAndValue(productAttributeValue.getAttrKeyId().toString(),productAttributeValue.getAttrValue()).getData().equals(null)) {
+		Object productAttributeValue1 = getProductAttributeValueByIdAndValue(productAttributeValue.getAttrKeyId().toString(),productAttributeValue.getAttrValue()).getData();
+		if(productAttributeValue1 == null) {
 			proAttributeDao.addProductAttributeValue(productAttributeValue);
 			return new ResponseData(200,"success",null);
 		}
@@ -136,15 +132,11 @@ public class ProAttributeServiceImpl implements ProAttributeService{
 	public ResponseData modifyProductAttributeValue(ProductAttributeValue productAttributeValue) {
 		// TODO Auto-generated method stub
 		ProductAttributeValue productAttributeValue1 = new ProductAttributeValue();
-		if(getProductAttributeValueByIdAndValue(productAttributeValue.getAttrKeyId().toString(),productAttributeValue.getAttrValue()).getData().equals(null)) {
-			//修改部分参数
-			productAttributeValue1.setAttrValue(productAttributeValue.getAttrValue());
-			productAttributeValue1.setValueSort(productAttributeValue.getValueSort());
-			proAttributeDao.modifyProductAttributeValue(productAttributeValue1);
-			return new ResponseData(200,"success",null);
-		}
-		else
-			return new ResponseData(400,"This commodity attribute already exists under this category",null);
+		//修改部分参数
+		productAttributeValue1.setAttrValue(productAttributeValue.getAttrValue());
+		productAttributeValue1.setValueSort(productAttributeValue.getValueSort());
+		proAttributeDao.modifyProductAttributeValue(productAttributeValue1);
+		return new ResponseData(200,"success",null);
 	}
 
 	@Override
