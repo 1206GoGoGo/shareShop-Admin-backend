@@ -16,7 +16,7 @@
   </resultMap>
   
    <select id="getListByUserId" parameterType="int" resultMap="BaseResultMap">
-         SELECT * FROM user_addr
+         SELECT * FROM user_addr where user_id = #{id}
    </select>
 
 </mapper>

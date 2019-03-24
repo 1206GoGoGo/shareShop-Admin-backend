@@ -36,7 +36,8 @@
 	            <param-name>cors.allowed.origins</param-name>
 	            <param-value>
 	                http://localhost:8080,
-	                http://localhost:8081
+	                http://localhost:8081,
+	                https://sarahcsy.github.io
 	            </param-value>
 	        </init-param>
 	        <init-param>
