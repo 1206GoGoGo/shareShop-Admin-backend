@@ -24,6 +24,7 @@ public interface UserInfoDao {
 	//通过用户对象获取用户全部信息（两个表的信息）
 	//无数据返回list为空
 	//String pagesize, String pageindex, String username, String phoneNumber,String name,String identityCardNo, String level
+	//int status, String email
 	List<UserInfo> searchAllInfoByUserInfo(Map<String, Object> map);
 
 	//map包括int pagesize, int pageindex,int superiorId通过上线id获取下线列表，只返回正常状态用户

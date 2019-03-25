@@ -12,7 +12,8 @@ public interface MemberInfoService {
 
 	public ResponseData delete(String jsonString);
 
-	public ResponseData search(int pagesize, int pageindex, String username, String phoneNumber,String name,String identityCardNo, String level);
+	public ResponseData search(int pagesize, int pageindex, String username, String phoneNumber,String name,
+			String identityCardNo, String level,int status, String email);
 
 	public ResponseData modify(UserInfo user);
 

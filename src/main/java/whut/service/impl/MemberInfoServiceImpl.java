@@ -145,7 +145,8 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 	}
 
 	@Override
-	public ResponseData search(int pagesize, int pageindex, String username, String phoneNumber,String name,String identityCardNo, String level) {
+	public ResponseData search(int pagesize, int pageindex, String username, String phoneNumber,String name
+			,String identityCardNo, String level,int status, String email) {
 		
 		//通过用户名直接查询，不再进行其他条件判断
 		int userId = 0;
@@ -173,7 +174,8 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 		map.put("name", name);
 		map.put("identityCardNo", identityCardNo);
 		map.put("level", level);
-		map.put("email", null);
+		map.put("email", email);
+		map.put("status", status);
 		
 		list = dao.searchAllInfoByUserInfo(map);
 		if(list!=null) {
