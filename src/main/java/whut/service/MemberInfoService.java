@@ -18,5 +18,5 @@ public interface MemberInfoService {
 
 	public ResponseData getDetail(int id);
 
-	public ResponseData getMemberListBySeller(String username);
+	public ResponseData getMemberListBySeller(int pagesize, int pageindex, String username);
 }

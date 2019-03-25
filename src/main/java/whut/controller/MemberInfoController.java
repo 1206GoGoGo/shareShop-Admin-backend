@@ -35,8 +35,8 @@ public class MemberInfoController {
 	 * @return
 	 */
 	@RequestMapping(value = "/getListBySeller", method = RequestMethod.GET)
-	public @ResponseBody ResponseData getListBySeller(String username) {
-		return  memberInfoService.getMemberListBySeller(username);
+	public @ResponseBody ResponseData getListBySeller(int pagesize, int pageindex, String username) {
+		return  memberInfoService.getMemberListBySeller(pagesize, pageindex, username);
 	}
 	
 	@RequestMapping(value = "/add", method = RequestMethod.POST)

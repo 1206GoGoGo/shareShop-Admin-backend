@@ -218,16 +218,20 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 	}
 
 	@Override
-	public ResponseData getMemberListBySeller(String username) {
-		int sellerid;
+	public ResponseData getMemberListBySeller(int pagesize, int pageindex, String username) {
+		int superiorId;
 		try {
-			sellerid = loginDao.getLoginInfo(username).getUserId();
+			superiorId = loginDao.getLoginInfo(username).getUserId();
 		}catch(Exception e) {
 			return new ResponseData(4061,"user does not exist",null);
 		}
 
 		List<UserInfo> list = null;
-		list = dao.getMemberBySellerId(sellerid);
+		Map<String,Integer> map = new HashMap<>();
+		map.put("pageindex", pageindex);
+		map.put("pagesize", pagesize);
+		map.put("superiorId", superiorId);
+		list = dao.getMemberBySellerId(map);
 		if(list==null || list.isEmpty() ) {
 			return new ResponseData(4062,"promoter has not downline",null);
 		}
