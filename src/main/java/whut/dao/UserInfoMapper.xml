@@ -85,9 +85,10 @@
     	limit #{pageindex}, #{pagesize}
    </select>
    
-  <select id="getMemberBySellerId" parameterType="int" resultMap="BaseResultMap">
+  <select id="getMemberBySellerId" parameterType="hashmap" resultMap="BaseResultMap">
        SELECT * FROM user_info ui LEFT JOIN user_login ul on ui.user_id = ul.user_id
-        where ui.user_id = #{sellerid} and ui.is_seller = 1
+        where ui.superior_id = #{superiorId} and ul.status = 1
+        limit #{pageindex}, #{pagesize}
    </select>
    
    <select id="addSeller" parameterType="string">
