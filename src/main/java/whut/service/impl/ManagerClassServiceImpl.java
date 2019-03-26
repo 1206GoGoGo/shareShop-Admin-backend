@@ -71,11 +71,13 @@ public class ManagerClassServiceImpl implements ManagerClassService {
 	@Override
 	public ResponseData delete(String jsonString) {
 		int id = new JsonUtils(jsonString).getIntValue("id");
+		System.out.println(id);
 		ManagerCategory managerCategory = dao.getByCategoryId(id);
-		if(managerCategory==null) {
+		if(managerCategory == null) {
 			//要删除分类不存在
 			return new ResponseData(4061,"classification does not exist",null);
 		}
+		System.out.println(managerCategory.getLevel());
 		int amount = userLoginDao.getLoginInfoAmountByLevel(managerCategory.getLevel());
 		if(amount!=0) {
 			//该分类下有管理员，无法修改
