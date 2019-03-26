@@ -82,6 +82,9 @@
         <if test="email != null">
       		and ui.email = #{email}  
     	</if>
+    	<if test="status != null">
+      		and ul.status = #{status}  
+    	</if>
     	limit #{pageindex}, #{pagesize}
    </select>
    
