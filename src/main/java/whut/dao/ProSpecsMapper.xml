@@ -42,7 +42,7 @@
     	name = #{name},product_code = #{productCode},specs = #{specs},specs_sort = #{specsSort},
     	pic_url = #{picUrl},average_cost = #{averageCost},original_price = #{originalPrice},price = #{price},
     	description = #{description},product_stock=#{productStock},update_time = now())
-        WHERE user_id = #{userId}
+        WHERE product_specs_id = #{productSpecsId}
     </select>
  
  </mapper>
