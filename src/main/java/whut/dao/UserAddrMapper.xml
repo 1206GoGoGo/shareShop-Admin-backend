@@ -7,6 +7,7 @@
     <id column="user_addr_id" jdbcType="INTEGER" property="userAddrId" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="postal_code" jdbcType="INTEGER" property="postalCode" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
     <result column="state" jdbcType="VARCHAR" property="state" />
     <result column="city" jdbcType="VARCHAR" property="city" />
     <result column="first_addr" jdbcType="VARCHAR" property="firstAddr" />
