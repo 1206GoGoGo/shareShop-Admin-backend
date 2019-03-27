@@ -29,7 +29,7 @@
         WHERE order_id = #{orderId}
   </select>
   
-  <select id="modifyStatusByOrderId" parameterType="hashmap">
+  <select id="modifyStatusByOrderDetailId" parameterType="hashmap">
     	UPDATE return_record SET status = #{status}
         WHERE order_detail_id = #{orderDetailId}
   </select>

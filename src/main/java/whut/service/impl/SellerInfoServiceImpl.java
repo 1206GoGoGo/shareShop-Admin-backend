@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import whut.dao.UserInfoDao;
+import whut.dao.UserLoginDao;
 import whut.pojo.UserInfo;
 import whut.service.SellerInfoService;
 import whut.utils.ResponseData;
@@ -17,6 +18,9 @@ public class SellerInfoServiceImpl implements SellerInfoService{
 
 	@Autowired
 	private UserInfoDao sellerInfoDao;
+	
+	@Autowired
+	private UserLoginDao userLoginDao;
 	
 	@Override
 	public ResponseData getSellerList(int pageindex, int pagesize) {
@@ -35,8 +39,9 @@ public class SellerInfoServiceImpl implements SellerInfoService{
 	@Override
 	public ResponseData addSeller(String id) {
 		// TODO Auto-generated method stub
-		if(sellerInfoDao.getUserInfo(id).getIsSeller().equals(0)) {			 
-			sellerInfoDao.addSeller(id);
+		if(userLoginDao.getLoginInfoById(Integer.parseInt(id)).getLevel().equals(1)
+				|| userLoginDao.getLoginInfoById(Integer.parseInt(id)).getLevel().equals(2)) {			 
+			userLoginDao.addSeller(id);
 			return new ResponseData(200,"success",null);
 		}
 		return new ResponseData(406,"You are a Seller",null);
@@ -45,8 +50,8 @@ public class SellerInfoServiceImpl implements SellerInfoService{
 	@Override
 	public ResponseData deleteSeller(String id) {
 		// TODO Auto-generated method stub
-		if(sellerInfoDao.getUserInfo(id).getIsSeller().equals(1)) {			 
-			sellerInfoDao.deleteSeller(id);
+		if(userLoginDao.getLoginInfoById(Integer.parseInt(id)).getLevel().equals(3)) {			 
+			userLoginDao.deleteSeller(id);
 			return new ResponseData(200,"success",null);
 		}
 		return new ResponseData(406,"You are not a Seller",null);
