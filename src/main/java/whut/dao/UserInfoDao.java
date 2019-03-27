@@ -33,7 +33,5 @@ public interface UserInfoDao {
 	//通过登录表id获取用户信息
 	UserInfo getUserInfo(String id);
 
-	void addSeller(String id);
-
-	void deleteSeller(String id);
+	
 }

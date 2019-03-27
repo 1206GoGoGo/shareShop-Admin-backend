@@ -8,7 +8,7 @@
     <result column="product_id" jdbcType="INTEGER" property="productId" />
     <result column="order_id" jdbcType="INTEGER" property="orderId" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
-    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="reply" property="reply" jdbcType="VARCHAR" />
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="second_content" jdbcType="VARCHAR" property="secondContent" />
     <result column="comment_time" jdbcType="TIMESTAMP" property="commentTime" />
@@ -27,9 +27,9 @@
    
    <select id="add" parameterType="ProductInfo">
     	INSERT INTO product_comment
-    	(product_id,order_id,user_id,title,content,comment_time,audit_status)      
+    	(product_id,order_id,user_id,reply,content,comment_time,audit_status)      
         VALUES
-    	(#{productId},#{orderId},#{userId},#{title},#{content},now(),1)
+    	(#{productId},#{orderId},#{userId},#{reply},#{content},now(),1)
     </select>
     
    <select id="delete" parameterType="String">

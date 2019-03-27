@@ -14,6 +14,8 @@ public class UserAddr implements Serializable{
     private Integer userId;  //用户id
 
     private Integer postalCode;  //邮编
+    
+    private String phone; //收货人电话
 
     private String state;  //地区所在州
 
@@ -49,6 +51,15 @@ public class UserAddr implements Serializable{
 
     public void setPostalCode(Integer postalCode) {
         this.postalCode = postalCode;
+    }
+    
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone == null ? null : phone.trim();
     }
 
     public String getState() {

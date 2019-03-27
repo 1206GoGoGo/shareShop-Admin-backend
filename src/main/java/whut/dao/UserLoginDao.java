@@ -14,6 +14,10 @@ public interface UserLoginDao {
 
 	//获取数量。不存在返回0
 	int getLoginInfoAmountByLevel(int level);
+	
+	void addSeller(String id);
+
+	void deleteSeller(String id);
 
 
 }

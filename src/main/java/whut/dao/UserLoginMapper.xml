@@ -28,6 +28,14 @@
    <select id="getLoginInfoAmountByLevel" parameterType="int" resultType="java.lang.Integer">
         SELECT count(*) FROM user_login where level = #{level}
    </select>
+   
+    <select id="addSeller" parameterType="string">
+    	UPDATE user_login SET level = 3 WHERE user_id = #{id}
+    </select>
+    
+   <select id="deleteSeller" parameterType="string">
+    	UPDATE user_login SET level = 1 WHERE user_id = #{id}
+    </select>
 
 </mapper>   
       

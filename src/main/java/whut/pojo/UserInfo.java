@@ -32,7 +32,7 @@ public class UserInfo implements Serializable{
 
     private Integer superiorId;  //上一级用户ID
 
-    private Byte isSeller;  //是否是店主
+    private String cardNumber;  //信用卡号
 
     private BigDecimal userMoney;  //账户余额
     
@@ -134,14 +134,14 @@ public class UserInfo implements Serializable{
         this.superiorId = superiorId;
     }
 
-    public Byte getIsSeller() {
-        return isSeller;
+    public String getCardNumber() {
+        return cardNumber;
     }
 
-    public void setIsSeller(Byte isSeller) {
-        this.isSeller = isSeller;
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber == null ? null : cardNumber.trim();
     }
-
+    
     public BigDecimal getUserMoney() {
         return userMoney;
     }

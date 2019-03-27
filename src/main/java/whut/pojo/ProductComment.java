@@ -18,7 +18,7 @@ public class ProductComment implements Serializable{
 
     private Integer userId;  //用户ID
 
-    private String title;  //评论标题
+    private String reply;  //回复评论
 
     private String content;  //评论内容
     
@@ -60,12 +60,12 @@ public class ProductComment implements Serializable{
         this.userId = userId;
     }
 
-    public String getTitle() {
-        return title;
+    public String getReply() {
+        return reply;
     }
 
-    public void setTitle(String title) {
-        this.title = title == null ? null : title.trim();
+    public void setReply(String reply) {
+        this.reply = reply == null ? null : reply.trim();
     }
 
     public String getContent() {
