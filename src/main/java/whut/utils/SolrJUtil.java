@@ -2,20 +2,16 @@ package whut.utils;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.client.solrj.response.QueryResponse;
-import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import whut.dao.ProInfoDao;
-import whut.pojo.ProductInfo;
 import whut.pojo.ProductInfoForSearch;
 
 /**
@@ -35,20 +31,34 @@ public class SolrJUtil {
 		solrClient = new HttpSolrClient.Builder(serverUrl).withConnectionTimeout(10000).withSocketTimeout(60000).build();
 	}
 	
-	
-	public static String search(int page, int rows, String searchWord, String highlightField, String[] queryItem) {
+	/**
+	 * @param page 页数
+	 * @param rows	每页内容数
+	 * @param searchWord	查询关键字（可以包含查询字段*:*）
+	 * @param queryItem		查询需要返回的字段列表
+	 * @param sortAsc	递增排序的字段
+	 * @param sortDesc	递减排序的字段
+	 * @param highlightField	设置高亮的字段
+	 * @return
+	 */
+	public static String search(int page, int rows, String searchWord, String[] queryItem, String sortAsc, 
+			String sortDesc, String highlightField) {
         //创建查询对象
         SolrQuery solrQuery = new SolrQuery();
         //设置查询条件
+        if(searchWord.isEmpty()) {searchWord = "*:*";}
         solrQuery.setQuery(searchWord);
         //设置分页
         solrQuery.setStart((page - 1) * rows);
         solrQuery.setRows(rows);
         //设置默认搜素域
         solrQuery.set("df", "Ptitle");
-        solrQuery.setSort("id", SolrQuery.ORDER.asc);
-        //solrQuery.addSort("id", SolrQuery.ORDER.desc);
-        
+        if(!sortAsc.isEmpty()) {solrQuery.setSort(sortAsc, SolrQuery.ORDER.asc);}
+        if(!sortDesc.isEmpty()) {solrQuery.addSort(sortDesc, SolrQuery.ORDER.desc);}
+        if(queryItem != null) {
+        	solrQuery.setFields(queryItem);
+        }
+
         //设置高亮显示
         if(!(highlightField == null)) {
             solrQuery.setHighlight(true);
@@ -57,7 +67,6 @@ public class SolrJUtil {
             solrQuery.setHighlightSimplePost("</em>");
         }
 
-        solrQuery.setFields(queryItem);
         
 
         //根据查询条件查询索引库
