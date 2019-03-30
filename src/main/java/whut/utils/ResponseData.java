@@ -1,5 +1,10 @@
 package whut.utils;
 
+/**
+ * 请求返回数据格式封装类
+ * @author chen cheng
+ *
+ */
 public class ResponseData {
 	private Integer code;
 	private String msg;

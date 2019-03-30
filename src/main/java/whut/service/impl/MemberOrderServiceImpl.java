@@ -1,5 +1,6 @@
 package whut.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -102,8 +103,10 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 	@Override
 	public ResponseData search(String orderNumber) {
 		OrderMaster orderMaster = dao.searchByOrderNumber(orderNumber);
+		List<OrderMaster> list = new ArrayList<OrderMaster>();
+		list.add(orderMaster);
 		if(orderMaster != null) {
-			return new ResponseData(200,"success",orderMaster);
+			return new ResponseData(200,"success",list);
 		}else {
 			return new ResponseData(400,"no data satify request",null);
 		}

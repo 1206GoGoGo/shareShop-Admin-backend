@@ -5,6 +5,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 
 import whut.pojo.ProductInfo;
+import whut.pojo.ProductInfoForSearch;
 
 public interface ProInfoDao {
 
@@ -32,6 +33,9 @@ public interface ProInfoDao {
 	List<ProductInfo> getIfShelfList(Map<String, Object> map);
 
 	List<ProductInfo> getListByCondition(Map<String, Object> map);
+
+	//获取全部商品信息solr所有信息【参考ProductInfoForSearch pojo对象】与ProductInfo相比删除了productSpecs，暂时新增6个参数
+	List<ProductInfoForSearch> getSolrDoucumentList();
 
 	
 	

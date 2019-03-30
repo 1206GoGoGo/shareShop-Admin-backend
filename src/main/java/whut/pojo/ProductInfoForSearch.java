@@ -2,8 +2,6 @@ package whut.pojo;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
-
 import org.apache.solr.client.solrj.beans.Field;
 
 /**
@@ -11,7 +9,8 @@ import org.apache.solr.client.solrj.beans.Field;
  * @author wangql
  *
  */
-public class ProductInfoForSearch implements Serializable{
+public class ProductInfoForSearch{
+	
 	@Field
     private Integer productId;//商品ID
 
@@ -37,13 +36,13 @@ public class ProductInfoForSearch implements Serializable{
     private String attributeList;//属性列表
 
 	@Field
-    private Byte publishStatus;//上下架状态
+    private Integer publishStatus;//上下架状态
 
 	@Field
-    private Byte auditStatus;//审核状态
+    private Integer auditStatus;//审核状态
 
 	@Field
-    private Byte useCoupon;//是否可以使用优惠券
+    private Integer useCoupon;//是否可以使用优惠券
 
 	@Field
     private Integer discountRate;//折扣比率
@@ -82,12 +81,14 @@ public class ProductInfoForSearch implements Serializable{
     private int cart;//加入购物车数
 	
 	@Field
-    private int sales;//出售的数量
+    private int sales;//出售的数量（一个月的/不含退货失败订单）
+
+	public ProductInfoForSearch() {	}
 
 	public ProductInfoForSearch(Integer productId, String productName, String brandName, Integer oneCategoryId,
-			Integer twoCategoryId, Integer threeCategoryId, String mainImage, String attributeList, Byte publishStatus,
-			Byte auditStatus, Byte useCoupon, Integer discountRate, Date productionDate, String description,
-			Integer stock, Date inputTime, Date modifiedTime, Double score, Double price, int collect, int cart, int sales) {
+			Integer twoCategoryId, Integer threeCategoryId, String mainImage, String attributeList, Integer publishStatus,
+			Integer auditStatus, Integer useCoupon, Integer discountRate, Date productionDate, String description,
+			Integer stock, Date inputTime, Date modifiedTime,int view, Double score, Double price, int collect, int cart, int sales) {
 		this.productId = productId;
 		this.productName = productName;
 		this.brandName = brandName;
@@ -105,10 +106,12 @@ public class ProductInfoForSearch implements Serializable{
 		this.stock = stock;
 		this.inputTime = inputTime;
 		this.modifiedTime = modifiedTime;
+		this.view = view;
 		this.score = score;
 		this.price = price;
 		this.collect = collect;
 		this.cart = cart;
+		this.sales = sales;
 	}
 
 	public Integer getProductId() {
@@ -175,27 +178,27 @@ public class ProductInfoForSearch implements Serializable{
         this.attributeList = attributeList == null ? null : attributeList.trim();
     }
 
-    public Byte getPublishStatus() {
+    public Integer getPublishStatus() {
         return publishStatus;
     }
 
-    public void setPublishStatus(Byte publishStatus) {
+    public void setPublishStatus(Integer publishStatus) {
         this.publishStatus = publishStatus;
     }
 
-    public Byte getAuditStatus() {
+    public Integer getAuditStatus() {
         return auditStatus;
     }
 
-    public void setAuditStatus(Byte auditStatus) {
+    public void setAuditStatus(Integer auditStatus) {
         this.auditStatus = auditStatus;
     }
 
-    public Byte getUseCoupon() {
+    public Integer getUseCoupon() {
         return useCoupon;
     }
 
-    public void setUseCoupon(Byte useCoupon) {
+    public void setUseCoupon(Integer useCoupon) {
         this.useCoupon = useCoupon;
     }
 
@@ -279,9 +282,26 @@ public class ProductInfoForSearch implements Serializable{
 	public void setCart(int cart) {
 		this.cart = cart;
 	}
+	
     
-    @Override
-    public String toString() {
-    	return null;
-    }
+    public int getView() {
+		return view;
+	}
+
+	public void setView(int view) {
+		this.view = view;
+	}
+
+	public int getSales() {
+		return sales;
+	}
+
+	public void setSales(int sales) {
+		this.sales = sales;
+	}
+
+//	@Override
+//    public String toString() {
+//    	return null;
+//    }
 }

@@ -6,6 +6,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+/**
+ * 处理json字符串工具类
+ * @author chen cheng
+ *
+ */
 public class JsonUtils {
 	
 	private JsonNode rootNode;
