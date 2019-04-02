@@ -55,9 +55,12 @@ public class ManagerInfoServiceImpl implements ManagerInfoService {
 		userLogin.setStatus((byte)1);	//设置用户状态
 		loginDao.addUser(userLogin);
 		
+		
 		//刷新，将执行数据插入操作，之后获取添加数据对象
 
 		userLogin = loginDao.getLoginInfo(username);
+		
+		System.out.println(userLogin.getUserId());
 		//给user对象赋值id
 		managerInfo.setUserId(userLogin.getUserId());
 		managerInfo.setUserLogin(userLogin);

@@ -19,5 +19,6 @@ public interface UserLoginDao {
 
 	void deleteSeller(String id);
 
-
+	//通过传入的日期2019-04-04获取改天注册用户数\seller,levle表示用户种类
+	int getCountADay(String day, int level);
 }

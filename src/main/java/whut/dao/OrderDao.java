@@ -43,4 +43,16 @@ public interface OrderDao {
 	//int pageindex, int pagesize, String user, String timebe, String timeen
 	List<SellerBill> getRecordByUser(Map<String, Object> map);
 
+	//获取某天的订单数
+	String getCountADay(String day);
+
+	//获取某天的订单总额
+	String getAmountADay(String day);
+
+	//获取某月的订单数
+	String getCountAMonth(int year, int month);
+
+	//获取某月的订单总额
+	String getAmountAMonth(int year, int month);
+
 }

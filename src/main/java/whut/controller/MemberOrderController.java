@@ -148,4 +148,24 @@ public class MemberOrderController {
 	public @ResponseBody ResponseData getRecordByUser(int pageindex, int pagesize, String user, String timebe, String timeen) {
 		return memberOrderService.getRecordByUser(pageindex, pagesize, user, timebe, timeen);
 	}
+	
+	/**
+	 * 查询一周中每天的订单数和销售额，以及一年中每月的订单数和销售额
+	 * @param type
+	 * @return
+	 */
+	@RequestMapping(value = "/getCountWeekOrYear", method = RequestMethod.GET)
+	public @ResponseBody ResponseData getCountWeekOrYear(int type) {
+		return memberOrderService.getCountWeekOrYear(type);
+	}
+	
+	/**
+	 * 获取一个月商品销售额最多排名和销售量最多排名
+	 * @param type
+	 * @return
+	 */
+	@RequestMapping(value = "/getTopSellProAMonth", method = RequestMethod.GET)
+	public @ResponseBody ResponseData getTopSellProAMonth(int type) {
+		return memberOrderService.getTopSellProAMonth(type);
+	}
 }
