@@ -25,6 +25,6 @@ public interface ProCategoryService {
 
 	public ResponseData getListByParentId(String id);
 
-	
+	public ResponseData modifyStatusNoShow(String id);
 
 }

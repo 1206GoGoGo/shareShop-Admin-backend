@@ -105,4 +105,11 @@ public class ProCategoryServiceImpl implements ProCategoryService{
 		return new ResponseData(200,"success",list);
 	}
 
+	@Override
+	public ResponseData modifyStatusNoShow(String id) {
+		// TODO Auto-generated method stub
+		proCategoryDao.modifyStatusNoShow(id);
+		return new ResponseData(200,"success",null);
+	}
+
 }

@@ -59,4 +59,11 @@ public class ProCategoryController {
 		
 	}
 	
+	//根据分类id设置导航栏不显示（状态为2）modifyStatusNoShow
+	@RequestMapping(value = "/modifyStatusNoShow", method = RequestMethod.GET)
+	public @ResponseBody ResponseData modifyStatusNoShow(String id){
+		return proCategoryService.modifyStatusNoShow(id);
+		
+	}
+	
 }
