@@ -17,10 +17,6 @@ public class StateTax implements Serializable{
 
     private BigDecimal taxRate; //税率
 
-    private Date creatime; //创建时间
-
-    private Date updatetime; //更新时间
-
     public Integer getStateTaxId() {
         return stateTaxId;
     }
@@ -45,19 +41,4 @@ public class StateTax implements Serializable{
         this.taxRate = taxRate;
     }
 
-    public Date getCreatime() {
-        return creatime;
-    }
-
-    public void setCreatime(Date creatime) {
-        this.creatime = creatime;
-    }
-
-    public Date getUpdatetime() {
-        return updatetime;
-    }
-
-    public void setUpdatetime(Date updatetime) {
-        this.updatetime = updatetime;
-    }
 }
