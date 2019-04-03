@@ -13,10 +13,12 @@ import org.springframework.stereotype.Service;
 
 import whut.dao.OrderDao;
 import whut.dao.OrderReturnDao;
+import whut.dao.ProCategoryDao;
 import whut.dao.ProSpecsDao;
 import whut.dao.UserLoginDao;
 import whut.pojo.OrderDetail;
 import whut.pojo.OrderMaster;
+import whut.pojo.ProductCategory;
 import whut.pojo.SellerBill;
 import whut.service.MemberOrderService;
 import whut.utils.JsonUtils;
@@ -36,6 +38,9 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 	
 	@Autowired
 	private OrderReturnDao orderReturnDao;
+	
+	@Autowired
+	private ProCategoryDao proCategoryDao;
 
 	@Override
 	public ResponseData getListByUser(int pageindex, int pagesize, int id) {
@@ -518,5 +523,35 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 		return new ResponseData(200,"success",list);
 	}
 
+	@Override
+	public ResponseData getCountForOneClass(int cateId) {
+		ProductCategory productCategory = proCategoryDao.ifCategoryExist(String.valueOf(cateId));
+		if(productCategory.equals(null)) {
+			return new ResponseData(406,"parameters incorrect",null);
+		}
+		Map<String, Object> map = new HashMap<>();
+		map.put("cateId", cateId);
+		map.put("cateLevel", productCategory.getCategoryLevel());
+		String list = "[";
+		//一年中每个月的记录
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM");
+		Calendar cal=Calendar.getInstance();
+		Date d=cal.getTime();
+		for(int i=0;i<13;i++) {
+			String day = df.format(d);
+			list += "{\"date\":\""+day+"\",\"count\":";
+			map.put("day",  cal.get(1)+"-"+cal.get(2)+1 );
+			list += dao.getCountAMonthForClass(map) + ",\"averageCost\":";
+			list += dao.getAverageCostAMonthForClass(map) + ",\"amount\":";
+			list += dao.getAmountAMonthForClass(map);
+			if(i<12) {
+				list += "},";
+			}
+	        cal.add(Calendar.MONTH,-1);
+	        d=cal.getTime();
+		}
+		
+		return new ResponseData(200,"success",list);
+	}
 
 }

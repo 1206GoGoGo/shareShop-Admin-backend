@@ -78,4 +78,14 @@ public interface OrderDao {
 	
 	//获取某商品某天的销售额map :proId、date
 	String getAmountADayAPro(Map<String, Object> map);
+
+	
+	//获取某分类下商品的总销量map:cateId\cateLevel分类级别\date2018-08
+	int getCountAMonthForClass(Map<String, Object> map);
+
+	//获取某分类下商品的成本map:cateId\cateLevel分类级别\date2018-08
+	String getAverageCostAMonthForClass(Map<String, Object> map);
+
+	//获取某分类下商品的销售额map:cateId\cateLevel分类级别\date2018-08
+	String getAmountAMonthForClass(Map<String, Object> map);
 }

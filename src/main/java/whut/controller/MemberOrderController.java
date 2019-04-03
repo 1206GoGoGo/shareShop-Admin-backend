@@ -160,8 +160,25 @@ public class MemberOrderController {
 	}
 	
 
+	/**
+	 * 某周或某年某商品的订单数、总金额、成本   (待测试)
+	 * @param type
+	 * @param proId
+	 * @return
+	 */
 	@RequestMapping(value = "/getCountForOnePro", method = RequestMethod.GET)
 	public @ResponseBody ResponseData getCountWeekOrYearForOnePro(int type, int proId) {
 		return memberOrderService.getCountWeekOrYearForOnePro(type, proId);
+	}
+	
+	/**
+	 * 某分类下商品某年的订单数、总金额、成本
+	 * @param type
+	 * @param proId
+	 * @return
+	 */
+	@RequestMapping(value = "/getCountForOneClass", method = RequestMethod.GET)
+	public @ResponseBody ResponseData getCountForOneClass(int cateId) {
+		return memberOrderService.getCountForOneClass(cateId);
 	}
 }

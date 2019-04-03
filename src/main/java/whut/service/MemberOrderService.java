@@ -36,4 +36,6 @@ public interface MemberOrderService {
 	public ResponseData getCountWeekOrYear(int type);
 
 	public ResponseData getCountWeekOrYearForOnePro(int type, int proId);
+
+	public ResponseData getCountForOneClass(int cateId);
 }
