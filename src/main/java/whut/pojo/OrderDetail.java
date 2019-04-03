@@ -12,6 +12,8 @@ public class OrderDetail implements Serializable{
     private Integer orderDetailId; //订单详情ID
 
     private Integer orderId;  //订单ID
+    
+    private Integer productId;//商品ID
 
     private Integer productSpecsId;  //单品ID
 
@@ -37,6 +39,14 @@ public class OrderDetail implements Serializable{
 
     public void setOrderId(Integer orderId) {
         this.orderId = orderId;
+    }
+    
+    public Integer getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Integer productId) {
+        this.productId = productId;
     }
 
     public Integer getProductSpecsId() {

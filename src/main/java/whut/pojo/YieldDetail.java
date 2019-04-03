@@ -1,6 +1,7 @@
 package whut.pojo;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 
@@ -17,6 +18,10 @@ public class YieldDetail implements Serializable{
     private Integer orderId;  //订单id
 
     private String yieldMoney;  //收益金额
+    
+    private BigDecimal receivedMoney; //实际所得金额
+
+    private BigDecimal taxMoney; //缴税金额
 
     private Integer purchaserId;  //买方用户id
 
@@ -54,6 +59,22 @@ public class YieldDetail implements Serializable{
 
     public void setYieldMoney(String yieldMoney) {
         this.yieldMoney = yieldMoney == null ? null : yieldMoney.trim();
+    }
+    
+    public BigDecimal getReceivedMoney() {
+        return receivedMoney;
+    }
+
+    public void setReceivedMoney(BigDecimal receivedMoney) {
+        this.receivedMoney = receivedMoney;
+    }
+
+    public BigDecimal getTaxMoney() {
+        return taxMoney;
+    }
+
+    public void setTaxMoney(BigDecimal taxMoney) {
+        this.taxMoney = taxMoney;
     }
 
     public Integer getPurchaserId() {

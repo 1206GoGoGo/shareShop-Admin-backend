@@ -4,6 +4,7 @@
 <mapper namespace="whut.dao.OrderCartDao">
   <resultMap id="BaseResultMap" type="whut.pojo.OrderCart">
     <id column="cart_id" jdbcType="INTEGER" property="cartId" />
+    <result column="product_id" jdbcType="INTEGER" property="productId" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="product_specs_id" jdbcType="INTEGER" property="productSpecsId" />
     <result column="product_quantity" jdbcType="INTEGER" property="productQuantity" />

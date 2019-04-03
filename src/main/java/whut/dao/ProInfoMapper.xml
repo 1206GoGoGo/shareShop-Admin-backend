@@ -6,6 +6,7 @@
      <id column="product_id" jdbcType="INTEGER" property="productId" />
     <result column="product_name" jdbcType="VARCHAR" property="productName" />
     <result column="brand_name" jdbcType="VARCHAR" property="brandName" />
+    <result column="spu" jdbcType="VARCHAR" property="spu" />
     <result column="one_category_id" jdbcType="INTEGER" property="oneCategoryId" />
     <result column="two_category_id" jdbcType="INTEGER" property="twoCategoryId" />
     <result column="three_category_id" jdbcType="INTEGER" property="threeCategoryId" />
@@ -36,11 +37,11 @@
     
      <select id="add" parameterType="ProductComment">
     	INSERT INTO product_info
-    	(product_name,brand_name,one_category_id,two_category_id,three_category_id,
+    	(product_name,brand_name,spu,one_category_id,two_category_id,three_category_id,
     	 main_image,attribute_list,publish_status,audit_status,use_coupon,discount_rate,
     	production_date,description,stock,input_time)      
         VALUES
-    	(#{productName},#{brandName},#{oneCategoryId},#{twoCategoryId},#{threeCategoryId},
+    	(#{productName},#{brandName},#{spu},#{oneCategoryId},#{twoCategoryId},#{threeCategoryId},
     	#{mainImage},#{attributeList},#{publishStatus},#{auditStatus},
     	#{useCoupon},#{discountRate},#{productionDate},#{description},#{stock},now())
     </select>
@@ -52,7 +53,7 @@
     
     <select id="modify" parameterType="ProductInfo">
     	UPDATE product_info SET 
-    	product_name = #{productName},brand_name = #{brandName},one_category_id = #{oneCategoryId},two_category_id = #{twoCategoryId},
+    	product_name = #{productName},brand_name = #{brandName},spu = #{spu},one_category_id = #{oneCategoryId},two_category_id = #{twoCategoryId},
     	three_category_id = #{threeCategoryId},main_image = #{mainImage},attribute_list = #{attributeList},publish_status = #{publishStatus},
     	audit_status = #{auditStatus},use_coupon = #{useCoupon},discount_rate = #{discountRate},
     	production_date = #{productionDate},description = #{description},stock = #{stock},modified_time = now()    

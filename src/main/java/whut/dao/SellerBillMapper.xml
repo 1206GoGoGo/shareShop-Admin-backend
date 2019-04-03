@@ -5,6 +5,7 @@
     <id column="withdraw_id" jdbcType="INTEGER" property="withdrawId" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="withdraw_money" jdbcType="DECIMAL" property="withdrawMoney" />
+    <result column="notes" jdbcType="VARCHAR" property="notes" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="status" jdbcType="TINYINT" property="status" />
   </resultMap>
@@ -14,6 +15,8 @@
     <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="order_id" jdbcType="INTEGER" property="orderId" />
     <result column="yield_money" jdbcType="DECIMAL" property="yieldMoney" />
+    <result column="received_money" jdbcType="DECIMAL" property="receivedMoney" />
+    <result column="tax_money" jdbcType="DECIMAL" property="taxMoney" />
     <result column="purchaser_id" jdbcType="INTEGER" property="purchaserId" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
@@ -28,16 +31,16 @@
     
     <select id="addWithdraw" parameterType="WithdrawRecord">
     	INSERT INTO withdraw_record
-    	(user_id,withdraw_money,create_time,status)      
+    	(user_id,withdraw_money,notes,create_time,status)      
         VALUES
-    	(#{userId},#{withdrawMoney},now(),1)
+    	(#{userId},#{withdrawMoney},#{notes},now(),1)
     </select>
     
     <select id="addYield" parameterType="YieldDetail">
     	INSERT INTO yield_detail
-    	(user_id,order_id,yield_money,purchaser_id,create_time)      
+    	(user_id,order_id,yield_money,received_money,tax_money,purchaser_id,create_time)      
         VALUES
-    	(#{userId},#{orderId},#{yieldMoney},#{purchaserId},now())
+    	(#{userId},#{orderId},#{yieldMoney},#{receivedMoney},#{taxMoney},#{purchaserId},now())
     </select>
     
     <select id="getWithdrawList" parameterType="hashmap" resultMap="WithdrawMap">

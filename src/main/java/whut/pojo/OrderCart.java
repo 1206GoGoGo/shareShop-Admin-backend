@@ -12,6 +12,8 @@ import java.util.Date;
 public class OrderCart implements Serializable{
 	
     private Integer cartId; //购物车ID
+    
+    private Integer productId;//商品ID
 
     private Integer userId;  //用户ID
 
@@ -29,6 +31,14 @@ public class OrderCart implements Serializable{
 
     public void setCartId(Integer cartId) {
         this.cartId = cartId;
+    }
+    
+    public Integer getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Integer productId) {
+        this.productId = productId;
     }
 
     public Integer getUserId() {

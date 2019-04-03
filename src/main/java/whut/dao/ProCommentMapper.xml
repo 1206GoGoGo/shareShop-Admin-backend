@@ -11,6 +11,7 @@
     <result column="reply" property="reply" jdbcType="VARCHAR" />
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="second_content" jdbcType="VARCHAR" property="secondContent" />
+    <result column="grade" jdbcType="TINYINT" property="grade" />
     <result column="comment_time" jdbcType="TIMESTAMP" property="commentTime" />
     <result column="audit_status" jdbcType="TINYINT" property="auditStatus" />
   </resultMap>
@@ -27,9 +28,9 @@
    
    <select id="add" parameterType="ProductInfo">
     	INSERT INTO product_comment
-    	(product_id,order_id,user_id,reply,content,comment_time,audit_status)      
+    	(product_id,order_id,user_id,reply,content,grade,comment_time,audit_status)      
         VALUES
-    	(#{productId},#{orderId},#{userId},#{reply},#{content},now(),1)
+    	(#{productId},#{orderId},#{userId},#{reply},#{content},#{grade},now(),1)
     </select>
     
    <select id="delete" parameterType="String">

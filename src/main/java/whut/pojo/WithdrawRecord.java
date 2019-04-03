@@ -15,6 +15,8 @@ public class WithdrawRecord implements Serializable{
     private Integer userId;  //用户id
 
     private BigDecimal withdrawMoney;  //提现金额
+    
+    private String notes;//备注
 
     private Date createTime; //提现时间
 
@@ -42,6 +44,14 @@ public class WithdrawRecord implements Serializable{
 
     public void setWithdrawMoney(BigDecimal withdrawMoney) {
         this.withdrawMoney = withdrawMoney;
+    }
+    
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes == null ? null : notes.trim();
     }
 
     public Date getCreateTime() {

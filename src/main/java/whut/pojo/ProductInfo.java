@@ -15,6 +15,8 @@ public class ProductInfo implements Serializable{
     private String productName;//商品名称
 
     private String brandName;//品牌
+    
+    private String spu;//商品spu
 
     private Integer oneCategoryId;//一级分类ID
 
@@ -77,6 +79,14 @@ public class ProductInfo implements Serializable{
 
     public void setBrandName(String brandName) {
         this.brandName = brandName == null ? null : brandName.trim();
+    }
+    
+    public String getSpu() {
+        return spu;
+    }
+
+    public void setSpu(String spu) {
+        this.spu = spu == null ? null : spu.trim();
     }
 
     public Integer getOneCategoryId() {
