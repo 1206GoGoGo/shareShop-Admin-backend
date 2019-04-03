@@ -32,18 +32,24 @@
         WHERE category_id = #{categoryId}
     </select>
     
-    <select id="delete" parameterType="String">
+    <select id="delete" parameterType="string">
     	UPDATE product_category SET 
     	category_status = 0  
         WHERE category_id = #{id}
     </select>
     
-    <select id="ifCategoryExist" parameterType="String" resultType="ProductCategory" resultMap="BaseResultMap">
+    <select id="ifCategoryExist" parameterType="string" resultType="ProductCategory" resultMap="BaseResultMap">
         SELECT * FROM product_category where category_code = #{categoryCode}
    </select>
 
-	<select id="ifHaveChild" parameterType="String" resultType="ProductCategory" resultMap="BaseResultMap">
+	<select id="ifHaveChild" parameterType="string" resultType="ProductCategory" resultMap="BaseResultMap">
         SELECT * FROM product_category where parent_id = #{id} and category_status = 1
 	</select>
+	
+    <select id="modifyStatusNoShow" parameterType="string">
+    	UPDATE product_category SET 
+    	category_status = 2 
+        WHERE category_id = #{id}
+    </select>
 
 </mapper>
