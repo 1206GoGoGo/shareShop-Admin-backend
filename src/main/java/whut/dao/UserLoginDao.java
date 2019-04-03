@@ -1,5 +1,7 @@
 package whut.dao;
 
+import java.util.Map;
+
 import whut.pojo.UserLogin;
 
 public interface UserLoginDao {
@@ -19,14 +21,6 @@ public interface UserLoginDao {
 
 	void deleteSeller(String id);
 
-	//通过传入的日期2019-04-04获取改天注册用户数\seller
-
-	//普通用户
-	int getCountADayForUser(String day);
-
-	//会员
-	int getCountADayForMember(String day);
-
-	//seller
-	int getCountADayForSeller(String day);
+	//通过传入的日期2019-04-04获取改天注册用户数\seller    用户数量map:day\level
+	int getCountADay(Map<String, Object> map);
 }

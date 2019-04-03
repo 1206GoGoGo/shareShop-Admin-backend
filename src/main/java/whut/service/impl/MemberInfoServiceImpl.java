@@ -266,6 +266,7 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 
 	@Override
 	public ResponseData getCountAWeek() {
+		Map<String,Object> map = new HashMap<>();
 		String list = "[";
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar cal=Calendar.getInstance();
@@ -273,9 +274,17 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 		for(int i=0;i<7;i++) {
 			String day = df.format(d);
 			list += "{\"data\":\""+day+"\",\"user\":";
-			list += loginDao.getCountADayForUser( day ) + ",\"member\":";
-			list += loginDao.getCountADayForMember( day ) + ",\"seller\":";
-			list += loginDao.getCountADayForSeller( day );
+			map.put("day", day);
+			map.put("level", 1);
+			list += loginDao.getCountADay( map ) + ",\"member\":";
+
+			map.put("day", day);
+			map.put("level", 2);
+			list += loginDao.getCountADay( map ) + ",\"seller\":";
+
+			map.put("day", day);
+			map.put("level", 3);
+			list += loginDao.getCountADay( map );
 
 			if(i<6) {
 				list += "},";
