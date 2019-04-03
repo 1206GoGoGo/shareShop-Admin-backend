@@ -13,9 +13,8 @@
     <result column="pic_url" jdbcType="VARCHAR" property="picUrl" />
   </resultMap>
   
-  <select id="getList"  parameterType="hashmap" resultMap="BaseResultMap">
+  <select id="getList"  resultMap="BaseResultMap">
         SELECT * FROM product_category where category_level = 1 and category_status = 1
-        limit #{pageindex},#{pagesize}
    </select>
    
    <select id="add" parameterType="ProductCategory">

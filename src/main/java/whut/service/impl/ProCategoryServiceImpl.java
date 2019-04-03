@@ -21,12 +21,9 @@ public class ProCategoryServiceImpl implements ProCategoryService{
 	public ProCategoryDao proCategoryDao;
 	
 	@Override
-	public ResponseData getList(int pageindex, int pagesize) {
-		// TODO Auto-generated method stub
-		Map<String,Object> map = new HashMap<>();
-		map.put("pageindex", pageindex);
-		map.put("pagesize", pagesize);
-		List<ProductCategory> list = proCategoryDao.getList(map);
+	public ResponseData getList() {
+		// TODO Auto-generated method stub		
+		List<ProductCategory> list = proCategoryDao.getList();
 		if(list != null) {
 			return new ResponseData(200,"success",list);
 		}else {

@@ -9,7 +9,7 @@ import whut.utils.ResponseData;
 public interface ProCategoryDao {
 
 	//获取第一层级分类列表(status=1)
-	public List<ProductCategory> getList(Map<String, Object> map);
+	public List<ProductCategory> getList();
 
 	//新增分类(默认status=1)
 	public void add(ProductCategory productCategory);

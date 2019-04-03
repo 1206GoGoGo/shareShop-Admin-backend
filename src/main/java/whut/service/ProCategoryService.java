@@ -9,7 +9,7 @@ import whut.utils.ResponseData;
 
 public interface ProCategoryService {
 
-	public ResponseData getList(int pageindex, int pagesize);
+	public ResponseData getList();
 
 	public ResponseData add(ProductCategory productCategory);
 	
