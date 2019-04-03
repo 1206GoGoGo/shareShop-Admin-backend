@@ -1,6 +1,9 @@
 package whut.service.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -414,6 +417,50 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 		}else {
 			return new ResponseData(200,"success",list);
 		}
+	}
+
+	@Override
+	public ResponseData getCountWeekOrYear(int type) {
+
+		String list = "[";
+		if(type == 1) {
+			//一年中每个月的记录
+			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM");
+			Calendar cal=Calendar.getInstance();
+			Date d=cal.getTime();
+			for(int i=0;i<13;i++) {
+				String day = df.format(d);
+				list += "{\"date\":\""+day+"\",\"count\":";
+				list += dao.getCountAMonth( cal.get(1) , cal.get(2)+1 ) + ",\"amount\":";
+				list += dao.getAmountAMonth( cal.get(1) , cal.get(2)+1 );
+				if(i<12) {
+					list += "},";
+				}
+		        cal.add(Calendar.MONTH,-1);
+		        d=cal.getTime();
+			}
+		}else if(type == 7) {
+			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+			Calendar cal=Calendar.getInstance();
+			Date d=cal.getTime();
+			for(int i=0;i<7;i++) {
+				String day = df.format(d);
+				list += "{\"date\":\""+day+"\",\"count\":";
+				list += dao.getCountADay( day ) + ",\"amount\":";
+				list += dao.getAmountADay( day );
+				if(i<6) {
+					list += "},";
+				}
+		        cal.add(Calendar.DATE,-1);
+		        d=cal.getTime();
+			}
+	        
+			
+		}else {return new ResponseData(406,"parameters incorrect",list);}
+
+		list += "}]";
+		//System.out.println(list);	
+		return new ResponseData(200,"success",list);
 	}
 
 

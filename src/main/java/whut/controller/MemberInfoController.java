@@ -75,5 +75,10 @@ public class MemberInfoController {
 	public @ResponseBody ResponseData getDetail(int id) {
 		return  memberInfoService.getDetail(id);
 	}
+	
+	@RequestMapping(value = "/getCountAWeek", method = RequestMethod.GET)
+	public @ResponseBody ResponseData getCountAWeek() {
+		return  memberInfoService.getCountAWeek();
+	}
 
 }

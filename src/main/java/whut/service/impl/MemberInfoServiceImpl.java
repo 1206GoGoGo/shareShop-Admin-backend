@@ -1,6 +1,9 @@
 package whut.service.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -260,5 +263,32 @@ public class MemberInfoServiceImpl implements MemberInfoService {
         System.out.println("num_count=" + num_count + ",char_number=" + char_number);
         return flag;
     }
+
+	@Override
+	public ResponseData getCountAWeek() {
+		String list = "[";
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar cal=Calendar.getInstance();
+		Date d=cal.getTime();
+		for(int i=0;i<7;i++) {
+			String day = df.format(d);
+			list += "{\"data\":\""+day+"\",\"user\":";
+			list += loginDao.getCountADay( day , 1) + ",\"member\":";
+			list += loginDao.getCountADay( day , 2) + ",\"seller\":";
+			list += loginDao.getCountADay( day , 3);
+
+			if(i<6) {
+				list += "},";
+			}
+
+	        cal.add(Calendar.DATE,-1);
+	        d=cal.getTime();
+		}
+		list += "}]";
+        
+		//System.out.println(list);
+		
+		return  new ResponseData(200,"success",list);
+	}
 
 }

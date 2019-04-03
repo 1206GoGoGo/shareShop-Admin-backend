@@ -32,4 +32,6 @@ public interface MemberOrderService {
 	public ResponseData modifyProStatus(@RequestBody String jsonString);
 
 	public ResponseData getRecordByUser(int pageindex, int pagesize, String user, String timebe, String timeen);
+
+	public ResponseData getCountWeekOrYear(int type);
 }
