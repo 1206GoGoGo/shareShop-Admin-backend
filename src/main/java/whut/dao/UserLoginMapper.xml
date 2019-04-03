@@ -37,7 +37,7 @@
     	UPDATE user_login SET level = 1 WHERE user_id = #{id}
     </select>
     
-   <select id="getCountADay" parameterType="hasmap" resultType="java.lang.Integer">
+   <select id="getCountADay" parameterType="hashmap" resultType="java.lang.Integer">
         SELECT count(*) from user_info where date_format(register_time,'%Y-%m-%d') =#{day}
 		AND user_id IN (SELECT user_id FROM user_login where level = #{level})
    </select>
