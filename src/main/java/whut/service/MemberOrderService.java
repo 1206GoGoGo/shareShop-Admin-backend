@@ -34,4 +34,6 @@ public interface MemberOrderService {
 	public ResponseData getRecordByUser(int pageindex, int pagesize, String user, String timebe, String timeen);
 
 	public ResponseData getCountWeekOrYear(int type);
+
+	public ResponseData getCountWeekOrYearForOnePro(int type, int proId);
 }

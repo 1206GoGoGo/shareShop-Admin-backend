@@ -159,13 +159,9 @@ public class MemberOrderController {
 		return memberOrderService.getCountWeekOrYear(type);
 	}
 	
-	/**
-	 * 获取一个月商品销售额最多排名和销售量最多排名
-	 * @param type
-	 * @return
-	 */
-	@RequestMapping(value = "/getTopSellProAMonth", method = RequestMethod.GET)
-	public @ResponseBody ResponseData getTopSellProAMonth(int type) {
-		return memberOrderService.getTopSellProAMonth(type);
+
+	@RequestMapping(value = "/getCountForOnePro", method = RequestMethod.GET)
+	public @ResponseBody ResponseData getCountWeekOrYearForOnePro(int type, int proId) {
+		return memberOrderService.getCountWeekOrYearForOnePro(type, proId);
 	}
 }
