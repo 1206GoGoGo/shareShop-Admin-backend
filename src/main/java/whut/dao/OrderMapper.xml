@@ -113,19 +113,19 @@
         WHERE order_id = #{orderId}
     </select>
     
-   <select id="getCountADay" parameterType="string" resultMap="java.lang.Integer">
+   <select id="getCountADay" parameterType="string" resultType="java.lang.Integer">
         SELECT count(*) from order_master where date_format(pay_time,'%Y-%m-%d') =#{day}
    </select>
    
-   <select id="getAmountADay" parameterType="string" resultMap="java.lang.Double">
+   <select id="getAmountADay" parameterType="string" resultType="java.lang.Double">
         SELECT sum(payment_money) from order_master where date_format(pay_time,'%Y-%m-%d') =#{day}
    </select>
    
-   <select id="getCountAMonth" parameterType="string" resultMap="java.lang.Integer">
+   <select id="getCountAMonth" parameterType="string" resultType="java.lang.Integer">
         SELECT count(*) from order_master where date_format(pay_time,'%Y-%m') =#{month}
    </select>
    
-   <select id="getAmountAMonth" parameterType="string" resultMap="java.lang.Double">
+   <select id="getAmountAMonth" parameterType="string" resultType="java.lang.Double">
         SELECT sum(payment_money) from order_master where date_format(pay_time,'%Y-%m') =#{month}
    </select>
 

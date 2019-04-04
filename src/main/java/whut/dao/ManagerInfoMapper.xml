@@ -22,7 +22,7 @@
     </association>
   </resultMap>
   
-   <select id="getList" resultMap="BaseResultMap">
+   <select id="getList" parameterType="int" resultMap="BaseResultMap">
          SELECT * FROM manager_info mi LEFT JOIN user_login ul on mi.user_id = ul.user_id where ul.status = #{status}
    </select>
    
