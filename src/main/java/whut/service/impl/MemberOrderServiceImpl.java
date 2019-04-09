@@ -507,7 +507,7 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 	@Override
 	public ResponseData getCountForOneClass(int cateId) {
 		ProductCategory productCategory = proCategoryDao.ifCategoryExist(String.valueOf(cateId));
-		if(productCategory.equals(null)) {
+		if(productCategory == null) {
 			return new ResponseData(406,"parameters incorrect",null);
 		}
 		Map<String, Object> map = new HashMap<>();
