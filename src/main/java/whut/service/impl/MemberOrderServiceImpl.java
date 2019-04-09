@@ -57,20 +57,28 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 	}
 	
 	@Override
-	public ResponseData getListByUserName(int pageindex, int pagesize, String username) {
+	public ResponseData getListSearch(int pageindex, int pagesize, int status, String orderNumber, String username, 
+			String consignee, String timeBe, String timeEn) {
 		int id = 0;
-		try {
-			id = loginDao.getLoginInfo(username).getUserId();
-		}catch(Exception e) {
-			return new ResponseData(4001,"the user does not exist",null);
+		if(username!=null) {
+			try {
+				id = loginDao.getLoginInfo(username).getUserId();
+			}catch(Exception e) {
+				return new ResponseData(4001,"the user does not exist",null);
+			}
 		}
-		
-		Map<String, Integer> map = new HashMap<>();
+
+		Map<String, Object> map = new HashMap<>();
 		map.put("pageindex", pageindex);
 		map.put("pagesize", pagesize);
 		map.put("id", id);
+		map.put("status", status);
+		map.put("orderNumber", orderNumber);
+		map.put("consignee", consignee);
+		map.put("timeBe", timeBe);
+		map.put("timeEn", timeEn);
 		
-		List<OrderMaster> list = dao.getListByUser(map);
+		List<OrderMaster> list = dao.getListSearch(map);
 		if(list.isEmpty()) {
 			return new ResponseData(4002,"the user has no order record",null);
 		}else {
@@ -90,33 +98,6 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 			return new ResponseData(400,"no data satify request",null);
 		}else {
 			return new ResponseData(200,"success",list);
-		}
-	}
-
-	@Override
-	public ResponseData getListByStatus(int pageindex, int pagesize, int status) {
-		Map<String, Integer> map = new HashMap<>();
-		map.put("pageindex", pageindex);
-		map.put("pagesize", pagesize);
-		map.put("status", status);
-		
-		List<OrderMaster> list = dao.getListByStatus(map);
-		if(list.isEmpty()) {
-			return new ResponseData(400,"no data satify request",null);
-		}else {
-			return new ResponseData(200,"success",list);
-		}
-	}
-
-	@Override
-	public ResponseData search(String orderNumber) {
-		OrderMaster orderMaster = dao.searchByOrderNumber(orderNumber);
-		List<OrderMaster> list = new ArrayList<OrderMaster>();
-		list.add(orderMaster);
-		if(orderMaster != null) {
-			return new ResponseData(200,"success",list);
-		}else {
-			return new ResponseData(400,"no data satify request",null);
 		}
 	}
 	

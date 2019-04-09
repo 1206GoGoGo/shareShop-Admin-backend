@@ -14,11 +14,6 @@ public interface OrderDao {
 
 	//String pageindex, String pagesize, int id
 	List<OrderDetail> getListByPro(Map<String, Integer> map);
-
-	//String pageindex, String pagesize, String status
-	List<OrderMaster> getListByStatus(Map<String, Integer> map);
-
-	OrderMaster searchByOrderNumber(String orderNumber);
 	
 	OrderMaster getMasterByOrderId(int orderId);
 
@@ -88,4 +83,8 @@ public interface OrderDao {
 
 	//获取某分类下商品的销售额map:cateId\cateLevel分类级别\date2018-08
 	String getAmountAMonthForClass(Map<String, Object> map);
+
+	//通过以下字段中的一个或多个查询订单
+	//int pageindex, int pagesize, int status, String orderNumber, String username, String consignee, String timeBe, String timeEn
+	List<OrderMaster> getListSearch(Map<String, Object> map);
 }

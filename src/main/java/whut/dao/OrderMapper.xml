@@ -57,17 +57,6 @@
        SELECT * FROM order_detail where product_specs_id = #{id}  limit #{pageindex},#{pagesize}
    </select>
    
-   <select id="getListByStatus" parameterType="hashmap" resultMap="orderResultMap">
-       SELECT * FROM order_master om LEFT JOIN order_detail od on om.order_id = od.order_id
-       where order_status = #{status}  
-       limit #{pageindex},#{pagesize}
-   </select>
-   
-    <select id="searchByOrderNumber" parameterType="string" resultMap="orderResultMap">
-       SELECT * FROM order_master om LEFT JOIN order_detail od on om.order_id = od.order_id
-       where order_number = #{orderNumber} 
-   </select>
-   
    <select id="getMasterByOrderId" parameterType="int" resultMap="orderResultMap">
        SELECT * FROM order_master om LEFT JOIN order_detail od on om.order_id = od.order_id
        where om.order_id = #{orderId} 

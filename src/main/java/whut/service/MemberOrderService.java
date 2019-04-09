@@ -11,13 +11,10 @@ public interface MemberOrderService {
 
 	public ResponseData getListByUser(int pageindex, int pagesize, int id);
 
-	public ResponseData getListByUserName(int pageindex, int pagesize, String username);
+	public ResponseData getListSearch(int pageindex, int pagesize, int status, String orderNumber, String username, 
+			String consignee, String timeBe, String timeEn);
 
 	public ResponseData getListByPro(int pageindex, int pagesize, int id);
-
-	public ResponseData getListByStatus(int pageindex, int pagesize, int status);
-
-	public ResponseData search(String orderNumber);
 
 	public ResponseData getDetailListByOrderId(int orderId);
 	
