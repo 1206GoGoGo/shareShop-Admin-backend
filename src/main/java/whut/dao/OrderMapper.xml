@@ -117,5 +117,100 @@
    <select id="getAmountAMonth" parameterType="string" resultType="java.lang.Double">
         SELECT sum(payment_money) from order_master where date_format(pay_time,'%Y-%m') =#{month}
    </select>
+   
+   <select id="getAverageCostADay" parameterType="string" resultType="java.lang.Double">
+       select sum(tc.cost) from
+		(select od.product_quantity * ps.average_cost as cost
+		 FROM order_detail od LEFT JOIN product_specs ps ON od.product_specs_id = ps.product_specs_id 
+		 where od.order_id IN (SELECT order_id from order_master WHERE date_format(pay_time,'%Y-%m-%d') = #{day}))tc
+   </select>
+   
+   <select id="getAverageCostAMonth" parameterType="string" resultType="java.lang.Double">
+       select sum(tc.cost) from
+		(select od.product_quantity * ps.average_cost as cost
+		 FROM order_detail od LEFT JOIN product_specs ps ON od.product_specs_id = ps.product_specs_id 
+		 where od.order_id IN (SELECT order_id from order_master WHERE date_format(pay_time,'%Y-%m') =#{month}))tc
+   </select>
+   
+   <select id="getCountAMonthAPro" parameterType="hashmap" resultType="java.lang.Integer">
+        select sum(od.product_quantity) from order_detail od
+		LEFT JOIN order_master om ON od.order_id = om.order_id 
+		where od.product_id = #{proId} and date_format(om.pay_time,'%Y-%m') = #{date}
+   </select>
+   
+   <select id="getAverageCostAMonthAPro" parameterType="hashmap" resultType="java.lang.Double">
+        select sum(tc.cost) from
+		(select od.product_quantity * ps.average_cost as cost
+		 FROM order_detail od LEFT JOIN product_specs ps ON od.product_specs_id = ps.product_specs_id 
+		 where od.product_id = #{proId} and  od.order_id IN (SELECT order_id from order_master 
+		 WHERE date_format(pay_time,'%Y-%m') = #{date})) tc
+   </select>
+   
+   <select id="getAmountAMonthAPro" parameterType="hashmap" resultType="java.lang.Double">
+        select sum(od.product_price) from order_detail od
+		LEFT JOIN order_master om ON od.order_id = om.order_id 
+		where od.product_id = #{proId} and date_format(om.pay_time,'%Y-%m') = #{date}
+   </select>
+   
+   <select id="getCountADayAPro" parameterType="hashmap" resultType="java.lang.Integer">
+        select sum(od.product_quantity) from order_detail od
+		LEFT JOIN order_master om ON od.order_id = om.order_id 
+		where od.product_id = #{proId} and date_format(om.pay_time,'%Y-%m-%d') = #{date}
+   </select>
+   
+   <select id="getAverageCostADayAPro" parameterType="hashmap" resultType="java.lang.Double">
+        select sum(tc.cost) from
+		(select od.product_quantity * ps.average_cost as cost
+		 FROM order_detail od LEFT JOIN product_specs ps ON od.product_specs_id = ps.product_specs_id 
+		 where od.product_id = #{proId} and  od.order_id IN (SELECT order_id from order_master 
+		 WHERE date_format(pay_time,'%Y-%m-%d') = #{date})) tc
+   </select>
+   
+   <select id="getAmountADayAPro" parameterType="hashmap" resultType="java.lang.Double">
+        select sum(od.product_price) from order_detail od
+		LEFT JOIN order_master om ON od.order_id = om.order_id 
+		where od.product_id = #{proId} and date_format(om.pay_time,'%Y-%m-%d') = #{date}
+   </select>
+   
+   <select id="getCountAMonthForClass" parameterType="hashmap" resultType="java.lang.Integer">
+        select sum(od.product_quantity) from order_detail od
+		LEFT JOIN order_master om ON od.order_id = om.order_id 
+		where date_format(om.pay_time,'%Y-%m') = #{date}
+		and od.product_id in (select product_id from product_info where one_category_id = #{cateId} or two_category_id = #{cateId} or three_category_id = #{cateId})
+   </select>
+   
+   <select id="getAverageCostAMonthForClass" parameterType="hashmap" resultType="java.lang.Double">
+        select sum(tc.cost) from
+		(select od.product_quantity * ps.average_cost as cost
+		 FROM order_detail od LEFT JOIN product_specs ps ON od.product_specs_id = ps.product_specs_id 
+		 where od.product_id in (select product_id from product_info where one_category_id = #{cateId} or two_category_id = #{cateId} or three_category_id = #{cateId})
+		 and  od.order_id IN (SELECT order_id from order_master 
+		 WHERE date_format(pay_time,'%Y-%m') = #{date})) tc
+   </select>
+   
+   <select id="getAmountAMonthForClass" parameterType="hashmap" resultType="java.lang.Double">
+        select sum(od.product_price) from order_detail od
+		LEFT JOIN order_master om ON od.order_id = om.order_id 
+		where od.product_id in (select product_id from product_info where one_category_id = #{cateId} or two_category_id = #{cateId} or three_category_id = #{cateId}) 
+		and date_format(om.pay_time,'%Y-%m') = #{date}
+   </select>
+   
+   <select id="getListSearch" parameterType="hashmap" resultMap="orderResultMap">
+       SELECT * FROM order_master om LEFT JOIN order_detail od on om.order_id = od.order_id
+       where  1 = 1
+    	<if test="username != null">
+      		and om.user_id in (select user_id from user_login where username = #{username}) 
+    	</if>
+    	<if test="orderNumber != null">
+      		and om.order_number = #{orderNumber} 
+    	</if>
+    	<if test="consignee != null">
+      		and om.consignee_name = #{orderNumber} 
+    	</if>
+    	<if test="timeBe != null and timeEn != null">
+      		and date_format(om.create_time,'%Y-%m-%d') BETWEEN #{timeBe} AND DATE_ADD(#{timeEn},INTERVAL 1 DAY);
+    	</if>
+       limit #{pageindex},#{pagesize}
+   </select>
 
 </mapper>
