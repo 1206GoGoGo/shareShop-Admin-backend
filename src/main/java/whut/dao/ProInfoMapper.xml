@@ -32,7 +32,7 @@
     </select>
     
     <select id="getDetailByCode" parameterType="String" resultMap="BaseResultMap">
-    	SELECT * FROM product_info where product_code = #{id}
+    	SELECT * FROM product_info where spu = #{id}
     </select>
     
      <select id="add" parameterType="ProductComment">
@@ -96,7 +96,7 @@
       		and product_name = #{productName} 
     	</if>
     	<if test="productCode != null">
-      		and product_code = #{productCode} 
+      		and spu = #{productCode} 
     	</if>
     	<if test="oneCategoryId != null">
       		and one_category_id = #{oneCategoryId} 
