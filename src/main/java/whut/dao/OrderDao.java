@@ -76,12 +76,15 @@ public interface OrderDao {
 
 	
 	//获取某分类下商品的总销量map:cateId\cateLevel分类级别\date2018-08
+	//level不需要/serviceImpl中已注释掉
 	int getCountAMonthForClass(Map<String, Object> map);
 
 	//获取某分类下商品的成本map:cateId\cateLevel分类级别\date2018-08
+	//level不需要/serviceImpl中已注释掉
 	String getAverageCostAMonthForClass(Map<String, Object> map);
 
 	//获取某分类下商品的销售额map:cateId\cateLevel分类级别\date2018-08
+	//level不需要/serviceImpl中已注释掉
 	String getAmountAMonthForClass(Map<String, Object> map);
 
 	//通过以下字段中的一个或多个查询订单

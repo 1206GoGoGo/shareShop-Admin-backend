@@ -512,7 +512,7 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 		}
 		Map<String, Object> map = new HashMap<>();
 		map.put("cateId", cateId);
-		map.put("cateLevel", productCategory.getCategoryLevel());
+		//map.put("cateLevel", productCategory.getCategoryLevel());
 		String list = "[";
 		//一年中每个月的记录
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM");
