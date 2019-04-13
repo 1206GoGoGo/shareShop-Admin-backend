@@ -39,53 +39,53 @@ public interface OrderDao {
 	List<SellerBill> getRecordByUser(Map<String, Object> map);
 
 	//获取某天的订单数
-	int getCountADay(String day);
+	Integer getCountADay(String day);
 
 	//获取某天的订单总额2018-04-12
-	String getAmountADay(String day);
+	Double getAmountADay(String day);
 
 	//获取某天出售商品的总成本
-	String getAverageCostADay(String day);
+	Double getAverageCostADay(String day);
 
 	//获取某月的订单数2018-04
-	int getCountAMonth(String month);
+	Integer getCountAMonth(String month);
 
 	//获取某月的订单总额
-	String getAmountAMonth(String month);
+	Double getAmountAMonth(String month);
 
 	//获取某月出售商品的总成本
-	String getAverageCostAMonth(String month);
+	Double getAverageCostAMonth(String month);
 
 	//获取某商品某月的销量map :proId、date
-	int getCountAMonthAPro(Map<String, Object> map);
+	Integer getCountAMonthAPro(Map<String, Object> map);
 	
 	//获取某商品某月的成本map :proId、date
-	String getAverageCostAMonthAPro(Map<String, Object> map);
+	Double getAverageCostAMonthAPro(Map<String, Object> map);
 	
 	//获取某商品某月的销售额map :proId、date
-	String getAmountAMonthAPro(Map<String, Object> map);
+	Double getAmountAMonthAPro(Map<String, Object> map);
 	
 	//获取某商品某天的销量map :proId、date
-	int getCountADayAPro(Map<String, Object> map);
+	Integer getCountADayAPro(Map<String, Object> map);
 	
 	//获取某商品某天的成本map :proId、date
-	String getAverageCostADayAPro(Map<String, Object> map);
+	Double getAverageCostADayAPro(Map<String, Object> map);
 	
 	//获取某商品某天的销售额map :proId、date
-	String getAmountADayAPro(Map<String, Object> map);
+	Double getAmountADayAPro(Map<String, Object> map);
 
 	
 	//获取某分类下商品的总销量map:cateId\cateLevel分类级别\date2018-08
 	//level不需要/serviceImpl中已注释掉
-	int getCountAMonthForClass(Map<String, Object> map);
+	Integer getCountAMonthForClass(Map<String, Object> map);
 
 	//获取某分类下商品的成本map:cateId\cateLevel分类级别\date2018-08
 	//level不需要/serviceImpl中已注释掉
-	String getAverageCostAMonthForClass(Map<String, Object> map);
+	Double getAverageCostAMonthForClass(Map<String, Object> map);
 
 	//获取某分类下商品的销售额map:cateId\cateLevel分类级别\date2018-08
 	//level不需要/serviceImpl中已注释掉
-	String getAmountAMonthForClass(Map<String, Object> map);
+	Double getAmountAMonthForClass(Map<String, Object> map);
 
 	//通过以下字段中的一个或多个查询订单
 	//int pageindex, int pagesize, int status, String orderNumber, String username, String consignee, String timeBe, String timeEn

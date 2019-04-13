@@ -11,6 +11,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import whut.dao.OrderDao;
 import whut.dao.OrderReturnDao;
 import whut.dao.ProCategoryDao;
@@ -407,22 +411,27 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 
 	@Override
 	public ResponseData getCountWeekOrYear(int type) {
-
-		String list = "[";
+		ObjectMapper mapper = new ObjectMapper();
+		//生成数组结点
+		ArrayNode arrNode = mapper.createArrayNode();
+		
 		if(type == 1) {
 			//一年中每个月的记录
 			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM");
 			Calendar cal=Calendar.getInstance();
 			Date d=cal.getTime();
-			for(int i=0;i<13;i++) {
+			for(int i=0;i<12;i++) {
 				String day = df.format(d);
-				list += "{\"date\":\""+day+"\",\"count\":";
-				list += dao.getCountAMonth( cal.get(1)+"-"+cal.get(2)+1 ) + ",\"averageCost\":";
-				list += dao.getAverageCostAMonth( cal.get(1)+"-"+cal.get(2)+1 ) + ",\"amount\":";
-				list += dao.getAmountAMonth( cal.get(1)+"-"+cal.get(2)+1 );
-				if(i<12) {
-					list += "},";
-				}
+				
+				//生成对象结点
+				ObjectNode objNode = mapper.createObjectNode();
+				objNode.put("date", day);    /*在jdk1.8中，简单值用put设置*/
+				objNode.put("count", dao.getCountAMonth(cal.get(1)+"-"+cal.get(2)+1) );
+				objNode.put("averageCost", dao.getAverageCostAMonth( cal.get(1)+"-"+cal.get(2)+1 ));
+				objNode.put("amount", dao.getAmountAMonth( cal.get(1)+"-"+cal.get(2)+1 ));
+				arrNode.add(objNode);    /*数组结点添加元素不做简单值和结点类的区分*/
+				
+
 		        cal.add(Calendar.MONTH,-1);
 		        d=cal.getTime();
 			}
@@ -432,47 +441,54 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 			Date d=cal.getTime();
 			for(int i=0;i<7;i++) {
 				String day = df.format(d);
-				list += "{\"date\":\""+day+"\",\"count\":";
-				list += dao.getCountADay( day ) + ",\"averageCost\":";
-				list += dao.getAverageCostADay( day ) + ",\"amount\":";
-				list += dao.getAmountADay( day );
-				if(i<6) {
-					list += "},";
-				}
+				
+				
+				//生成对象结点
+				ObjectNode objNode = mapper.createObjectNode();
+				objNode.put("date", day);    /*在jdk1.8中，简单值用put设置*/
+				objNode.put("count", dao.getCountADay(day) );
+				objNode.put("averageCost", dao.getAverageCostADay(day) );
+				objNode.put("amount", dao.getAmountADay(day) );
+				arrNode.add(objNode);    /*数组结点添加元素不做简单值和结点类的区分*/
+				
+				
 		        cal.add(Calendar.DATE,-1);
 		        d=cal.getTime();
 			}
 	        
 			
-		}else {return new ResponseData(406,"parameters incorrect",list);}
-
-		list += "}]";
-		//System.out.println(list);	
-		return new ResponseData(200,"success",list);
+		}else {
+			return new ResponseData(406,"parameters incorrect",null);
+		}
+		return new ResponseData(200,"success",arrNode);
 	}
 
 	@Override
 	public ResponseData getCountWeekOrYearForOnePro(int type, int proId) {
+		ObjectMapper mapper = new ObjectMapper();
+		//生成数组结点
+		ArrayNode arrNode = mapper.createArrayNode();
+		
+		
 		Map<String, Object> map = new HashMap<>();
 		map.put("proId", proId);
-		String list = "[";
 		if(type == 1) {
 			//一年中每个月的记录
 			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM");
 			Calendar cal=Calendar.getInstance();
 			Date d=cal.getTime();
-			for(int i=0;i<13;i++) {
+			for(int i=0;i<12;i++) {
 				String day = df.format(d);
-				list += "{\"date\":\""+day+"\",\"count\":";
 				map.put("date", cal.get(1)+"-"+cal.get(2)+1);
-				list += dao.getCountAMonthAPro( map ) + ",\"averageCost\":";
-				map.put("date", cal.get(1)+"-"+cal.get(2)+1);
-				list += dao.getAverageCostAMonthAPro( map ) + ",\"amount\":";
-				map.put("date", cal.get(1)+"-"+cal.get(2)+1);
-				list += dao.getAmountAMonthAPro( map );
-				if(i<12) {
-					list += "},";
-				}
+				
+				//生成对象结点
+				ObjectNode objNode = mapper.createObjectNode();
+				objNode.put("date", day);    /*在jdk1.8中，简单值用put设置*/
+				objNode.put("count", dao.getCountAMonthAPro(map) );
+				objNode.put("averageCost", dao.getAverageCostAMonthAPro(map) );
+				objNode.put("amount", dao.getAmountAMonthAPro(map) );
+				arrNode.add(objNode);    /*数组结点添加元素不做简单值和结点类的区分*/
+
 		        cal.add(Calendar.MONTH,-1);
 		        d=cal.getTime();
 			}
@@ -482,30 +498,31 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 			Date d=cal.getTime();
 			for(int i=0;i<7;i++) {
 				String day = df.format(d);
-				list += "{\"date\":\""+day+"\",\"count\":";
 				map.put("date", day);
-				list += dao.getCountADayAPro( map ) + ",\"averageCost\":";
-				map.put("date", day);
-				list += dao.getAverageCostADayAPro( map ) + ",\"amount\":";
-				map.put("date", day);
-				list += dao.getAmountADayAPro( map );
-				if(i<6) {
-					list += "},";
-				}
+				
+				//生成对象结点
+				ObjectNode objNode = mapper.createObjectNode();
+				objNode.put("date", day);    /*在jdk1.8中，简单值用put设置*/
+				objNode.put("count", dao.getCountADayAPro(map) );
+				objNode.put("averageCost", dao.getAverageCostADayAPro(map) );
+				objNode.put("amount", dao.getAmountADayAPro(map));
+				arrNode.add(objNode);    /*数组结点添加元素不做简单值和结点类的区分*/
+
 		        cal.add(Calendar.DATE,-1);
 		        d=cal.getTime();
 			}
-	        
-			
-		}else {return new ResponseData(406,"parameters incorrect",list);}
+		}else {return new ResponseData(406,"parameters incorrect",null);}
 
-		list += "}]";
-		//System.out.println(list);	
-		return new ResponseData(200,"success",list);
+		return new ResponseData(200,"success",arrNode);
 	}
 
 	@Override
 	public ResponseData getCountForOneClass(int cateId) {
+		ObjectMapper mapper = new ObjectMapper();
+		//生成数组结点
+		ArrayNode arrNode = mapper.createArrayNode();
+		
+		
 		ProductCategory productCategory = proCategoryDao.ifCategoryExist(String.valueOf(cateId));
 		if(productCategory == null) {
 			return new ResponseData(406,"parameters incorrect",null);
@@ -513,26 +530,27 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 		Map<String, Object> map = new HashMap<>();
 		map.put("cateId", cateId);
 		//map.put("cateLevel", productCategory.getCategoryLevel());
-		String list = "[";
 		//一年中每个月的记录
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM");
 		Calendar cal=Calendar.getInstance();
 		Date d=cal.getTime();
-		for(int i=0;i<13;i++) {
+		for(int i=0;i<12;i++) {
 			String day = df.format(d);
-			list += "{\"date\":\""+day+"\",\"count\":";
 			map.put("day",  cal.get(1)+"-"+cal.get(2)+1 );
-			list += dao.getCountAMonthForClass(map) + ",\"averageCost\":";
-			list += dao.getAverageCostAMonthForClass(map) + ",\"amount\":";
-			list += dao.getAmountAMonthForClass(map);
-			if(i<12) {
-				list += "},";
-			}
+			
+			//生成对象结点
+			ObjectNode objNode = mapper.createObjectNode();
+			objNode.put("date", day);    /*在jdk1.8中，简单值用put设置*/
+			objNode.put("count", dao.getCountAMonthForClass(map) );
+			objNode.put("averageCost", dao.getAverageCostAMonthForClass(map) );
+			objNode.put("amount", dao.getAmountAMonthForClass(map) );
+			arrNode.add(objNode);    /*数组结点添加元素不做简单值和结点类的区分*/
+
 	        cal.add(Calendar.MONTH,-1);
 	        d=cal.getTime();
 		}
 		
-		return new ResponseData(200,"success",list);
+		return new ResponseData(200,"success",arrNode);
 	}
 
 }
