@@ -70,6 +70,9 @@
         <if test="proName != null">
       		and product_id in (select product_id from product_info where product_name = #{proName})
     	</if>
+    	<if test="star1 != null and star2 != null">
+      		and grade BETWEEN #{star1} AND #{star1}
+    	</if>
     	 <if test="spu != null">
       		and product_id in (select product_id from product_info where spu = #{spu})
     	</if>
