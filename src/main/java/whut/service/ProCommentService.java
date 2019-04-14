@@ -21,6 +21,6 @@ public interface ProCommentService {
 
 	public ProductComment getCommentById(String id);
 
-	public ResponseData getListByCondition(String proName, String proCode, String userName,int pageindex, int pagesize);
+	public ResponseData getListByCondition(String proName, String proCode, String userName,String star1,String star2,int pageindex, int pagesize);
 
 }

@@ -86,13 +86,15 @@ public class ProCommentServiceImpl implements ProCommentService{
 	}
 
 	@Override
-	public ResponseData getListByCondition(String proName, String proCode, String userName,int pageindex, int pagesize) {
+	public ResponseData getListByCondition(String proName, String proCode, String userName,String star1,String star2,int pageindex, int pagesize) {
 		// TODO Auto-generated method stub
 		//商品评论：管理员要显示商品编码、商品名称、评价的用户名。（新建一个POJO类）
 		Map<String,Object> map = new HashMap<>();
 		map.put("proName", proName);
-		map.put("proCode", proCode);
+		map.put("spu", proCode);
 		map.put("userName", userName);
+		map.put("star1", star1);
+		map.put("star2", star2);
 		map.put("pageindex", pageindex);
 		map.put("pagesize", pagesize);
 		List<ProductComment> list = proCommentDao.getListByCondition(map);
