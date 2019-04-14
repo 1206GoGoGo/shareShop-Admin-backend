@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import whut.dao.ProCommentDao;
-import whut.pojo.ProUserComment;
 import whut.pojo.ProductComment;
 import whut.service.ProCommentService;
 import whut.utils.ResponseData;
@@ -96,7 +95,7 @@ public class ProCommentServiceImpl implements ProCommentService{
 		map.put("userName", userName);
 		map.put("pageindex", pageindex);
 		map.put("pagesize", pagesize);
-		List<ProUserComment> list = proCommentDao.getListByCondition(map);
+		List<ProductComment> list = proCommentDao.getListByCondition(map);
 		if(list.size() > 0)
 			return new ResponseData(200,"success",list);
 		return new ResponseData(400,"no data",null);
