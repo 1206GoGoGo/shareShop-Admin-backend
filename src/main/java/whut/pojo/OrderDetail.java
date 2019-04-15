@@ -17,7 +17,7 @@ public class OrderDetail implements Serializable{
 
     private Integer productSpecsId;  //单品ID
 
-    private String poductName;    //商品名称
+    private String productName;    //商品名称
 
     private Integer productQuantity; //商品数量
 
@@ -58,11 +58,11 @@ public class OrderDetail implements Serializable{
     }
 
     public String getPoductName() {
-        return poductName;
+        return productName;
     }
 
-    public void setPoductName(String poductName) {
-        this.poductName = poductName == null ? null : poductName.trim();
+    public void setPoductName(String productName) {
+        this.productName = productName == null ? null : productName.trim();
     }
 
     public Integer getProductQuantity() {

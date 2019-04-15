@@ -5,6 +5,7 @@ import java.util.Map;
 
 import whut.pojo.OrderDetail;
 import whut.pojo.OrderMaster;
+import whut.pojo.ProductSales;
 import whut.pojo.SellerBill;
 
 public interface OrderDao {
@@ -94,5 +95,5 @@ public interface OrderDao {
 	//cateId,pageindex,pagesize
 	//cateId为0返回所有的，否则返回该分类下商品的
 	//返回数据需要的字段：商品名、销量、销售额
-	List getCountClassForOneGood(Map<String, Integer> map);
+	List<ProductSales> getCountClassForOneGood(Map<String, Integer> map);
 }
