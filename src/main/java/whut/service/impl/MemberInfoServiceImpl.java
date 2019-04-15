@@ -11,6 +11,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import whut.dao.OrderDao;
 import whut.dao.UserInfoDao;
 import whut.dao.UserLoginDao;
@@ -266,38 +270,33 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 
 	@Override
 	public ResponseData getCountAWeek() {
+		ObjectMapper mapper = new ObjectMapper();
+		//生成数组结点
+		ArrayNode arrNode = mapper.createArrayNode();
+		
 		Map<String,Object> map = new HashMap<>();
-		String list = "[";
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar cal=Calendar.getInstance();
 		Date d=cal.getTime();
 		for(int i=0;i<7;i++) {
 			String day = df.format(d);
-			list += "{\"data\":\""+day+"\",\"user\":";
 			map.put("day", day);
+			//生成对象结点
+			ObjectNode objNode = mapper.createObjectNode();
+			objNode.put("date", day);    /*在jdk1.8中，简单值用put设置*/
 			map.put("level", 1);
-			list += loginDao.getCountADay( map ) + ",\"member\":";
-
-			map.put("day", day);
+			objNode.put("user", loginDao.getCountADay(map) );
 			map.put("level", 2);
-			list += loginDao.getCountADay( map ) + ",\"seller\":";
-
-			map.put("day", day);
+			objNode.put("member", loginDao.getCountADay(map) );
 			map.put("level", 3);
-			list += loginDao.getCountADay( map );
-
-			if(i<6) {
-				list += "},";
-			}
-
+			objNode.put("seller", loginDao.getCountADay(map) );
+			arrNode.add(objNode);    /*数组结点添加元素不做简单值和结点类的区分*/
+			
 	        cal.add(Calendar.DATE,-1);
 	        d=cal.getTime();
 		}
-		list += "}]";
-        
-		//System.out.println(list);
 		
-		return  new ResponseData(200,"success",list);
+		return  new ResponseData(200,"success",arrNode);
 	}
 
 }
