@@ -1,7 +1,6 @@
 package whut.service.impl;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -551,6 +550,24 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 		}
 		
 		return new ResponseData(200,"success",arrNode);
+	}
+
+	@Override
+	public ResponseData getCountClassForOneGood(int cateId, int pageindex, int pagesize) {
+		if(cateId!=0) {
+			ProductCategory productCategory = proCategoryDao.ifCategoryExist(String.valueOf(cateId));
+			if(productCategory == null) {
+				return new ResponseData(406,"parameters incorrect",null);
+			}
+		}
+		Map<String, Integer> map = new HashMap<>();
+		map.put("cateId", cateId);
+		map.put("pageindex", pageindex);
+		map.put("pagesize", pagesize);
+		
+		List temp = dao.getCountClassForOneGood(map);
+		
+		return new ResponseData(temp);
 	}
 
 }

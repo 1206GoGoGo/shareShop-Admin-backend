@@ -162,4 +162,15 @@ public class MemberOrderController {
 	public @ResponseBody ResponseData getCountForOneClass(int cateId) {
 		return memberOrderService.getCountForOneClass(cateId);
 	}
+	
+	/**
+	 * 某分类下商品全部的订单数、总金额、成本
+	 * @param type
+	 * @param proId
+	 * @return
+	 */
+	@RequestMapping(value = "/getCountClassForOneGood", method = RequestMethod.GET)
+	public @ResponseBody ResponseData getCountClassForOneGood(int cateId, int pageindex, int pagesize) {
+		return memberOrderService.getCountClassForOneGood(cateId,pageindex , pagesize);
+	}
 }

@@ -90,4 +90,9 @@ public interface OrderDao {
 	//通过以下字段中的一个或多个查询订单
 	//int pageindex, int pagesize, int status, String orderNumber, String username, String consignee, String timeBe, String timeEn
 	List<OrderMaster> getListSearch(Map<String, Object> map);
+
+	//cateId,pageindex,pagesize
+	//cateId为0返回所有的，否则返回该分类下商品的
+	//返回数据需要的字段：商品名、销量、销售额
+	List getCountClassForOneGood(Map<String, Integer> map);
 }
