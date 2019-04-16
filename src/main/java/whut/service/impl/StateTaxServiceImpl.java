@@ -51,8 +51,12 @@ public class StateTaxServiceImpl implements StateTaxService {
 	@Override
 	public ResponseData modifyStateTax(String id,String taxRate) {
 		// TODO Auto-generated method stub
-		stateTaxDao.modifyStateTax(id,taxRate);
-		return new ResponseData(200,"success",null);
+		StateTax stateTax = stateTaxDao.getStateTaxById(id);
+		if(stateTax != null) {
+			stateTaxDao.modifyStateTax(id,taxRate);
+			return new ResponseData(200,"success",null);
+		}
+		return new ResponseData(400,"This State is not found!",null);
 	}
 
 }
