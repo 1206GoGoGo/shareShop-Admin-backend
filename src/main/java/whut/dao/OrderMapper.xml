@@ -204,17 +204,17 @@
    <select id="getListSearch" parameterType="hashmap" resultMap="orderResultMap">
        SELECT * FROM order_master om LEFT JOIN order_detail od on om.order_id = od.order_id
        where  1 = 1
-    	<if test="userid != 0">
-      		and om.user_id = #{userid}
+    	<if test="id != 0">
+      		and om.user_id = #{id}
     	</if>
     	<if test="orderNumber != null">
       		and om.order_number = #{orderNumber} 
     	</if>
     	<if test="consignee != null">
-      		and om.consignee_name = #{orderNumber} 
+      		and om.consignee_name = #{consignee} 
     	</if>
-    	<if test="orderStatus != 0">
-      		and order_status = #{orderStatus}
+    	<if test="status != 0">
+      		and om.order_status = #{status}
     	</if>
     	<if test="timeBe != null and timeEn != null">
       		and date_format(om.create_time,'%Y-%m-%d') BETWEEN #{timeBe} AND DATE_ADD(#{timeEn},INTERVAL 1 DAY)
