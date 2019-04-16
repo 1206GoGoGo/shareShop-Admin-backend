@@ -2,6 +2,8 @@ package whut.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import whut.pojo.ProductCategory;
 
 public interface ProCategoryDao {
@@ -29,5 +31,8 @@ public interface ProCategoryDao {
 
 	//根据分类id获取商品分类信息
 	public ProductCategory getCategoryById(int categoryId);
+
+	//根据分类名称查找分类列表getCategoryByName
+	public List<ProductCategory> getCategoryByName(@Param(value="name") String name);
 
 }

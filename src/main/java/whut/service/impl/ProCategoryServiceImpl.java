@@ -109,4 +109,14 @@ public class ProCategoryServiceImpl implements ProCategoryService{
 		return new ResponseData(200,"success",null);
 	}
 
+	@Override
+	public ResponseData getCategoryByName(String name) {
+		// TODO Auto-generated method stub
+		List<ProductCategory> list = proCategoryDao.getCategoryByName(name);
+		if(list.size() == 0) {
+			return new ResponseData(400,"No similar category was found",null);
+		}
+		return new ResponseData(200,"success",list);
+	}
+
 }

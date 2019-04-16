@@ -63,7 +63,11 @@ public class ProCategoryController {
 	@RequestMapping(value = "/modifyStatusNoShow", method = RequestMethod.GET)
 	public @ResponseBody ResponseData modifyStatusNoShow(String id){
 		return proCategoryService.modifyStatusNoShow(id);
-		
 	}
 	
+	//根据分类名称查找分类列表getCategoryByName
+	@RequestMapping(value = "/getCategoryByName", method = RequestMethod.GET)
+	public @ResponseBody ResponseData getCategoryByName(String name){
+		return proCategoryService.getCategoryByName(name);
+	}
 }

@@ -27,4 +27,6 @@ public interface ProCategoryService {
 
 	public ResponseData modifyStatusNoShow(String id);
 
+	public ResponseData getCategoryByName(String name);
+
 }
