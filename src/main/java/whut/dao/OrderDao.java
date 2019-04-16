@@ -88,8 +88,8 @@ public interface OrderDao {
 	//level不需要/serviceImpl中已注释掉
 	Double getAmountAMonthForClass(Map<String, Object> map);
 
-	//通过以下字段中的一个或多个查询订单
-	//int pageindex, int pagesize, int status, String orderNumber, String username, String consignee, String timeBe, String timeEn
+	//通过以下字段中的一个或多个查询订单,userId为0表示不需要该条件
+	//int pageindex, int pagesize, int orderStatus, String orderNumber, int userid, String consignee, String timeBe, String timeEn
 	List<OrderMaster> getListSearch(Map<String, Object> map);
 
 	//cateId,pageindex,pagesize
