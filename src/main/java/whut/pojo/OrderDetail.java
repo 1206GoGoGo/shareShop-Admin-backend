@@ -57,11 +57,11 @@ public class OrderDetail implements Serializable{
         this.productSpecsId = productSpecsId;
     }
 
-    public String getPoductName() {
+    public String getProductName() {
         return productName;
     }
 
-    public void setPoductName(String productName) {
+    public void setProductName(String productName) {
         this.productName = productName == null ? null : productName.trim();
     }
 
