@@ -34,11 +34,18 @@ public class ProCategoryServiceImpl implements ProCategoryService{
 	@Override
 	public ResponseData add(ProductCategory productCategory) {
 		// TODO Auto-generated method stub
-		if(proCategoryDao.ifCategoryExist(productCategory.getCategoryCode()) == null) {
-			proCategoryDao.add(productCategory);
-			return new ResponseData(200,"add success",null);
-		}
-		return new ResponseData(406,"Fail to add",null);
+		
+		ProductCategory productCategorynew = new ProductCategory();
+		//根据传来的父分类id获取其所属层级
+		if(proCategoryDao.getCategoryById(productCategory.getParentId()).getCategoryLevel() == null)
+			return new ResponseData(400,"Level is null",null);
+		int level = proCategoryDao.getCategoryById(productCategory.getParentId()).getCategoryLevel();
+		productCategorynew.setCategoryLevel((byte) (level+1));
+		productCategorynew.setCategoryName(productCategory.getCategoryName());
+		productCategorynew.setParentId(productCategory.getParentId());
+		productCategorynew.setCategoryStatus((byte) 1);
+		proCategoryDao.add(productCategorynew);
+		return new ResponseData(200,"add success",null);
 	}
 
 	@Override

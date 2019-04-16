@@ -19,6 +19,6 @@ public interface StateTaxDao {
 	StateTax getStateTaxByName(@Param(value = "name") String name);
 
 	//根据州的id修改州税【modifyStateTax】
-	void modifyStateTax(String id,String taxRate);
+	void modifyStateTax(Map<String, String> map);
 
 }

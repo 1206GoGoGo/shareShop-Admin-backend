@@ -53,7 +53,10 @@ public class StateTaxServiceImpl implements StateTaxService {
 		// TODO Auto-generated method stub
 		StateTax stateTax = stateTaxDao.getStateTaxById(id);
 		if(stateTax != null) {
-			stateTaxDao.modifyStateTax(id,taxRate);
+			Map<String,String> map = new HashMap<>();
+			map.put("id", id);
+			map.put("taxRate", taxRate);
+			stateTaxDao.modifyStateTax(map);
 			return new ResponseData(200,"success",null);
 		}
 		return new ResponseData(400,"This State is not found!",null);
