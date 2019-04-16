@@ -170,7 +170,7 @@ public class MemberOrderController {
 	 * @return
 	 */
 	@RequestMapping(value = "/getCountClassForOneGood", method = RequestMethod.GET)
-	public @ResponseBody ResponseData getCountClassForOneGood(int cateId, int pageindex, int pagesize) {
-		return memberOrderService.getCountClassForOneGood(cateId,pageindex , pagesize);
+	public @ResponseBody ResponseData getCountClassForOneGood(int cateId, int pageindex, int pagesize, String timeBe, String timeEn) {
+		return memberOrderService.getCountClassForOneGood(cateId, pageindex, pagesize, timeBe, timeEn);
 	}
 }

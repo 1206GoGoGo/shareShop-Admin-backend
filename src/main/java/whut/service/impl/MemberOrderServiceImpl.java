@@ -22,6 +22,7 @@ import whut.dao.UserLoginDao;
 import whut.pojo.OrderDetail;
 import whut.pojo.OrderMaster;
 import whut.pojo.ProductCategory;
+import whut.pojo.ProductSales;
 import whut.pojo.SellerBill;
 import whut.service.MemberOrderService;
 import whut.utils.JsonUtils;
@@ -521,8 +522,7 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 		//生成数组结点
 		ArrayNode arrNode = mapper.createArrayNode();
 		
-		
-		ProductCategory productCategory = proCategoryDao.ifCategoryExist(String.valueOf(cateId));
+		ProductCategory productCategory = proCategoryDao.getCategoryById(cateId);
 		if(productCategory == null) {
 			return new ResponseData(406,"parameters incorrect",null);
 		}
@@ -553,21 +553,22 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 	}
 
 	@Override
-	public ResponseData getCountClassForOneGood(int cateId, int pageindex, int pagesize) {
+	public ResponseData getCountClassForOneGood(int cateId, int pageindex, int pagesize, String timeBe, String timeEn) {
 		if(cateId!=0) {
-			ProductCategory productCategory = proCategoryDao.ifCategoryExist(String.valueOf(cateId));
+			ProductCategory productCategory = proCategoryDao.getCategoryById(cateId);
 			if(productCategory == null) {
 				return new ResponseData(406,"parameters incorrect",null);
 			}
 		}
-		Map<String, Integer> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<>();
 		map.put("cateId", cateId);
 		map.put("pageindex", pageindex);
 		map.put("pagesize", pagesize);
+		map.put("timeBe", timeBe);
+		map.put("timeEn", timeEn);
 		
-		List temp = dao.getCountClassForOneGood(map);
+		List<ProductSales> productSales = dao.getCountClassForOneGood(map);
 		
-		return new ResponseData(temp);
+		return new ResponseData(productSales);
 	}
-
 }

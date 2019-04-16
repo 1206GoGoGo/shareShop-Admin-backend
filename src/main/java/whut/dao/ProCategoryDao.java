@@ -27,6 +27,7 @@ public interface ProCategoryDao {
 	//根据分类id设置导航栏不显示（状态为2）modifyStatusNoShow
 	public void modifyStatusNoShow(String id);
 
-	
+	//根据分类id获取商品分类信息
+	public ProductCategory getCategoryById(int categoryId);
 
 }

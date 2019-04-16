@@ -36,5 +36,5 @@ public interface MemberOrderService {
 
 	public ResponseData getCountForOneClass(int cateId);
 
-	public ResponseData getCountClassForOneGood(int cateId, int pageindex, int pagesize);
+	public ResponseData getCountClassForOneGood(int cateId, int pageindex, int pagesize, String timeBe, String timeEn);
 }
