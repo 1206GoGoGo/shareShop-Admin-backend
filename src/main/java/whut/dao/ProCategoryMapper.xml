@@ -55,5 +55,9 @@
     	 SELECT * FROM product_category where category_id = #{categoryId}
     </select>
     
+    <select id="ProductCategory" parameterType="string" resultMap="BaseResultMap">
+    	 SELECT * FROM product_category where category_name LIKE CONCAT(CONCAT('%',#{name}),'%')
+    </select>
+    
 
 </mapper>
