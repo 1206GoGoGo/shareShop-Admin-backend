@@ -22,7 +22,7 @@ public class StateTaxController {
 		return stateTaxService.getStateTaxList(pageindex,pagesize);
 	}
 	
-	//根据州的id查看对应州的税率【getStateTaxById】
+	//根据州税的id查看对应州的税率【getStateTaxById】
 	@RequestMapping(value="/getStateTaxById", method = RequestMethod.GET)
 	public @ResponseBody ResponseData getStateTaxById(String id) {
 		return stateTaxService.getStateTaxById(id);
@@ -34,7 +34,7 @@ public class StateTaxController {
 		return stateTaxService.getStateTaxByName(name);
 	}
 	
-	//根据州的id修改州税【modifyStateTax】
+	//根据州税的id修改州税【modifyStateTax】
 	@RequestMapping(value="/modifyStateTax", method = RequestMethod.GET)
 	public @ResponseBody ResponseData modifyStateTax(String id,String taxRate) {
 		return stateTaxService.modifyStateTax(id,taxRate);
