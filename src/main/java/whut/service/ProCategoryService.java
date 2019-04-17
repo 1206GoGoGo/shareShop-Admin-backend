@@ -29,4 +29,6 @@ public interface ProCategoryService {
 
 	public ResponseData getCategoryByName(String name);
 
+	public ResponseData getCategoryById(int categoryId);
+
 }

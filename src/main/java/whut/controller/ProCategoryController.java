@@ -70,4 +70,10 @@ public class ProCategoryController {
 	public @ResponseBody ResponseData getCategoryByName(String name){
 		return proCategoryService.getCategoryByName(name);
 	}
+	
+	//根据分类id获取商品分类信息
+	@RequestMapping(value = "/getCategoryById", method = RequestMethod.GET)
+	public @ResponseBody ResponseData getCategoryById(int id){
+		return proCategoryService.getCategoryById(id);
+	}
 }

@@ -126,4 +126,14 @@ public class ProCategoryServiceImpl implements ProCategoryService{
 		return new ResponseData(200,"success",list);
 	}
 
+	@Override
+	public ResponseData getCategoryById(int categoryId) {
+		// TODO Auto-generated method stub
+		ProductCategory productCategory = proCategoryDao.getCategoryById(categoryId);
+		if(productCategory == null) {
+			return new ResponseData(400,"This Category is not found",null);
+		}
+		return new ResponseData(200,"success",productCategory);
+	}
+
 }
