@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import org.omg.PortableInterceptor.ServerRequestInfo;
-
 /**
  * 店主注册信息
  * @author wangql
@@ -19,8 +17,6 @@ public class SellerRegisterInfo implements Serializable{
     private BigDecimal payment;//缴费金额
 
     private Date time;//注册时间
-
-    private String cardNumber;//提现卡号
 
     public Integer getRegisterId() {
         return registerId;
@@ -54,11 +50,4 @@ public class SellerRegisterInfo implements Serializable{
         this.time = time;
     }
 
-    public String getCardNumber() {
-        return cardNumber;
-    }
-
-    public void setCardNumber(String cardNumber) {
-        this.cardNumber = cardNumber == null ? null : cardNumber.trim();
-    }
 }
