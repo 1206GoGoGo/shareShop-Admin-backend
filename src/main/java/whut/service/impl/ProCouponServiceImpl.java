@@ -164,6 +164,20 @@ public class ProCouponServiceImpl implements ProCouponService{
 		proCouponDao.modifyCouponReceiveStatus(id);
 		return new ResponseData(200,"success",null);
 	}
+
+	@Override
+	public ResponseData getCouponByNameAndType(String name, String type) {
+		// TODO Auto-generated method stub
+		Map<String, String> map = new HashMap<>();
+		map.put("name", name);
+		map.put("type", type);
+		List<CouponInfo> couponLogs = proCouponDao.getCouponByNameAndType(map);
+		if(couponLogs.size() > 0) {
+			return new ResponseData(200,"success",couponLogs);
+		}else {
+			return new ResponseData(400,"No data",null);
+		}
+	}
 	
 	
 }

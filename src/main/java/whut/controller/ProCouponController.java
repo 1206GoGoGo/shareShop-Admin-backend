@@ -99,5 +99,9 @@ public class ProCouponController {
 		return proCouponService.modifyCouponReceiveStatus(id);
 	}
 	
-	
+	//根据优惠券名称和类型联合查询【getCouponByNameAndType】get【String name, String type】
+	@RequestMapping(value = "/getCouponByNameAndType", method = RequestMethod.GET)
+	public @ResponseBody ResponseData getCouponByNameAndType(String name, String type) {
+		return proCouponService.getCouponByNameAndType(name, type);
+	}
 }

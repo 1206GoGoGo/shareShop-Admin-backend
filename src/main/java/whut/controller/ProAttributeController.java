@@ -84,4 +84,5 @@ public class ProAttributeController {
 	public @ResponseBody ResponseData modifyProductAttributeValueByStatus(String id, String status) {
 		return proAttributeService.modifyProductAttributeValueByStatus(id, status);
 	}
+	
 }

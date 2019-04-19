@@ -19,7 +19,7 @@ public interface ProAttributeDao {
 	List<ProductAttributeKey> getProductAttributeKeyByCategoryID(String id);
 
 
-	ProductAttributeValue getProductAttributeValueByIdAndValue(Map<String, String> map);
+	List<ProductAttributeValue> getProductAttributeValueByIdAndValue(Map<String, String> map);
 
 	void addProductAttributeValue(ProductAttributeValue productAttributeValue);
 

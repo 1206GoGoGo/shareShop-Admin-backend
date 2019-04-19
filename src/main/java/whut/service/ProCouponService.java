@@ -33,4 +33,6 @@ public interface ProCouponService {
 
 	ResponseData modifyCouponReceiveStatus(String id);
 
+	ResponseData getCouponByNameAndType(String name, String type);
+
 }

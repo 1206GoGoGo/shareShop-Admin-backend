@@ -34,7 +34,8 @@ public interface ProCouponDao {
 	void addCouponReceive(CouponReceive couponReceive);
 
 	void modifyCouponReceiveStatus(String id);
-
 	
+	//根据优惠券名称和类型联合查询
+	List<CouponInfo> getCouponByNameAndType(Map<String, String> map);
 
 }
