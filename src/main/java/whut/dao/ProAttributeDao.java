@@ -10,7 +10,7 @@ public interface ProAttributeDao {
 
 	List<ProductAttributeKey> getProductAttributeKeyList(Map<String, Integer> map);
 
-	ProductAttributeKey getProductAttributeKeyByIdAndName(Map<String, String> map);
+	List<ProductAttributeKey> getProductAttributeKeyByIdAndName(Map<String, String> map);
 
 	void addProductAttributeKey(ProductAttributeKey productAttributeKey);
 

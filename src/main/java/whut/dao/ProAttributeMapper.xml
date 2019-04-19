@@ -33,7 +33,7 @@
         	and category_id = #{categoryId}
         </if>
         <if test="attrName != null">
-        	and attr_name = #{attrName}
+        	and attr_name LIKE CONCAT(CONCAT('%',#{attrName}),'%')
         </if>
    </select>
    
@@ -70,7 +70,7 @@
         	and attr_key_id = #{attrKeyId}
         </if>
         <if test="attrValue != null">
-        	and attr_value = #{attrValue}
+        	and attr_value LIKE CONCAT(CONCAT('%',#{attrValue}),'%')
         </if>
    </select>
    

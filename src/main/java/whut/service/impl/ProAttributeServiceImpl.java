@@ -53,8 +53,8 @@ public class ProAttributeServiceImpl implements ProAttributeService{
 		Map<String, String> map = new HashMap<>();
 		map.put("categoryId", id);
 		map.put("attrName", name);
-		ProductAttributeKey productAttributeKey = proAttributeDao.getProductAttributeKeyByIdAndName(map);
-		if(productAttributeKey != null)
+		List<ProductAttributeKey> productAttributeKey = proAttributeDao.getProductAttributeKeyByIdAndName(map);
+		if(productAttributeKey.size() > 0)
 			return new ResponseData(200,"success",productAttributeKey);
 		else
 			return new ResponseData(400,"no data",null);
