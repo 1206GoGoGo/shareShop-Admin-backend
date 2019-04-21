@@ -18,7 +18,7 @@ import whut.utils.ResponseData;
 public class ProInfoController {
 	
 	@Autowired
-	public ProInfoService proInfoService;
+	private ProInfoService proInfoService;
 	
 	
 	//获取所有商品列表

@@ -16,7 +16,7 @@ import whut.utils.ResponseData;
 public class StateTaxServiceImpl implements StateTaxService {
 
 	@Autowired
-	public StateTaxDao stateTaxDao;
+	private StateTaxDao stateTaxDao;
 	
 	@Override
 	public ResponseData getStateTaxList(int pageindex, int pagesize) {

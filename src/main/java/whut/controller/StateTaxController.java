@@ -14,7 +14,7 @@ import whut.utils.ResponseData;
 @RequestMapping(value = "/state/tax")
 public class StateTaxController {
 	@Autowired
-	public StateTaxService stateTaxService;
+	private StateTaxService stateTaxService;
 	
 	//查看所有州的税率【getStateTaxList】
 	@RequestMapping(value="/getStateTaxList", method = RequestMethod.GET)

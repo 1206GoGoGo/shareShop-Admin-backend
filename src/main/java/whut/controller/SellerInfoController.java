@@ -14,7 +14,7 @@ import whut.utils.ResponseData;
 public class SellerInfoController {
 	
 	@Autowired
-	public SellerInfoService sellerInfoService;
+	private SellerInfoService sellerInfoService;
 	
 	
 	//获取所有的seller信息
