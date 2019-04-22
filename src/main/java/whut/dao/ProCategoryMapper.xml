@@ -56,5 +56,10 @@
     	 SELECT * FROM product_category where category_name LIKE CONCAT(CONCAT('%',#{name}),'%')
     </select>
     
+    <select id="getCategoryByChildrenID" parameterType="int" resultMap="BaseResultMap">
+    	 SELECT * FROM product_category
+		 WHERE category_id = (select parent_id FROM product_category where category_id = #{id})
+    </select>
+    
 
 </mapper>
