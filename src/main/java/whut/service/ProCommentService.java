@@ -19,7 +19,7 @@ public interface ProCommentService {
 
 	public ResponseData addAgain(String id, String content);
 
-	public ProductComment getCommentById(String id);
+	public ResponseData getCommentById(String id);
 
 	public ResponseData getListByCondition(String proName, String proCode, String userName,String star1,String star2,int pageindex, int pagesize);
 

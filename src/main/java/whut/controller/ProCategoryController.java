@@ -76,4 +76,10 @@ public class ProCategoryController {
 	public @ResponseBody ResponseData getCategoryById(int id){
 		return proCategoryService.getCategoryById(id);
 	}
+	
+	//根据子分类id查询父分类信息getCategoryByChildrenID
+	@RequestMapping(value = "/getCategoryByChildrenID", method = RequestMethod.GET)
+	public @ResponseBody ResponseData getCategoryByChildrenID(String id){
+		return proCategoryService.getCategoryByChildrenID(id);
+	}
 }

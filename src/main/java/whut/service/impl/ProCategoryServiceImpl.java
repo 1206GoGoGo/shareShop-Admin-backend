@@ -1,9 +1,8 @@
 package whut.service.impl;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,7 +42,7 @@ public class ProCategoryServiceImpl implements ProCategoryService{
 		productCategorynew.setCategoryLevel((byte) (level+1));
 		productCategorynew.setCategoryName(productCategory.getCategoryName());
 		productCategorynew.setParentId(productCategory.getParentId());
-		productCategorynew.setCategoryStatus((byte) 1);
+		productCategorynew.setCategoryStatus(productCategory.getCategoryStatus());
 		proCategoryDao.add(productCategorynew);
 		return new ResponseData(200,"add success",null);
 	}
@@ -59,7 +58,7 @@ public class ProCategoryServiceImpl implements ProCategoryService{
 	public ResponseData delete(String id) {
 		// TODO Auto-generated method stub
 		List<ProductCategory> list = new ArrayList<>();
-		list = proCategoryDao.ifHaveChild(id);
+		list = proCategoryDao.getListByParentId(id);
 		if(list.size() == 0) {
 			proCategoryDao.delete(id);
 			return new ResponseData(200,"delete success",null);
@@ -67,28 +66,17 @@ public class ProCategoryServiceImpl implements ProCategoryService{
 		return new ResponseData(406,"There are subcategories under this category",null);
 	}
 
-	@Override
-	public ProductCategory ifCategoryExist(String categoryCode) {
-		// TODO Auto-generated method stub
-		return proCategoryDao.ifCategoryExist(categoryCode);
-	}
-
-	@Override
-	public List<ProductCategory> ifHaveChild(String id) {
-		// TODO Auto-generated method stub
-		return proCategoryDao.ifHaveChild(id);
-	}
 
 	@Override
 	public ResponseData deleteConfirm(String id) {
 		// TODO Auto-generated method stub
 		proCategoryDao.delete(id);
 		List<ProductCategory> list = new ArrayList<>();
-		list = proCategoryDao.ifHaveChild(id);
+		list = proCategoryDao.getListByParentId(id);
 		for(int i = 0; i < list.size(); i++) {
 			proCategoryDao.delete(list.get(i).getCategoryId().toString());
 			List<ProductCategory> list1 = new ArrayList<>();
-			list1 = proCategoryDao.ifHaveChild(list.get(i).getCategoryId().toString());
+			list1 = proCategoryDao.getListByParentId(list.get(i).getCategoryId().toString());
 			if(list1.size() > 0) {
 				for(int j = 0; j < list1.size(); j++) {
 					proCategoryDao.delete(list1.get(j).getCategoryId().toString());
@@ -102,7 +90,7 @@ public class ProCategoryServiceImpl implements ProCategoryService{
 	public ResponseData getListByParentId(String id) {
 		// TODO Auto-generated method stub
 		List<ProductCategory> list = new ArrayList<>();
-		list = proCategoryDao.ifHaveChild(id);
+		list = proCategoryDao.getListByParentId(id);
 		if(list.size() == 0) {
 			return new ResponseData(406,"There are no subcategories",null);
 		}
@@ -134,6 +122,20 @@ public class ProCategoryServiceImpl implements ProCategoryService{
 			return new ResponseData(400,"This Category is not found",null);
 		}
 		return new ResponseData(200,"success",productCategory);
+	}
+
+	@Override
+	public ResponseData getCategoryByChildrenID(String id) {
+		// TODO Auto-generated method stub
+		ProductCategory productCategory = proCategoryDao.getCategoryById(Integer.parseInt(id));
+		if(productCategory == null) {
+			return new ResponseData(400,"This Category is not found",null);
+		}
+		ProductCategory productCategory1 = proCategoryDao.getCategoryByChildrenID(productCategory.getParentId());
+		if(productCategory1 == null) {
+			return new ResponseData(400,"This category has no parent category",null);
+		}
+		return new ResponseData(200,"success",productCategory1);
 	}
 
 }

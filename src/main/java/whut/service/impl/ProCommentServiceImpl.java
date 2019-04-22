@@ -80,9 +80,13 @@ public class ProCommentServiceImpl implements ProCommentService{
 	}
 
 	@Override
-	public ProductComment getCommentById(String id) {
+	public ResponseData getCommentById(String id) {
 		// TODO Auto-generated method stub
-		return proCommentDao.getCommentById(id);
+		ProductComment productComment = proCommentDao.getCommentById(id);
+		if(productComment == null) {
+			return new ResponseData(406,"There are no comments",null);
+		}
+		return new ResponseData(200,"success",productComment);
 	}
 
 	@Override

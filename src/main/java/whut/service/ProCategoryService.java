@@ -1,8 +1,6 @@
 package whut.service;
 
 
-import java.util.List;
-
 import whut.pojo.ProductCategory;
 import whut.utils.ResponseData;
 
@@ -17,10 +15,6 @@ public interface ProCategoryService {
 
 	public ResponseData delete(String id);
 
-	public ProductCategory ifCategoryExist(String categoryCode);
-
-	public List<ProductCategory> ifHaveChild(String id);
-
 	public ResponseData deleteConfirm(String id);
 
 	public ResponseData getListByParentId(String id);
@@ -30,5 +24,7 @@ public interface ProCategoryService {
 	public ResponseData getCategoryByName(String name);
 
 	public ResponseData getCategoryById(int categoryId);
+
+	public ResponseData getCategoryByChildrenID(String id);
 
 }

@@ -37,11 +37,8 @@
         WHERE category_id = #{id}
     </select>
     
-    <select id="ifCategoryExist" parameterType="string" resultMap="BaseResultMap">
-        SELECT * FROM product_category where category_code = #{categoryCode}
-   </select>
 
-	<select id="ifHaveChild" parameterType="string"  resultMap="BaseResultMap">
+	<select id="getListByParentId" parameterType="string"  resultMap="BaseResultMap">
         SELECT * FROM product_category where parent_id = #{id} and category_status = 1
 	</select>
 	

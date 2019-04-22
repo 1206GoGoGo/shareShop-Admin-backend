@@ -58,4 +58,11 @@ public class ProCommentController {
 		return proCommentService.getListByCondition(proName,proCode,userName,star1,star2,pageindex, pagesize);
 		
 	}
+	
+	//根据评论id查看商品评论
+	@RequestMapping(value = "/getCommentById", method = RequestMethod.GET)
+	public @ResponseBody ResponseData getCommentById(String id){
+		return proCommentService.getCommentById(id);
+		
+	}
 }
