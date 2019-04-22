@@ -12,8 +12,14 @@
     <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
   </resultMap>
   
+    <sql id="orderCart">
+  		SELECT oc.cart_id,oc.product_id,oc.user_id,oc.product_specs_id,oc.product_quantity,ps.price product_price,oc.add_time FROM order_cart oc 
+		LEFT JOIN product_specs ps ON oc.product_specs_id = ps.product_specs_id
+    </sql>
+  
    <select id="getListByUser" parameterType="int" resultMap="BaseResultMap">
-        SELECT * FROM order_cart where user_id = #{id}
+         <include refid="orderCart"/>
+         where user_id = #{id}
    </select>
    
    <select id="getAmountById" parameterType="int" resultType="java.lang.Integer">
