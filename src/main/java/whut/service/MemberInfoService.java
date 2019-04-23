@@ -8,7 +8,7 @@ public interface MemberInfoService {
 
 	public ResponseData getList(int status,int pageindex, int pagesize);
 
-	public ResponseData add(UserInfo user);
+	public ResponseData useradd(UserInfo user);
 
 	public ResponseData delete(String jsonString);
 

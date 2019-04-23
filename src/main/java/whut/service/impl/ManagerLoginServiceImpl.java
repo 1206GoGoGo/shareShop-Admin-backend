@@ -31,7 +31,7 @@ public class ManagerLoginServiceImpl implements ManagerLoginService {
 		String password = jsonUtils.getStringValue("password");
 
 		UserLogin userLogin = loginDao.getLoginInfo(username);
-		if( !EncryptUtil.MD5(password).equals(userLogin.getPassword())) {
+		if( !EncryptUtil.MD5ForPW(password).equals(userLogin.getPassword())) {
 			return new ResponseData(4061,"password error",null);
 		}
 		if( userLogin.getLevel()!=20 ) {

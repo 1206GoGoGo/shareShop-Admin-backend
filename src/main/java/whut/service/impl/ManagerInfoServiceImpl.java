@@ -10,6 +10,7 @@ import whut.dao.UserLoginDao;
 import whut.pojo.ManagerInfo;
 import whut.pojo.UserLogin;
 import whut.service.ManagerInfoService;
+import whut.utils.EncryptUtil;
 import whut.utils.JsonUtils;
 import whut.utils.ResponseData;
 @Service
@@ -32,7 +33,7 @@ public class ManagerInfoServiceImpl implements ManagerInfoService {
 	}
 
 	@Override
-	public ResponseData add(ManagerInfo managerInfo) {
+	public ResponseData manageAdd(ManagerInfo managerInfo) {
 		String username = managerInfo.getUserLogin().getUsername();
 		String password = managerInfo.getUserLogin().getPassword();
 		//判断用户名、密码是否符合规则
@@ -50,7 +51,7 @@ public class ManagerInfoServiceImpl implements ManagerInfoService {
 		//添加用户登录表数据
 		UserLogin userLogin = new UserLogin();
 		userLogin.setUsername(username);
-		userLogin.setPassword(password);
+		userLogin.setPassword(EncryptUtil.MD5ForPW(password));
 		userLogin.setLevel( managerInfo.getUserLogin().getLevel() );	//设置用户等级、管理员类型需要传入
 		userLogin.setStatus((byte)1);	//设置用户状态
 		loginDao.addUser(userLogin);
@@ -65,8 +66,13 @@ public class ManagerInfoServiceImpl implements ManagerInfoService {
 		managerInfo.setUserId(userLogin.getUserId());
 		managerInfo.setUserLogin(userLogin);
 
-		//判断用户名是否重复
-		dao.add(managerInfo);
+		try {
+			dao.add(managerInfo);
+		}catch(Exception e) {
+			loginDao.deleteUserLoginForError(userLogin.getUserId());
+			return new ResponseData(5001,"system registration exception",null);
+		}
+		
 		return new ResponseData(200,"success",null);
 
 	}

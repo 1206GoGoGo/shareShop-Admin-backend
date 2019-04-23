@@ -41,7 +41,7 @@ public class MemberInfoController {
 	
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public @ResponseBody ResponseData add(@RequestBody UserInfo user){
-		return  memberInfoService.add(user);
+		return  memberInfoService.useradd(user);
 	}
 	
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)

@@ -156,13 +156,23 @@ public class EncryptUtil {
         }
         return result;
     }
-
     /**
+	     * 密码专用
+	* md5加密算法进行加密（不可逆）
+	* @param res 需要加密的原文
+	* @return
+	*/
+	public static String MD5(String res) {
+	   return messageDigest(res, MD5);
+	}
+	
+    /**
+          * 密码专用
      * md5加密算法进行加密（不可逆）
      * @param res 需要加密的原文
      * @return
      */
-    public static String MD5(String res) {
+    public static String MD5ForPW(String res) {
         return messageDigest(res+"abc", MD5);
     }
 
