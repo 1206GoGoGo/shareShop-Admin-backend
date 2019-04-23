@@ -33,6 +33,6 @@ public interface ProCategoryDao {
 	public List<ProductCategory> getListByParentId(String id);
 
 	//根据子分类id查询父分类信息getCategoryByChildrenID
-	public ProductCategory getCategoryByChildrenID(Integer parentId);
+	public ProductCategory getCategoryByChildrenID(Integer id);
 
 }
