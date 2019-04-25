@@ -64,7 +64,7 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 	public ResponseData getListSearch(int pageindex, int pagesize, int status, String orderNumber, String username, 
 			String consignee, String timeBe, String timeEn) {
 		int userid = 0;
-		if(username.equals(null)) {
+		if(username != null) {
 			try {
 				userid = loginDao.getLoginInfo(username).getUserId();
 			}catch(Exception e) {
@@ -75,8 +75,8 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 		Map<String, Object> map = new HashMap<>();
 		map.put("pageindex", pageindex);
 		map.put("pagesize", pagesize);
-		map.put("userid", userid);
-		map.put("orderStatus", status);
+		map.put("id", userid);
+		map.put("status", status);
 		map.put("orderNumber", orderNumber);
 		map.put("consignee", consignee);
 		map.put("timeBe", timeBe);

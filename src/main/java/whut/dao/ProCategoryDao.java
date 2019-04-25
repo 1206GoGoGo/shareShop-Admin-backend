@@ -35,4 +35,5 @@ public interface ProCategoryDao {
 	//根据子分类id查询父分类信息getCategoryByChildrenID
 	public ProductCategory getCategoryByChildrenID(String id);
 
+
 }

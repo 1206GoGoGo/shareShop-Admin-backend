@@ -72,7 +72,7 @@ public class MemberOrderController {
 	//暂时不实现
 	@RequestMapping(value = "/getDeliveryInfo", method = RequestMethod.GET)
 	public @ResponseBody ResponseData getDeliveryInfo(int id) {
-		return  new ResponseData(400, "success", null);
+		return  new ResponseData(400, "error", null);
 	}
 	
 

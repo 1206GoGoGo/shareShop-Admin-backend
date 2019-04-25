@@ -21,6 +21,7 @@ import whut.dao.UserLoginDao;
 import whut.pojo.UserInfo;
 import whut.pojo.UserLogin;
 import whut.service.MemberInfoService;
+import whut.utils.EncryptUtil;
 import whut.utils.JsonUtils;
 import whut.utils.ResponseData;
 @Service
@@ -34,7 +35,7 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 	
 	@Autowired
 	private OrderDao orderDao;
-	
+
 	@Override
 	public ResponseData getList(int status,int pageindex, int pagesize) {
 		Map<String,Integer> map = new HashMap<>();
@@ -52,8 +53,8 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 	}
 
 	@Override
-	public ResponseData add(UserInfo user){
-
+	public ResponseData useradd(UserInfo user){
+		
 		String username = user.getUserLogin().getUsername();
 		String password = user.getUserLogin().getPassword();
 		//判断用户名、密码是否符合规则
@@ -104,22 +105,27 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 		//添加用户登录表数据
 		UserLogin userLogin = new UserLogin();
 		userLogin.setUsername(username);
-		userLogin.setPassword(password);
+		userLogin.setPassword(EncryptUtil.MD5ForPW(password));
 		userLogin.setLevel(1);	//设置用户等级
 		userLogin.setStatus((byte)1);	//设置用户状态
-		
 		loginDao.addUser(userLogin);
 		
 		userLogin = loginDao.getLoginInfo(username);
-		
 		//给user对象赋值
 		user.setUserId(userLogin.getUserId());
 		user.setUserLogin(userLogin);
-
 		//添加用户
-		dao.add(user);
+		try {
+			dao.add(user);
+		}catch(Exception e) {
+			loginDao.deleteUserLoginForError(userLogin.getUserId());
+			return new ResponseData(5001,"system registration exception",null);
+		}
+		
 		return new ResponseData(200,"success",null);
 	}
+	
+
 
 	@Override
 	public ResponseData delete( String jsonString) {
