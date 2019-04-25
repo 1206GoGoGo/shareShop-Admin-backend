@@ -127,15 +127,11 @@ public class ProCategoryServiceImpl implements ProCategoryService{
 	@Override
 	public ResponseData getCategoryByChildrenID(String id) {
 		// TODO Auto-generated method stub
-		ProductCategory productCategory = proCategoryDao.getCategoryById(Integer.parseInt(id));
+		ProductCategory productCategory = proCategoryDao.getCategoryByChildrenID(id);
 		if(productCategory == null) {
 			return new ResponseData(400,"This Category is not found",null);
 		}
-		ProductCategory productCategory1 = proCategoryDao.getCategoryByChildrenID(productCategory.getParentId());
-		if(productCategory1 == null) {
-			return new ResponseData(400,"This category has no parent category",null);
-		}
-		return new ResponseData(200,"success",productCategory1);
+		return new ResponseData(200,"success",productCategory);
 	}
 
 }
