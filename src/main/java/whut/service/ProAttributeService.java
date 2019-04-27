@@ -6,7 +6,7 @@ import whut.utils.ResponseData;
 
 public interface ProAttributeService {
 
-	ResponseData getProductAttributeKeyList(int pageindex, int pagesize);
+	ResponseData getProductAttributeKeyList(Integer pageindex, Integer pagesize);
 
 	ResponseData addProductAttributeKey(ProductAttributeKey productAttributeKey);
 

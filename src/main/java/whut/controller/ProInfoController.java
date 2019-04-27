@@ -23,7 +23,7 @@ public class ProInfoController {
 	
 	//获取所有商品列表
 	@RequestMapping(value = "/getList", method = RequestMethod.GET)
-	public @ResponseBody ResponseData getList(int pageindex, int pagesize) {
+	public @ResponseBody ResponseData getList(Integer pageindex, Integer pagesize) {
 		return proInfoService.getList(pageindex, pagesize);
 
 	}
@@ -50,7 +50,7 @@ public class ProInfoController {
 	
 	//根据商品名称查找商品
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public @ResponseBody ResponseData search(String name,int pageindex, int pagesize){
+	public @ResponseBody ResponseData search(String name,Integer pageindex, Integer pagesize){
 		return proInfoService.search(name,pageindex, pagesize);
 	}
 	
@@ -77,25 +77,25 @@ public class ProInfoController {
 	
 	//根据分类获取商品列表
 	@RequestMapping(value = "/getListByCategory", method = RequestMethod.GET)
-	public @ResponseBody ResponseData getListByCategory(String id,int pageindex, int pagesize){
+	public @ResponseBody ResponseData getListByCategory(String id,Integer pageindex, Integer pagesize){
 		return proInfoService.getListByCategory(id,pageindex, pagesize);	
 	}
 	
 	//根据审核状态获取所有的商品列表
 	@RequestMapping(value = "/getIfcheckedList", method = RequestMethod.GET)
-	public @ResponseBody ResponseData getIfcheckedList(String status,int pageindex, int pagesize){
+	public @ResponseBody ResponseData getIfcheckedList(String status,Integer pageindex, Integer pagesize){
 		return proInfoService.getIfcheckedList(status,pageindex, pagesize);	
 	}
 	
 	//根据上下架状态获取所有的商品列表
 	@RequestMapping(value = "/getIfShelfList", method = RequestMethod.GET)
-	public @ResponseBody ResponseData getIfShelfList(String status,int pageindex, int pagesize){
+	public @ResponseBody ResponseData getIfShelfList(String status,Integer pageindex, Integer pagesize){
 		return proInfoService.getIfShelfList(status,pageindex, pagesize);	
 	}
 	
 	//管理员联合查询
 	@RequestMapping(value = "/getListByCondition", method = RequestMethod.GET)
-	public @ResponseBody ResponseData getListByCondition(String name, String procode, String categoryId1, String categoryId2,String categoryId3,String status1,String status2,int pageindex, int pagesize){
+	public @ResponseBody ResponseData getListByCondition(String name, String procode, String categoryId1, String categoryId2,String categoryId3,String status1,String status2,Integer pageindex, Integer pagesize){
 		return proInfoService.getListByCondition(name,procode,categoryId1,categoryId2,categoryId3,status1,status2,pageindex, pagesize);	
 	}
 	

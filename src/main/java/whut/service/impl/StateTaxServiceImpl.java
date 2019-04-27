@@ -19,8 +19,12 @@ public class StateTaxServiceImpl implements StateTaxService {
 	private StateTaxDao stateTaxDao;
 	
 	@Override
-	public ResponseData getStateTaxList(int pageindex, int pagesize) {
+	public ResponseData getStateTaxList(Integer pageindex, Integer pagesize) {
 		// TODO Auto-generated method stub
+		if(pageindex == null)
+			pageindex = 0;
+		if(pagesize == null)
+			pagesize = 20;
 		Map<String, Integer> map = new HashMap<>();
 		map.put("pageindex", pageindex);
 		map.put("pagesize", pagesize);

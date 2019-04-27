@@ -23,8 +23,12 @@ public class SellerInfoServiceImpl implements SellerInfoService{
 	private UserLoginDao userLoginDao;
 	
 	@Override
-	public ResponseData getSellerList(int pageindex, int pagesize) {
+	public ResponseData getSellerList(Integer pageindex, Integer pagesize) {
 		// TODO Auto-generated method stub
+		if(pageindex == null)
+			pageindex = 0;
+		if(pagesize == null)
+			pagesize = 20;
 		Map<String,Object> map = new HashMap<>();
 		map.put("pageindex", pageindex);
 		map.put("pagesize", pagesize);

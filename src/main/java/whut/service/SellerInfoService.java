@@ -4,7 +4,7 @@ import whut.utils.ResponseData;
 
 public interface SellerInfoService {
 
-	ResponseData getSellerList(int pageindex, int pagesize);
+	ResponseData getSellerList(Integer pageindex, Integer pagesize);
 
 	ResponseData addSeller(String id);
 

@@ -22,8 +22,12 @@ public class ProCommentServiceImpl implements ProCommentService{
 	private ProCommentDao proCommentDao;
 
 	@Override
-	public ResponseData getListByProduct(String id,int pageindex, int pagesize) {
+	public ResponseData getListByProduct(String id,Integer pageindex, Integer pagesize) {
 		// TODO Auto-generated method stub
+		if(pageindex == null)
+			pageindex = 0;
+		if(pagesize == null)
+			pagesize = 20;
 		Map<String,Object> map = new HashMap<>();
 		map.put("productId", id);
 		map.put("pageindex", pageindex);
@@ -37,8 +41,12 @@ public class ProCommentServiceImpl implements ProCommentService{
 	}
 
 	@Override
-	public ResponseData getListByUser(String id,int pageindex, int pagesize) {
+	public ResponseData getListByUser(String id,Integer pageindex, Integer pagesize) {
 		// TODO Auto-generated method stub
+		if(pageindex == null)
+			pageindex = 0;
+		if(pagesize == null)
+			pagesize = 20;
 		Map<String,Object> map = new HashMap<>();
 		map.put("userId", id);
 		map.put("pageindex", pageindex);
@@ -90,9 +98,13 @@ public class ProCommentServiceImpl implements ProCommentService{
 	}
 
 	@Override
-	public ResponseData getListByCondition(String proName, String proCode, String userName,String star1,String star2,int pageindex, int pagesize) {
+	public ResponseData getListByCondition(String proName, String proCode, String userName,String star1,String star2,Integer pageindex, Integer pagesize) {
 		// TODO Auto-generated method stub
 		//商品评论：管理员要显示商品编码、商品名称、评价的用户名。（新建一个POJO类）
+		if(pageindex == null)
+			pageindex = 0;
+		if(pagesize == null)
+			pagesize = 20;
 		Map<String,Object> map = new HashMap<>();
 		map.put("proName", proName);
 		map.put("spu", proCode);

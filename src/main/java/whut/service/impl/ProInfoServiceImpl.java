@@ -23,8 +23,12 @@ public class ProInfoServiceImpl implements ProInfoService{
 	private ProInfoDao proInfoDao;
 	
 	@Override
-	public ResponseData getList(int pageindex, int pagesize) {
+	public ResponseData getList(Integer pageindex, Integer pagesize) {
 		// TODO Auto-generated method stub
+		if(pageindex == null)
+			pageindex = 0;
+		if(pagesize == null)
+			pagesize = 20;
 		Map<String,Object> map = new HashMap<>();
 		map.put("pageindex", pageindex);
 		map.put("pagesize", pagesize);
@@ -60,8 +64,12 @@ public class ProInfoServiceImpl implements ProInfoService{
 	}
 
 	@Override
-	public ResponseData search(String name,int pageindex, int pagesize) {
+	public ResponseData search(String name,Integer pageindex, Integer pagesize) {
 		// TODO Auto-generated method stub
+		if(pageindex == null)
+			pageindex = 0;
+		if(pagesize == null)
+			pagesize = 20;
 		Map<String,Object> map = new HashMap<>();
 		map.put("productName", name);
 		map.put("pageindex", pageindex);
@@ -102,8 +110,12 @@ public class ProInfoServiceImpl implements ProInfoService{
 	}
 
 	@Override
-	public ResponseData getListByCategory(String id,int pageindex, int pagesize) {
+	public ResponseData getListByCategory(String id,Integer pageindex, Integer pagesize) {
 		// TODO Auto-generated method stub
+		if(pageindex == null)
+			pageindex = 0;
+		if(pagesize == null)
+			pagesize = 20;
 		Map<String,Object> map = new HashMap<>();
 		map.put("oneCategoryId", id);
 		map.put("twoCategoryId", id);
@@ -129,8 +141,12 @@ public class ProInfoServiceImpl implements ProInfoService{
 	}
 
 	@Override
-	public ResponseData getIfcheckedList(String status,int pageindex, int pagesize) {
+	public ResponseData getIfcheckedList(String status,Integer pageindex, Integer pagesize) {
 		// TODO Auto-generated method stub
+		if(pageindex == null)
+			pageindex = 0;
+		if(pagesize == null)
+			pagesize = 20;
 		Map<String,Object> map = new HashMap<>();
 		map.put("auditStatus", status);
 		map.put("pageindex", pageindex);
@@ -144,8 +160,12 @@ public class ProInfoServiceImpl implements ProInfoService{
 	}
 
 	@Override
-	public ResponseData getIfShelfList(String status,int pageindex, int pagesize) {
+	public ResponseData getIfShelfList(String status,Integer pageindex, Integer pagesize) {
 		// TODO Auto-generated method stub
+		if(pageindex == null)
+			pageindex = 0;
+		if(pagesize == null)
+			pagesize = 20;
 		Map<String,Object> map = new HashMap<>();
 		map.put("publishStatus", status);
 		map.put("pageindex", pageindex);
@@ -160,8 +180,12 @@ public class ProInfoServiceImpl implements ProInfoService{
 
 	@Override
 	public ResponseData getListByCondition(String name, String procode, String categoryId1, String categoryId2,
-			String categoryId3, String status1, String status2,int pageindex, int pagesize) {
+			String categoryId3, String status1, String status2,Integer pageindex, Integer pagesize) {
 		// TODO Auto-generated method stub
+		if(pageindex == null)
+			pageindex = 0;
+		if(pagesize == null)
+			pagesize = 20;
 		Map<String, Object> map = new HashMap<>();
 		map.put("productName", name);
 		map.put("productCode", procode);

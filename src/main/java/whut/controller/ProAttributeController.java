@@ -21,7 +21,7 @@ public class ProAttributeController {
 	
 	//查询商品属性Key表
 	@RequestMapping(value = "/getProductAttributeKeyList", method = RequestMethod.GET)
-	public @ResponseBody ResponseData getProductAttributeKeyList(int pageindex, int pagesize) {
+	public @ResponseBody ResponseData getProductAttributeKeyList(Integer pageindex, Integer pagesize) {
 		return proAttributeService.getProductAttributeKeyList(pageindex, pagesize);
 	}
 	

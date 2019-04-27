@@ -4,7 +4,7 @@ import whut.utils.ResponseData;
 
 public interface StateTaxService {
 
-	ResponseData getStateTaxList(int pageindex, int pagesize);
+	ResponseData getStateTaxList(Integer pageindex, Integer pagesize);
 
 	ResponseData getStateTaxById(String id);
 

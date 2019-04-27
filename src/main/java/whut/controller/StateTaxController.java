@@ -18,7 +18,7 @@ public class StateTaxController {
 	
 	//查看所有州的税率【getStateTaxList】
 	@RequestMapping(value="/getStateTaxList", method = RequestMethod.GET)
-	public @ResponseBody ResponseData getStateTaxList(int pageindex, int pagesize) {
+	public @ResponseBody ResponseData getStateTaxList(Integer pageindex, Integer pagesize) {
 		return stateTaxService.getStateTaxList(pageindex,pagesize);
 	}
 	
