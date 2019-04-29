@@ -32,9 +32,9 @@ public class CommonManageController {
 	 * @param productDiscount
 	 * @return
 	 */
-	@RequestMapping(value = "/discount/modify", method = RequestMethod.POST)
-	public @ResponseBody ResponseData modifyDiscount(@RequestBody ProductDiscount productDiscount) {
-		return commonManageService.modifyDiscount(productDiscount);
+	@RequestMapping(value = "/sysInfo/get", method = RequestMethod.GET)
+	public @ResponseBody ResponseData getSysInfo() {
+		return commonManageService.getSysInfo();
 	}
 	
 }

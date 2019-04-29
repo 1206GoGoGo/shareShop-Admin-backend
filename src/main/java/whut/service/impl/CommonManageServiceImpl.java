@@ -3,10 +3,16 @@ package whut.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import whut.dao.ProDiscountDao;
 import whut.pojo.ProductDiscount;
 import whut.service.CommonManageService;
+import whut.utils.JedisUtil;
 import whut.utils.ResponseData;
+import whut.utils.SolrJUtil;
 
 @Service
 public class CommonManageServiceImpl implements CommonManageService {
@@ -50,6 +56,35 @@ public class CommonManageServiceImpl implements CommonManageService {
 		productDiscountNew.setDiscountId(5);
 		proDiscountDao.modify(productDiscountNew);
 		return new ResponseData(200,"success",null);
+	}
+
+	@Override
+	public ResponseData getSysInfo() {
+		
+		ObjectMapper mapper = new ObjectMapper();
+		//ArrayNode arrNode = mapper.createArrayNode();
+		
+		ObjectNode objNode = mapper.createObjectNode();
+		try {
+			SolrJUtil.getSolrClient();
+			objNode.put("solr", "ok");
+		}catch(Exception e) {
+			//Solr服务器异常
+			objNode.put("solr", "error");
+		}
+		//arrNode.add(objNode1);
+		
+		//ObjectNode objNode2 = mapper.createObjectNode();
+		try {
+			JedisUtil.getJedis().getClient().close();
+			objNode.put("redis", "ok");
+		}catch(Exception e) {
+			//redis服务器异常
+			objNode.put("redis", "error");
+		}
+		//arrNode.add(objNode2);
+		
+		return new ResponseData(200,"success",objNode);
 	}
 
 }

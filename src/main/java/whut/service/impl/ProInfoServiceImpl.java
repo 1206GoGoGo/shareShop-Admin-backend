@@ -36,6 +36,7 @@ public class ProInfoServiceImpl implements ProInfoService{
 			this.updateData();
 			return new ResponseData(200,"success",null);
 		}catch(Exception e) {
+			System.out.println(e);
 			return new ResponseData(400,"error",null);
 		}
 	}

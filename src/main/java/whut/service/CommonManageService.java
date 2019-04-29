@@ -9,4 +9,6 @@ public interface CommonManageService {
 
 	ResponseData modifyDiscount(ProductDiscount productDiscount);
 
+	ResponseData getSysInfo();
+
 }
