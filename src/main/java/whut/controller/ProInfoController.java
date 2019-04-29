@@ -20,6 +20,11 @@ public class ProInfoController {
 	@Autowired
 	private ProInfoService proInfoService;
 	
+	//更新soler中商品信息
+	@RequestMapping(value = "/update", method = RequestMethod.GET)
+	public @ResponseBody ResponseData update() {
+		return proInfoService.updateSolrData();
+	}
 	
 	//获取所有商品列表
 	@RequestMapping(value = "/getList", method = RequestMethod.GET)

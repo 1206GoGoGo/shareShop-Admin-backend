@@ -63,8 +63,8 @@
     <result column="input_time" jdbcType="TIMESTAMP" property="inputTime" />
     <result column="modified_time" jdbcType="TIMESTAMP" property="modifiedTime" />
     <result column="pscore" jdbcType="DOUBLE" property="pscore"/>
-    <result column="min_price" jdbcType="DECIMAL" property="minPrice"/>
-    <result column="max_price" jdbcType="DECIMAL"  property="maxPrice"/>
+    <result column="min_price" jdbcType="DOUBLE" property="minPrice"/>
+    <result column="max_price" jdbcType="DOUBLE"  property="maxPrice"/>
     <result column="collect" jdbcType="INTEGER" property="collect"/>
    	<result column="cart" jdbcType="INTEGER" property="cart"/>
    	<result column="sales" jdbcType="INTEGER" property="sales"/>

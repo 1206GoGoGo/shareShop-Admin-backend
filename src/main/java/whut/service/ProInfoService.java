@@ -7,7 +7,9 @@ import whut.utils.ResponseData;
 
 
 public interface ProInfoService {
-
+	
+	public ResponseData updateSolrData();
+	
 	public ResponseData getList(Integer pageindex, Integer pagesize);
 
 	public ResponseData getDetail(String id);
