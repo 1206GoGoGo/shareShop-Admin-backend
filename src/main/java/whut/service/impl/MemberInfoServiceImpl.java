@@ -95,12 +95,14 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 		}
 		map.put("email", null);
 		
-		String identityCardNo = user.getIdentityCardNo();
-		map.put("identityCardNo", identityCardNo);
-		if(!dao.searchAllInfoByUserInfo(map).isEmpty()) {
-			return new ResponseData(4064,"identityCardNo is occupied",null);
-		}
-		map.put("identityCardNo", null);
+//		String identityCardNo = user.getIdentityCardNo();
+//		map.put("identityCardNo", identityCardNo);
+//		if(!dao.searchAllInfoByUserInfo(map).isEmpty()) {
+//			return new ResponseData(4064,"identityCardNo is occupied",null);
+//		}
+//		map.put("identityCardNo", null);
+		
+		//处理推荐信息待处理
 		
 		//添加用户登录表数据
 		UserLogin userLogin = new UserLogin();
@@ -113,7 +115,7 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 		userLogin = loginDao.getLoginInfo(username);
 		//给user对象赋值
 		user.setUserId(userLogin.getUserId());
-		user.setUserLogin(userLogin);
+		user.setRegisterTime(new Date());
 		//添加用户
 		try {
 			dao.add(user);
