@@ -36,12 +36,12 @@ public class ProCategoryServiceImpl implements ProCategoryService{
 		
 		ProductCategory productCategorynew = new ProductCategory();
 		//根据传来的父分类id获取其所属层级
-		if(proCategoryDao.getCategoryById(productCategory.getParentId()).getCategoryLevel() == null)
-			return new ResponseData(400,"Level is null",null);
-		int level = proCategoryDao.getCategoryById(productCategory.getParentId()).getCategoryLevel();
+		//if(proCategoryDao.getCategoryById(productCategory.getParentId()).getCategoryLevel() == null)
+			//return new ResponseData(400,"Level is null",null);
+		int level = proCategoryDao.getCategoryById(productCategory.getCategoryId()).getCategoryLevel();
 		productCategorynew.setCategoryLevel((byte) (level+1));
 		productCategorynew.setCategoryName(productCategory.getCategoryName());
-		productCategorynew.setParentId(productCategory.getParentId());
+		productCategorynew.setParentId(productCategory.getCategoryId());
 		productCategorynew.setCategoryStatus(productCategory.getCategoryStatus());
 		proCategoryDao.add(productCategorynew);
 		return new ResponseData(200,"add success",null);
@@ -127,8 +127,8 @@ public class ProCategoryServiceImpl implements ProCategoryService{
 	@Override
 	public ResponseData getCategoryByChildrenID(String id) {
 		// TODO Auto-generated method stub
-		ProductCategory productCategory = proCategoryDao.getCategoryByChildrenID(id);
-		if(productCategory == null) {
+		List<ProductCategory> productCategory = proCategoryDao.getCategoryByChildrenID(id);
+		if(productCategory.size() == 0) {
 			return new ResponseData(400,"This Category is not found",null);
 		}
 		return new ResponseData(200,"success",productCategory);
