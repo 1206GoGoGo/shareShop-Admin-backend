@@ -26,14 +26,12 @@ public class LoginFilter implements Filter{
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		
 		//用户登录不过滤
 		if( ((HttpServletRequest)request).getRequestURI().indexOf("/manager/login")>-1 ) {
 			//继续执行
 			chain.doFilter(request,response);
 			return;
 		}
-		
 
 		//获取cookie和session
         String sercityOldCookie = null;
