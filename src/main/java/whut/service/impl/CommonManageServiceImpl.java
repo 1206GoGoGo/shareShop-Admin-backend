@@ -66,10 +66,11 @@ public class CommonManageServiceImpl implements CommonManageService {
 		
 		ObjectNode objNode = mapper.createObjectNode();
 		try {
-			SolrJUtil.getSolrClient();
+			SolrJUtil.getSolrClient().commit("products_core");
 			objNode.put("solr", "ok");
 		}catch(Exception e) {
 			//Solr服务器异常
+			System.out.println(e);
 			objNode.put("solr", "error");
 		}
 		//arrNode.add(objNode1);
