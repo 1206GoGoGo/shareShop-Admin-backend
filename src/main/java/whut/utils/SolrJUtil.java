@@ -56,8 +56,8 @@ public class SolrJUtil {
         solrQuery.setRows(rows);
         //设置默认搜素域
         solrQuery.set("df", "Ptitle");
-        if(!sortAsc.isEmpty()) {solrQuery.setSort(sortAsc, SolrQuery.ORDER.asc);}
-        if(!sortDesc.isEmpty()) {solrQuery.addSort(sortDesc, SolrQuery.ORDER.desc);}
+        if(sortAsc != null) {solrQuery.setSort(sortAsc, SolrQuery.ORDER.asc);}
+        if(sortDesc != null) {solrQuery.addSort(sortDesc, SolrQuery.ORDER.desc);}
         if(queryItem != null) {
         	solrQuery.setFields(queryItem);
         }

@@ -23,7 +23,7 @@ public interface ProCouponService {
 
 	ResponseData addCouponLogs(CouponLogs couponLogs);
 
-	ResponseData getCouponLogsDetail(String id, String orderNumber);
+	ResponseData getCouponLogsDetail(String id, String status, String orderNum, Integer pageindex, Integer pagesize);
 
 	ResponseData getCouponLogsListByStatus(String status,Integer pageindex, Integer pagesize);
 

@@ -25,7 +25,7 @@ public interface ProCouponDao {
 
 	void addCouponLogs(CouponLogs couponLogs);
 
-	CouponLogs getCouponLogsDetail(Map<String, String> map);
+	CouponLogs getCouponLogsDetail(Map<String, Object> map);
 
 	List<CouponLogs> getCouponLogsListByStatus(Map<String, Object> map);
 
@@ -37,5 +37,6 @@ public interface ProCouponDao {
 	
 	//根据优惠券名称和类型联合查询
 	List<CouponInfo> getCouponByNameAndType(Map<String, String> map);
+
 
 }

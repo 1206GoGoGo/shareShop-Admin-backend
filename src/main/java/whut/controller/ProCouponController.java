@@ -63,10 +63,11 @@ public class ProCouponController {
 	}
 	
 	
-	//根据优惠券id或订单编号查看优惠券消费记录详情
+	//根据优惠券id和用户对其使用状态(选择已使用则有订单编号)进行查询
+		//状态有三种：已使用0，未过期未使用1，过期未使用-1
 	@RequestMapping(value = "/getCouponLogsDetail", method = RequestMethod.GET)
-	public @ResponseBody ResponseData getCouponLogsDetail(String id,String orderNumber) {
-		return proCouponService.getCouponLogsDetail(id, orderNumber);
+	public @ResponseBody ResponseData getCouponLogsDetail(String id,String status,String orderNum,Integer pageindex, Integer pagesize) {
+		return proCouponService.getCouponLogsDetail(id, status,orderNum,pageindex,pagesize);
 	}
 	
 	//根据状态获取优惠券消费记录列表
@@ -104,4 +105,5 @@ public class ProCouponController {
 	public @ResponseBody ResponseData getCouponByNameAndType(String name, String type) {
 		return proCouponService.getCouponByNameAndType(name, type);
 	}
+	
 }

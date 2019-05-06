@@ -251,6 +251,12 @@ public class ProInfoServiceImpl implements ProInfoService{
 		}else {
 			return new ResponseData(400,"no data",null);
 		}
+	}
+
+	@Override
+	public ResponseData getSalesByIdSearch(String id) {
+		// TODO Auto-generated method stub
+		return new ResponseData(200,"success",SolrJUtil.search(1,1,"productId:"+id,new String[] {"productId", "productName","pscore","collect","cart","sales"},null,null,null));
 	}	
 	
 }

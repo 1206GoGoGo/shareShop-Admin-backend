@@ -104,6 +104,12 @@ public class ProInfoController {
 		return proInfoService.getListByCondition(name,procode,categoryId1,categoryId2,categoryId3,status1,status2,pageindex, pagesize);	
 	}
 	
+	//根据商品id在Solr中查看销量、收藏数等
+	@RequestMapping(value = "/getSalesByIdSearch", method = RequestMethod.GET)
+	public @ResponseBody ResponseData getSalesByIdSearch(String id){
+		return proInfoService.getSalesByIdSearch(id);	
+	}
+	
 }
 	
 

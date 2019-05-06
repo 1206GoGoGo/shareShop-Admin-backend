@@ -35,6 +35,8 @@ public interface ProInfoService {
 	public ResponseData getListByCondition(String name, String procode, String categoryId1, String categoryId2,
 			String categoryId3, String status1, String status2,Integer pageindex, Integer pagesize);
 
+	public ResponseData getSalesByIdSearch(String id);
+
 	
 
 }
