@@ -29,6 +29,10 @@ public class CouponLogs implements Serializable{
     private Date time;//消费时间
 
     private Byte status;//状态
+    
+    private Date receiveTime;//领取时间
+    
+    private String username;  //用户名
 
     public Integer getId() {
         return id;
@@ -109,4 +113,21 @@ public class CouponLogs implements Serializable{
     public void setStatus(Byte status) {
         this.status = status;
     }
+
+	public Date getReceiveTime() {
+		return receiveTime;
+	}
+
+	public void setReceiveTime(Date receiveTime) {
+		this.receiveTime = receiveTime;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+    
 }

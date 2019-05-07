@@ -39,7 +39,15 @@
     <result column="full_money" jdbcType="DECIMAL" property="fullMoney" />
     <result column="time" jdbcType="TIMESTAMP" property="time" />
     <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="receive_time" jdbcType="TIMESTAMP" property="receiveTime" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
   </resultMap>
+  
+  <sql id="couponLogs">
+  	   SELECT cl.id,cl.user_id,cl.coupon_id,cl.order_number,cl.order_original_money,cl.coupon_money,cl.order_final_money,cl.full_money,cl.time,cl.status,ul.username,cr.receive_time FROM coupon_logs cl
+	   LEFT JOIN user_login ul ON cl.user_id = ul.user_id
+	   LEFT JOIN coupon_receive cr ON cr.coupon_id = cl.coupon_id 
+  </sql>
   
   <select id="getList"  parameterType="hashmap" resultMap="CouponInfoResultMap">
         SELECT * FROM coupon_info where status = 1
@@ -74,7 +82,8 @@
     </select>
   
     <select id="getCouponLogsList" parameterType="hashmap" resultMap="CouponLogsResultMap">
-        SELECT * FROM coupon_logs where status = 1
+        <include refid="couponLogs"/>
+        where status = 1
         limit #{pageindex},#{pagesize}
     </select>
     
@@ -88,19 +97,23 @@
     </select>
     
    <select id="getCouponLogsDetail" parameterType="hashmap" resultMap="CouponLogsResultMap">
-        SELECT * FROM coupon_logs 
+        <include refid="couponLogs"/>
         where 1 = 1
         <if test="couponId != null">
       		and coupon_id = #{couponId} 
     	</if>
-    	<if test="orderNumber != null">
+    	<if test="status != null">
+      		and status = #{status} 
+    	</if>
+    	<if test="orderNumber != null and status == 1">
       		and order_number = #{orderNumber} 
     	</if>
     	  limit #{pageindex},#{pagesize}
     </select>
     
    <select id="getCouponLogsListByStatus" parameterType="hashmap" resultMap="CouponLogsResultMap">
-        SELECT * FROM coupon_logs where status = #{status}
+        <include refid="couponLogs"/> 
+        where status = #{status}
         limit #{pageindex},#{pagesize}
     </select>
     
