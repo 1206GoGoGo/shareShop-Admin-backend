@@ -1,5 +1,9 @@
 package whut.service.impl;
 
+import java.io.IOException;
+
+import org.apache.solr.client.solrj.SolrServerException;
+import org.apache.solr.client.solrj.impl.HttpSolrClient.RemoteSolrException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -68,16 +72,17 @@ public class CommonManageServiceImpl implements CommonManageService {
 		try {
 			SolrJUtil.getSolrClient().commit("products_core");
 			objNode.put("solr", "ok");
-		}catch(Exception e) {
-			//Solr服务器异常
-			System.out.println(e);
+		}catch(SolrServerException e1) {
+			//无法连接到Solr服务器异常
 			objNode.put("solr", "error");
+		}catch(Exception e) {
+			//
 		}
 		//arrNode.add(objNode1);
 		
 		//ObjectNode objNode2 = mapper.createObjectNode();
 		try {
-			JedisUtil.getJedis().getClient().close();
+			JedisUtil.closeJedis(JedisUtil.getJedis());
 			objNode.put("redis", "ok");
 		}catch(Exception e) {
 			//redis服务器异常
