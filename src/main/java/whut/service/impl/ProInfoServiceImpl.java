@@ -83,7 +83,8 @@ public class ProInfoServiceImpl implements ProInfoService{
 		map.put("pagesize", pagesize);
 		List<ProductInfo> list = proInfoDao.getList(map);
 		if(list != null) {
-			return new ResponseData(200,"success",list);
+			Integer num = proInfoDao.getListNum();
+			return new ResponseData(200,"success",list,num);
 		}else {
 			return new ResponseData(400,"no data",null);
 		}
@@ -127,7 +128,8 @@ public class ProInfoServiceImpl implements ProInfoService{
 		list = proInfoDao.search(map);
 		if(list.isEmpty())
 			return new ResponseData(400,"No match was found",null);
-		return new ResponseData(200,"success",list);
+		Integer num = proInfoDao.searchNum(name);
+		return new ResponseData(200,"success",list,num);
 	}
 
 	@Override
@@ -175,7 +177,8 @@ public class ProInfoServiceImpl implements ProInfoService{
 		list = proInfoDao.getListByCategory(map);
 		if(list.isEmpty())
 			return new ResponseData(400,"No data",null);
-		return new ResponseData(200,"success",list);
+		Integer num = proInfoDao.getListByCategoryNum(id);
+		return new ResponseData(200,"success",list,num);
 	}
 
 	@Override
@@ -202,7 +205,8 @@ public class ProInfoServiceImpl implements ProInfoService{
 		map.put("pagesize", pagesize);
 		List<ProductInfo> list = proInfoDao.getIfcheckedList(map);
 		if(list != null) {
-			return new ResponseData(200,"success",list);
+			Integer num = proInfoDao.getIfcheckedListNum(status);
+			return new ResponseData(200,"success",list,num);
 		}else {
 			return new ResponseData(400,"no data",null);
 		}
@@ -221,7 +225,8 @@ public class ProInfoServiceImpl implements ProInfoService{
 		map.put("pagesize", pagesize);
 		List<ProductInfo> list = proInfoDao.getIfShelfList(map);
 		if(list != null) {
-			return new ResponseData(200,"success",list);
+			Integer num = proInfoDao.getIfShelfListNum(status);
+			return new ResponseData(200,"success",list,num);
 		}else {
 			return new ResponseData(400,"no data",null);
 		}
@@ -247,7 +252,16 @@ public class ProInfoServiceImpl implements ProInfoService{
 		map.put("pagesize", pagesize);
 		List<ProductInfo> list = proInfoDao.getListByCondition(map);
 		if(list != null) {
-			return new ResponseData(200,"success",list);
+			Map<String, Object> map1 = new HashMap<>();
+			map1.put("productName", name);
+			map1.put("productCode", procode);
+			map1.put("oneCategoryId", categoryId1);
+			map1.put("twoCategoryId", categoryId2);
+			map1.put("threeCategoryId", categoryId3);
+			map1.put("publishStatus", status1);
+			map1.put("auditStatus", status2);
+			Integer num = proInfoDao.getListByConditionNum(map1);
+			return new ResponseData(200,"success",list,num);
 		}else {
 			return new ResponseData(400,"no data",null);
 		}

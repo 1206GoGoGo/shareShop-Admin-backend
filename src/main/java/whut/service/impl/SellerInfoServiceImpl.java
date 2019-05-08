@@ -34,7 +34,8 @@ public class SellerInfoServiceImpl implements SellerInfoService{
 		map.put("pagesize", pagesize);
 		List<UserInfo> list = sellerInfoDao.getSellerList(map);	 
 		if(list != null) {
-			return new ResponseData(200,"success",list);
+			Integer num = sellerInfoDao.getSellerListNum();
+			return new ResponseData(200,"success",list,num);
 		}else {
 			return new ResponseData(400,"no data",null);
 		}

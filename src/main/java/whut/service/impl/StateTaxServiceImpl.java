@@ -31,7 +31,8 @@ public class StateTaxServiceImpl implements StateTaxService {
 		List<StateTax> list = stateTaxDao.getStateTaxList(map);
 		if(list.isEmpty())
 			return new ResponseData(400,"No data",null);
-		return new ResponseData(200,"success",list);
+		Integer num = stateTaxDao.getStateTaxListNum();
+		return new ResponseData(200,"success",list,num);
 	}
 
 	@Override

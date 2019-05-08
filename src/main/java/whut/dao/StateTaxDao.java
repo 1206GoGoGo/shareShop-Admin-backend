@@ -21,4 +21,7 @@ public interface StateTaxDao {
 	//根据州税的id修改州税【modifyStateTax】
 	void modifyStateTax(Map<String, String> map);
 
+	//查看所有州的税率的总数
+	Integer getStateTaxListNum();
+
 }

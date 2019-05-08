@@ -33,5 +33,9 @@ public interface UserInfoDao {
 	//通过登录表id获取用户信息
 	UserInfo getUserInfo(String id);
 
+	//以下为分页新增查询总数
+	//获取所有的seller数量
+	Integer getSellerListNum();
+
 	
 }
