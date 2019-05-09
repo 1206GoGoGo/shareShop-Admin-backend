@@ -16,13 +16,9 @@ public class CouponLogs implements Serializable{
 
     private Integer couponId;//优惠券id
 
-    private Long orderNumber;//订单编号
-
-    private BigDecimal orderOriginalMoney; //原订单金额
+    private Integer orderId;//订单编号
 
     private BigDecimal couponMoney;//优惠券面值
-
-    private BigDecimal orderFinalMoney;//付款金额
 
     private BigDecimal fullMoney;//金额满多少
 
@@ -58,20 +54,12 @@ public class CouponLogs implements Serializable{
         this.couponId = couponId;
     }
 
-    public Long getOrderNumber() {
-        return orderNumber;
+    public Integer getOrderId() {
+        return orderId;
     }
 
-    public void setOrderNumber(Long orderNumber) {
-        this.orderNumber = orderNumber;
-    }
-
-    public BigDecimal getOrderOriginalMoney() {
-        return orderOriginalMoney;
-    }
-
-    public void setOrderOriginalMoney(BigDecimal orderOriginalMoney) {
-        this.orderOriginalMoney = orderOriginalMoney;
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
     }
 
     public BigDecimal getCouponMoney() {
@@ -80,14 +68,6 @@ public class CouponLogs implements Serializable{
 
     public void setCouponMoney(BigDecimal couponMoney) {
         this.couponMoney = couponMoney;
-    }
-
-    public BigDecimal getOrderFinalMoney() {
-        return orderFinalMoney;
-    }
-
-    public void setOrderFinalMoney(BigDecimal orderFinalMoney) {
-        this.orderFinalMoney = orderFinalMoney;
     }
 
     public BigDecimal getFullMoney() {

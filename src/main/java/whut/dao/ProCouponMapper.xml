@@ -32,10 +32,8 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="coupon_id" jdbcType="INTEGER" property="couponId" />
-    <result column="order_number" jdbcType="BIGINT" property="orderNumber" />
-    <result column="order_original_money" jdbcType="DECIMAL" property="orderOriginalMoney" />
+    <result column="order_id" jdbcType="BIGINT" property="orderId" />
     <result column="coupon_money" jdbcType="DECIMAL" property="couponMoney" />
-    <result column="order_final_money" jdbcType="DECIMAL" property="orderFinalMoney" />
     <result column="full_money" jdbcType="DECIMAL" property="fullMoney" />
     <result column="time" jdbcType="TIMESTAMP" property="time" />
     <result column="status" jdbcType="TINYINT" property="status" />
@@ -44,7 +42,7 @@
   </resultMap>
   
   <sql id="couponLogs">
-  	   SELECT cl.id,cl.user_id,cl.coupon_id,cl.order_number,cl.order_original_money,cl.coupon_money,cl.order_final_money,cl.full_money,cl.time,cl.status,ul.username,cr.receive_time FROM coupon_logs cl
+  	   SELECT cl.id,cl.user_id,cl.coupon_id,cl.order_id,cl.coupon_money,cl.full_money,cl.time,cl.status,ul.username,cr.receive_time FROM coupon_logs cl
 	   LEFT JOIN user_login ul ON cl.user_id = ul.user_id
 	   LEFT JOIN coupon_receive cr ON cr.coupon_id = cl.coupon_id 
   </sql>
@@ -89,11 +87,9 @@
     
     <select id="addCouponLogs" parameterType="couponLogs">
     	INSERT INTO coupon_logs
-    	(user_id,coupon_id,order_number,order_original_money,coupon_money,
-    	order_final_money,full_money,time,status)      
+    	(user_id,coupon_id,order_id,coupon_money,full_money,time,status)      
         VALUES
-    	(#{userId},#{couponId},#{orderNumber},#{orderOriginalMoney},#{couponMoney},
-    	#{orderFinalMoney},#{fullMoney},now(),#{status})
+    	(#{userId},#{couponId},#{orderId},#{couponMoney},#{fullMoney},now(),#{status})
     </select>
     
    <select id="getCouponLogsDetail" parameterType="hashmap" resultMap="CouponLogsResultMap">
