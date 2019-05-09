@@ -18,6 +18,7 @@
     <result column="discount_money" jdbcType="DECIMAL" property="discountMoney" />
     <result column="shipping_money" jdbcType="DECIMAL" property="shippingMoney" />
     <result column="payment_money" jdbcType="DECIMAL" property="paymentMoney" />
+    <result column="tax_money" jdbcType="DECIMAL" property="taxMoney" />
     <result column="express_number" jdbcType="VARCHAR" property="expressNumber" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="pay_time" jdbcType="TIMESTAMP" property="payTime" />
