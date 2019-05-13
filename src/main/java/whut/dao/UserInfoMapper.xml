@@ -35,14 +35,6 @@
         limit #{pageindex}, #{pagesize}
    </select>
 
-   <select id="add" parameterType="UserInfo">
-    	INSERT INTO user_info
-    	(name,identity_card_type,identity_card_no,phone_number,email,gender,birthday,
-    	register_time,user_id,superior_id)      
-        VALUES
-    	(#{name},#{identityCardType},#{identityCardNo},#{phoneNumber},#{email},#{gender},#{birthday},
-    	now(),#{userId},#{superiorId})
-    </select>
     
    <select id="delete" parameterType="int">
         DELETE FROM user_info where user_id = #{id}

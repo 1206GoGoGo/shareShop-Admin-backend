@@ -13,8 +13,6 @@ public interface UserInfoDao {
 	
 	List<UserInfo> getSellerList(Map<String, Object> map);
 
-	void add(UserInfo user);
-
 	//修改用户状态
 	void delete(int id);
 

@@ -24,7 +24,7 @@ public class ManagerInfoController {
 	
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public @ResponseBody ResponseData add(@RequestBody ManagerInfo managerInfo) {
-		return  managerInfoService.manageAdd(managerInfo);
+		return  managerInfoService.add(managerInfo);
 	}
 	
 	@RequestMapping(value = "/getDetail", method = RequestMethod.GET)

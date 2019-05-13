@@ -39,11 +39,6 @@ public class MemberInfoController {
 		return  memberInfoService.getMemberListBySeller(pagesize, pageindex, username);
 	}
 	
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public @ResponseBody ResponseData add(@RequestBody UserInfo user){
-		return  memberInfoService.useradd(user);
-	}
-	
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
 	public @ResponseBody ResponseData modify(@RequestBody UserInfo user) {
 		return  memberInfoService.modify(user);

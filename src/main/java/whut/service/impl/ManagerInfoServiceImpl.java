@@ -33,7 +33,7 @@ public class ManagerInfoServiceImpl implements ManagerInfoService {
 	}
 
 	@Override
-	public ResponseData manageAdd(ManagerInfo managerInfo) {
+	public ResponseData add(ManagerInfo managerInfo) {
 		String username = managerInfo.getUserLogin().getUsername();
 		String password = managerInfo.getUserLogin().getPassword();
 		//判断用户名、密码是否符合规则
@@ -46,33 +46,16 @@ public class ManagerInfoServiceImpl implements ManagerInfoService {
 		//判断用户名是否冲突
 		if(loginDao.getLoginInfo(username)!=null) {
 			return new ResponseData(4063,"username is occupied",null);
-		}
-		
+		}	
 		//添加用户登录表数据
 		UserLogin userLogin = new UserLogin();
 		userLogin.setUsername(username);
 		userLogin.setPassword(EncryptUtil.MD5ForPW(password));
 		userLogin.setLevel( managerInfo.getUserLogin().getLevel() );	//设置用户等级、管理员类型需要传入
 		userLogin.setStatus((byte)1);	//设置用户状态
-		loginDao.addUser(userLogin);
-		
-		
-		//刷新，将执行数据插入操作，之后获取添加数据对象
-
-		userLogin = loginDao.getLoginInfo(username);
-		
-		System.out.println(userLogin.getUserId());
+		loginDao.addUser(userLogin);	//插入用户登录信息后，将主键放入放入userLogin对象
 		//给user对象赋值id
 		managerInfo.setUserId(userLogin.getUserId());
-		managerInfo.setUserLogin(userLogin);
-
-		try {
-			dao.add(managerInfo);
-		}catch(Exception e) {
-			loginDao.deleteUserLoginForError(userLogin.getUserId());
-			return new ResponseData(5001,"system registration exception",null);
-		}
-		
 		return new ResponseData(200,"success",null);
 
 	}
