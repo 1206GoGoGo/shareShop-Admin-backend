@@ -16,10 +16,6 @@ public class ProductAttributeValue implements Serializable{
     private String attrValue;//属性值
 
     private Byte valueSort;//属性值排序
-
-    private Date createTime;//创建时间
-
-    private Date updateTime;//修改时间
     
     private Byte status;//状态
 
@@ -53,22 +49,6 @@ public class ProductAttributeValue implements Serializable{
 
     public void setValueSort(Byte valueSort) {
         this.valueSort = valueSort;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
     }
     
     public Byte getStatus() {
