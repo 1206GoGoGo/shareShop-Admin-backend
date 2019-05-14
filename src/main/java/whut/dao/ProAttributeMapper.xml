@@ -63,7 +63,7 @@
         SELECT pk.key_id,pk.category_id,pk.attr_name,pk.name_sort,pk.status,
 		pv.value_id,pv.attr_key_id,pv.attr_value,pv.value_sort,pv.status value_status FROM product_attribute_key pk
 		LEFT JOIN product_attribute_value pv on pv.attr_key_id = pk.key_id
-		where pk.status = 1 and pv.status = 1 and
+		where pk.status = 1 and pv.status = 1
         and category_id = #{id}
    </select>
    
