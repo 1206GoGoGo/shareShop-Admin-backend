@@ -24,7 +24,7 @@ public class MemberOrderController {
 	 * @return
 	 */
 	@RequestMapping(value = "/getListByUser", method = RequestMethod.GET)
-	public @ResponseBody ResponseData getListByUser(int pageindex, int pagesize, int id) {
+	public @ResponseBody ResponseData getListByUser(Integer pageindex, Integer pagesize, int id) {
 		return memberOrderService.getListByUser(pageindex, pagesize, id);
 	}
 	
@@ -34,7 +34,7 @@ public class MemberOrderController {
 	 * @return
 	 */
 	@RequestMapping(value = "/getListSearch", method = RequestMethod.GET)
-	public @ResponseBody ResponseData getListSearch(int pageindex, int pagesize, int status, String orderNumber, String username, 
+	public @ResponseBody ResponseData getListSearch(Integer pageindex, Integer pagesize, Integer status, String orderNumber, String username, 
 			String consignee, String timeBe, String timeEn) {
 		return memberOrderService.getListSearch(pageindex, pagesize, status, orderNumber, username, consignee, timeBe, timeEn);
 	}
@@ -45,7 +45,7 @@ public class MemberOrderController {
 	 * @return
 	 */
 	@RequestMapping(value = "/getListByPro", method = RequestMethod.GET)
-	public @ResponseBody ResponseData getListByPro(int pageindex, int pagesize, int id) {
+	public @ResponseBody ResponseData getListByPro(Integer pageindex, Integer pagesize, int id) {
 		return memberOrderService.getListByPro(pageindex, pagesize, id);
 	}
 	
@@ -126,7 +126,7 @@ public class MemberOrderController {
 	 * @return
 	 */
 	@RequestMapping(value = "/getRecord", method = RequestMethod.GET)
-	public @ResponseBody ResponseData getRecordByUser(int pageindex, int pagesize, String user, String timebe, String timeen) {
+	public @ResponseBody ResponseData getRecordByUser(Integer pageindex, Integer pagesize, String user, String timebe, String timeen) {
 		return memberOrderService.getRecordByUser(pageindex, pagesize, user, timebe, timeen);
 	}
 	
@@ -170,7 +170,7 @@ public class MemberOrderController {
 	 * @return
 	 */
 	@RequestMapping(value = "/getCountClassForOneGood", method = RequestMethod.GET)
-	public @ResponseBody ResponseData getCountClassForOneGood(int cateId, int pageindex, int pagesize, String timeBe, String timeEn) {
+	public @ResponseBody ResponseData getCountClassForOneGood(int cateId, Integer pageindex, Integer pagesize, String timeBe, String timeEn) {
 		return memberOrderService.getCountClassForOneGood(cateId, pageindex, pagesize, timeBe, timeEn);
 	}
 }

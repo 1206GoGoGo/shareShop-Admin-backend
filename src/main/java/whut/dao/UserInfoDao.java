@@ -8,7 +8,7 @@ import whut.pojo.UserInfo;
 public interface UserInfoDao {
 
 	//String status,String pageindex, String pagesize
-	//获取完整用户信息--不包括seller
+	//获取完整用户信息	当status为null获取所有状态
 	List<UserInfo> getList(Map<String, Integer> map);
 	
 	List<UserInfo> getSellerList(Map<String, Object> map);

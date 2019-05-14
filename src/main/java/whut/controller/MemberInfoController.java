@@ -25,7 +25,7 @@ public class MemberInfoController {
 	 * @return
 	 */
 	@RequestMapping(value = "/getList", method = RequestMethod.GET)
-	public @ResponseBody ResponseData getList(int status,int pageindex, int pagesize) {
+	public @ResponseBody ResponseData getList(Integer status,Integer pageindex, Integer pagesize) {
 		return  memberInfoService.getList(status, pageindex, pagesize);
 	}
 	
@@ -35,7 +35,7 @@ public class MemberInfoController {
 	 * @return
 	 */
 	@RequestMapping(value = "/getListBySeller", method = RequestMethod.GET)
-	public @ResponseBody ResponseData getListBySeller(int pagesize, int pageindex, String username) {
+	public @ResponseBody ResponseData getListBySeller(Integer pagesize, Integer pageindex, String username) {
 		return  memberInfoService.getMemberListBySeller(pagesize, pageindex, username);
 	}
 	
@@ -61,8 +61,8 @@ public class MemberInfoController {
 	 * @return
 	 */
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public @ResponseBody ResponseData search(int pagesize,int pageindex,String username,
-			String phoneNumber,String name,String identityCardNo,String level,int status, String email) {
+	public @ResponseBody ResponseData search(Integer pagesize,Integer pageindex,String username,
+			String phoneNumber,String name,String identityCardNo,String level,Integer status, String email) {
 		return  memberInfoService.search(pagesize,pageindex,username, phoneNumber, name, identityCardNo,level,status,email);
 	}
 	

@@ -18,7 +18,7 @@ public class ManagerInfoController {
 	private ManagerInfoService managerInfoService;
 	
 	@RequestMapping(value = "/getList", method = RequestMethod.GET)
-	public @ResponseBody ResponseData getList(int status) {
+	public @ResponseBody ResponseData getList(Integer status) {
 		return  managerInfoService.getList(status);
 	}
 	

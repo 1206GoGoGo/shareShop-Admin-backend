@@ -23,7 +23,7 @@ public class ManagerInfoServiceImpl implements ManagerInfoService {
 	private UserLoginDao loginDao;
 
 	@Override
-	public ResponseData getList(int status) {
+	public ResponseData getList(Integer status) {
 		List<ManagerInfo> list = dao.getList(status);
 		if(list.isEmpty()) {
 			return new ResponseData(400,"no data",null);

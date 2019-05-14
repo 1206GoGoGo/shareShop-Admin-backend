@@ -19,7 +19,13 @@ public class MemberOrderReturnServiceImpl implements MemberOrderReturnService {
 	private OrderReturnDao orderReturnDao;
 	
 	@Override
-	public ResponseData getListByUser(int pageindex, int pagesize, int userId) {
+	public ResponseData getListByUser(Integer pageindex, Integer pagesize, Integer userId) {
+		if(pageindex == null) {
+			pageindex = 0;
+		}
+		if(pagesize == null) {
+			pagesize = 20;
+		}
 		Map<String, Integer> map = new HashMap<>();
 		map.put("pageindex", pageindex);
 		map.put("pagesize", pagesize);
@@ -33,11 +39,17 @@ public class MemberOrderReturnServiceImpl implements MemberOrderReturnService {
 	}
 
 	@Override
-	public ResponseData getListByStatus(int pageindex, int pagesize, int status) {
-		Map<String, Integer> map = new HashMap<>();
+	public ResponseData getListByStatus(Integer pageindex, Integer pagesize, String statusAll) {
+		if(pageindex == null) {
+			pageindex = 0;
+		}
+		if(pagesize == null) {
+			pagesize = 20;
+		}
+		Map<String, Object> map = new HashMap<>();
 		map.put("pageindex", pageindex);
 		map.put("pagesize", pagesize);
-		map.put("status", status);
+		map.put("statusAll", statusAll);
 		List<ReturnRecord> list = orderReturnDao.getListByStatus(map);
 		if(list.isEmpty()) {
 			return new ResponseData(400,"no data satify request",null);
@@ -47,7 +59,7 @@ public class MemberOrderReturnServiceImpl implements MemberOrderReturnService {
 	}
 
 	@Override
-	public ResponseData getListByOrderId(int orderId) {
+	public ResponseData getListByOrderId(Integer orderId) {
 		List<ReturnRecord> list = orderReturnDao.getListByOrderId(orderId);
 		if(list.isEmpty()) {
 			return new ResponseData(400,"no data satify request",null);
@@ -57,7 +69,13 @@ public class MemberOrderReturnServiceImpl implements MemberOrderReturnService {
 	}
 
 	@Override
-	public ResponseData getListByReturnType(int pageindex, int pagesize, int type) {
+	public ResponseData getListByReturnType(Integer pageindex, Integer pagesize, Integer type) {
+		if(pageindex == null) {
+			pageindex = 0;
+		}
+		if(pagesize == null) {
+			pagesize = 20;
+		}
 		Map<String, Integer> map = new HashMap<>();
 		map.put("pageindex", pageindex);
 		map.put("pagesize", pagesize);

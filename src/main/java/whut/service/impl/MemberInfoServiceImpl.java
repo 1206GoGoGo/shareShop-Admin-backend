@@ -2,6 +2,7 @@ package whut.service.impl;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -21,7 +22,6 @@ import whut.dao.UserLoginDao;
 import whut.pojo.UserInfo;
 import whut.pojo.UserLogin;
 import whut.service.MemberInfoService;
-import whut.utils.EncryptUtil;
 import whut.utils.JsonUtils;
 import whut.utils.ResponseData;
 @Service
@@ -37,7 +37,13 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 	private OrderDao orderDao;
 
 	@Override
-	public ResponseData getList(int status,int pageindex, int pagesize) {
+	public ResponseData getList(Integer status,Integer pageindex, Integer pagesize) {
+		if(pageindex == null) {
+			pageindex = 0;
+		}
+		if(pagesize == null) {
+			pagesize = 20;
+		}
 		Map<String,Integer> map = new HashMap<>();
 		map.put("status", status);
 		map.put("pageindex", pageindex);
@@ -83,9 +89,14 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 	}
 
 	@Override
-	public ResponseData search(int pagesize, int pageindex, String username, String phoneNumber,String name
-			,String identityCardNo, String level,int status, String email) {
-		
+	public ResponseData search(Integer pagesize, Integer pageindex, String username, String phoneNumber,String name
+			,String identityCardNo, String level,Integer status, String email) {
+		if(pageindex == null) {
+			pageindex = 0;
+		}
+		if(pagesize == null) {
+			pagesize = 20;
+		}
 		//通过用户名直接查询，不再进行其他条件判断
 		int userId = 0;
 		try {
@@ -151,14 +162,20 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 	public ResponseData getDetail(int id) {
 		UserInfo info = dao.getUserInfo(String.valueOf(id));
 		if(info != null) {
-			return new ResponseData(200,"success",info);
+			return new ResponseData(200,"success",Arrays.asList(info));
 		}else {
 			return new ResponseData(400,"no data satify request",null);
 		}
 	}
 
 	@Override
-	public ResponseData getMemberListBySeller(int pagesize, int pageindex, String username) {
+	public ResponseData getMemberListBySeller(Integer pagesize, Integer pageindex, String username) {
+		if(pageindex == null) {
+			pageindex = 0;
+		}
+		if(pagesize == null) {
+			pagesize = 20;
+		}
 		int superiorId;
 		try {
 			superiorId = loginDao.getLoginInfo(username).getUserId();
@@ -178,26 +195,6 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 		
 		return new ResponseData(200,"success",list);
 	}
-	
-	//密码校验
-    private boolean checkPassWordMethod(String str) {
-        char[] ch1 = str.toCharArray();
-        boolean flag = false;
-        int num_count = 0, char_number = 0;
-        for (int i = 0; i < ch1.length; i++) {
-            if (Character.isDigit(ch1[i]) || Character.isLetter(ch1[i])) {
-                if (Character.isDigit(ch1[i]))
-                    num_count++;
-                else
-                    char_number++;
-            } else
-                break;
-        }
-        if (num_count >= 2 && char_number >= 8)
-            flag = true;
-        System.out.println("num_count=" + num_count + ",char_number=" + char_number);
-        return flag;
-    }
 
 	@Override
 	public ResponseData getCountAWeek() {

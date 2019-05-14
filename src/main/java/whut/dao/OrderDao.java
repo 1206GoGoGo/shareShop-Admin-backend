@@ -36,7 +36,7 @@ public interface OrderDao {
 	//int orderId, Byte status
 	void modifyProStatusByOrderId(Map<String, String> map);
 
-	//int pageindex, int pagesize, String user, String timebe, String timeen
+	//int pageindex, int pagesize, String user, String timebe, String timeen	获取用户订单
 	List<SellerBill> getRecordByUser(Map<String, Object> map);
 
 	//获取某天的订单数

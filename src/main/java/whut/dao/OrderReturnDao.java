@@ -16,8 +16,8 @@ public interface OrderReturnDao {
 	//int pageindex, int pagesize, int userId
 	List<ReturnRecord> getListByUser(Map<String, Integer> map);
 
-	//int pageindex, int pagesize, int status
-	List<ReturnRecord> getListByStatus(Map<String, Integer> map);
+	//int pageindex, int pagesize, String statusAll(申请退货apply [21]、退货失败fail [29]、完成退货success [25,28]、退货中in[23,23])
+	List<ReturnRecord> getListByStatus(Map<String, Object> map);
 
 	List<ReturnRecord> getListByOrderId(int orderId);
 

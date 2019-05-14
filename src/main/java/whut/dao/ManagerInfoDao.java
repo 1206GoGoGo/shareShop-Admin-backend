@@ -6,7 +6,8 @@ import whut.pojo.ManagerInfo;
 
 public interface ManagerInfoDao {
 
-	List<ManagerInfo> getList(int status);
+	//当status为null时查全部信息
+	List<ManagerInfo> getList(Integer status);
 
 	void add(ManagerInfo managerInfo);
 

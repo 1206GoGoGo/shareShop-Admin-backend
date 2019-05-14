@@ -1,6 +1,7 @@
 package whut.service.impl;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -47,7 +48,13 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 	private ProCategoryDao proCategoryDao;
 
 	@Override
-	public ResponseData getListByUser(int pageindex, int pagesize, int id) {
+	public ResponseData getListByUser(Integer pageindex, Integer pagesize, int id) {
+		if(pageindex == null) {
+			pageindex = 0;
+		}
+		if(pagesize == null) {
+			pagesize = 20;
+		}
 		Map<String, Integer> map = new HashMap<>();
 		map.put("pageindex", pageindex);
 		map.put("pagesize", pagesize);
@@ -61,9 +68,18 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 	}
 	
 	@Override
-	public ResponseData getListSearch(int pageindex, int pagesize, int status, String orderNumber, String username, 
+	public ResponseData getListSearch(Integer pageindex, Integer pagesize, Integer status, String orderNumber, String username, 
 			String consignee, String timeBe, String timeEn) {
-		int userid = 0;
+		if(pageindex == null) {
+			pageindex = 0;
+		}
+		if(pagesize == null) {
+			pagesize = 20;
+		}
+		if(status == 0) {
+			status = null;
+		}
+		Integer userid = null;
 		if(username != null) {
 			try {
 				userid = loginDao.getLoginInfo(username).getUserId();
@@ -91,7 +107,13 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 	}
 
 	@Override
-	public ResponseData getListByPro(int pageindex, int pagesize, int id) {
+	public ResponseData getListByPro(Integer pageindex, Integer pagesize, int id) {
+		if(pageindex == null) {
+			pageindex = 0;
+		}
+		if(pagesize == null) {
+			pagesize = 20;
+		}
 		Map<String, Integer> map = new HashMap<>();
 		map.put("pageindex", pageindex);
 		map.put("pagesize", pagesize);
@@ -119,7 +141,7 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 	public ResponseData getDetail(int orderId) {
 		OrderMaster  orderMaster = dao.getMasterByOrderId(orderId);
 		if(orderMaster != null) {
-			return new ResponseData(200,"success",orderMaster);
+			return new ResponseData(200,"success", Arrays.asList(orderMaster));
 		}else {
 			return new ResponseData(400,"no data satify request",null);
 		}
@@ -386,7 +408,13 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 	}
 
 	@Override
-	public ResponseData getRecordByUser(int pageindex, int pagesize, String user, String timebe, String timeen) {
+	public ResponseData getRecordByUser(Integer pageindex, Integer pagesize, String user, String timebe, String timeen) {
+		if(pageindex == null) {
+			pageindex = 0;
+		}
+		if(pagesize == null) {
+			pagesize = 20;
+		}
 		int id = 0;
 		try {
 			id = loginDao.getLoginInfo(user).getUserId();
@@ -553,7 +581,13 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 	}
 
 	@Override
-	public ResponseData getCountClassForOneGood(int cateId, int pageindex, int pagesize, String timeBe, String timeEn) {
+	public ResponseData getCountClassForOneGood(int cateId, Integer pageindex, Integer pagesize, String timeBe, String timeEn) {
+		if(pageindex == null) {
+			pageindex = 0;
+		}
+		if(pagesize == null) {
+			pagesize = 20;
+		}
 		if(cateId!=0) {
 			ProductCategory productCategory = proCategoryDao.getCategoryById(cateId);
 			if(productCategory == null) {

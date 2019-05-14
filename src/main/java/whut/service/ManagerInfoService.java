@@ -6,7 +6,7 @@ import whut.utils.ResponseData;
 
 public interface ManagerInfoService {
 
-	public ResponseData getList(int status);
+	public ResponseData getList(Integer status);
 
 	public ResponseData add(ManagerInfo managerInfo);
 

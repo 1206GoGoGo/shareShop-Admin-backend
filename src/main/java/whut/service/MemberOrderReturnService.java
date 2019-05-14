@@ -4,12 +4,12 @@ import whut.utils.ResponseData;
 
 public interface MemberOrderReturnService {
 
-	ResponseData getListByUser(int pageindex, int pagesize, int userId);
+	ResponseData getListByUser(Integer pageindex, Integer pagesize, Integer userId);
 
-	ResponseData getListByStatus(int pageindex, int pagesize, int status);
+	ResponseData getListByStatus(Integer pageindex, Integer pagesize, String statusAll);
 
-	ResponseData getListByOrderId(int orderId);
+	ResponseData getListByOrderId(Integer orderId);
 
-	ResponseData getListByReturnType(int pageindex, int pagesize, int type);
+	ResponseData getListByReturnType(Integer pageindex, Integer pagesize, Integer type);
 
 }
