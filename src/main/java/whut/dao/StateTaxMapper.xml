@@ -28,5 +28,9 @@
         WHERE state_tax_id = #{id}
     </select>
     
+    <select id="getStateTaxListNum" resultType="Integer">
+        SELECT count(*) FROM state_tax 
+   </select>
+    
   
 </mapper>

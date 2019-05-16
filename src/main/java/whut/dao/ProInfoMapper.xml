@@ -212,5 +212,52 @@
 		GROUP BY od.product_id) od on pi.product_id = od.product_id
 		ORDER BY pi.product_id 
 	</select>
+	
+	<select id="getListNum" resultType="Integer">
+		select count(*) from product_info
+	</select>
+	
+	<select id="searchNum" parameterType="String" resultType="Integer">
+		select count(*) from product_info where product_name LIKE CONCAT(CONCAT('%',#{name}),'%') 
+	</select>
+	
+	<select id="getListByCategoryNum" parameterType="String" resultType="Integer">
+		select count(*) from product_info
+		where (one_category_id = #{id} or two_category_id = #{id} or three_category_id = #{id})
+	</select>
+	
+    <select id="getIfcheckedListNum" parameterType="String" resultType="Integer">
+		select count(*) from product_info where audit_status = #{status} 
+	</select>
+	
+	<select id="getIfShelfListNum" parameterType="String" resultType="Integer">
+		select count(*) from product_info where publish_status = #{status} 
+	</select>
+	
+	<select id="getListByConditionNum" parameterType="hashmap" resultType="Integer">
+		select count(*) from product_info 
+		where  1 = 1
+    	<if test="productName != null">
+      		and product_name = #{productName} 
+    	</if>
+    	<if test="productCode != null">
+      		and spu = #{productCode} 
+    	</if>
+    	<if test="oneCategoryId != null">
+      		and one_category_id = #{oneCategoryId} 
+    	</if>
+    	<if test="twoCategoryId != null">
+      		and two_category_id = #{twoCategoryId} 
+    	</if>
+    	<if test="threeCategoryId != null">
+      		and three_category_id = #{threeCategoryId} 
+    	</if>
+    	<if test="publishStatus != null">
+      		and publish_status = #{publishStatus}  
+    	</if>
+        <if test="auditStatus != null">
+      		and audit_status = #{auditStatus}  
+    	</if> 
+	</select>
     
 </mapper>

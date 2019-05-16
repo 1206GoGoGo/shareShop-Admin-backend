@@ -48,7 +48,7 @@
   </sql>
   
   <select id="getList"  parameterType="hashmap" resultMap="CouponInfoResultMap">
-        SELECT * FROM coupon_info where status = 1
+        SELECT * FROM coupon_info where status = 1 or status = 0
         limit #{pageindex},#{pagesize}
    </select>
    
@@ -75,7 +75,7 @@
     </select>
     
  	<select id="getCouponReceiveList" parameterType="hashmap" resultMap="CouponReceiveResultMap">
-        SELECT * FROM coupon_receive where status != -1
+        SELECT * FROM coupon_receive where status = 1 or status = 0
         limit #{pageindex},#{pagesize}
     </select>
   
@@ -126,6 +126,18 @@
     
     <select id="modifyCouponReceiveStatus" parameterType="string">
     	UPDATE coupon_receive SET status = 0 where coupon_id = #{id}
+    </select>
+    
+    <select id="getListNum" resultType="Integer">
+    	select count(*) from status = 1 or status = 0
+    </select>
+    
+    <select id="getCouponReceiveListNum" resultType="Integer">
+    	select count(*) FROM coupon_receive where status = 1 or status = 0
+    </select>
+    
+   <select id="getCouponLogsListNum" resultType="Integer">
+    	select count(*) from  coupon_logs where status = 1
     </select>
     
   </mapper>

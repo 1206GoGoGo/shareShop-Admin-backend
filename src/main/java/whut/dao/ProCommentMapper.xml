@@ -35,7 +35,7 @@
    
     <select id="getListByUser" parameterType="hashmap" resultMap="BaseResultMap">
         <include refid="comment"/>
-        where user_id = #{userId}
+        where user_id = #{userId} 
         limit #{pageindex},#{pagesize}
    </select>
    
@@ -80,6 +80,16 @@
       		and user_id in (select user_id from user_login where username = #{userName})
     	</if>
     	limit #{pageindex},#{pagesize} 
+   </select>
+   
+   <select id="getListByProductNum" parameterType="String"  resultType="Integer">
+   		select count(*) FROM product_comment
+   		where product_id = #{id} and audit_status = 1
+   </select>
+   
+    <select id="getListByUserNum" parameterType="String"  resultType="Integer">
+   		select count(*) FROM product_comment
+   		where user_id = #{id}
    </select>
  
   </mapper>

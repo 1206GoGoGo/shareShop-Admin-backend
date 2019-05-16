@@ -88,4 +88,9 @@
         limit #{pageindex}, #{pagesize}
    </select>
    
+   <select id="getSellerListNum" resultType="Integer">
+       SELECT count(*) FROM user_login where level = 3
+   </select>
+   
+   
 </mapper>
