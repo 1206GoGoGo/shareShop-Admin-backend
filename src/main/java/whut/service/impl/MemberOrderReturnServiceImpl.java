@@ -7,6 +7,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import whut.dao.OrderReturnDao;
 import whut.pojo.ReturnRecord;
 import whut.service.MemberOrderReturnService;
@@ -86,5 +90,29 @@ public class MemberOrderReturnServiceImpl implements MemberOrderReturnService {
 		}else {
 			return new ResponseData(200,"success",list);
 		}
+	}
+
+	@Override
+	public ResponseData getReturnStatus() {
+		ObjectMapper mapper = new ObjectMapper();
+		 
+		//生成数组结点
+		ArrayNode arrNode = mapper.createArrayNode();
+		
+		//生成对象结点
+		ObjectNode objNode1 = mapper.createObjectNode();
+		objNode1.put("申请退货", "apply");
+		arrNode.add(objNode1);
+		ObjectNode objNode2 = mapper.createObjectNode();
+		objNode2.put("退货中", "in");
+		arrNode.add(objNode2);
+		ObjectNode objNode3 = mapper.createObjectNode();
+		objNode3.put("退货失败", "fail");
+		arrNode.add(objNode3);
+		ObjectNode objNode4 = mapper.createObjectNode();
+		objNode4.put("完成退货", "success");
+		arrNode.add(objNode4);
+		
+		return new ResponseData(200,"success",arrNode);
 	}
 }

@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import whut.dao.UserLoginDao;
+import whut.dao.UserLoginLogDao;
 import whut.pojo.UserLogin;
+import whut.pojo.UserLoginLog;
 import whut.service.ManagerLoginService;
 import whut.utils.EncryptUtil;
 import whut.utils.JsonUtils;
@@ -21,6 +23,9 @@ public class ManagerLoginServiceImpl implements ManagerLoginService {
 	
 	@Autowired
 	private UserLoginDao loginDao;
+	
+	@Autowired
+	private UserLoginLogDao loginLogDao;
 	
 	@Override
 	public ResponseData loginin(String jsonString, HttpServletRequest request, HttpServletResponse response) {
@@ -43,6 +48,11 @@ public class ManagerLoginServiceImpl implements ManagerLoginService {
 		
 		//验证成功创建安全信息sercity及加密
 		String sercity = EncryptUtil.MD5(username+new Date());	//每次请求更新，写到过滤器或拦截器中
+		
+		
+		
+		UserLoginLog userLoginLog = new UserLoginLog("111.111.111.111", 1, userLogin.getUserId());
+		loginLogDao.addLoginLog(userLoginLog);
 		
 		//设置cookie
 		

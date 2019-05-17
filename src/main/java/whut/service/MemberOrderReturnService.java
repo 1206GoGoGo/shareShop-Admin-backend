@@ -12,4 +12,6 @@ public interface MemberOrderReturnService {
 
 	ResponseData getListByReturnType(Integer pageindex, Integer pagesize, Integer type);
 
+	ResponseData getReturnStatus();
+
 }

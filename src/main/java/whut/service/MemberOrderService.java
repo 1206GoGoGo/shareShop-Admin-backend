@@ -37,4 +37,6 @@ public interface MemberOrderService {
 	public ResponseData getCountForOneClass(int cateId);
 
 	public ResponseData getCountClassForOneGood(int cateId, Integer pageindex, Integer pagesize, String timeBe, String timeEn);
+
+	public ResponseData getOrderStatus();
 }

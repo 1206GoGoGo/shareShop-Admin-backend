@@ -605,4 +605,40 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 		
 		return new ResponseData(productSales);
 	}
+
+	@Override
+	public ResponseData getOrderStatus() {
+		ObjectMapper mapper = new ObjectMapper();
+		 
+		//生成数组结点
+		ArrayNode arrNode = mapper.createArrayNode();
+		
+		//生成对象结点
+		ObjectNode objNode0 = mapper.createObjectNode();
+		objNode0.put("全部", "0");
+		arrNode.add(objNode0);
+		ObjectNode objNode1 = mapper.createObjectNode();
+		objNode1.put("待付款", 1);
+		arrNode.add(objNode1);
+		ObjectNode objNode2 = mapper.createObjectNode();
+		objNode2.put("待发货", 2);
+		arrNode.add(objNode2);
+		ObjectNode objNode3 = mapper.createObjectNode();
+		objNode3.put("待收货", 3);
+		arrNode.add(objNode3);
+		ObjectNode objNode4 = mapper.createObjectNode();
+		objNode4.put("已完成", 4);
+		arrNode.add(objNode4);
+		ObjectNode objNode5 = mapper.createObjectNode();
+		objNode5.put("退货中", 5);
+		arrNode.add(objNode5);
+		ObjectNode objNode6 = mapper.createObjectNode();
+		objNode6.put("换货中", 6);
+		arrNode.add(objNode6);
+		ObjectNode objNode10 = mapper.createObjectNode();
+		objNode10.put("其它", 10);
+		arrNode.add(objNode10);
+		
+		return new ResponseData(200,"success",arrNode);
+	}
 }

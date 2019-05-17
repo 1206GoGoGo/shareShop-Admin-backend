@@ -40,4 +40,9 @@ public class MemberOrderReturnController {
 		return memberOrderReturnService.getListByReturnType(pageindex, pagesize, type);
 	}
 	
+	@RequestMapping(value = "/getReturnStatus", method = RequestMethod.GET)
+	public @ResponseBody ResponseData getReturnStatus() {
+		return memberOrderReturnService.getReturnStatus();
+	}
+	
 }

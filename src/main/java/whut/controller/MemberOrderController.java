@@ -173,4 +173,9 @@ public class MemberOrderController {
 	public @ResponseBody ResponseData getCountClassForOneGood(int cateId, Integer pageindex, Integer pagesize, String timeBe, String timeEn) {
 		return memberOrderService.getCountClassForOneGood(cateId, pageindex, pagesize, timeBe, timeEn);
 	}
+	
+	@RequestMapping(value = "/getOrderStatus", method = RequestMethod.GET)
+	public @ResponseBody ResponseData getOrderStatus() {
+		return memberOrderService.getOrderStatus();
+	}
 }
