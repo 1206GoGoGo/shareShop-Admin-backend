@@ -12,10 +12,12 @@ import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import redis.clients.jedis.Jedis;
 import whut.dao.ProInfoDao;
 import whut.pojo.ProductInfo;
 import whut.pojo.ProductInfoForSearch;
 import whut.service.ProInfoService;
+import whut.utils.JedisUtil;
 import whut.utils.ResponseData;
 import whut.utils.SolrJUtil;
 
@@ -45,6 +47,23 @@ public class ProInfoServiceImpl implements ProInfoService{
 		List<ProductInfoForSearch> productInfoForSearchs = new ArrayList<ProductInfoForSearch>();
 		productInfoForSearchs = proInfoDao.getSolrDoucumentList();
 		//productInfoForSearchs.add(new ProductInfoForSearch(1, "Fashion hat", "", 1,1, 1, "", "", 1,1, 1, 21, null, "",1, null, null,12, 12.0, 11.0,11.0, 11, 11, 0));
+		
+		//获取每个商品浏览量
+		List<ProductInfoForSearch> productInfoForSearchNews = new ArrayList<ProductInfoForSearch>();
+		Jedis jedis = JedisUtil.getJedis();
+		int viewOne = 0;
+		for(ProductInfoForSearch productInfoForSearch : productInfoForSearchs) {
+			try {
+				viewOne = Integer.parseInt(jedis.get("view:"+productInfoForSearch.getProductId()));
+			}catch(Exception e) {
+				viewOne = 0;
+			}
+			productInfoForSearch.setView(viewOne);
+			productInfoForSearchNews.add(productInfoForSearch);
+		}
+		JedisUtil.closeJedis(jedis);
+		productInfoForSearchs = productInfoForSearchNews;
+		
 		if(!productInfoForSearchs.isEmpty()) {
 			deleteData();
 		}else {
