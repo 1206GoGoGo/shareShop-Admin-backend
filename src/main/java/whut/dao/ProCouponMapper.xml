@@ -129,7 +129,7 @@
     </select>
     
     <select id="getListNum" resultType="Integer">
-    	select count(*) from status = 1 or status = 0
+    	select count(*)  from coupon_info where status = 1 or status = 0
     </select>
     
     <select id="getCouponReceiveListNum" resultType="Integer">
