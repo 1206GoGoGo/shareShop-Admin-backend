@@ -25,16 +25,16 @@ public interface OrderDao {
 	void modifyPro(OrderDetail orderDetail);
 
 	//int orderId, Byte status
-	void modifyOrderStatus(Map<String, String> map);
+	void modifyOrderStatus(Map<String, Integer> map);
 
 	//int orderDetailId, Byte status
-	void modifyProStatus(Map<String, String> map);
+	void modifyProStatus(Map<String, Integer> map);
 
 	OrderDetail getOrderDetailByOrderDetailId(Integer orderDetailId);
 
 	//通过订单号修改订单下所有商品对应的状态
 	//int orderId, Byte status
-	void modifyProStatusByOrderId(Map<String, String> map);
+	void modifyProStatusByOrderId(Map<String, Integer> map);
 
 	//int pageindex, int pagesize, String user, String timebe, String timeen	获取用户订单
 	List<SellerBill> getRecordByUser(Map<String, Object> map);

@@ -24,10 +24,6 @@ public interface MemberOrderService {
 
 	public ResponseData modifyPro(OrderDetail orderDetail);
 
-	public ResponseData modifyOrderStatus(@RequestBody String jsonString);
-
-	public ResponseData modifyProStatus(@RequestBody String jsonString);
-
 	public ResponseData getRecordByUser(Integer pageindex, Integer pagesize, String user, String timebe, String timeen);
 
 	public ResponseData getCountWeekOrYear(int type);
@@ -39,4 +35,8 @@ public interface MemberOrderService {
 	public ResponseData getCountClassForOneGood(int cateId, Integer pageindex, Integer pagesize, String timeBe, String timeEn);
 
 	public ResponseData getOrderStatus();
+
+	public ResponseData dealReturn(String jsonString);
+
+	public ResponseData dealReturnBack(String jsonString);
 }

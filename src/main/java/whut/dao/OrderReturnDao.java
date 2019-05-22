@@ -8,10 +8,10 @@ import whut.pojo.ReturnRecord;
 public interface OrderReturnDao {
 
 	//修改orderId对应的所有记录（可能有多条）的状态map中数据为orderId与status
-	void modifyStatusByOrderId(Map<String, String> map);
+	void modifyStatusByOrderId(Map<String, Integer> map);
 
 	//修改orderDetailId对应的记录（一条）map中数据orderDetailId和status
-	void modifyStatusByOrderDetailId(Map<String, String> map);
+	void modifyStatusByOrderDetailId(Map<String, Integer> map);
 
 	//int pageindex, int pagesize, int userId
 	List<ReturnRecord> getListByUser(Map<String, Integer> map);
@@ -23,5 +23,8 @@ public interface OrderReturnDao {
 
 	//int pageindex, int pagesize, int type
 	List<ReturnRecord> getListByReturnType(Map<String, Integer> map);
+
+	//通过退货id获取退货信息
+	ReturnRecord getReturnRecordByReturnId(int returnId);
 	
 }

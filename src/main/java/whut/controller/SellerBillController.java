@@ -44,7 +44,6 @@ public class SellerBillController {
 	@RequestMapping(value = "/addWithdraw", method = RequestMethod.POST, consumes = "application/json")
 	public @ResponseBody ResponseData addWithdraw(@RequestBody WithdrawRecord withdrawRecord) {
 		return sellerBillService.addWithdraw(withdrawRecord);
-		
 	}
 	
 	//添加收益记录

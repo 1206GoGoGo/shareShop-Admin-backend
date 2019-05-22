@@ -20,7 +20,7 @@ public class TradeRequestImpl implements TradeRequest {
 //    status字段1表示成功  0表示失败
 
 	@Override
-	//商户订单号、支付场景(手机、电脑等)、订单标题、总金额、类型（退换货）、管理id、订单描述、支付方式、操作员id、订单过期时间(5分钟--)
+	//商户订单号、支付场景(手机、电脑等)、订单标题、总金额、类型（退换货）、关联id、订单描述、支付方式、操作员id、订单过期时间(5分钟--)
 	public String tradePay(String tradeNo ,String scene, String subject, BigDecimal totalAmount, Byte type, Integer correlationId,
 			String body, String payWay, String operatorId, String timeoutExpress) {
 		
