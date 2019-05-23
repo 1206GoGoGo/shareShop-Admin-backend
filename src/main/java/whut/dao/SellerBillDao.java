@@ -19,4 +19,10 @@ public interface SellerBillDao {
 
 	public List<YieldDetail> getYieldList(Map<String, Object> map);
 
+	//status", -1);("orderId", orderId);将orderId的收益记录状态改为status.
+	public void modifyStatusByOrderId(Map<String, Integer> map);
+
+	//status", -1);("orderId", orderDetailId);将orderDetailId的收益记录状态改为status.
+	public void modifyStatusByOrderDetailId(Map<String, Integer> map);
+
 }

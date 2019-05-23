@@ -1,8 +1,5 @@
 package whut.service;
 
-
-import org.springframework.web.bind.annotation.RequestBody;
-
 import whut.pojo.OrderDetail;
 import whut.pojo.OrderMaster;
 import whut.utils.ResponseData;
@@ -38,5 +35,11 @@ public interface MemberOrderService {
 
 	public ResponseData dealReturn(String jsonString);
 
+	public ResponseData dealReturnWait(String jsonString);
+
 	public ResponseData dealReturnBack(String jsonString);
+
+	public ResponseData deliver(String jsonString);
+
+	public ResponseData cancel(String jsonString);
 }

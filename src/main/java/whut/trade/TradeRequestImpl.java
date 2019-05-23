@@ -45,7 +45,7 @@ public class TradeRequestImpl implements TradeRequest {
 	}
 
 	@Override
-	public String tradeRefund(String tradeNo, String PayNo, String refundAmount, String refundReason,
+	public String tradeRefund(String tradeNo, String PayNo, BigDecimal refundAmount, String refundReason,
 			String outRequestNo, String GoodsInfo) {
 		// TODO Auto-generated method stub
 		return null;

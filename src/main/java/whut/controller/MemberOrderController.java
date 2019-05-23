@@ -158,7 +158,7 @@ public class MemberOrderController {
 	}
 	
 	/**
-	 * 接口订单退货
+	 * 已发货处理订单退货
 	 * @param orderDetail
 	 * @return
 	 */
@@ -167,11 +167,35 @@ public class MemberOrderController {
 		return memberOrderService.dealReturn(jsonString);
 	}
 	
+	/**
+	 * 未发货处理订单退货
+	 * @param jsonString
+	 * @return
+	 */
+	@RequestMapping(value = "/dealReturnWait", method = RequestMethod.POST)
+	public @ResponseBody ResponseData dealReturnWait(@RequestBody String jsonString) {
+		return memberOrderService.dealReturnWait(jsonString);
+	}
+	
 	@RequestMapping(value = "/dealReturnBack", method = RequestMethod.POST)
 	public @ResponseBody ResponseData dealReturnBack(@RequestBody String jsonString) {
 		return memberOrderService.dealReturnBack(jsonString);
 	}
 	
+	/**
+	 * 用户支付后发货
+	 * @param jsonString
+	 * @return
+	 */
+	@RequestMapping(value = "/deliver", method = RequestMethod.POST)
+	public @ResponseBody ResponseData deliver(@RequestBody String jsonString) {
+		return memberOrderService.deliver(jsonString);
+	}
+	
+	@RequestMapping(value = "/cancel", method = RequestMethod.POST)
+	public @ResponseBody ResponseData cancel(@RequestBody String jsonString) {
+		return memberOrderService.cancel(jsonString);
+	}
 	
 	
 }

@@ -1,6 +1,5 @@
 package whut.service.impl;
 
-import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -20,6 +19,7 @@ import whut.dao.OrderDao;
 import whut.dao.OrderReturnDao;
 import whut.dao.ProCategoryDao;
 import whut.dao.ProSpecsDao;
+import whut.dao.SellerBillDao;
 import whut.dao.UserLoginDao;
 import whut.pojo.OrderDetail;
 import whut.pojo.OrderMaster;
@@ -52,6 +52,9 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 	
 	@Autowired
 	private TradeRequest tradeRequest;
+	
+	@Autowired
+	private SellerBillDao sellerBillDao;
 
 	@Override
 	public ResponseData getListByUser(Integer pageindex, Integer pagesize, int id) {
@@ -464,6 +467,7 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 			return new ResponseData(4061,"该退货记录不存在",null);
 		}
 		if(returnRecord.getStatus()!=21) {
+			//发货后申请退货
 			return new ResponseData(4062,"该退货记录不符合处理要求",null);
 		}
 		
@@ -474,14 +478,50 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 		}else {
 			map.put("status", 28);
 		}
-		map.put("orderId", returnRecord.getOrderDetailId());
-		dao.modifyOrderStatus(map);
-		//dao.modifyProStatusByOrderId(map);
-		//修改退货表状态
+		map.put("orderDetailId", returnRecord.getOrderDetailId());
+		dao.modifyProStatus(map);
 		orderReturnDao.modifyStatusByOrderDetailId(map);
 		return new ResponseData(200,"success",null);
+	}
+	
 
-
+	@Override
+	public ResponseData dealReturnWait(String jsonString) {
+		JsonUtils jsonUtils = new JsonUtils(jsonString);
+		
+		int orderId = jsonUtils.getIntValue("returnId");
+		int isAgree = jsonUtils.getIntValue("isAgree");
+		
+		OrderMaster orderMaster = dao.getMasterByOrderId(orderId);
+		
+		if(orderMaster == null) {
+			return new ResponseData(4061,"该退货记录不存在",null);
+		}
+		if(orderMaster.getOrderStatus()!=11) {
+			//发货后申请退货
+			return new ResponseData(4062,"该退货记录不符合处理要求",null);
+		}
+		
+		Map<String, Integer> map = new HashMap<>();
+		map.put("orderId", orderId);
+		if(isAgree == 1) {
+			map.put("status", 12);
+			dao.modifyOrderStatus(map);
+			dao.modifyProStatusByOrderId(map);
+			//修改退货表状态
+			orderReturnDao.modifyStatusByOrderId(map);
+			//处理收益表
+			map.put("status", -1);
+			sellerBillDao.modifyStatusByOrderId(map);
+			//处理退货，支付退款
+			tradeRequest.tradeRefund(String.valueOf(orderMaster.getOrderId()), "", orderMaster.getPaymentMoney(), 
+					"商户取消订单", "0", "退款商品名");
+			
+		}else {
+			map.put("status", 28);
+			orderReturnDao.modifyStatusByOrderId(map);
+		}
+		return new ResponseData(200,"success",null);
 	}
 
 	@Override
@@ -500,26 +540,87 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 			return new ResponseData(4062,"该退货记录不符合处理要求",null);
 		}
 		
-		//修改子订单状态，订单状态不修改-------------------------------------------------------
+		//修改子订单状态，订单状态不修改
 		Map<String, Integer> map = new HashMap<>();
+		map.put("orderDetailId", returnRecord.getOrderDetailId());
 		if(isAgree == 1) {
 			map.put("status", 29);
-			
-			//退回退货金额
-			tradeRequest.tradePay("", "AUTO", "return money", returnRecord.getReturnMoney(), (byte)2, returnRecord.getReturnId(), "body退货", 
-					"payWay", "000", "60*60*2");
-			
+			//处理退货，支付退款
+			tradeRequest.tradeRefund(String.valueOf(returnRecord.getOrderId()), "", returnRecord.getReturnMoney(), 
+					"商户取消订单", "001", "退款商品名");
 			//处理seller表
-			
-			
+			map.put("status", -1);
+			sellerBillDao.modifyStatusByOrderDetailId(map);
 		}else {
 			map.put("status", 23);
 		}
-		map.put("orderId", returnRecord.getOrderDetailId());
-		dao.modifyOrderStatus(map);
-		//dao.modifyProStatusByOrderId(map);
 		//修改退货表状态
 		orderReturnDao.modifyStatusByOrderDetailId(map);
 		return new ResponseData(200,"success",null);
 	}
+
+	@Override
+	public ResponseData deliver(String jsonString) {
+		JsonUtils jsonUtils = new JsonUtils(jsonString);
+		int orderId = jsonUtils.getIntValue("orderId");
+		
+		OrderMaster orderMaster = dao.getMasterByOrderId(orderId);
+		
+		if(orderMaster == null) {
+			return new ResponseData(4061,"该订单记录不存在",null);
+		}
+		if(orderMaster.getOrderStatus()!=2 ) {
+			return new ResponseData(4062,"订单未支付或其它不符合发货条件",null);
+		}
+		
+		//修改子订单状态，订单状态不修改-------------------------------------------------------
+		Map<String, Integer> map = new HashMap<>();
+		map.put("status", 4);
+		map.put("orderId", orderId);
+		dao.modifyOrderStatus(map);
+		dao.modifyProStatusByOrderId(map);
+		return new ResponseData(200,"success",null);
+	}
+
+	@Override
+	public ResponseData cancel(String jsonString) {
+		JsonUtils jsonUtils = new JsonUtils(jsonString);
+		int orderId = jsonUtils.getIntValue("orderId");
+		
+		OrderMaster orderMaster = dao.getMasterByOrderId(orderId);
+		
+		if(orderMaster == null) {
+			return new ResponseData(4061,"该订单记录不存在",null);
+		}
+		
+		if(orderMaster.getOrderStatus() == 1 ) {
+			//修改子订单状态，订单状态和收益表状态
+			Map<String, Integer> map = new HashMap<>();
+			map.put("status", 15);
+			map.put("orderId", orderId);
+			dao.modifyOrderStatus(map);
+			dao.modifyProStatusByOrderId(map);
+			//收益表数据失败
+			map.put("status", -1);
+			sellerBillDao.modifyStatusByOrderId(map);
+			return new ResponseData(200,"success",null);
+		}else if(orderMaster.getOrderStatus() == 2 ) {
+			//修改子订单状态，订单状态和收益表状态
+			Map<String, Integer> map = new HashMap<>();
+			map.put("status", 15);
+			map.put("orderId", orderId);
+			dao.modifyOrderStatus(map);
+			dao.modifyProStatusByOrderId(map);
+			//收益表数据失败
+			map.put("status", -1);
+			sellerBillDao.modifyStatusByOrderId(map);
+			//支付退款
+			tradeRequest.tradeRefund(String.valueOf(orderMaster.getOrderId()), "", orderMaster.getPaymentMoney(), 
+					"商户取消订单", "0", "退款商品名");
+			return new ResponseData(200,"success",null);
+		}else {
+			return new ResponseData(4062,"订单未支付或其它不符合发货条件",null);
+		}
+	}
+
 }
