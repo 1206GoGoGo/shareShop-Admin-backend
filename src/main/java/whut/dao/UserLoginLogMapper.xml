@@ -9,13 +9,11 @@
     <result column="login_type" jdbcType="TINYINT" property="loginType" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
   </resultMap>
-  
+
   <select id="addLoginLog" parameterType="UserLoginLog">
         INSERT INTO user_login_log
         (login_time,login_ip,login_type,user_id)
         VALUES
         (now(),#{loginIp},#{loginType},#{userId})
    </select>
-  
-  
 </mapper>

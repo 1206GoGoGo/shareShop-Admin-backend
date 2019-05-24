@@ -46,12 +46,12 @@ public class ManagerLoginServiceImpl implements ManagerLoginService {
 			return new ResponseData(4064,"Administrator status exception",null);
 		}
 		
+		String ip = getIp(request);
+		
 		//验证成功创建安全信息sercity及加密
 		String sercity = EncryptUtil.MD5(username+new Date());	//每次请求更新，写到过滤器或拦截器中
 		
-		
-		
-		UserLoginLog userLoginLog = new UserLoginLog("111.111.111.111", 1, userLogin.getUserId());
+		UserLoginLog userLoginLog = new UserLoginLog(ip, 1, userLogin.getUserId());
 		loginLogDao.addLoginLog(userLoginLog);
 		
 		//设置cookie
@@ -92,6 +92,32 @@ public class ManagerLoginServiceImpl implements ManagerLoginService {
 
 		return new ResponseData(200,"login success",null);
 	}
+	
+
+	private String getIp(HttpServletRequest request) {
+		//request为HttpServletRequest对象
+	    String ip = request.getHeader("X-Real-IP");
+	    if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+	        ip = request.getHeader("X-Forwarded-For");
+	    }
+	    if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+	        ip = request.getHeader("Proxy-Client-IP");
+	    }
+	    if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+	        ip = request.getHeader("WL-Proxy-Client-IP");
+	    }
+	    if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+	        ip = request.getRemoteAddr();
+	    }
+	    // 处理多IP的情况（只取第一个IP）
+	    if (ip != null && ip.contains(",")) {
+	        String[] ipArray = ip.split(",");
+	        ip = ipArray[0];
+	    }
+		return ip;
+	}
+
+
 
 	@Override
 	public ResponseData loginout(String username, HttpServletRequest request, HttpServletResponse response) {
