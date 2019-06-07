@@ -48,7 +48,8 @@ public class ProInfoServiceImpl implements ProInfoService{
 		productInfoForSearchs = proInfoDao.getSolrDoucumentList();
 		//productInfoForSearchs.add(new ProductInfoForSearch(1, "Fashion hat", "", 1,1, 1, "", "", 1,1, 1, 21, null, "",1, null, null,12, 12.0, 11.0,11.0, 11, 11, 0));
 		
-		//获取每个商品浏览量
+		//获取每个商品浏览量.
+		//如果直接操作的是对象productInfoForSearchNews就不需要定义了
 		List<ProductInfoForSearch> productInfoForSearchNews = new ArrayList<ProductInfoForSearch>();
 		Jedis jedis = JedisUtil.getJedis();
 		int viewOne = 0;
