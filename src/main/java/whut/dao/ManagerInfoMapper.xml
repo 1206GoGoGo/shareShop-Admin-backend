@@ -25,7 +25,7 @@
    <select id="getList" parameterType="int" resultMap="BaseResultMap">
          SELECT * FROM manager_info mi LEFT JOIN user_login ul on mi.user_id = ul.user_id 
          where 1 = 1
-         <if test="status != null">
+         <if test="_parameter != null">
       		and ul.status = #{status}  
     	</if>
    </select>
