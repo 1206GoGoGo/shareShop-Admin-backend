@@ -29,6 +29,9 @@ public class ProductInfoForSearch{
 
 	@Field
     private Integer threeCategoryId;//三级分类ID
+	
+	@Field
+	private Integer isRecommend;//是否推荐
 
 	@Field
     private String mainImage;//主图
@@ -94,7 +97,7 @@ public class ProductInfoForSearch{
 	public ProductInfoForSearch() {	}
 
 	public ProductInfoForSearch(Integer productId, String productName, String brandName, Integer oneCategoryId,
-			Integer twoCategoryId, Integer threeCategoryId, String mainImage, String attributeList, Integer publishStatus,
+			Integer twoCategoryId, Integer threeCategoryId,Integer isRecommend, String mainImage, String attributeList, Integer publishStatus,
 			Integer auditStatus, Integer useCoupon, Integer discountRate, Date productionDate, String description,
 			Integer stock, String html, Date inputTime, Date modifiedTime,int view, Double pscore, Double minPrice, Double maxPrice, int collect, int cart, int sales) {
 		this.productId = productId;
@@ -103,6 +106,7 @@ public class ProductInfoForSearch{
 		this.oneCategoryId = oneCategoryId;
 		this.twoCategoryId = twoCategoryId;
 		this.threeCategoryId = threeCategoryId;
+		this.isRecommend = isRecommend;
 		this.mainImage = mainImage;
 		this.attributeList = attributeList;
 		this.publishStatus = publishStatus;
@@ -170,6 +174,14 @@ public class ProductInfoForSearch{
 
     public void setThreeCategoryId(Integer threeCategoryId) {
         this.threeCategoryId = threeCategoryId;
+    }
+    
+    public Integer getIsRecommend() {
+        return isRecommend;
+    }
+
+    public void Integer(Integer isRecommend) {
+        this.isRecommend = isRecommend;
     }
 
     public String getMainImage() {

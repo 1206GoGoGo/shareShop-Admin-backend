@@ -10,6 +10,7 @@
     <result column="one_category_id" jdbcType="INTEGER" property="oneCategoryId" />
     <result column="two_category_id" jdbcType="INTEGER" property="twoCategoryId" />
     <result column="three_category_id" jdbcType="INTEGER" property="threeCategoryId" />
+    <result column="is_recommend" jdbcType="TINYINT" property="isRecommend" />
     <result column="main_image" jdbcType="VARCHAR" property="mainImage" />
     <result column="attribute_list" jdbcType="VARCHAR" property="attributeList" />
     <result column="publish_status" jdbcType="TINYINT" property="publishStatus" />
@@ -52,6 +53,7 @@
     <result column="one_category_id" jdbcType="INTEGER" property="oneCategoryId" />
     <result column="two_category_id" jdbcType="INTEGER" property="twoCategoryId" />
     <result column="three_category_id" jdbcType="INTEGER" property="threeCategoryId" />
+    <result column="is_recommend" jdbcType="TINYINT" property="isRecommend" />
     <result column="main_image" jdbcType="VARCHAR" property="mainImage" />
     <result column="attribute_list" jdbcType="VARCHAR" property="attributeList" />
     <result column="publish_status" jdbcType="TINYINT" property="publishStatus" />
@@ -74,7 +76,7 @@
    
   	<sql id="proInfo">
   		SELECT pi.product_id,pi.product_name,pi.brand_name,pi.spu,pi.one_category_id,pi.two_category_id,pi.three_category_id,
-  		pi.main_image,pi.attribute_list,pi.publish_status,pi.audit_status,pi.use_coupon,
+  		pi.is_recommend,pi.main_image,pi.attribute_list,pi.publish_status,pi.audit_status,pi.use_coupon,
   		pi.discount_rate,pi.production_date,pi.description pro_description,pi.stock,pi.html,pi.input_time,pi.modified_time, 
   		ps.product_specs_id,ps.name,ps.product_code,ps.specs,ps.specs_sort,ps.pic_url,ps.average_cost,ps.original_price,
   		ps.price,ps.description,ps.product_stock,ps.create_time,ps.update_time,psp.min_price,psp.max_price,pc.score  FROM product_info pi
@@ -109,11 +111,11 @@
      <select id="add" parameterType="ProductComment">
     	INSERT INTO product_info
     	(product_name,brand_name,spu,one_category_id,two_category_id,three_category_id,
-    	 main_image,attribute_list,publish_status,audit_status,use_coupon,discount_rate,
+    	 is_recommend,main_image,attribute_list,publish_status,audit_status,use_coupon,discount_rate,
     	production_date,description,stock,html,input_time)      
         VALUES
     	(#{productName},#{brandName},#{spu},#{oneCategoryId},#{twoCategoryId},#{threeCategoryId},
-    	#{mainImage},#{attributeList},#{publishStatus},#{auditStatus},
+    	#{isRecommend},#{mainImage},#{attributeList},#{publishStatus},#{auditStatus},
     	#{useCoupon},#{discountRate},#{productionDate},#{description},#{stock},#{html},now())
     </select>
     
@@ -127,7 +129,7 @@
     <select id="modify" parameterType="ProductInfo">
     	UPDATE product_info SET 
     	product_name = #{productName},brand_name = #{brandName},spu = #{spu},one_category_id = #{oneCategoryId},two_category_id = #{twoCategoryId},
-    	three_category_id = #{threeCategoryId},main_image = #{mainImage},attribute_list = #{attributeList},publish_status = #{publishStatus},
+    	three_category_id = #{threeCategoryId},is_recommend = #{isRecommend},main_image = #{mainImage},attribute_list = #{attributeList},publish_status = #{publishStatus},
     	audit_status = #{auditStatus},use_coupon = #{useCoupon},discount_rate = #{discountRate},
     	production_date = #{productionDate},description = #{description},stock = #{stock},html = #{html},modified_time = now()    
         WHERE product_id = #{productId}
@@ -198,7 +200,7 @@
     
     <select id="getSolrDoucumentList" resultMap="ForSearchResultMap">
     	SELECT pi.product_id,pi.product_name,pi.brand_name,pi.one_category_id,pi.two_category_id,pi.three_category_id,
-		pi.main_image,pi.attribute_list,pi.publish_status,pi.audit_status,pi.audit_status,pi.use_coupon,pi.discount_rate,
+		pi.is_recommend,pi.main_image,pi.attribute_list,pi.publish_status,pi.audit_status,pi.audit_status,pi.use_coupon,pi.discount_rate,
 		pi.production_date,pi.description,pi.stock,pi.html,pi.input_time,pi.modified_time,pc.score,ps.min_price,ps.max_price,IFNULL(uc.collect,0) collect,
 		IFNULL(oc.cart,0) cart,IFNULL(od.sales,0) sales
 		FROM product_info pi
